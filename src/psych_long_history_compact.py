@@ -1,6 +1,6 @@
-"""Proposed, reversible event notation for two complete long human histories.
+"""Reversible event notation for two complete long human histories.
 
-Preparation only until the user approves these additional presentation protocols.
+These presentations are not used by the evaluated modes.
 Every original input prefix can be reconstructed exactly; labels and scoring do
 not enter the encoding. Original full-text evaluations remain separate.
 """

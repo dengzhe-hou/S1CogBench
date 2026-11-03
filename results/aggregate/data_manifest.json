@@ -19,7 +19,7 @@
     "final_baseline_paper_artifacts_20261028/full_condition_scores.csv",
     "task_catalog.json",
     "selected_tasks_24.json",
-    "VALIDATION_24_STATUS.json",
+    "cpu_validation_24_status.json",
     "table2_values_20261030.json (main results table, paper commit 5a0f491)",
     "runs/probes_20261028/analysis/paper_body_revision_20261029/TABLE2_COMPLETE_UNIFORM_INTEGRATION_20261029.json",
     "runs/probes_20261028/analysis/paper_revision_b_20261029/EXISTING_REFERENCE_ROW_ALIGNMENT_20261029.json",
@@ -85,13 +85,13 @@
     "bandit_condition_scores.csv",
     "metric_status.json",
     "result_schema.json",
-    "quickstart.md",
     "grouping_guide.md",
     "api_time_cost_per_target.csv",
     "table2.csv",
     "table2.json",
     "minitaur_nonliteral_reparsed.csv",
-    "rlwm_curves.csv"
+    "rlwm_curves.csv",
+    "cpu_validation_24_status.json"
   ],
   "limitations": [
     "120/120 means one full-sample accepted named protocol per selected task/model, not all modes or all metrics.",

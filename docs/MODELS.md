@@ -64,7 +64,7 @@ Add `--smoke-calls N` for more calls per mode. The decision and generative templ
 | Minitaur8B | `models/minitaur8b` or `S1COGBENCH_MINITAUR_MODEL_DIR` with the evaluated provider revision | `examples/minitaur8b_choice_agent.py` |
 | Qwen3.5-4B | `models/qwen3.5-4b` | `examples/qwen35_4b_choice_agent.py` |
 
-The Intern and Qwen examples record their model IDs and evaluated revisions. Several tasks used task-specific variants of these adapters (event, integer-sequence and Restless files in `examples/`); the task runner recorded in each accepted row names the one used. Preserve each adapter's precision, temperature, prompt and decision rule when reproducing its results. `requirements-eval-cpu.txt` installs the CPU task environment only; the neural adapters need their own PyTorch, Transformers, SDK and checkpoint dependencies.
+The Intern and Qwen examples record their model IDs and evaluated revisions. Several tasks used task-specific variants of these adapters (event, integer-sequence and Restless files in `examples/`); the task runner recorded in each accepted row names the one used. Preserve each adapter's precision, temperature, prompt and decision rule when reproducing its results. `requirements.txt` installs the CPU task environment only; the neural adapters need their own PyTorch, Transformers, SDK and checkpoint dependencies.
 
 Through the CLI, Llama-3.1-8B on a whole A100 is the one neural setup supported so far. The other adapters in this table have not run through it, and a MIG slice gives different Llama numbers. See [REPRODUCTION.md](REPRODUCTION.md).
 

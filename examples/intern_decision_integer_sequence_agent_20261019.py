@@ -1,4 +1,4 @@
-"""User-approved additional Intern integer readout, 2026-10-19.
+"""Additional Intern integer readout, 2026-10-19.
 
 All original numeric reports use complete integer + immediate turn termination
 at T=1. Ordinary choices retain the official frozen BF16 Intern interface.
@@ -18,7 +18,7 @@ class InternDecisionIntegerSequenceChoice(InternDecisionChoice):
         super().__init__(device)
         self.metadata.update(
             readout_protocol=PROTOCOL,
-            protocol_status="User explicitly approved option A, full integer readout, 2026-10-19.",
+            protocol_status="Full integer readout, 2026-10-19.",
             interface="Additional integer sequence readout; ordinary choices retain the official native interface.",
             probabilities="Numeric: complete terminated-reply joint probability conditioned on all original legal values, T=1. Ordinary choice: official calibrated symbol distribution.",
             numeric_interface="Literal original integer followed immediately by <|im_end|>; every token scored; no length normalization, bins, or digit subquestions.",

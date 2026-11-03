@@ -1,4 +1,4 @@
-"""Prepared Columbia presentation; approval is pending for formal deployment."""
+"""Compact Columbia Card Task presentation, not used by the evaluated modes."""
 from src.psych_long_history_compact import load_trials as _load
 from src.psych_typed import DEFAULT_SOURCE
 

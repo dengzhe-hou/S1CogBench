@@ -9,7 +9,7 @@ git clone https://github.com/dengzhe-hou/S1CogBench.git
 cd S1CogBench
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements-eval-cpu.txt
+python -m pip install -r requirements.txt
 ```
 
 These are the pins of the 24-task CPU validation (CPU PyTorch, NumPy 1.26, the original CogBench and bandit dependencies); the install took under three minutes on the lab cluster. A neural adapter adds its own model stack on top. Python 3.11 reproduces the 2026-10-26 validation bit for bit. Under Python 3.12 a few aggregates differ in their last digit or two, because Python 3.12 made the built-in float `sum()` compensated (see [REPRODUCTION.md](REPRODUCTION.md)).

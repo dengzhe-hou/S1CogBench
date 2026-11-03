@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the approved Intern integer protocol with complete per-response evidence.
+"""Run the Intern integer protocol with complete per-response evidence.
 
 The entire original source remains in scope. This runner adds typed-response
 likelihood; it does not reproduce Centaur's full-vocabulary likelihood. The

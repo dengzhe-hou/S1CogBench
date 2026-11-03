@@ -1,5 +1,0 @@
-# Install only if the unmodified FullBench import path requires these packages.
-# This is the upstream EVOLvE declared stack, not a contextual environment shim.
-tensorflow==2.17.0
-tensorflow_datasets==4.9.3
-ml-dtypes==0.3.1

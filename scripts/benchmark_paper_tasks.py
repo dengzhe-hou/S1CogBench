@@ -427,16 +427,19 @@ def report(args):
                                     'official_baseline_runs': baseline_status,
                                     'current_primary_models': ['Laya-English', 'Minitaur8B-current-revision', 'Llama3.1-8B-Instruct'],
                                     'unstarted70B_closed_loop_jobs': 'deferred_by_user; existing completed70B human predictions retained'})
-    lines = ['# 公开认知任务评测资源', '',
-             '两个完整真人预测任务可通过统一导出/评分接口接入新模型。', '',
-             'Horizon、Two-step与Mouselab闭环保留原环境（模型全量运行状态分别列出）；概率推断保留原可见先验/证据和事件后验，'
-             '各任务支持外部模型回调。闭环收益、真人预测与程序生成的后验报告分表。', '']
+    lines = ['# Public cognitive task evaluation resources', '',
+             'Two complete human-prediction tasks accept new models through the shared export and scoring interface.', '',
+             'Horizon, Two-step and Mouselab closed-loop runs keep the original environments, and the full-run status of each '
+             'model is listed separately. Probabilistic inference keeps the original visible priors and evidence and the event '
+             'posterior. Each task supports external model callbacks. Closed-loop reward, human prediction and generated '
+             'posterior reports are in separate tables.', '']
     for name, path in sources.items():
         lines.append(f'- [{name}]({(ROOT / path).as_posix()})')
     if baseline_status:
-        lines += ['', '原CPU基线运行单列，不能从任务入口存在推断它已完成：', '']
+        lines += ['', 'Original CPU baseline runs are listed separately, because an existing task entry does not show that a run is complete.', '']
         lines += [f"- {name}: {record['status']}" for name, record in baseline_status.items()]
-    lines += ['', '完整任务矩阵仍有未完成项。原任务复用和接口实现不自动证明独立benchmark的新颖性。']
+    lines += ['', 'The full task matrix still has unfinished cells. Reusing original tasks and implementing interfaces does not by itself '
+              'establish the novelty of an independent benchmark.']
     (out / 'README.md').write_text('\n'.join(lines) + '\n')
     print(json.dumps({'status': 'available_completed_results', 'output': str(out)}))
 

@@ -1,4 +1,4 @@
-"""Run one approved full P2 participant shard after its single shared pilot."""
+"""Run one full P2 participant shard after its single shared pilot."""
 from pathlib import Path
 import argparse
 import datetime

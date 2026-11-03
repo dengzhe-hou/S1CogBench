@@ -1,4 +1,0 @@
--r requirements-cpu.txt
-# Original Restless/Instrumental environments and scorers require real CPU torch.
-# Install with the PyTorch CPU extra index; no CUDA wheel or fake replacement.
-torch==2.10.0+cpu

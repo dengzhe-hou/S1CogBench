@@ -15,9 +15,8 @@
 <header class="hero">
 <h1 class="wordmark"><img src="assets/mark.svg" alt=""><span>S1CogBench</span></h1>
 <h2 class="subtitle">What System One Decision Models Can and Cannot Do on Cognitive Experiments</h2>
-<p class="authors">Dengzhe Hou <span>&nbsp;&nbsp;</span> Kazunori D Yamada</p>
 <p class="venue">arXiv preprint, 2026</p>
-<div class="hero-actions"><a class="pill" href="https://arxiv.org/abs/2611.00911" target="_blank" rel="noopener">arXiv</a><a class="pill" href="downloads/s1cogbench-paper.pdf" target="_blank" rel="noopener">PDF</a><a class="pill" href="https://github.com/dengzhe-hou/S1CogBench" target="_blank" rel="noopener">Code</a><a class="pill" href="#leaderboard">Leaderboard</a><a class="pill" href="#evaluate">Evaluate your model</a></div>
+<div class="hero-actions"><a class="pill" href="https://arxiv.org/abs/2611.00911" target="_blank" rel="noopener">arXiv</a><a class="pill" href="https://arxiv.org/pdf/2611.00911" target="_blank" rel="noopener">PDF</a><a class="pill" href="https://github.com/dengzhe-hou/S1CogBench" target="_blank" rel="noopener">Code</a><a class="pill" href="#leaderboard">Leaderboard</a><a class="pill" href="#evaluate">Evaluate your model</a></div>
 <p class="hero-note">Original tasks and scoring. Explicit comparison context. No pooled cognitive score.</p>
 </header>
 
@@ -82,7 +81,7 @@
 <section class="section" aria-label="Evaluate a model">
 <p class="section-lead">One entry point runs each of the 27 modes through its original runner and scorer. The smoke run takes about two minutes on one CPU, with no model weights.</p>
 <pre class="code-block" id="quickstart-code"><code>python3.12 -m venv .venv &amp;&amp; source .venv/bin/activate
-python -m pip install -r requirements-eval-cpu.txt
+python -m pip install -r requirements.txt
 python scripts/fetch_public_sources.py all
 python -m s1cogbench doctor
 python -m s1cogbench eval --smoke --output runs/smoke
@@ -114,7 +113,6 @@ python -m s1cogbench eval --adapter my_agent.py --device cuda:0 --model-label my
 <a href="docs/API_TIME_COST.html"><h3>API time and cost</h3><p>Client time and usage-priced cost per target, and the cells not completed.</p></a>
 <a href="docs/SUPPLEMENTARY_CONTROLS.html"><h3>Supplementary controls</h3><p>Accepted latency, generated-reasoning, legal-readout, and Claude prefix records.</p></a>
 <a href="docs/LATENCY.html"><h3>Controlled latency</h3><p>Per-mode timings of nine configurations on one A100 at batch size one.</p></a>
-<a href="docs/RELATED_RESOURCES.html"><h3>Related evaluation resources</h3><p>A factual protocol comparison with directly related benchmarks.</p></a>
 <a href="data/grouping_guide.md"><h3>Comparing results</h3><p>Use the same task, target, mode, protocol, unit, and aggregation.</p></a>
 </div>
 <div class="box baseline-panel"><h3>Task-specific references</h3><p>Reference fits and algorithms carry their own exposure and provenance. Human-action NLL and autonomous reward are separate comparison targets.</p><div id="baseline-list" class="baseline-list"></div></div>
@@ -134,7 +132,7 @@ python -m s1cogbench eval --adapter my_agent.py --device cuda:0 --model-label my
 <p class="copy-row"><button class="text-button" data-copy="citation-code">Copy BibTeX</button></p>
 </section>
 </main>
-<footer class="footer"><p><strong>S1CogBench</strong>, a benchmark of System One decision models on cognitive experiments.</p><p><a href="https://arxiv.org/abs/2611.00911">arXiv</a> · <a href="downloads/s1cogbench-paper.pdf">PDF</a> · <a href="https://github.com/dengzhe-hou/S1CogBench">Code</a> · <a href="data/data_manifest.json">Data manifest</a></p><p>Original project software uses the <a href="LICENSE.txt">MIT License</a>; third-party terms remain in force.</p></footer>
+<footer class="footer"><p><strong>S1CogBench</strong>, a benchmark of System One decision models on cognitive experiments.</p><p><a href="https://arxiv.org/abs/2611.00911">arXiv</a> · <a href="https://arxiv.org/pdf/2611.00911">PDF</a> · <a href="https://github.com/dengzhe-hou/S1CogBench">Code</a> · <a href="data/data_manifest.json">Data manifest</a></p><p>Original project software uses the <a href="LICENSE.txt">MIT License</a>; third-party terms remain in force.</p></footer>
 <dialog id="import-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><h2>Add a comparison file</h2><p>Import aggregate JSON using the downloadable result schema. Files stay in this browser. Keep the protocol and target fields unchanged when making a matched comparison.</p><input type="file" id="import-file" accept=".json,application/json"><p id="import-error" role="alert"></p><button class="pill small" id="import-template">Download matching template</button></dialog>
 <div id="toast" role="status" aria-live="polite"></div>
 <script type="module" src="app.js"></script></body></html>

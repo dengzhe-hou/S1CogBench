@@ -1,6 +1,6 @@
 # Reproduction of accepted reference values
 
-`python -m s1cogbench eval` dispatches every mode to the original runner and scorer. To check that it changes no protocol, prompt, history, sample, seed or scorer, reference adapters were run through it on the inputs of the 2026-10-26 CPU validation (rebuilt on the lab cluster from the project snapshot), on CPU through Slurm on c01, with the pins of `requirements-eval-cpu.txt`.
+`python -m s1cogbench eval` dispatches every mode to the original runner and scorer. To check that it changes no protocol, prompt, history, sample, seed or scorer, reference adapters were run through it on the inputs of the 2026-10-26 CPU validation (rebuilt on the lab cluster from the project snapshot), on CPU through Slurm on c01, with the pins of `requirements.txt`.
 
 ## CPU reference: 27/27 modes identical
 

@@ -9,3 +9,5 @@ external/
 .runtime/
 literature/
 .tools/
+homepage/docs/
+homepage/LICENSE.txt

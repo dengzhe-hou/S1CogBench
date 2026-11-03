@@ -1,4 +1,4 @@
-"""Exact disjoint participant partition for approved full P2 tasks."""
+"""Exact disjoint participant partition for the full P2 tasks."""
 from pathlib import Path
 import argparse
 import csv
