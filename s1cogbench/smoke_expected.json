@@ -1,0 +1,1586 @@
+{
+ "adapter": "examples/uniform_reference_agent.py",
+ "limit_per_mode": 5,
+ "limits": {
+  "temporal_discounting": 1000
+ },
+ "recorded_utc": "2026-10-30T06:56:59.244602+00:00",
+ "modes": {
+  "bayesian_urn_inference": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "posterior_probability",
+     "state_chars": 805,
+     "value": 0.5
+    },
+    {
+     "method": "posterior_probability",
+     "state_chars": 804,
+     "value": 0.5
+    },
+    {
+     "method": "posterior_probability",
+     "state_chars": 804,
+     "value": 0.5
+    },
+    {
+     "method": "posterior_probability",
+     "state_chars": 805,
+     "value": 0.5
+    },
+    {
+     "method": "posterior_probability",
+     "state_chars": 804,
+     "value": 0.5
+    }
+   ],
+   "scores": {
+    "value": 0.301010101010101,
+    "n": 5
+   }
+  },
+  "multiple_cue_judgment": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 773,
+     "keys": [
+      "10",
+      "20",
+      "30",
+      "40",
+      "50",
+      "60",
+      "70",
+      "80",
+      "90"
+     ],
+     "native_choice": "10"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 795,
+     "keys": [
+      "10",
+      "20",
+      "30",
+      "40",
+      "50",
+      "60",
+      "70",
+      "80",
+      "90"
+     ],
+     "native_choice": "10"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 817,
+     "keys": [
+      "10",
+      "20",
+      "30",
+      "40",
+      "50",
+      "60",
+      "70",
+      "80",
+      "90"
+     ],
+     "native_choice": "10"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 839,
+     "keys": [
+      "10",
+      "20",
+      "30",
+      "40",
+      "50",
+      "60",
+      "70",
+      "80",
+      "90"
+     ],
+     "native_choice": "10"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 861,
+     "keys": [
+      "10",
+      "20",
+      "30",
+      "40",
+      "50",
+      "60",
+      "70",
+      "80",
+      "90"
+     ],
+     "native_choice": "10"
+    }
+   ],
+   "scores": {
+    "value": 2.1972245773362196,
+    "n": 5
+   }
+  },
+  "multi_attribute_choice": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 597,
+     "keys": [
+      "P",
+      "G"
+     ],
+     "native_choice": "P"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 674,
+     "keys": [
+      "P",
+      "G"
+     ],
+     "native_choice": "P"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 751,
+     "keys": [
+      "P",
+      "G"
+     ],
+     "native_choice": "P"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 828,
+     "keys": [
+      "P",
+      "G"
+     ],
+     "native_choice": "P"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 905,
+     "keys": [
+      "P",
+      "G"
+     ],
+     "native_choice": "P"
+    }
+   ],
+   "scores": {
+    "value": 0.6931471805599453,
+    "n": 5
+   }
+  },
+  "probability_coherence_judgment": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 245,
+     "keys": [
+      101,
+      "0",
+      "100"
+     ],
+     "native_choice": "0"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 399,
+     "keys": [
+      101,
+      "0",
+      "100"
+     ],
+     "native_choice": "0"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 553,
+     "keys": [
+      101,
+      "0",
+      "100"
+     ],
+     "native_choice": "0"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 670,
+     "keys": [
+      101,
+      "0",
+      "100"
+     ],
+     "native_choice": "0"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 792,
+     "keys": [
+      101,
+      "0",
+      "100"
+     ],
+     "native_choice": "0"
+    }
+   ],
+   "scores": {
+    "value": 51.0,
+    "n": 5
+   }
+  },
+  "shj_category_learning": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 502,
+     "keys": [
+      "C",
+      "N"
+     ],
+     "native_choice": "C"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 576,
+     "keys": [
+      "C",
+      "N"
+     ],
+     "native_choice": "C"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 650,
+     "keys": [
+      "C",
+      "N"
+     ],
+     "native_choice": "C"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 724,
+     "keys": [
+      "C",
+      "N"
+     ],
+     "native_choice": "C"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 798,
+     "keys": [
+      "C",
+      "N"
+     ],
+     "native_choice": "C"
+    }
+   ],
+   "scores": {
+    "value": 0.4,
+    "n": 5
+   }
+  },
+  "medin_category_learning": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 974,
+     "keys": [
+      "Q",
+      "J"
+     ],
+     "native_choice": "Q"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1027,
+     "keys": [
+      "Q",
+      "J"
+     ],
+     "native_choice": "Q"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1080,
+     "keys": [
+      "Q",
+      "J"
+     ],
+     "native_choice": "Q"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1133,
+     "keys": [
+      "Q",
+      "J"
+     ],
+     "native_choice": "Q"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1186,
+     "keys": [
+      "Q",
+      "J"
+     ],
+     "native_choice": "Q"
+    }
+   ],
+   "scores": {
+    "value": 0.4,
+    "n": 5
+   }
+  },
+  "weather_prediction": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 337,
+     "keys": [
+      "W",
+      "J"
+     ],
+     "native_choice": "W"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 453,
+     "keys": [
+      "W",
+      "J"
+     ],
+     "native_choice": "W"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 553,
+     "keys": [
+      "W",
+      "J"
+     ],
+     "native_choice": "W"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 645,
+     "keys": [
+      "W",
+      "J"
+     ],
+     "native_choice": "W"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 744,
+     "keys": [
+      "W",
+      "J"
+     ],
+     "native_choice": "W"
+    }
+   ],
+   "scores": {
+    "value": 0.4,
+    "n": 5
+   }
+  },
+  "rlwm": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 503,
+     "keys": [
+      "1",
+      "2",
+      "3"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 555,
+     "keys": [
+      "1",
+      "2",
+      "3"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 607,
+     "keys": [
+      "1",
+      "2",
+      "3"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 659,
+     "keys": [
+      "1",
+      "2",
+      "3"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 711,
+     "keys": [
+      "1",
+      "2",
+      "3"
+     ],
+     "native_choice": "1"
+    }
+   ],
+   "scores": {
+    "value": 0.0,
+    "n": 5
+   }
+  },
+  "recent_probes": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 404,
+     "keys": [
+      "N",
+      "L"
+     ],
+     "native_choice": "N"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 501,
+     "keys": [
+      "N",
+      "L"
+     ],
+     "native_choice": "N"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 598,
+     "keys": [
+      "N",
+      "L"
+     ],
+     "native_choice": "N"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 695,
+     "keys": [
+      "N",
+      "L"
+     ],
+     "native_choice": "N"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 792,
+     "keys": [
+      "N",
+      "L"
+     ],
+     "native_choice": "N"
+    }
+   ],
+   "scores": {
+    "value": 0.6,
+    "n": 5
+   }
+  },
+  "wcst:human_predictive": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 872,
+     "keys": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "native_choice": "A"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1024,
+     "keys": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "native_choice": "A"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1172,
+     "keys": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "native_choice": "A"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1316,
+     "keys": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "native_choice": "A"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1459,
+     "keys": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "native_choice": "A"
+    }
+   ],
+   "scores": {
+    "value": 1.3862943611158907,
+    "n": 1
+   }
+  },
+  "wcst:autonomous_generative": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 872,
+     "keys": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "native_choice": "A"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1024,
+     "keys": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "native_choice": "A"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1170,
+     "keys": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "native_choice": "A"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1316,
+     "keys": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "native_choice": "A"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1461,
+     "keys": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "native_choice": "A"
+    }
+   ],
+   "scores": {
+    "value": 0.4,
+    "n": 1
+   }
+  },
+  "nonstationary_bandit": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 906,
+     "keys": [
+      "F",
+      "J"
+     ],
+     "native_choice": "F"
+    },
+    {
+     "method": "confidence_probability",
+     "state_chars": 906,
+     "value": 0.5
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1049,
+     "keys": [
+      "F",
+      "J"
+     ],
+     "native_choice": "F"
+    },
+    {
+     "method": "confidence_probability",
+     "state_chars": 1049,
+     "value": 0.5
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1119,
+     "keys": [
+      "F",
+      "J"
+     ],
+     "native_choice": "F"
+    }
+   ],
+   "scores": null
+  },
+  "instrumental_learning": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 395,
+     "keys": [
+      "B",
+      "E"
+     ],
+     "native_choice": "B"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 515,
+     "keys": [
+      "K",
+      "T"
+     ],
+     "native_choice": "K"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 562,
+     "keys": [
+      "J",
+      "V"
+     ],
+     "native_choice": "J"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 609,
+     "keys": [
+      "K",
+      "T"
+     ],
+     "native_choice": "K"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 656,
+     "keys": [
+      "A",
+      "C"
+     ],
+     "native_choice": "A"
+    }
+   ],
+   "scores": null
+  },
+  "horizon:human_predictive": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 932,
+     "keys": [
+      "H",
+      "I"
+     ],
+     "native_choice": "H"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 933,
+     "keys": [
+      "H",
+      "I"
+     ],
+     "native_choice": "H"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 971,
+     "keys": [
+      "H",
+      "I"
+     ],
+     "native_choice": "H"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1009,
+     "keys": [
+      "H",
+      "I"
+     ],
+     "native_choice": "H"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1047,
+     "keys": [
+      "H",
+      "I"
+     ],
+     "native_choice": "H"
+    }
+   ],
+   "scores": {
+    "value": 0.6931471605599454,
+    "n": 5
+   }
+  },
+  "horizon:autonomous_generative": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 940,
+     "keys": [
+      "H",
+      "I"
+     ],
+     "native_choice": "H"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 941,
+     "keys": [
+      "H",
+      "I"
+     ],
+     "native_choice": "H"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 981,
+     "keys": [
+      "H",
+      "I"
+     ],
+     "native_choice": "H"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1021,
+     "keys": [
+      "H",
+      "I"
+     ],
+     "native_choice": "H"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1061,
+     "keys": [
+      "H",
+      "I"
+     ],
+     "native_choice": "H"
+    }
+   ],
+   "scores": null
+  },
+  "stationary_multiarmed_bandit": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 989,
+     "keys": [
+      "CK",
+      "I",
+      "Q",
+      "AT",
+      "G"
+     ],
+     "native_choice": "CK"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1181,
+     "keys": [
+      "CK",
+      "I",
+      "Q",
+      "AT",
+      "G"
+     ],
+     "native_choice": "CK"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1181,
+     "keys": [
+      "CK",
+      "I",
+      "Q",
+      "AT",
+      "G"
+     ],
+     "native_choice": "CK"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1181,
+     "keys": [
+      "CK",
+      "I",
+      "Q",
+      "AT",
+      "G"
+     ],
+     "native_choice": "CK"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1181,
+     "keys": [
+      "CK",
+      "I",
+      "Q",
+      "AT",
+      "G"
+     ],
+     "native_choice": "CK"
+    }
+   ],
+   "scores": null
+  },
+  "hybrid_information_sampling": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 793,
+     "keys": [
+      "sample_left",
+      "sample_right",
+      "select_left",
+      "select_right"
+     ],
+     "native_choice": "sample_left"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 806,
+     "keys": [
+      "sample_left",
+      "sample_right",
+      "select_left",
+      "select_right"
+     ],
+     "native_choice": "sample_left"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 793,
+     "keys": [
+      "sample_left",
+      "sample_right",
+      "select_left",
+      "select_right"
+     ],
+     "native_choice": "sample_left"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 798,
+     "keys": [
+      "sample_left",
+      "sample_right",
+      "select_left",
+      "select_right"
+     ],
+     "native_choice": "sample_left"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 804,
+     "keys": [
+      "sample_left",
+      "sample_right",
+      "select_left",
+      "select_right"
+     ],
+     "native_choice": "sample_left"
+    }
+   ],
+   "scores": null
+  },
+  "mouselab_tree:human_predictive": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 566,
+     "keys": [
+      "STOP",
+      "R1",
+      "R5",
+      "R9",
+      "R13"
+     ],
+     "native_choice": "STOP"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 567,
+     "keys": [
+      "STOP",
+      "R2",
+      "R5",
+      "R9",
+      "R13"
+     ],
+     "native_choice": "STOP"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 574,
+     "keys": [
+      "STOP",
+      "R2",
+      "R6",
+      "R9",
+      "R13"
+     ],
+     "native_choice": "STOP"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 580,
+     "keys": [
+      "STOP",
+      "R2",
+      "R6",
+      "R10",
+      "R13"
+     ],
+     "native_choice": "STOP"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 587,
+     "keys": [
+      "STOP",
+      "R2",
+      "R6",
+      "R11",
+      "R12",
+      "R13"
+     ],
+     "native_choice": "STOP"
+    }
+   ],
+   "scores": {
+    "value": 1.6459022237928913,
+    "n": 5
+   }
+  },
+  "mouselab_tree:autonomous_generative": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 632,
+     "keys": [
+      "STOP",
+      "R1",
+      "R5",
+      "R9",
+      "R13"
+     ],
+     "native_choice": "STOP"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 632,
+     "keys": [
+      "STOP",
+      "R1",
+      "R5",
+      "R9",
+      "R13"
+     ],
+     "native_choice": "STOP"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 632,
+     "keys": [
+      "STOP",
+      "R1",
+      "R5",
+      "R9",
+      "R13"
+     ],
+     "native_choice": "STOP"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 632,
+     "keys": [
+      "STOP",
+      "R1",
+      "R5",
+      "R9",
+      "R13"
+     ],
+     "native_choice": "STOP"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 632,
+     "keys": [
+      "STOP",
+      "R1",
+      "R5",
+      "R9",
+      "R13"
+     ],
+     "native_choice": "STOP"
+    }
+   ],
+   "scores": null
+  },
+  "bart": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1022,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1208,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1303,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1398,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1493,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    }
+   ],
+   "scores": null
+  },
+  "temporal_discounting": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 143,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 143,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 143,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 145,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 145,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 145,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 135,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 135,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 135,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    }
+   ],
+   "scores": {
+    "value": 0.0,
+    "n": 6
+   }
+  },
+  "two_step": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 317,
+     "keys": [
+      "X",
+      "Y"
+     ],
+     "native_choice": "X"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 390,
+     "keys": [
+      "J",
+      "K"
+     ],
+     "native_choice": "J"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 480,
+     "keys": [
+      "X",
+      "Y"
+     ],
+     "native_choice": "X"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 553,
+     "keys": [
+      "D",
+      "F"
+     ],
+     "native_choice": "D"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 599,
+     "keys": [
+      "X",
+      "Y"
+     ],
+     "native_choice": "X"
+    }
+   ],
+   "scores": null
+  },
+  "false_belief_story_qa": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 297,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 295,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 316,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 286,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 296,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    }
+   ],
+   "scores": {
+    "value": 0.2,
+    "n": 5
+   }
+  },
+  "politeness_pragmatics": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 569,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 572,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 566,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 566,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 579,
+     "keys": [
+      "1",
+      "2"
+     ],
+     "native_choice": "1"
+    }
+   ],
+   "scores": {
+    "value": 0.6931471805599453,
+    "n": 5
+   }
+  },
+  "pragmatic_language_interpretation": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1172,
+     "keys": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1112,
+     "keys": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1145,
+     "keys": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1067,
+     "keys": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "native_choice": "1"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1274,
+     "keys": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "native_choice": "1"
+    }
+   ],
+   "scores": {
+    "value": 1.3862943611198906,
+    "n": 5
+   }
+  },
+  "nonliteral_number_interpretation": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "posterior_probability",
+     "state_chars": 3340,
+     "value": 0.5
+    },
+    {
+     "method": "posterior_probability",
+     "state_chars": 3340,
+     "value": 0.5
+    },
+    {
+     "method": "posterior_probability",
+     "state_chars": 3341,
+     "value": 0.5
+    },
+    {
+     "method": "posterior_probability",
+     "state_chars": 3341,
+     "value": 0.5
+    },
+    {
+     "method": "posterior_probability",
+     "state_chars": 3342,
+     "value": 0.5
+    }
+   ],
+   "scores": {
+    "value": 35.616,
+    "n": 5
+   }
+  },
+  "performance_self_assessment": {
+   "status": "complete",
+   "calls": [
+    {
+     "method": "choice_probabilities",
+     "state_chars": 137,
+     "keys": [
+      21,
+      "0",
+      "20"
+     ],
+     "native_choice": "0"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 431,
+     "keys": [
+      101,
+      "0",
+      "100"
+     ],
+     "native_choice": "0"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 545,
+     "keys": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+     ],
+     "native_choice": "0"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 637,
+     "keys": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+     ],
+     "native_choice": "0"
+    },
+    {
+     "method": "choice_probabilities",
+     "state_chars": 1493,
+     "keys": [
+      "D",
+      "B",
+      "N",
+      "O",
+      "U"
+     ],
+     "native_choice": "D"
+    }
+   ],
+   "scores": {
+    "value": 2.8129742825191046,
+    "n": 5
+   }
+  }
+ }
+}

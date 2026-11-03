@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "S1CogBench public aggregate result row",
+  "type": "object",
+  "required": [
+    "row_id",
+    "task",
+    "model",
+    "protocol",
+    "mode",
+    "metric",
+    "metric_variant",
+    "scope",
+    "target",
+    "unit",
+    "aggregation",
+    "n",
+    "value",
+    "value_raw",
+    "value_status",
+    "status",
+    "source"
+  ],
+  "properties": {
+    "row_id": {
+      "type": "string"
+    },
+    "task": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "protocol": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string"
+    },
+    "metric": {
+      "type": "string"
+    },
+    "metric_variant": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "target": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "aggregation": {
+      "type": "string"
+    },
+    "value_raw": {
+      "type": "string"
+    },
+    "n_raw": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "description": "Row state. Accepted cells: available_full_protocol and the complete_* source states. Table 3 cells without a value: not_applicable_readout (n.a.: no option probabilities for an NLL target), partial_records_retained (part.), not_evaluated (n.e.: outside the measured scope), non_full_prefix_only (n.f.), cancelled_before_generation (canc.), all_responses_invalid (inv.). Local runs of python -m s1cogbench: user_supplied_full_protocol, user_supplied_incomplete."
+    },
+    "notes": {
+      "type": "string"
+    },
+    "n": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "value": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "enum": [
+            "Infinity",
+            "-Infinity"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "value_status": {
+      "enum": [
+        "finite",
+        "defined_positive_infinity",
+        "undefined"
+      ]
+    },
+    "source": {
+      "type": "object"
+    },
+    "runtime_context": {
+      "type": "object"
+    },
+    "common_metric": {
+      "type": "boolean"
+    },
+    "steps": {
+      "type": "integer"
+    },
+    "table2_marker": {
+      "description": "The marker printed in the Table 3 cell when the row has no value; null otherwise.",
+      "enum": [
+        "n.a.",
+        "part.",
+        "n.e.",
+        "n.f.",
+        "canc.",
+        "inv.",
+        null
+      ]
+    }
+  },
+  "additionalProperties": true,
+  "comparison_context": [
+    "task",
+    "protocol",
+    "mode",
+    "metric",
+    "metric_variant",
+    "scope",
+    "target",
+    "unit",
+    "aggregation"
+  ],
+  "notes": [
+    "Context keys define comparable views; do not collapse distinct protocols, reward families, horizons, units or targets.",
+    "Latency additionally requires matching runtime_context and notes. Shared-GPU timings are not isolated model speed or human reaction time.",
+    "n is the original aggregation denominator and can mean responses, participants or episodes; interpret with aggregation.",
+    "No overall cognitive score or cross-task normalized ranking is supplied.",
+    "A row with a table2_marker has value null and value_status undefined; its status names the marker. Do not read it as a zero or a missing run of an applicable target.",
+    "API rows (model_access api in results.json) keep the provider readout in runtime_context.readout: native typed choice (Jev), generated FINAL line (Claude; human-NLL targets n.a.), or stated probabilities (Claude Haiku on four modes). Stated probabilities are not internal model probabilities."
+  ]
+}

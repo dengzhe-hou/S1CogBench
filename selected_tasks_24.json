@@ -1,0 +1,146 @@
+[
+  {
+    "task_number": 1,
+    "task_id": "bayesian_urn_inference",
+    "name_zh": "概率推断",
+    "domain": "证据整合与概率推理"
+  },
+  {
+    "task_number": 2,
+    "task_id": "multiple_cue_judgment",
+    "name_zh": "多线索判断",
+    "domain": "证据整合与概率推理"
+  },
+  {
+    "task_number": 3,
+    "task_id": "multi_attribute_choice",
+    "name_zh": "多属性选择",
+    "domain": "证据整合与概率推理"
+  },
+  {
+    "task_number": 4,
+    "task_id": "probability_coherence_judgment",
+    "name_zh": "概率一致性判断",
+    "domain": "证据整合与概率推理"
+  },
+  {
+    "task_number": 5,
+    "task_id": "shj_category_learning",
+    "name_zh": "Shepard 类别学习",
+    "domain": "概念与类别学习"
+  },
+  {
+    "task_number": 6,
+    "task_id": "medin_category_learning",
+    "name_zh": "Medin 类别学习",
+    "domain": "概念与类别学习"
+  },
+  {
+    "task_number": 7,
+    "task_id": "weather_prediction",
+    "name_zh": "天气预测任务",
+    "domain": "概念与类别学习"
+  },
+  {
+    "task_number": 8,
+    "task_id": "rlwm",
+    "name_zh": "RLWM",
+    "domain": "学习与历史利用"
+  },
+  {
+    "task_number": 9,
+    "task_id": "recent_probes",
+    "name_zh": "近期探测",
+    "domain": "学习与历史利用"
+  },
+  {
+    "task_number": 10,
+    "task_id": "wcst",
+    "name_zh": "威斯康星卡片分类",
+    "domain": "反馈适应与灵活性"
+  },
+  {
+    "task_number": 11,
+    "task_id": "nonstationary_bandit",
+    "name_zh": "非平稳bandit：漂移/变化与适应",
+    "domain": "反馈适应与灵活性"
+  },
+  {
+    "task_number": 12,
+    "task_id": "instrumental_learning",
+    "name_zh": "概率工具性学习",
+    "domain": "反馈适应与灵活性"
+  },
+  {
+    "task_number": 13,
+    "task_id": "horizon",
+    "name_zh": "Horizon探索",
+    "domain": "探索与结构学习"
+  },
+  {
+    "task_number": 14,
+    "task_id": "stationary_multiarmed_bandit",
+    "name_zh": "平稳多臂bandit",
+    "domain": "探索与结构学习"
+  },
+  {
+    "task_number": 16,
+    "task_id": "hybrid_information_sampling",
+    "name_zh": "Hybrid",
+    "domain": "信息获取与停止"
+  },
+  {
+    "task_number": 17,
+    "task_id": "mouselab_tree",
+    "name_zh": "Mouselab",
+    "domain": "信息获取与停止"
+  },
+  {
+    "task_number": 19,
+    "task_id": "bart",
+    "name_zh": "气球模拟风险任务",
+    "domain": "风险与时间偏好"
+  },
+  {
+    "task_number": 22,
+    "task_id": "temporal_discounting",
+    "name_zh": "跨期选择与时间折扣",
+    "domain": "风险与时间偏好"
+  },
+  {
+    "task_number": 23,
+    "task_id": "two_step",
+    "name_zh": "Two-step连续决策",
+    "domain": "规划与价值重估"
+  },
+  {
+    "task_number": 26,
+    "task_id": "false_belief_story_qa",
+    "name_zh": "故事中的信念追踪",
+    "domain": "社会信念与语用"
+  },
+  {
+    "task_number": 27,
+    "task_id": "politeness_pragmatics",
+    "name_zh": "礼貌与间接表达",
+    "domain": "社会信念与语用"
+  },
+  {
+    "task_number": 28,
+    "task_id": "pragmatic_language_interpretation",
+    "name_zh": "细粒度语用理解",
+    "domain": "社会信念与语用"
+  },
+  {
+    "task_number": 29,
+    "task_id": "nonliteral_number_interpretation",
+    "name_zh": "非字面数字理解",
+    "domain": "社会信念与语用"
+  },
+  {
+    "task_number": 31,
+    "task_id": "performance_self_assessment",
+    "name_zh": "答题与自我评估（语法、逻辑两个题域）",
+    "domain": "元认知与自我评估"
+  }
+]

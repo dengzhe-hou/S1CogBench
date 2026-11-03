@@ -1,0 +1,415 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-10-27T18:21:39.533061+00:00",
+  "scope": "Provenance and fitting exposure for the completed task-reference families of Table 3. No optional old baseline is relabelled required or newly run.",
+  "baselines": [
+    {
+      "id": "horizon_rw3",
+      "label": "RW3 (local formula fit)",
+      "task": "horizon",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "parameter_fit": "25 original training participants; 28,000 free choices; forced choices retained for updates",
+        "predictive_evaluation": "6 held-out participants; 6,720 free choices",
+        "autonomous_evaluation": "31 original timelines including the 25 training-participant timelines; 34,720 free choices",
+        "autonomous_action_rule": "Softmax sampling at temperature 1 with original participant seeds"
+      },
+      "comparison_note": "Same Horizon target modes and published split; task fitting and softmax readout differ from frozen neural native-action protocols. Autonomous reward is not held-out reward evidence. The unavailable author executable and its archived NLL are distinct references.",
+      "source_paper": "https://arxiv.org/html/2508.07887v1",
+      "author_executable_recovered": false,
+      "full_precision_source_status": "accepted aggregate JSON located",
+      "same_neural_mode": {
+        "human_prediction": true,
+        "autonomous_return": true
+      },
+      "matched_training_exposure": false
+    },
+    {
+      "id": "hybrid_end_to_end_ann",
+      "label": "Independent end-to-end ANN (reimplementation)",
+      "task": "hybrid_information_sampling",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "participants": 20,
+        "responses": 163135,
+        "folds": 160,
+        "folds_per_participant": 8,
+        "iterations_per_fold": 3000,
+        "split_unit": "Original response/trial fold within each participant; not held-out participants",
+        "checkpoint_selection": "Lowest loss on that same validation fold across all 3,000 iterations; not nested model selection",
+        "normalization": "Training-fold statistics only",
+        "neural_models": "Frozen checkpoints without this task-specific fitting"
+      },
+      "comparison_note": "Same 163,135 human action targets and original folds. ANN uses disclosed structured inputs and within-participant fitting; neural models use their frozen text/choice interfaces. Validation-fold checkpoint selection and training exposure differ, so this is not a matched-training superiority comparison.",
+      "source_description": "Original Hybrid supplementary Note 4, pages 5-6",
+      "official_standalone_code_recovered": false,
+      "full_precision_source_status": "accepted aggregate JSON located",
+      "same_neural_mode": true,
+      "matched_training_exposure": false
+    },
+    {
+      "id": "multiple_cue_disclosed",
+      "label": "Multiple-cue formula reimplementation",
+      "task": "multiple_cue_judgment",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "train_participants": 232,
+        "train_responses": 52464,
+        "heldout_test_participants": 28,
+        "heldout_test_responses": 6136,
+        "parameter_fits": "Each of three original experiments fitted separately on its training rows",
+        "parameter_selection": "Held-out data not used for parameter selection",
+        "feedback": "Update only after feedback actually visible to the human; retain no-feedback rows"
+      },
+      "comparison_note": "Same original held-out human-response mode, split and all responses. Disclosed formula fit is distinct from unrecovered author fitting code and archived unpaired scores. Retain each output interface and NLL definition; shared task membership does not make integer, typed or binned likelihoods interchangeable.",
+      "author_executable_recovered": false,
+      "full_precision_source_status": "accepted aggregate JSON located",
+      "same_neural_mode": true,
+      "matched_training_exposure": false
+    },
+    {
+      "id": "rlwm_archived_models",
+      "label": "RLWM archived fitted cognitive models",
+      "task": "rlwm",
+      "status": "completed_reference",
+      "provenance_type": "archived-replay",
+      "fitting_exposure": {
+        "participants": 79,
+        "scored_responses": 52911,
+        "fitting": "Archived individual parameters fitted on these same 79 participants",
+        "heldout": false,
+        "history": "Archive uses RT-filtered histories; neural inputs retain earlier fast responses and omissions",
+        "models_in_archive_order": [
+          9,
+          6,
+          2,
+          8,
+          26,
+          38,
+          42
+        ]
+      },
+      "comparison_note": "Same broad offline human-response prediction family, but same-participant fitting and different history exposure. These are neither held-out predictions nor matched-training/identical-history superiority comparisons. Correct-action probability is distinct from an argmax action.",
+      "archive_scalar_checks": 553,
+      "archive_max_absolute_nll_error_raw": "1.7053025658242404E-12",
+      "full_precision_source_status": "accepted full-precision aggregate CSV located",
+      "same_neural_mode": true,
+      "identical_history": false,
+      "matched_training_exposure": false
+    },
+    {
+      "id": "wcst_sl",
+      "label": "SL (local refit)",
+      "task": "wcst",
+      "status": "completed_reference",
+      "provenance_type": "official-code",
+      "fitting_exposure": {
+        "fit_participants": 300,
+        "test_participants": 75,
+        "trials_per_test_mode": 12754,
+        "split": "First 75 original source participants are test; remaining 300 are training"
+      },
+      "comparison_note": "Same test participants and task-mode targets; training exposure and recorded inference rules differ from frozen neural checkpoints. Autonomous modes replay human-source rule-switch times. The four-decimal paper table is the source precision shown here.",
+      "full_precision_source_status": "Rounded manuscript table used for this public export; original completed reference is not marked incomplete",
+      "paper_source": "WCST table, label tab:wcst",
+      "source_code": "https://github.com/snamazova/centaur_evaluation/tree/main/wcst",
+      "implementation_boundary": "Model and objective extracted directly from official SL_model_fitting_and_eval notebook cells; local full refit preserves grid order and tie rule. Generative evaluation samples and updates from its own chosen action.",
+      "same_neural_mode": true,
+      "matched_training_exposure": false
+    },
+    {
+      "id": "mouselab_metagreedy",
+      "label": "MetaGreedy (official implementation)",
+      "task": "mouselab_tree",
+      "status": "completed_reference",
+      "provenance_type": "official-code",
+      "fitting_exposure": {
+        "participants": 95,
+        "heldout_trials": 2375,
+        "heldout_action_distributions": 20363,
+        "fit": "Five-fold cross-validation within each participant, with 100 successful Sobol restarts per fit",
+        "same_participant_exposure": true,
+        "heldout_unit": "Trials/action distributions within participants, not unseen participants"
+      },
+      "comparison_note": "Matches the human-action prediction mode only. Its human-response NLL is not comparable numerically with the 23,750-episode neural autonomous reveals or returns. Project-local Julia 1.4-compatible dependencies differ from the historical author archive environment.",
+      "implementation_boundary": "Official source with disclosed local dependency environment; not identical historical environment",
+      "full_precision_source_status": "Rounded manuscript description used for this public export; original completed reference is not marked incomplete",
+      "source_paper": "https://doi.org/10.1038/s41562-022-01332-8",
+      "same_neural_mode": {
+        "human_prediction": true,
+        "autonomous_return": false
+      },
+      "matched_training_exposure": false
+    },
+    {
+      "id": "probability_coherence_reference_20261030",
+      "label": "Median report of training participants",
+      "task": "probability_coherence_judgment",
+      "status": "completed_reference",
+      "provenance_type": "independent-fit",
+      "fitting_exposure": {
+        "fit": "19,740 reports from the 128 Psych-101 training participants of the same source experiments",
+        "evaluation": "15 disjoint test participants; 2,460 responses"
+      },
+      "comparison_note": "Predicts each test response with the median report of the training participants for the same query in the same experiment.",
+      "table2_reference_type": "human fit"
+    },
+    {
+      "id": "instrumental_learning_reference_20261030",
+      "label": "Rescorla-Wagner with separate learning rates",
+      "task": "instrumental_learning",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "fit": "Learning rates 0.08 and 0.06 and inverse temperature 794.328 selected by mean earned reward on 100 independent training environments; no human data",
+        "evaluation": "The ten original test environments, after selection"
+      },
+      "comparison_note": "CogBench model with separate learning rates for positive and negative prediction errors. Reads only visible information.",
+      "table2_reference_type": "algorithm"
+    },
+    {
+      "id": "bart_reference_20261030",
+      "label": "Fixed pump threshold per balloon letter",
+      "task": "bart",
+      "status": "completed_reference",
+      "provenance_type": "independent-fit",
+      "fitting_exposure": {
+        "fit": "Thresholds 61, 63 and 66 selected by mean reward on 100 independent training environments; no human data",
+        "evaluation": "The 20 original test runs, after selection"
+      },
+      "comparison_note": "The original runner reassigns the three maxima to the letters in every run, so these visible-information thresholds stay below the full-information optimum of 14.00, which requires the hidden maxima.",
+      "table2_reference_type": "algorithm"
+    },
+    {
+      "id": "temporal_discounting_reference_20261030",
+      "label": "Later-reward rate of Psych-101 participants",
+      "task": "temporal_discounting",
+      "status": "completed_reference",
+      "provenance_type": "human-data-summary",
+      "fitting_exposure": {
+        "fit": "None; descriptive summary of human sessions",
+        "evaluation": "All 13,232 participants on the same instrument"
+      },
+      "comparison_note": "Applies the realized-question rule of the model rows. Human sessions keep four anomaly items that the CogBench path skips after three immediate choices; dropping them gives 39.8%.",
+      "table2_reference_type": "human"
+    },
+    {
+      "id": "two_step_reference_20261030",
+      "label": "Hybrid model fits to CogBench participants (Daw et al. 2011)",
+      "task": "two_step",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "fit": "Seven parameters by maximum likelihood on each of the 40 CogBench human participants",
+        "evaluation": "Identical seeded reward-rate path of the five models"
+      },
+      "comparison_note": "Twenty-five of the 40 fits have at least one parameter at a bound, so the parameters are a reference policy, not estimates of individual learning.",
+      "table2_reference_type": "human fit"
+    },
+    {
+      "id": "politeness_reference_20261030",
+      "label": "Other participants, leave one out",
+      "task": "politeness_pragmatics",
+      "status": "completed_reference",
+      "provenance_type": "human-data-summary",
+      "fitting_exposure": {
+        "fit": "None; the other participants' responses to the same item, add-one smoothing",
+        "evaluation": "Each released human response"
+      },
+      "comparison_note": "Predicts each human response from the other participants' responses to the same item.",
+      "table2_reference_type": "human"
+    },
+    {
+      "id": "pragmatic_interpretation_reference_20261030",
+      "label": "Other participants, leave one out",
+      "task": "pragmatic_language_interpretation",
+      "status": "completed_reference",
+      "provenance_type": "human-data-summary",
+      "fitting_exposure": {
+        "fit": "None; the other participants' responses to the same item, add-one smoothing",
+        "evaluation": "Each released human response"
+      },
+      "comparison_note": "Predicts each human response from the other participants' responses to the same item.",
+      "table2_reference_type": "human"
+    },
+    {
+      "id": "nonliteral_number_reference_20261030",
+      "label": "Human split-half",
+      "task": "nonliteral_number_interpretation",
+      "status": "completed_reference",
+      "provenance_type": "human-data-summary",
+      "fitting_exposure": {
+        "fit": "None; mean reports of two random halves of each item's respondents",
+        "evaluation": "All 330 queries"
+      },
+      "comparison_note": "A half-panel mean lies about twice as far from the other half as from the full-panel mean, so this value is a conservative human reference.",
+      "table2_reference_type": "human"
+    },
+    {
+      "id": "self_assessment_lookup_reference_20261030",
+      "label": "Lookup table",
+      "task": "performance_self_assessment",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "fit": "Response-frequency tables with add-alpha smoothing. Grammar tables on 3,192 training sessions; logic by tenfold cross-fitting across logic participants",
+        "evaluation": "323 grammar test sessions; held-out logic folds"
+      },
+      "comparison_note": "Lookup-table family of Binz et al. (2025). The source defines no baseline for the logic set. Transferring the grammar tables to logic instead gives 1.917.",
+      "table2_reference_type": "human fit"
+    },
+    {
+      "id": "uniform_choice",
+      "label": "Uniform",
+      "task": "all_27_modes",
+      "status": "completed_reference",
+      "provenance_type": "analytic-expectation",
+      "fitting_exposure": {
+        "fit": "None; no model and no fitting",
+        "evaluation": "Expectation under the original scoring rule"
+      },
+      "comparison_note": "Expectation over uniform legal actions or reports with source weights and tie credit. Not a sampled model run. Each row of reference_results.json states its definition.",
+      "table2_column": "Uniform"
+    },
+    {
+      "id": "multi_attribute_wadd",
+      "label": "WADD",
+      "task": "multi_attribute_choice",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "fit": "Four-weight paper-form reimplementation; 7,008 responses from 73 training participants",
+        "evaluation": "Six held-out participants"
+      },
+      "comparison_note": "Follows the published model family of Binz et al. (2025). An existing fitted output, aligned to the current target with no new model call.",
+      "table2_reference_type": "human fit"
+    },
+    {
+      "id": "shj_gcm",
+      "label": "GCM",
+      "task": "shj_category_learning",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "fit": "Paper-form reimplementation; 29,776 responses from 85 training participants",
+        "evaluation": "Ten held-out participants"
+      },
+      "comparison_note": "Follows the published model family of Binz et al. (2025). Compares each saved legal argmax to the original objective label under human history; not a human-likelihood or autonomous-reward score.",
+      "table2_reference_type": "human fit"
+    },
+    {
+      "id": "medin_gcm",
+      "label": "GCM",
+      "task": "medin_category_learning",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "fit": "Train-only refit on 34,200 learning responses across the two source experiments",
+        "evaluation": "42 held-out participant sessions"
+      },
+      "comparison_note": "Uses the local train-only refit, not the separately archived author-parameter replay. The separate 336 no-feedback classifications and 336 typicality reports are not counted, and the full 6,972-response human-likelihood task is not claimed complete.",
+      "table2_reference_type": "human fit"
+    },
+    {
+      "id": "weather_gcm",
+      "label": "GCM",
+      "task": "weather_prediction",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "fit": "Paper-form reimplementation; 4,600 responses from 23 training participants",
+        "evaluation": "Two held-out participants"
+      },
+      "comparison_note": "Follows the published model family of Binz et al. (2025). Compares each saved legal argmax to the original objective label under human history.",
+      "table2_reference_type": "human fit"
+    },
+    {
+      "id": "recent_probes_rational",
+      "label": "Rational conditional-response model",
+      "task": "recent_probes",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "fit": "Conditional-response matrix fitted on 34,714 responses from 471 training participants",
+        "evaluation": "51 held-out participants"
+      },
+      "comparison_note": "The prompt supplies the current letter set, and the fitted model selects the correct visible-set membership category on every item. This does not demonstrate an internal working-memory mechanism.",
+      "table2_reference_type": "human fit"
+    },
+    {
+      "id": "stationary_thompson_family",
+      "label": "Thompson family",
+      "task": "stationary_multiarmed_bandit",
+      "status": "completed_reference",
+      "provenance_type": "official-code-and-disclosed-reimplementation",
+      "fitting_exposure": {
+        "fit": "None; the policies observe only their own past selected arms and rewards",
+        "evaluation": "All 16 original conditions"
+      },
+      "comparison_note": "Official Beta(1,1) Thompson on eight Bernoulli conditions and disclosed normal-inverse-gamma Thompson on eight Gaussian conditions. Same original conditions, horizons and environment seeds, with separate logged action RNGs. Step-weighted; no reward units are pooled.",
+      "table2_reference_type": "algorithm"
+    },
+    {
+      "id": "restless_qlearning",
+      "label": "Two-parameter Q-learning",
+      "task": "nonstationary_bandit",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "fit": "Alpha 0.44 and beta 100 selected by mean earned reward on 100 independent 80-trial environments; no human data",
+        "evaluation": "The ten original test environments, after selection"
+      },
+      "comparison_note": "Original choice equations in the retained CogBench environment. Mean reward 54.6679. No confidence mapping is fitted, and softmax choice probabilities are not read as confidence.",
+      "table2_reference_type": "algorithm"
+    },
+    {
+      "id": "mouselab_metagreedy_autonomous",
+      "label": "MetaGreedy, archived fitted parameters",
+      "task": "mouselab_tree",
+      "status": "completed_reference",
+      "provenance_type": "disclosed-reimplementation",
+      "fitting_exposure": {
+        "fit": "All 95 archived participant-specific fitted parameter sets; no fitting on the generated evaluation trees",
+        "evaluation": "The same trees as the five open models"
+      },
+      "comparison_note": "Python port checked against all 20,363 saved Julia probability vectors. The sampler matches the original distribution, not Julia's random stream. Distinct from the archived human-prediction NLL of 1.3670.",
+      "table2_reference_type": "human fit"
+    },
+    {
+      "id": "bayesian_urn_analytic",
+      "label": "Exact Bayes",
+      "task": "bayesian_urn_inference",
+      "status": "completed_reference",
+      "provenance_type": "analytic-solution",
+      "fitting_exposure": {
+        "fit": "None; the analytic posterior from the visible priors, likelihoods and observations",
+        "evaluation": "The 400 generated queries"
+      },
+      "comparison_note": "Zero by construction. examples/bayes_event_agent.py computes it through the original scorer.",
+      "table2_reference_type": "optimal"
+    },
+    {
+      "id": "false_belief_answer_key",
+      "label": "ToMi answer key",
+      "task": "false_belief_story_qa",
+      "status": "completed_reference",
+      "provenance_type": "answer-key",
+      "fitting_exposure": {
+        "fit": "None; the answer key itself",
+        "evaluation": "By definition"
+      },
+      "comparison_note": "ToMi has no human responses, so the reference is the answer key itself; it is 100 by definition, not a measured performance.",
+      "table2_reference_type": "optimal"
+    }
+  ],
+  "comparison_policy": [
+    "Keep each reference mode, metric, aggregation and training exposure visible.",
+    "Same task membership does not imply a matched mode, history, output interface, training exposure or score.",
+    "Horizon reward includes training-participant timelines; Hybrid/Mouselab folds are within participants; RLWM archived fits are same-participant references.",
+    "Paper-table or paragraph precision is legitimate reported precision and is labelled as such. The inability to locate a full-precision scalar in this bounded export is not an incomplete experiment.",
+    "The existing results.json remains unchanged and includes Gaussian Thompson condition results separately."
+  ]
+}

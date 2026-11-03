@@ -1,0 +1,3184 @@
+{
+  "tasks": [
+    {
+      "task_number": 1,
+      "task_id": "bayesian_urn_inference",
+      "name_zh": "概率推断",
+      "domain": "证据整合与概率推理",
+      "runner": "scripts/benchmark_paper_tasks.py",
+      "task_argument": "probabilistic-posterior",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "S1CogBench existing inventory",
+          "manipulations": "先验基率、urn似然与观测颜色",
+          "original_papers": [
+            {
+              "citation": "CogBench ICML 2024",
+              "url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://github.com/juliancodaforno/CogBench",
+              "availability": "public",
+              "note": "原源码本机已有；保留官方版本/评分"
+            },
+            {
+              "kind": "analysis",
+              "url": "docs/PROBABILISTIC_REASONING_ORIGINAL_20261007.md",
+              "availability": "local",
+              "note": "本机协议与实际结果入口，按2026-10-17快照"
+            }
+          ],
+          "input": "先验、urn组成与观测颜色",
+          "output": "目标urn后验概率",
+          "history": "这是事件概率；Bayes全零误差时原严格去尾分数无定义；生成题不是真人数据",
+          "split_protocol": "原代码200 runs×2条件=400题；前100 runs另报论文规模，无train/test",
+          "metrics": "原去尾1−MAE、先验/似然回归权重；全量MAE及事件Brier/NLL另列",
+          "baselines": [
+            {
+              "name": "Bayes",
+              "status": "author_reference",
+              "source_url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "note": "解析规范后验；新增全量指标与原去尾分数分列"
+            }
+          ],
+          "adaptation_note": "这是事件概率；Bayes全零误差时原严格去尾分数无定义；生成题不是真人数据"
+        },
+        {
+          "source_library": "CogBench",
+          "manipulations": "先验轮盘比例与 urn 红/蓝球比例分别变化",
+          "original_papers": [
+            {
+              "citation": "Dasgupta et al. (2020). A theory of learning to infer. Psychological Review 127:412.",
+              "url": "https://doi.org/10.1037/rev0000178",
+              "relation": "source_study"
+            },
+            {
+              "citation": "Coda-Forno et al. (2024). CogBench: a large language model walks into a psychology lab. ICML/PMLR235:9076–9108.",
+              "url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://github.com/juliancodaforno/CogBench/tree/main/Experiments/ProbabilisticReasoning",
+              "availability": "public",
+              "note": "本地 external/CogBench 对应原 query.py 和环境已读；本轮不执行新实验。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/juliancodaforno/CogBench/blob/main/Experiments/ProbabilisticReasoning/store.py",
+              "availability": "public",
+              "note": "原行为/表现指标代码。"
+            }
+          ],
+          "input": "完整先验、似然和观测球色",
+          "output": "事件后验概率 0–1",
+          "history": "每步保留本run截至当前的原实验信息；重置边界按原代码，历史窗口适配须标注。",
+          "split_protocol": "原查询默认200 runs×两条件；论文描述100 simulations，既有本地报告分列，不按相同名称混淆。",
+          "metrics": "原 prior/likelihood 权重回归、原去尾误差；完整MAE/Brier是本项目另列分析",
+          "baselines": [
+            {
+              "name": "Bayes 后验与随机参照",
+              "status": "official",
+              "source_url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "note": "按CogBench公开参照或诊断拟合称呼，不将普通随机参照包装为认知SOTA。"
+            }
+          ],
+          "adaptation_note": "explicit posterior不由两动作softmax直接替代；原严格去尾对零误差参照可能无定义。"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 2,
+      "task_id": "multiple_cue_judgment",
+      "name_zh": "多线索判断",
+      "domain": "证据整合与概率推理",
+      "runner": "scripts/run_psych_compact.py",
+      "task_argument": "multiple_cue_judgment",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "两个线索各五级、结果九级；加性与非加性任务、言语与数值表示；反馈停止阶段",
+          "original_papers": [
+            {
+              "citation": "Collsiöö, A., Juslin, P. & Winman, A. Is numerical information always beneficial? verbal and numerical cue-integration in additive and non-additive tasks. Cognition 240 , 105584 (2023).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib97",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "当前线索及先前训练反馈",
+          "output": "九级结果分类及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；结果预测误差、反馈停止后的泛化、线索权重。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Linear regression model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx7",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "原结果等级有序，不把等级编号当实际连续浓度"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 3,
+      "task_id": "multi_attribute_choice",
+      "name_zh": "多属性选择",
+      "domain": "证据整合与概率推理",
+      "runner": "scripts/run_psych_extended.py",
+      "task_argument": "multi_attribute_choice",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "两商品各有四位不同有效度专家的二元评价",
+          "original_papers": [
+            {
+              "citation": "Hilbig, B. E. & Moshagen, M. Generalized outcome-based strategy classification: Comparing deterministic and probabilistic choice models. Psychonomic bulletin & review 21 , 1431–1443 (2014).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib46",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "评价矩阵及专家有效度顺序",
+          "output": "两个商品及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；高有效度线索与多数线索权重、策略预测拟合。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Weighted-additive model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx8",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "保留两商品信息；weighted-additive 与 take-the-best 等需区分原正式对照和新增诊断"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 4,
+      "task_id": "probability_coherence_judgment",
+      "name_zh": "概率一致性判断",
+      "domain": "证据整合与概率推理",
+      "runner": "scripts/run_four_task_responses_20261018.py",
+      "task_argument": "probability_coherence_judgment",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "事件、否定、合取、析取和条件概率询问",
+          "original_papers": [
+            {
+              "citation": "Zhu, J.-Q., Sanborn, A. N. & Chater, N. The bayesian sampler: Generic bayesian inference causes incoherence in human probability judgments. Psychological review 127 , 719 (2020).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib122",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "天气事件及其逻辑组合问题",
+          "output": "0–100 显式概率估计",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；加法/补集/条件一致性、人类数值响应 NLL。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "该来源未给出可直接比对的领域基线",
+              "status": "not_located",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx2",
+              "note": "已查官方 Modeling details 映射；不把 Centaur/Llama 对照或拟议策略冒称原官方认知基线。"
+            }
+          ],
+          "adaptation_note": "与 CogBench 提供明确先验/似然的 urn 推断不同范式，不能只因同名合并"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "queued",
+        "qwen35_4b": "queued"
+      }
+    },
+    {
+      "task_number": 5,
+      "task_id": "shj_category_learning",
+      "name_zh": "Shepard 类别学习",
+      "domain": "概念与类别学习",
+      "runner": "scripts/run_psych_typed.py",
+      "task_argument": null,
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "不同二元特征组合与分类规则；带反馈学习后比较规则难度",
+          "original_papers": [
+            {
+              "citation": "Badham, S. P., Sanborn, A. N. & Maylor, E. A. Deficits in category learning in older adults: Rule-based versus clustering accounts. Psychology and Aging 32 , 473 (2017).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib95",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "形状、大小、颜色描述，当前问题内过去类别反馈",
+          "output": "两个类别及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；原任务学习曲线、各规则正确率；条件效应分析为后续提取。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Generalized context model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx1",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "文字化视觉特征已经是 Psych-101 转录，测概念学习不等于原视觉识别"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 6,
+      "task_id": "medin_category_learning",
+      "name_zh": "Medin 类别学习",
+      "domain": "概念与类别学习",
+      "runner": "scripts/run_psych_category.py",
+      "task_argument": "medin",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "三二元特征组合，训练分类和测试典型性评级；线性可分性操纵",
+          "original_papers": [
+            {
+              "citation": "Levering, K. R., Conaway, N. & Kurtz, K. J. Revisiting the linear separability constraint: New implications for theories of human category learning. Memory & cognition 48 , 335–347 (2020).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib108",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "三特征编码、类别反馈、阶段",
+          "output": "二类别及概率；测试典型性 1–9",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；类别学习/泛化、典型性与类别结构关系。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Generalized context model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx1",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "类别选择和典型性评分分开；不要将典型性看成概率"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 7,
+      "task_id": "weather_prediction",
+      "name_zh": "天气预测任务",
+      "domain": "概念与类别学习",
+      "runner": "scripts/run_psych_category.py",
+      "task_argument": "weather",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "一至三张卡片组合对应概率性晴雨反馈",
+          "original_papers": [
+            {
+              "citation": "Speekenbrink, M., Channon, S. & Shanks, D. R. Learning strategies in amnesia. Neuroscience & Biobehavioral Reviews 32 , 292–310 (2008).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib115",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "卡片组合、过去天气反馈",
+          "output": "晴/雨及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；学习曲线、组合线索敏感性、泛化。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Generalized context model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx1",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "保留概率反馈而非确定标签；相同卡片组合可有不同结果"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 8,
+      "task_id": "rlwm",
+      "name_zh": "RLWM",
+      "domain": "学习与历史利用",
+      "runner": "scripts/run_rlwm_typed.py",
+      "task_argument": "rlwm",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "S1CogBench existing inventory",
+          "manipulations": "集合大小2–6、刺激重复次数、重复间隔",
+          "original_papers": [
+            {
+              "citation": "Collins & Frank 2012; the author's later WMH implementation",
+              "url": "https://doi.org/10.1111/j.1460-9568.2011.07980.x",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://osf.io/wgzb6/",
+              "availability": "public",
+              "note": "原逐试次数据，本机已有"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/AnneCollins/WMH",
+              "availability": "public",
+              "note": "作者后续模型实现，参数回放不等于新拟合"
+            },
+            {
+              "kind": "analysis",
+              "url": "docs/RLWM_RUN_20261015.md",
+              "availability": "local",
+              "note": "本机协议与实际结果入口，按2026-10-17快照"
+            }
+          ],
+          "input": "原刺激与可见选择/反馈",
+          "output": "三个动作；神经模型呈现/历史协议待落实",
+          "history": "原参数回放为样本内拟合；作者模拟复制初次真人选择，不能当完整自主行动；完整历史不等于人类工作记忆容量",
+          "split_protocol": "79 IDs/53,573行；原学习分析52,911有效响应；无官方ML划分",
+          "metrics": "集合大小2–6与呈现次数的学习曲线、错误模式、行为NLL；间隔效应待整理",
+          "baselines": [
+            {
+              "name": "原RL/WM及RLWM模型；作者WMH实现",
+              "status": "official",
+              "source_url": "https://doi.org/10.1111/j.1460-9568.2011.07980.x",
+              "note": "7模型原拟合参数回放完成；不称新拟合或自主性能"
+            }
+          ],
+          "adaptation_note": "原参数回放为样本内拟合；作者模拟复制初次真人选择，不能当完整自主行动；完整历史不等于人类工作记忆容量"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "queued",
+        "minitaur8b": "queued",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 9,
+      "task_id": "recent_probes",
+      "name_zh": "近期探测",
+      "domain": "学习与历史利用",
+      "runner": "scripts/run_psych_extended.py",
+      "task_argument": "recent_probes",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "当前六字母集合成员判断；前一集合的熟悉探针干扰",
+          "original_papers": [
+            {
+              "citation": "Enkavi, A. Z. et al. Large-scale analysis of test–retest reliabilities of self-regulation measures. Proceedings of the National Academy of Sciences 116 , 5472–5477 (2019).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib62",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "当前集合、探针及前序集合",
+          "output": "在当前集合/不在及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；近期负探针与非近期负探针错误差、命中/虚报。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Rational model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx13",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "原集合消失；持续可见文本只测在外部历史支持下的来源判断"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 10,
+      "task_id": "wcst",
+      "name_zh": "威斯康星卡片分类",
+      "domain": "反馈适应与灵活性",
+      "runner": "scripts/run_wcst_models.py",
+      "task_argument": null,
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "S1CogBench existing inventory",
+          "manipulations": "隐藏分类规则切换、反馈效价、规则稳定期",
+          "original_papers": [
+            {
+              "citation": "Namazova et al. 2025, public cWCST data and protocol",
+              "url": "https://arxiv.org/abs/2508.07887",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "analysis",
+              "url": "docs/COGNITIVE_EXPERIMENT_LAUNCH_20261015.md",
+              "availability": "local",
+              "note": "本机协议与实际结果入口，按2026-10-17快照"
+            }
+          ],
+          "input": "卡片、原说明、完整真人/自身反馈历史",
+          "output": "A/B/C/D",
+          "history": "按原隐藏规则时间线运行；Laya原生argmax与两8B原解码不同；四选项NLL与全词表NLL分列",
+          "split_protocol": "375人，原顺序300 train/75 test；每模式test 12,754试次",
+          "metrics": "accuracy、perseveration error、set-loss error；真人预测NLL；按参与者等权",
+          "baselines": [
+            {
+              "name": "Selective Learning (SL)",
+              "status": "official",
+              "source_url": "https://arxiv.org/abs/2508.07887",
+              "note": "原公布参数与全量重新拟合均有本机结果"
+            }
+          ],
+          "adaptation_note": "按原隐藏规则时间线运行；Laya原生argmax与两8B原解码不同；四选项NLL与全词表NLL分列"
+        },
+        {
+          "source_library": "PsyToolkit",
+          "manipulations": "颜色/形状/数量隐规则切换、正确/错误反馈",
+          "original_papers": [
+            {
+              "citation": "Grant, D. A., & Berg, E. (1948). A behavioral analysis of degree of reinforcement and ease of shifting to new responses in Weigl-type card-sorting problem. Journal of Experimental Psychology, 38, 404-411.",
+              "url": "https://www.psytoolkit.org/experiment-library/wcst.html#_further_reading",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://www.psytoolkit.org/experiment-library/wcst.html",
+              "availability": "public",
+              "note": "官方浏览器实验说明、演示入口与代码下载链接；未运行实验。"
+            },
+            {
+              "kind": "materials",
+              "url": "https://www.psytoolkit.org/doc_exp/wcst.html",
+              "availability": "public",
+              "note": "The PsyToolkit code；本轮核对入口，未下载大刺激文件。"
+            },
+            {
+              "kind": "materials",
+              "url": "https://www.psytoolkit.org/doc_exp/wcst.zip",
+              "availability": "public",
+              "note": "The PsyToolkit code zip file；本轮核对入口，未下载大刺激文件。"
+            }
+          ],
+          "input": "待分类卡、参照卡和历史反馈",
+          "output": "四参照卡之一",
+          "history": "动作-反馈历史用于推断规则",
+          "split_protocol": "实验工具库无统一ML训练/测试划分；使用所选原论文区块、刺激表和排除规则。浏览器演示长度不自动等于原研究正式协议。",
+          "metrics": "正确率、完成类别数、坚持性错误、维持规则失败",
+          "baselines": [
+            {
+              "name": "该库未定位已发布模型基线",
+              "status": "not_located",
+              "source_url": "https://www.psytoolkit.org/experiment-library/wcst.html",
+              "note": "演示的正确答案/人类效应说明不等于可比较的模型基线；需按所选原论文补齐。"
+            }
+          ],
+          "adaptation_note": "PsyToolkit明确称inspired task，与本项目原论文WCST协议不可互换"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 11,
+      "task_id": "nonstationary_bandit",
+      "name_zh": "非平稳bandit：漂移/变化与适应",
+      "domain": "反馈适应与灵活性",
+      "runner": "scripts/run_paper_restless.py",
+      "task_argument": null,
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "S1CogBench existing inventory",
+          "manipulations": "随时间变化的收益、反馈历史、独立信心报告",
+          "original_papers": [
+            {
+              "citation": "CogBench ICML 2024",
+              "url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://github.com/juliancodaforno/CogBench",
+              "availability": "public",
+              "note": "原源码本机已有；保留官方版本/评分"
+            },
+            {
+              "kind": "analysis",
+              "url": "docs/REMAINING_TASK_INTERFACES_20261009.md",
+              "availability": "local",
+              "note": "本机协议与实际结果入口，按2026-10-17快照"
+            }
+          ],
+          "input": "自身完整选择/奖励历史",
+          "output": "F/J，再独立报告所选机器当前最好概率",
+          "history": "独立confidence不来自动作最大概率；原边界事后评分和事前附加指标分列；也为元认知提供补充，不另计任务",
+          "split_protocol": "10 runs×80 trials，800动作＋800次独立信心报告/模型",
+          "metrics": "reward、accuracy、QSR、adjusted QSR、confidence；事前/事后评分分列",
+          "baselines": [
+            {
+              "name": "原论文LLM/随机参照",
+              "status": "author_reference",
+              "source_url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "note": "更强适应学习认知控制器未在本轮定位"
+            }
+          ],
+          "adaptation_note": "独立confidence不来自动作最大概率；原边界事后评分和事前附加指标分列；也为元认知提供补充，不另计任务"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "四个选项奖励均值随时间漂移；逐次选后反馈",
+          "original_papers": [
+            {
+              "citation": "Bahrami, B. & Navajas, J. 4 arm bandit task dataset (2022). URL osf.io/f3t2a .",
+              "url": "https://osf.io/f3t2a",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "四个合法臂、过去选择与分数",
+          "output": "四选一及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；追踪最佳臂、选择切换、奖励；真人轨迹只能评分行为预测。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Rescorla-Wagner model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx5",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "当前公开转录提供实际行动反馈，未执行臂闭环收益仍需原生成环境"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "明确告知 hazard rate；两臂均值独立突变，改变率跨局变化",
+          "original_papers": [
+            {
+              "citation": "Xiong, H.-D., Ji-An, L., Mattar, M. & Wilson, R. Neural network modeling reveals diverse human exploration behaviors via state space analysis (2023).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib121",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "两个选项、已见奖励、hazard rate",
+          "output": "两选一及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；变化后调整、hazard 敏感性、探索行为。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Rescorla-Wagner model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx5",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "独立突变与漂移/交替反转分别保留变体，不能复用同一个奖励生成器"
+        },
+        {
+          "source_library": "CogBench",
+          "manipulations": "两臂高低奖励分布交替切换；每次选择后独立报告信心",
+          "original_papers": [
+            {
+              "citation": "Ershadmanesh et al. (2023). Meta-cognitive efficiency in learned value-based choice. CCN.",
+              "url": "https://doi.org/10.32470/CCN.2023.1570-0",
+              "relation": "source_study"
+            },
+            {
+              "citation": "Coda-Forno et al. (2024). CogBench: a large language model walks into a psychology lab. ICML/PMLR235:9076–9108.",
+              "url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://github.com/juliancodaforno/CogBench/tree/main/Experiments/RestlessBandit",
+              "availability": "public",
+              "note": "本地 external/CogBench 对应原 query.py 和环境已读；本轮不执行新实验。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/juliancodaforno/CogBench/blob/main/Experiments/RestlessBandit/store.py",
+              "availability": "public",
+              "note": "原行为/表现指标代码。"
+            }
+          ],
+          "input": "已见奖励、合法臂",
+          "output": "选择后再报告0–1信心",
+          "history": "每步保留本run截至当前的原实验信息；重置边界按原代码，历史窗口适配须标注。",
+          "split_protocol": "源码默认10 runs；本地原协议每run80次；原反馈/奖励切换步序与修正参照分列。",
+          "metrics": "收益、正确率、QSR、均值信心、adjusted QSR",
+          "baselines": [
+            {
+              "name": "随机参照与原人类成绩",
+              "status": "official",
+              "source_url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "note": "按CogBench公开参照或诊断拟合称呼，不将普通随机参照包装为认知SOTA。"
+            }
+          ],
+          "adaptation_note": "独立信心询问不等于动作概率；切换前/后正确性编码需遵循原脚本。"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 12,
+      "task_id": "instrumental_learning",
+      "name_zh": "概率工具性学习",
+      "domain": "反馈适应与灵活性",
+      "runner": "scripts/run_cogbench_expansion.py",
+      "task_argument": "instrumental",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "四种情境各两选项；概率收益与正负预测误差",
+          "original_papers": [
+            {
+              "citation": "Lefebvre, G., Lebreton, M., Meyniel, F., Bourgeois-Gironde, S. & Palminteri, S. Behavioural and neural characterization of optimistic reinforcement learning. Nature Human Behaviour 1 , 0067 (2017).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib107",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "情境、两个合法选项与反馈历史",
+          "output": "两选一及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；学习率、正/负更新差、选择正确率。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Rescorla-Wagner model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx5",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "Psych-101 与 CogBench 奖励数值/采样方案有差异，不能同名直接混分"
+        },
+        {
+          "source_library": "CogBench",
+          "manipulations": "四情境交错两臂任务；正负预测误差及不同奖励概率",
+          "original_papers": [
+            {
+              "citation": "Lefebvre et al. (2017). Behavioural and neural characterization of optimistic reinforcement learning. Nature Human Behaviour 1:0067.",
+              "url": "https://www.nature.com/articles/s41562-017-0067",
+              "relation": "source_study"
+            },
+            {
+              "citation": "Coda-Forno et al. (2024). CogBench: a large language model walks into a psychology lab. ICML/PMLR235:9076–9108.",
+              "url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://github.com/juliancodaforno/CogBench/tree/main/Experiments/InstrumentalLearning",
+              "availability": "public",
+              "note": "本地 external/CogBench 对应原 query.py 和环境已读；本轮不执行新实验。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/juliancodaforno/CogBench/blob/main/Experiments/InstrumentalLearning/store.py",
+              "availability": "public",
+              "note": "原行为/表现指标代码。"
+            }
+          ],
+          "input": "情境、历史选择/反馈",
+          "output": "两臂选择及概率",
+          "history": "每步保留本run截至当前的原实验信息；重置边界按原代码，历史窗口适配须标注。",
+          "split_protocol": "默认10 runs，每run96次交错四情境；按原环境概率与拟合优化。",
+          "metrics": "平均奖励、RW学习率、正负学习率差；原官方拟合代码",
+          "baselines": [
+            {
+              "name": "Rescorla-Wagner 单学习率与双学习率模型",
+              "status": "official",
+              "source_url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "note": "按CogBench公开参照或诊断拟合称呼，不将普通随机参照包装为认知SOTA。"
+            }
+          ],
+          "adaptation_note": "领域模型参数拟合用于认知表型，不自动代表外部最强策略；不要称SOTA。"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 13,
+      "task_id": "horizon",
+      "name_zh": "Horizon探索",
+      "domain": "探索与结构学习",
+      "runner": "scripts/benchmark_paper_tasks.py",
+      "task_argument": "horizon-generative",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "S1CogBench existing inventory",
+          "manipulations": "未来机会1/6、强制信息3:1/2:2、初始奖励差",
+          "original_papers": [
+            {
+              "citation": "Wilson et al. 2014, Humans use directed and random exploration to solve the explore–exploit dilemma",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/25347535/",
+              "relation": "original"
+            },
+            {
+              "citation": "Wilson task; the original prediction and generation protocol of Namazova et al.",
+              "url": "https://arxiv.org/abs/2508.07887",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "analysis",
+              "url": "docs/PAPER_MATCHED_CENTAUR_20261003.md",
+              "availability": "local",
+              "note": "本机协议与实际结果入口，按2026-10-17快照"
+            }
+          ],
+          "input": "四次强制观察、已见选择奖励、未来机会",
+          "output": "H/I",
+          "history": "31时间线不是31次独立模型重复；旧1000局探索pilot不能替代本正式协议",
+          "split_protocol": "预测25人train/6人test、6,720自由动作；生成31时间线、34,720自由动作/模型",
+          "metrics": "真人NLL；原horizon×trial最优臂率/SEM；奖励及配对CI；定向/随机探索效应另分析",
+          "baselines": [
+            {
+              "name": "原三参数RW",
+              "status": "official",
+              "source_url": "https://arxiv.org/abs/2508.07887",
+              "note": "待补作者原拟合资产/复跑"
+            }
+          ],
+          "adaptation_note": "31时间线不是31次独立模型重复；旧1000局探索pilot不能替代本正式协议"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "四次强制取样后自由选择 1 或 6 次；初始信息均衡/不均衡",
+          "original_papers": [
+            {
+              "citation": "Feng, S. F., Wang, S., Zarnescu, S. & Wilson, R. C. The dynamics of explore–exploit decisions reveal a signal-to-noise mechanism for random exploration. Scientific reports 11 , 3077 (2021).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib99",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "当前局强制样本、奖励记录、剩余次数",
+          "output": "两臂选择及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；第一自由选择的定向/随机探索效应；收益仅在环境执行轨迹上评价。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Rescorla-Wagner model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx5",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "不同研究人群及任务时间线保留；Maggie 三臂版本记录为同家族独立结构变体"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "四次强制取样后自由选择 1 或 6 次；初始信息均衡/不均衡",
+          "original_papers": [
+            {
+              "citation": "Sadeghiyeh, H. et al. Temporal discounting correlates with directed exploration but not with random exploration. Scientific reports 10 , 4020 (2020).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib112",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "当前局强制样本、奖励记录、剩余次数",
+          "output": "两臂选择及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；第一自由选择的定向/随机探索效应；收益仅在环境执行轨迹上评价。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Rescorla-Wagner model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx5",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "不同研究人群及任务时间线保留；Maggie 三臂版本记录为同家族独立结构变体"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "四次强制取样后自由选择 1 或 6 次；初始信息均衡/不均衡",
+          "original_papers": [
+            {
+              "citation": "Somerville, L. H. et al. Charting the expansion of strategic exploratory behavior during adolescence. Journal of experimental psychology: general 146 , 155 (2017).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib114",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "当前局强制样本、奖励记录、剩余次数",
+          "output": "两臂选择及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；第一自由选择的定向/随机探索效应；收益仅在环境执行轨迹上评价。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Rescorla-Wagner model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx5",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "不同研究人群及任务时间线保留；Maggie 三臂版本记录为同家族独立结构变体"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "四次强制取样后自由选择 1 或 6 次；初始信息均衡/不均衡",
+          "original_papers": [
+            {
+              "citation": "Waltz, J. A., Wilson, R. C., Albrecht, M. A., Frank, M. J. & Gold, J. M. Differential effects of psychotic illness on directed and random exploration. Computational Psychiatry (Cambridge, Mass.) 4 , 18 (2020).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib118",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "当前局强制样本、奖励记录、剩余次数",
+          "output": "两臂选择及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；第一自由选择的定向/随机探索效应；收益仅在环境执行轨迹上评价。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Rescorla-Wagner model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx5",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "不同研究人群及任务时间线保留；Maggie 三臂版本记录为同家族独立结构变体"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "四次强制取样后自由选择 1 或 6 次；初始信息均衡/不均衡",
+          "original_papers": [
+            {
+              "citation": "Wilson, R. C., Geana, A., White, J. M., Ludvig, E. A. & Cohen, J. D. Humans use directed and random exploration to solve the explore–exploit dilemma. Journal of experimental psychology: General 143 , 2074 (2014).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib23",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "当前局强制样本、奖励记录、剩余次数",
+          "output": "两臂选择及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；第一自由选择的定向/随机探索效应；收益仅在环境执行轨迹上评价。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Rescorla-Wagner model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx5",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "不同研究人群及任务时间线保留；Maggie 三臂版本记录为同家族独立结构变体"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "Horizon 从两臂改三臂；不同强制样本和未来机会",
+          "original_papers": [
+            {
+              "citation": "Dubois, M. & Hauser, T. U. Value-free random exploration is linked to impulsivity. Nature Communications 13 , 4542 (2022).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib27",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "needs_verification",
+              "note": "论文给出逐参与者转录；独立 OOD 数据路径与权限须逐项核对，不假定在训练 Psych-101 中。"
+            }
+          ],
+          "input": "原任务说明、当前问题/可选动作及之前真实历史；句子阅读仅输入短句。",
+          "output": "按当前阶段合法选项及概率；逻辑自评独立数值。",
+          "history": "保持原实验会话历史；句子阅读按原神经分析处理，不凭空加选择。",
+          "split_protocol": "论文指定 OOD；不可作为模型调参集。原模型以最近似训练任务拟合领域参数后转移，不能在 OOD 测试集拟合。",
+          "metrics": "官方 OOD 真人选择 NLL；逻辑题可另分析正确率和自评误差。",
+          "baselines": [
+            {
+              "name": "Rescorla-Wagner model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx5",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "结构迁移单列，不把三臂任务成绩直接混入二臂 Horizon。"
+        },
+        {
+          "source_library": "CogBench",
+          "manipulations": "四次强制样本的信息不对称×后续1或6次选择",
+          "original_papers": [
+            {
+              "citation": "Wilson et al. (2014). Humans use directed and random exploration to solve the explore–exploit dilemma. JEP General 143:2074.",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/25347535/",
+              "relation": "source_study"
+            },
+            {
+              "citation": "Coda-Forno et al. (2024). CogBench: a large language model walks into a psychology lab. ICML/PMLR235:9076–9108.",
+              "url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://github.com/juliancodaforno/CogBench/tree/main/Experiments/HorizonTask",
+              "availability": "public",
+              "note": "本地 external/CogBench 对应原 query.py 和环境已读；本轮不执行新实验。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/juliancodaforno/CogBench/blob/main/Experiments/HorizonTask/store.py",
+              "availability": "public",
+              "note": "原行为/表现指标代码。"
+            }
+          ],
+          "input": "强制和自由选择历史、当前机会数",
+          "output": "两臂选择及概率",
+          "history": "每步保留本run截至当前的原实验信息；重置边界按原代码，历史窗口适配须标注。",
+          "split_protocol": "源码默认1000个生成游戏，按原1/6 horizon和信息条件；不同于当前31条真人时间线复跑。",
+          "metrics": "定向探索、随机探索逻辑回归、平均收益",
+          "baselines": [
+            {
+              "name": "随机策略和论文人类参照；探索回归是测量模型",
+              "status": "official",
+              "source_url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "note": "按CogBench公开参照或诊断拟合称呼，不将普通随机参照包装为认知SOTA。"
+            }
+          ],
+          "adaptation_note": "不把外部按概率采样制造的随机性全归模型；此处是生成环境非真人。"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 14,
+      "task_id": "stationary_multiarmed_bandit",
+      "name_zh": "平稳多臂bandit",
+      "domain": "探索与结构学习",
+      "runner": "scripts/run_bandit_open_models.py",
+      "task_argument": null,
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "S1CogBench existing inventory",
+          "manipulations": "臂数、奖励分布、时间长度、完整历史/统计摘要",
+          "original_papers": [
+            {
+              "citation": "EVOLvE ICML 2025",
+              "url": "https://proceedings.mlr.press/v267/nie25b.html",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "analysis",
+              "url": "docs/PAPER_MATCHED_BANDIT_20261003.md",
+              "availability": "local",
+              "note": "本机协议与实际结果入口，按2026-10-17快照"
+            }
+          ],
+          "input": "原prompt＋RH完整行动历史或SH累计统计",
+          "output": "原合法臂名",
+          "history": "官方代码适配；horizon、seed、解码与论文有差异；跨奖励尺度不算总均值",
+          "split_protocol": "FullBench MAB 16条件×30轨迹；480局/312,000步，每种历史独立",
+          "metrics": "逐条件累计奖励、pseudo-regret；RH/SH分开",
+          "baselines": [
+            {
+              "name": "UCB / Greedy / Thompson sampling",
+              "status": "official",
+              "source_url": "https://proceedings.mlr.press/v267/nie25b.html",
+              "note": "本机参照已跑，Greedy修正实现单列"
+            },
+            {
+              "name": "算法指导与蒸馏方法",
+              "status": "official",
+              "source_url": "https://proceedings.mlr.press/v267/nie25b.html",
+              "note": "原论文强比较仍未完整复跑"
+            }
+          ],
+          "adaptation_note": "官方代码适配；horizon、seed、解码与论文有差异；跨奖励尺度不算总均值"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "每局十试次；不确定臂和固定收益臂等不同风险条件",
+          "original_papers": [
+            {
+              "citation": "Gershman, S. J. Deconstructing the human algorithms for exploration. Cognition 173 , 34–42 (2018).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib102",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "两个选项、过去收益、当前局进程",
+          "output": "两臂选择及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；不确定性与价值对选择的影响、学习曲线。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Rescorla-Wagner model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx5",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "与专门操纵未来机会的 Horizon 不自动合并成同一实验"
+        },
+        {
+          "source_library": "NeuroGym",
+          "manipulations": "臂数、奖励概率和幅度",
+          "original_papers": [
+            {
+              "citation": "Prefrontal cortex as a meta-reinforcement learning system",
+              "url": "https://www.nature.com/articles/s41593-018-0147-8",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://github.com/neurogym/neurogym/blob/main/neurogym/envs/native/bandit.py",
+              "availability": "public",
+              "note": "官方当前main源码；本轮未安装或运行环境。"
+            }
+          ],
+          "input": "可选臂与已见奖惩",
+          "output": "臂编号",
+          "history": "跨试次选择-反馈",
+          "split_protocol": "生成式环境，官方核心库不提供统一训练/测试数据划分；保留原版本dt、period、奖励、动作空间和终止条件；新种子/刺激划分属于明确新增评测协议。",
+          "metrics": "累计收益、选臂率；regret需明确真实收益参照",
+          "baselines": [
+            {
+              "name": "该任务官方已训练强基线未定位",
+              "status": "not_located",
+              "source_url": "https://github.com/neurogym/neurogym/blob/main/neurogym/envs/native/bandit.py",
+              "note": "环境ground-truth不是模型基线；通用训练示例不自动构成该任务的论文匹配强基线。"
+            }
+          ],
+          "adaptation_note": "保留未知收益；该简单Bernoulli版不冒充Horizon或Restless"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "running",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "running"
+      }
+    },
+    {
+      "task_number": 15,
+      "task_id": "structured_bandit",
+      "name_zh": "结构化 bandit",
+      "domain": "探索与结构学习",
+      "runner": "scripts/run_psych_extended.py",
+      "task_argument": "structured_bandit",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "八个选项奖励存在可学结构；每局十次后重置",
+          "original_papers": [
+            {
+              "citation": "Schulz, E., Franklin, N. T. & Gershman, S. J. Finding structure in multi-armed bandits. Cognitive psychology 119 , 101261 (2020).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib113",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "选项位置、此前奖励和当前局",
+          "output": "八选一及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；结构学习、未取样选项泛化、累计收益。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "GP-UCB model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx12",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "具体结构条件须依原五实验标签，不能自行重建为通用随机 bandit"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "queued",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "queued"
+      }
+    },
+    {
+      "task_number": 16,
+      "task_id": "hybrid_information_sampling",
+      "name_zh": "Hybrid",
+      "domain": "信息获取与停止",
+      "runner": "scripts/run_hybrid_open_prediction.py",
+      "task_argument": null,
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "S1CogBench existing inventory",
+          "manipulations": "左右采样信息、可继续采样/停止、采样阶段",
+          "original_papers": [
+            {
+              "citation": "D’Ambrogio et al., Nature Neuroscience 2026",
+              "url": "https://www.nature.com/articles/s41593-026-02342-9",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://github.com/simonedambrogio/HybridModellingProject",
+              "availability": "public",
+              "note": "原任务与拟合代码；当前本机仅预测原人类动作"
+            },
+            {
+              "kind": "analysis",
+              "url": "docs/HYBRID_PROTOCOL_ASSETS_20261003.md",
+              "availability": "local",
+              "note": "本机协议与实际结果入口，按2026-10-17快照"
+            }
+          ],
+          "input": "采样/红点数、作者后验摘要、位置/阶段",
+          "output": "采样左/右、选择左/右",
+          "history": "当前是真人预测，不是模型闭环；原X提供后验支持；行级CV不是参与者留出",
+          "split_protocol": "20人/163,135行；原行级8折、160折单元",
+          "metrics": "原subject-mean折均NLL；pooled NLL另列；采样/停止条件行为可由轨迹分析",
+          "baselines": [
+            {
+              "name": "Linear / UCB / Symbolic / Hybrid-ANN / end-to-end ANN",
+              "status": "official",
+              "source_url": "https://www.nature.com/articles/s41593-026-02342-9",
+              "note": "前四本机全量完成；最后一项资产缺口保留"
+            }
+          ],
+          "adaptation_note": "当前是真人预测，不是模型闭环；原X提供后验支持；行级CV不是参与者留出"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 17,
+      "task_id": "mouselab_tree",
+      "name_zh": "Mouselab",
+      "domain": "信息获取与停止",
+      "runner": "scripts/benchmark_paper_tasks.py",
+      "task_argument": "mouselab-generative",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "S1CogBench existing inventory",
+          "manipulations": "树的隐藏回报、信息揭示与停止、信息成本",
+          "original_papers": [
+            {
+              "citation": "Callaway et al., Nature Human Behaviour 2022",
+              "url": "https://www.nature.com/articles/s41562-022-01332-8",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "analysis",
+              "url": "docs/PAPER_MATCHED_MOUSELAB_20261003.md",
+              "availability": "local",
+              "note": "本机协议与实际结果入口，按2026-10-17快照"
+            }
+          ],
+          "input": "原树、先验、已揭示节点",
+          "output": "合法揭示或STOP",
+          "history": "真人揭示等待3秒；新模型meta-MDP cost=0且自动选最佳期望路线；期望值不是实际路线收益；原Pareto无固定seed",
+          "split_protocol": "95人×25 trials，20,363动作；每人原五折；模型自主23,750局/模型",
+          "metrics": "真人动作NLL/Brier；STOP时最佳路线期望值、揭示数；成本曲线原参照分列",
+          "baselines": [
+            {
+              "name": "原195项拟合参照及策略simulate/Pareto",
+              "status": "official",
+              "source_url": "https://www.nature.com/articles/s41562-022-01332-8",
+              "note": "已完成范围见原总表，代价设置不同不合排名"
+            }
+          ],
+          "adaptation_note": "真人揭示等待3秒；新模型meta-MDP cost=0且自动选最佳期望路线；期望值不是实际路线收益；原Pareto无固定seed"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 18,
+      "task_id": "risky_choice_information_search",
+      "name_zh": "风险选择的信息搜索",
+      "domain": "信息获取与停止",
+      "runner": "scripts/run_psych_compact.py",
+      "task_argument": "risky_choice_information_search",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "六种彩票、四种结果；每次查看单元格有成本，随时停止选彩票",
+          "original_papers": [
+            {
+              "citation": "Krueger, P. M., Callaway, F., Gul, S., Griffiths, T. L. & Lieder, F. Identifying resource-rational heuristics for risky choice. Psychological Review (2024).",
+              "url": "https://doi.org/10.31234/osf.io/mg7dn",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "结果概率、已揭示回报矩阵、成本与合法动作",
+          "output": "彩票×结果的揭示动作，或停止并选择彩票",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；搜索次序、揭示数、停止位置、成本扣除后收益。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "该来源未给出可直接比对的领域基线",
+              "status": "not_located",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx2",
+              "note": "已查官方 Modeling details 映射；不把 Centaur/Llama 对照或拟议策略冒称原官方认知基线。"
+            }
+          ],
+          "adaptation_note": "原两阶段响应可保持两次 typed choice；合成联合动作需另标接口变化"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "queued",
+        "minitaur8b": "queued",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 19,
+      "task_id": "bart",
+      "name_zh": "气球模拟风险任务",
+      "domain": "风险与时间偏好",
+      "runner": "scripts/run_cogbench_expansion.py",
+      "task_argument": "bart",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "继续充气增加收益与爆破风险；可停止兑付",
+          "original_papers": [
+            {
+              "citation": "Frey, R., Pedroni, A., Mata, R., Rieskamp, J. & Hertwig, R. Risk preference shares the psychometric structure of major psychological traits. Science advances 3 , e1701381 (2017).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib61",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "气球编号、当前泵数及之前爆破/兑现反馈",
+          "output": "充气/停止及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；泵数、未爆气球调整泵数、风险反馈适应。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Rational model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx13",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "Psych-101 Frey 数据和 CogBench Lejuez 改编分别保留，不混协议"
+        },
+        {
+          "source_library": "CogBench",
+          "manipulations": "三气球类型爆破分布及逐次充气/兑现",
+          "original_papers": [
+            {
+              "citation": "Lejuez et al. (2002). Evaluation of a behavioral measure of risk taking: the balloon analogue risk task (BART). JEP Applied 8:75–84.",
+              "url": "https://doi.org/10.1037/1076-898X.8.2.75",
+              "relation": "source_study"
+            },
+            {
+              "citation": "Coda-Forno et al. (2024). CogBench: a large language model walks into a psychology lab. ICML/PMLR235:9076–9108.",
+              "url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://github.com/juliancodaforno/CogBench/tree/main/Experiments/BART",
+              "availability": "public",
+              "note": "本地 external/CogBench 对应原 query.py 和环境已读；本轮不执行新实验。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/juliancodaforno/CogBench/blob/main/Experiments/BART/store.py",
+              "availability": "public",
+              "note": "原行为/表现指标代码。"
+            }
+          ],
+          "input": "气球类型、当前泵数、之前反馈",
+          "output": "充气/兑现及概率",
+          "history": "每步保留本run截至当前的原实验信息；重置边界按原代码，历史窗口适配须标注。",
+          "split_protocol": "源码默认10 runs、max_pumps128/32/8、trials15；论文B.7.2写每类型从15减到10，需显式处理论文/代码差异，不能静默择一。",
+          "metrics": "收益、泵数、未爆气球调整风险",
+          "baselines": [
+            {
+              "name": "随机策略与原论文性别分组均值参照",
+              "status": "official",
+              "source_url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "note": "按CogBench公开参照或诊断拟合称呼，不将普通随机参照包装为认知SOTA。"
+            }
+          ],
+          "adaptation_note": "保留爆破与丢失已积收益规则；不能把泵数最大视为最优。"
+        },
+        {
+          "source_library": "PsyToolkit",
+          "manipulations": "气球类型/爆炸分布、累计充气次数、停止时点",
+          "original_papers": [
+            {
+              "citation": "Lejuez, C. W., Read, J. P., Kahler, C. W., Richards, J. B., Ramsey, S. E., Stuart, G. L., …​ & Brown, R. A. (2002). Evaluation of a behavioral measure of risk taking: the Balloon Analogue Risk Task (BART). Journal of Experimental Psychology: Applied, 8(2), 75. You can find free versions like this one on academia.edu.",
+              "url": "https://www.academia.edu/download/43347539/BART.pdf",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://www.psytoolkit.org/experiment-library/bart.html",
+              "availability": "public",
+              "note": "官方浏览器实验说明、演示入口与代码下载链接；未运行实验。"
+            },
+            {
+              "kind": "materials",
+              "url": "https://www.psytoolkit.org/doc_exp/bart.html",
+              "availability": "public",
+              "note": "The PsyToolkit code；本轮核对入口，未下载大刺激文件。"
+            },
+            {
+              "kind": "materials",
+              "url": "https://www.psytoolkit.org/doc_exp/bart.zip",
+              "availability": "public",
+              "note": "The PsyToolkit code zip file；本轮核对入口，未下载大刺激文件。"
+            }
+          ],
+          "input": "当前气球、已有充气结果、累计收益",
+          "output": "继续充气/兑现停止",
+          "history": "本气球及前序气球行动反馈",
+          "split_protocol": "实验工具库无统一ML训练/测试划分；使用所选原论文区块、刺激表和排除规则。浏览器演示长度不自动等于原研究正式协议。",
+          "metrics": "调整后平均充气次数、爆炸率、兑现/净收益",
+          "baselines": [
+            {
+              "name": "该库未定位已发布模型基线",
+              "status": "not_located",
+              "source_url": "https://www.psytoolkit.org/experiment-library/bart.html",
+              "note": "演示的正确答案/人类效应说明不等于可比较的模型基线；需按所选原论文补齐。"
+            }
+          ],
+          "adaptation_note": "隐藏爆炸阈值不得泄漏；PsyToolkit实现与CogBench参数分别保留"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 20,
+      "task_id": "risky_choice_description",
+      "name_zh": "Choices13k 彩票选择",
+      "domain": "风险与时间偏好",
+      "runner": "scripts/run_psych_risk.py",
+      "task_argument": "choices13k",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "收益/损失、显式/未知概率、反馈存在与否",
+          "original_papers": [
+            {
+              "citation": "Peterson, J. C., Bourgin, D. D., Agrawal, M., Reichman, D. & Griffiths, T. L. Using large-scale experiments and machine learning to discover theories of human decision-making. Science 372 , 1209–1214 (2021).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib21",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "两个彩票描述及本题既往结果反馈",
+          "output": "二选一及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；人类选择 NLL、选择比例误差；风险/模糊性条件效应。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Prospect theory model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx2",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "原 Choices13k 比例预测划分与 Psych-101 参与者留出是不同协议，需分别评分"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "queued",
+        "minitaur8b": "queued",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 21,
+      "task_id": "columbia_card_task",
+      "name_zh": "Columbia 翻牌风险",
+      "domain": "风险与时间偏好",
+      "runner": "scripts/run_psych_compact.py",
+      "task_argument": "columbia_card_task",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "收益额、损失额、损失卡数变化；连续翻牌可随时兑现",
+          "original_papers": [
+            {
+              "citation": "Frey, R., Pedroni, A., Mata, R., Rieskamp, J. & Hertwig, R. Risk preference shares the psychometric structure of major psychological traits. Science advances 3 , e1701381 (2017).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib61",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "本轮风险参数、已翻牌与累计收益",
+          "output": "翻牌/停止及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；停止位置、翻牌数、风险参数敏感性；环境收益另算。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Decision-updated reference point model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx9",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "真人离线行动只能做拟合，需原发牌机制才能反事实执行"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "queued",
+        "minitaur8b": "queued",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 22,
+      "task_id": "temporal_discounting",
+      "name_zh": "跨期选择与时间折扣",
+      "domain": "风险与时间偏好",
+      "runner": "scripts/run_cogbench_expansion.py",
+      "task_argument": "temporal",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Original studies / datasets",
+          "manipulations": "金额、延迟、即时性；各原研究条件单列",
+          "original_papers": [
+            {
+              "citation": "A large-scale dataset of choice and response-time data in intertemporal choice, Scientific Data 2026",
+              "url": "https://www.nature.com/articles/s41597-026-06947-4",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://osf.io/3wsae/",
+              "availability": "public",
+              "note": "论文指向CSV/RData及代码，100研究；本轮未下载全量"
+            }
+          ],
+          "input": "较早较小与较晚较大金额/延迟",
+          "output": "SS/LL及选择分布",
+          "history": "逐研究原序列；不能默认每行独立训练测试",
+          "split_protocol": "保留100原研究标识；未见全库统一ML划分",
+          "metrics": "SS/LL选择率、行为NLL、折扣曲线；人类RT按原数据报告",
+          "baselines": [
+            {
+              "name": "原数据库配套分析代码",
+              "status": "author_reference",
+              "source_url": "https://osf.io/3wsae/",
+              "note": "不等同统一预测SOTA"
+            },
+            {
+              "name": "hyperbolic / exponential discounting",
+              "status": "proposed",
+              "source_url": "https://www.nature.com/articles/s41597-026-06947-4",
+              "note": "接入前回各来源核原拟合设置"
+            }
+          ],
+          "adaptation_note": "与CogBench/Psych跨期选择合并家族，研究版本保留；模型耗时不拟人类RT"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "收益/损失、数额、即时/延迟选项、相同延迟的时点平移",
+          "original_papers": [
+            {
+              "citation": "Ruggeri, K. et al. The globalizability of temporal discounting. Nature Human Behaviour 6 , 1386–1397 (2022).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib59",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "两个金额及兑现/支付时间",
+          "output": "二选一及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；折扣倾向、现时偏好、数额/符号效应。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Hyperbolic discounting model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx3",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "偏好没有单一正确答案，折扣率不自动代表能力"
+        },
+        {
+          "source_library": "CogBench",
+          "manipulations": "即时/延迟、收益/损失、两数量级及四偏差题",
+          "original_papers": [
+            {
+              "citation": "Ruggeri et al. (2022). The globalizability of temporal discounting. Nature Human Behaviour 6:1386–1397.",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib59",
+              "relation": "source_study"
+            },
+            {
+              "citation": "Coda-Forno et al. (2024). CogBench: a large language model walks into a psychology lab. ICML/PMLR235:9076–9108.",
+              "url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://github.com/juliancodaforno/CogBench/tree/main/Experiments/TemporalDiscounting",
+              "availability": "public",
+              "note": "本地 external/CogBench 对应原 query.py 和环境已读；本轮不执行新实验。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/juliancodaforno/CogBench/blob/main/Experiments/TemporalDiscounting/store.py",
+              "availability": "public",
+              "note": "原行为/表现指标代码。"
+            }
+          ],
+          "input": "两个金额和时间、条件分支状态",
+          "output": "二选一及概率",
+          "history": "每步保留本run截至当前的原实验信息；重置边界按原代码，历史窗口适配须标注。",
+          "split_protocol": "非程序生成固定适应题；默认1 run、base_pay500，保持原10–13响应条件分支。",
+          "metrics": "原0–19折扣分数、现时偏好、次可加性和延迟不对称",
+          "baselines": [
+            {
+              "name": "原人类均值与随机参照；可参照Psych-101官方双曲折扣但不能称本任务已拟合",
+              "status": "official",
+              "source_url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "note": "按CogBench公开参照或诊断拟合称呼，不将普通随机参照包装为认知SOTA。"
+            }
+          ],
+          "adaptation_note": "没有单一正确偏好；原人类只报告汇总均值，不冒称可用逐参与者数据。"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 23,
+      "task_id": "two_step",
+      "name_zh": "Two-step连续决策",
+      "domain": "规划与价值重估",
+      "runner": "scripts/benchmark_paper_tasks.py",
+      "task_argument": "twostep-generative",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "S1CogBench existing inventory",
+          "manipulations": "奖励与常见/罕见转移70/30的交互",
+          "original_papers": [
+            {
+              "citation": "Daw et al. 2011, Model-based influences on humans’ choices and striatal prediction errors",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3077926/",
+              "relation": "original"
+            },
+            {
+              "citation": "Daw paradigm; CogBench ICML 2024 implementation",
+              "url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://github.com/juliancodaforno/CogBench",
+              "availability": "public",
+              "note": "原源码本机已有；保留官方版本/评分"
+            },
+            {
+              "kind": "analysis",
+              "url": "docs/TWOSTEP_ORIGINAL_PROTOCOL_20261006.md",
+              "availability": "local",
+              "note": "本机协议与实际结果入口，按2026-10-17快照"
+            }
+          ],
+          "input": "自身历史、当前阶段",
+          "output": "X/Y，再D/F或J/K",
+          "history": "interaction不是内部规划机制的充分证据；human归档40×200与模型规模不同",
+          "split_protocol": "100 runs×20 trials；2,000 trials/4,000动作，无train/test",
+          "metrics": "reward；原stay OLS的reward/common/interaction及CI；run级收益CI另列",
+          "baselines": [
+            {
+              "name": "作者历史模型与human归档",
+              "status": "author_reference",
+              "source_url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "note": "原归档不等于本机同协议重跑"
+            },
+            {
+              "name": "model-based/model-free认知参照",
+              "status": "proposed",
+              "source_url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "note": "需匹配实现；Uniform只是接口参照"
+            }
+          ],
+          "adaptation_note": "interaction不是内部规划机制的充分证据；human归档40×200与模型规模不同"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "转移结构与终局奖励变化；不同研究还有收益倍率、故事和结果类型操纵",
+          "original_papers": [
+            {
+              "citation": "Kool, W., Cushman, F. A. & Gershman, S. J. When does model-based control pay off? PLoS computational biology 12 , e1005090 (2016).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib29",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "当前阶段、合法动作、过去转移及奖励",
+          "output": "当前阶段两选一及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；奖励×转移对后续重复选择效应；人类拟合与自主收益分开。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Dual-systems model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx4",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "多个研究同家族但结构/奖励不完全相同；交互效应不单独证明内部规划机制"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "转移结构与终局奖励变化；不同研究还有收益倍率、故事和结果类型操纵",
+          "original_papers": [
+            {
+              "citation": "Kool, W., Gershman, S. J. & Cushman, F. A. Cost-benefit arbitration between multiple reinforcement-learning systems. Psychological science 28 , 1321–1333 (2017).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib30",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "当前阶段、合法动作、过去转移及奖励",
+          "output": "当前阶段两选一及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；奖励×转移对后续重复选择效应；人类拟合与自主收益分开。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Dual-systems model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx4",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "多个研究同家族但结构/奖励不完全相同；交互效应不单独证明内部规划机制"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "转移结构与终局奖励变化；不同研究还有收益倍率、故事和结果类型操纵",
+          "original_papers": [
+            {
+              "citation": "Zorowitz, S. & Niv, Y. Data from two-step task pilots (2023). URL osf.io/2tgjd .",
+              "url": "https://osf.io/2tgjd",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "当前阶段、合法动作、过去转移及奖励",
+          "output": "当前阶段两选一及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；奖励×转移对后续重复选择效应；人类拟合与自主收益分开。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Dual-systems model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx4",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "多个研究同家族但结构/奖励不完全相同；交互效应不单独证明内部规划机制"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "同两阶段结构改故事为魔毯/灯神；迁移到未见叙事",
+          "original_papers": [
+            {
+              "citation": "Feher da Silva, C. & Hare, T. A. Humans primarily use model-based inference in the two-stage task. Nature Human Behaviour 4 , 1053–1066 (2020).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib26",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "needs_verification",
+              "note": "论文给出逐参与者转录；独立 OOD 数据路径与权限须逐项核对，不假定在训练 Psych-101 中。"
+            }
+          ],
+          "input": "原任务说明、当前问题/可选动作及之前真实历史；句子阅读仅输入短句。",
+          "output": "按当前阶段合法选项及概率；逻辑自评独立数值。",
+          "history": "保持原实验会话历史；句子阅读按原神经分析处理，不凭空加选择。",
+          "split_protocol": "论文指定 OOD；不可作为模型调参集。原模型以最近似训练任务拟合领域参数后转移，不能在 OOD 测试集拟合。",
+          "metrics": "官方 OOD 真人选择 NLL；逻辑题可另分析正确率和自评误差。",
+          "baselines": [
+            {
+              "name": "Dual-systems model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx4",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "不同故事不增加范式计数；保持与主数据训练来源隔离。"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "抽象/魔毯故事两阶段选择并有fMRI记录",
+          "original_papers": [
+            {
+              "citation": "Feher da Silva, C., Lombardi, G., Edelson, M. & Hare, T. A. Rethinking model-based and model-free influences on mental effort and striatal prediction errors. Nature Human Behaviour 7 , 956–969 (2023).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib41",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "needs_verification",
+              "note": "论文给出逐参与者转录；独立 OOD 数据路径与权限须逐项核对，不假定在训练 Psych-101 中。"
+            }
+          ],
+          "input": "原任务说明、当前问题/可选动作及之前真实历史；句子阅读仅输入短句。",
+          "output": "按当前阶段合法选项及概率；逻辑自评独立数值。",
+          "history": "保持原实验会话历史；句子阅读按原神经分析处理，不凭空加选择。",
+          "split_protocol": "论文指定 OOD；不可作为模型调参集。原模型以最近似训练任务拟合领域参数后转移，不能在 OOD 测试集拟合。",
+          "metrics": "官方 OOD 真人选择 NLL；逻辑题可另分析正确率和自评误差。",
+          "baselines": [
+            {
+              "name": "Dual-systems model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx4",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "不同故事不增加范式计数；保持与主数据训练来源隔离。"
+        },
+        {
+          "source_library": "CogBench",
+          "manipulations": "常见/稀有转移、上一轮奖励、漂移终局价值",
+          "original_papers": [
+            {
+              "citation": "Daw et al. (2011). Model-based influences on humans choices and striatal prediction errors. Neuron 69:1204–1215.",
+              "url": "https://doi.org/10.1016/j.neuron.2011.02.027",
+              "relation": "source_study"
+            },
+            {
+              "citation": "Coda-Forno et al. (2024). CogBench: a large language model walks into a psychology lab. ICML/PMLR235:9076–9108.",
+              "url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://github.com/juliancodaforno/CogBench/tree/main/Experiments/TwoStepTask",
+              "availability": "public",
+              "note": "本地 external/CogBench 对应原 query.py 和环境已读；本轮不执行新实验。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/juliancodaforno/CogBench/blob/main/Experiments/TwoStepTask/store.py",
+              "availability": "public",
+              "note": "原行为/表现指标代码。"
+            }
+          ],
+          "input": "当前阶段和可选动作、完整本run转移奖励历史",
+          "output": "当前阶段两选一及概率",
+          "history": "每步保留本run截至当前的原实验信息；重置边界按原代码，历史窗口适配须标注。",
+          "split_protocol": "默认100 runs×20 trials；与原人类长时间任务不同，记录为CogBench正式LLM协议。",
+          "metrics": "平均奖励、奖励×转移的stay回归交互",
+          "baselines": [
+            {
+              "name": "随机参照；原stay回归诊断",
+              "status": "official",
+              "source_url": "https://proceedings.mlr.press/v235/coda-forno24a.html",
+              "note": "按CogBench公开参照或诊断拟合称呼，不将普通随机参照包装为认知SOTA。"
+            }
+          ],
+          "adaptation_note": "保留两阶段合法动作；stay交互不是对内部机制的唯一证明。"
+        },
+        {
+          "source_library": "NeuroGym",
+          "manipulations": "常见/罕见转移、第二阶段奖励",
+          "original_papers": [
+            {
+              "citation": "Model-Based Influences on Humans Choices and Striatal Prediction Errors",
+              "url": "https://www.sciencedirect.com/science/article/pii/S0896627311001255",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "environment",
+              "url": "https://github.com/neurogym/neurogym/blob/main/neurogym/envs/native/dawtwostep.py",
+              "availability": "public",
+              "note": "官方当前main源码；本轮未安装或运行环境。"
+            }
+          ],
+          "input": "当前阶段及历史状态-动作-奖励",
+          "output": "每阶段两选一",
+          "history": "跨试次和阶段反馈",
+          "split_protocol": "生成式环境，官方核心库不提供统一训练/测试数据划分；保留原版本dt、period、奖励、动作空间和终止条件；新种子/刺激划分属于明确新增评测协议。",
+          "metrics": "累计收益、reward×transition stay交互",
+          "baselines": [
+            {
+              "name": "该任务官方已训练强基线未定位",
+              "status": "not_located",
+              "source_url": "https://github.com/neurogym/neurogym/blob/main/neurogym/envs/native/dawtwostep.py",
+              "note": "环境ground-truth不是模型基线；通用训练示例不自动构成该任务的论文匹配强基线。"
+            }
+          ],
+          "adaptation_note": "采用源码转移/奖励规则；与CogBench两步不同实现分别保留"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "complete_at_least_one_full_protocol",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 24,
+      "task_id": "subway_hierarchical_planning",
+      "name_zh": "地铁网络层级规划",
+      "domain": "规划与价值重估",
+      "runner": "scripts/run_subway_original.py",
+      "task_argument": null,
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "起点/终点改变、局部邻接信息和潜在网络社群结构",
+          "original_papers": [
+            {
+              "citation": "Tomov, M. S., Yagati, S., Kumar, A., Yang, W. & Gershman, S. J. Discovery of hierarchical representations for efficient planning. PLoS computational biology 16 , e1007594 (2020).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib117",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "当前位置、邻站、目标和已探索路径",
+          "output": "四方向合法移动或到站结束及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；路径长度、到达率、跨子图规划与路径选择。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "该来源未给出可直接比对的领域基线",
+              "status": "not_located",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx2",
+              "note": "已查官方 Modeling details 映射；不把 Centaur/Llama 对照或拟议策略冒称原官方认知基线。"
+            }
+          ],
+          "adaptation_note": "文字邻接图不测视觉导航；环境需维护未见节点信息界限"
+        }
+      ],
+      "model_status": {
+        "laya": "source_or_interface_gap",
+        "intern_decision_4b": "source_or_interface_gap",
+        "llama8b": "source_or_interface_gap",
+        "minitaur8b": "source_or_interface_gap",
+        "qwen35_4b": "source_or_interface_gap"
+      }
+    },
+    {
+      "task_number": 25,
+      "task_id": "multi_task_reward_revaluation",
+      "name_zh": "多任务奖励重估",
+      "domain": "规划与价值重估",
+      "runner": "scripts/run_psych_compact.py",
+      "task_argument": "reward_revaluation",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "同房间转移结构，不同资源价格向量改变任务价值",
+          "original_papers": [
+            {
+              "citation": "Tomov, M. S., Schulz, E. & Gershman, S. J. Multi-task reinforcement learning in humans. Nature Human Behaviour 5 , 764–773 (2021).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib93",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "房间、门、已见资源、当前价格",
+          "output": "三扇门及概率",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；新价格下策略迁移、奖励和特征复用。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Multi-task reinforcement learning model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx11",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "价格改变与环境结构改变区分，不能将所有历史压成当前净奖励"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "complete_at_least_one_full_protocol",
+        "minitaur8b": "queued",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 26,
+      "task_id": "false_belief_story_qa",
+      "name_zh": "故事中的信念追踪",
+      "domain": "社会信念与语用",
+      "runner": "scripts/run_psych_social.py",
+      "task_argument": "false_belief_story_qa",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Original studies / datasets",
+          "manipulations": "true/false/second-order false belief；记忆与现实控制题",
+          "original_papers": [
+            {
+              "citation": "Le, Boureau & Nickel 2019, Revisiting the Evaluation of Theory of Mind through Question Answering",
+              "url": "https://aclanthology.org/D19-1598/",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "materials",
+              "url": "https://github.com/facebookresearch/ToMi",
+              "availability": "public",
+              "note": "官方生成器和带.trace分类的数据；合成故事，无真人响应"
+            }
+          ],
+          "input": "完整事件故事、谁观察到什么及原问题",
+          "output": "原单词答案；若限定选项为候选位置，应另记协议",
+          "history": "单题完整故事，不产生新闭环环境",
+          "split_protocol": "保留原train/val/test与.trace问题类型；公开数据不等于未知训练内容",
+          "metrics": "原答案准确率；按信念层次、故事和问题类型分解；选项NLL若新增需标适配",
+          "baselines": [
+            {
+              "name": "原tom-qa-dataset模型",
+              "status": "author_reference",
+              "source_url": "https://github.com/facebookresearch/ToMi",
+              "note": "README链接原模型资源；本次未复跑"
+            },
+            {
+              "name": "论文启发式诊断",
+              "status": "author_reference",
+              "source_url": "https://aclanthology.org/D19-1598/",
+              "note": "用于诊断捷径，不是新增基线"
+            }
+          ],
+          "adaptation_note": "原输出不是统一MCQ；候选选项转写应单列，不能声称为原协议"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "queued",
+        "minitaur8b": "queued",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 27,
+      "task_id": "politeness_pragmatics",
+      "name_zh": "礼貌与间接表达",
+      "domain": "社会信念与语用",
+      "runner": "scripts/run_psych_social.py",
+      "task_argument": "politeness_pragmatics",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "CogGym",
+          "manipulations": "真实评价、诚实/友善/刻薄目标和话语",
+          "original_papers": [
+            {
+              "citation": "Yoon, E. J., Tessler, M. H., Goodman, N. D., & Frank, M. C. (2016). Talking with tact: Polite language as a balance between kindness and informativity. In Proceedings of the 38th Annual Meeting of the Cognitive Science Society (pp. 2771–2776).",
+              "url": "https://escholarship.org/uc/item/6dm139m8",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "materials",
+              "url": "https://coggym.org/studies/yoon2016talking-exp1",
+              "availability": "public",
+              "note": "公开网页可浏览题目、说明、响应控件；本轮保存网页元数据。浏览许可不等于可再分发完整数据集；媒体未逐一播放。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://coggym.org/dataset-access",
+              "availability": "gated",
+              "note": "许可版需签研究使用协议；本轮未申请、未签署、未下载。网页不含真人响应。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/lance-ying/coggym/tree/main/evaluation",
+              "availability": "needs_verification",
+              "note": "公开评分器存在，但本条许可版选题、真人响应与逐研究分析尚未取得，不称可直接完整评测。"
+            }
+          ],
+          "input": "评价场景与说话者目标",
+          "output": "字面判断、1–5真实评价、目标评分",
+          "history": "三个实验角色分别保留",
+          "split_protocol": "网页保留实验flow和settings；未获得许可版官方选题映射或ML划分，不从网页scenario数推定正式评测规模。",
+          "metrics": [
+            "原响应量：字面接受、真实评价与目标推断",
+            "原论文具体统计、拟合指标和正式CogGym许可版选题尚未核实；此处记录可见响应，不编造已实现指标。"
+          ],
+          "baselines": [
+            {
+              "name": "原认知/计算基线",
+              "status": "not_located",
+              "source_url": "https://escholarship.org/uc/item/6dm139m8",
+              "note": "本轮尚未核实原论文基线代码与推荐设置；不等于原论文不存在基线。"
+            }
+          ],
+          "adaptation_note": "公开可见不等于原始实验完全复现或held-out；须保留原刺激、量表和条件。滑条的等级、坐标、事件概率和数值各有原含义，不能统一当动作概率或成功信心。"
+        },
+        {
+          "source_library": "CogGym",
+          "manipulations": "0–3心真实评价；信息、社会、联合目标",
+          "original_papers": [
+            {
+              "citation": "Yoon, E. J., Tessler, M. H., Goodman, N. D., & Frank, M. C. (2020). Polite Speech Emerges From Competing Social Goals. Open Mind, 4, 71–87. https://doi.org/10.1162/opmi_a_00035",
+              "url": "https://doi.org/10.1162/opmi_a_00035",
+              "relation": "source_study"
+            },
+            {
+              "citation": "Yoon, E. J., Tessler, M. H., Goodman, N. D., & Frank, M. C. (2020). Polite speech emerges from competing social goals.",
+              "url": "https://doi.org/10.1162/opmi_a_00035",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "materials",
+              "url": "https://github.com/lance-ying/coggym/tree/main/EML/Yoon2020Polite",
+              "availability": "public",
+              "note": "已读config、instruction、trial和README；媒体资产在仓库中，本轮未逐一播放。保留CogGym重建与原论文版本差异。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/lance-ying/coggym/tree/main/evaluation",
+              "availability": "public",
+              "note": "已读官方scorer和evaluation README，固定trial_selection_map；未运行模型。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://github.com/lance-ying/coggym/blob/main/EML/Yoon2020Polite/exp1/human_data_ind.json",
+              "availability": "public",
+              "note": "本轮已下载并解析；个体记录与聚合均值分开。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://github.com/lance-ying/coggym/blob/main/EML/Yoon2020Polite/exp1/human_data_mean.json",
+              "availability": "public",
+              "note": "本轮已下载并解析；个体记录与聚合均值分开。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://github.com/lance-ying/coggym/blob/main/EML/Yoon2020Polite/exp2/human_data_ind.json",
+              "availability": "public",
+              "note": "本轮已下载并解析；个体记录与聚合均值分开。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://github.com/lance-ying/coggym/blob/main/EML/Yoon2020Polite/exp2/human_data_mean.json",
+              "availability": "public",
+              "note": "本轮已下载并解析；个体记录与聚合均值分开。"
+            }
+          ],
+          "input": "社交场景、目标和候选表达",
+          "output": "字面真值二选一及说话者表达选择",
+          "history": "保留原四种选项顺序条件",
+          "split_protocol": "按public_manifest和trial_selection_map固定评测题，保留各config实验flow与条件；公开题不作held-out，未见ML训练/测试拆分。",
+          "metrics": [
+            "原响应量：真值判断与表达选择分布",
+            "CogGym公开analyze：同题重复响应先平均，按响应类型/量表归一，实验级Pearson R²对真人均值；官方固定选题；少于5项可评分对默认排除。",
+            "scorer按查询类型保留：选择的人类众数匹配/所选人类频率；单滑条绝对/归一误差；多滑条相关/MSE/MAE。使用前按该实验实际响应类型选择。"
+          ],
+          "baselines": [
+            {
+              "name": "真人响应参照",
+              "status": "official",
+              "source_url": "https://github.com/lance-ying/coggym/tree/main/EML/Yoon2020Polite",
+              "note": "个体及聚合文件已解析；是人类参照，不是模型上界。"
+            },
+            {
+              "name": "原认知/计算模型及原LLM比较组",
+              "status": "not_located",
+              "source_url": "https://doi.org/10.1162/opmi_a_00035",
+              "note": "已核公开任务和通用评分；原研究强模型与参数尚待逐篇核实，不凭标题指定SOTA。"
+            },
+            {
+              "name": "probabilistic model of polite speech",
+              "status": "author_reference",
+              "source_url": "https://github.com/lance-ying/coggym/blob/main/EML/Yoon2020Polite/README.md",
+              "note": "源研究README明确模型；代码参数待核。"
+            }
+          ],
+          "adaptation_note": "公开可见不等于原始实验完全复现或held-out；须保留原刺激、量表和条件。"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "queued",
+        "minitaur8b": "queued",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 28,
+      "task_id": "pragmatic_language_interpretation",
+      "name_zh": "细粒度语用理解",
+      "domain": "社会信念与语用",
+      "runner": "scripts/run_psych_social.py",
+      "task_argument": "pragmatic_language_interpretation",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "CogGym",
+          "manipulations": "欺骗、间接言语、反讽、准则、隐喻、幽默、连贯推断",
+          "original_papers": [
+            {
+              "citation": "Hu, J., Floyd, S., Jouravlev, O., Fedorenko, E., & Gibson, E. (2023, July). A fine-grained comparison of pragmatic language understanding in humans and language models. In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) (pp. 4194-4213).",
+              "url": "https://arxiv.org/abs/2212.06801",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "materials",
+              "url": "https://github.com/lance-ying/coggym/tree/main/EML/Hu2023Fine",
+              "availability": "public",
+              "note": "已读config、instruction、trial和README；媒体资产在仓库中，本轮未逐一播放。保留CogGym重建与原论文版本差异。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/lance-ying/coggym/tree/main/evaluation",
+              "availability": "public",
+              "note": "已读官方scorer和evaluation README，固定trial_selection_map；未运行模型。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://github.com/lance-ying/coggym/blob/main/EML/Hu2023Fine/exp1/human_data_ind.json",
+              "availability": "public",
+              "note": "本轮已下载并解析；个体记录与聚合均值分开。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://github.com/lance-ying/coggym/blob/main/EML/Hu2023Fine/exp1/human_data_mean.json",
+              "availability": "public",
+              "note": "本轮已下载并解析；个体记录与聚合均值分开。"
+            }
+          ],
+          "input": "原情境短文和候选解释",
+          "output": "选择最合适解释",
+          "history": "公开版本仅contextual exp1；不自动加入未公开no-context exp2",
+          "split_protocol": "按public_manifest和trial_selection_map固定评测题，保留各config实验flow与条件；公开题不作held-out，未见ML训练/测试拆分。",
+          "metrics": [
+            "原响应量：解释选择、各语用条件行为",
+            "CogGym公开analyze：同题重复响应先平均，按响应类型/量表归一，实验级Pearson R²对真人均值；官方固定选题；少于5项可评分对默认排除。",
+            "scorer按查询类型保留：选择的人类众数匹配/所选人类频率；单滑条绝对/归一误差；多滑条相关/MSE/MAE。使用前按该实验实际响应类型选择。"
+          ],
+          "baselines": [
+            {
+              "name": "真人响应参照",
+              "status": "official",
+              "source_url": "https://github.com/lance-ying/coggym/tree/main/EML/Hu2023Fine",
+              "note": "个体及聚合文件已解析；是人类参照，不是模型上界。"
+            },
+            {
+              "name": "原认知/计算模型及原LLM比较组",
+              "status": "not_located",
+              "source_url": "https://arxiv.org/abs/2212.06801",
+              "note": "已核公开任务和通用评分；原研究强模型与参数尚待逐篇核实，不凭标题指定SOTA。"
+            }
+          ],
+          "adaptation_note": "公开可见不等于原始实验完全复现或held-out；须保留原刺激、量表和条件。"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "queued",
+        "minitaur8b": "queued",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 29,
+      "task_id": "nonliteral_number_interpretation",
+      "name_zh": "非字面数字理解",
+      "domain": "社会信念与语用",
+      "runner": "scripts/run_psych_social.py",
+      "task_argument": "nonliteral_number_interpretation",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "CogGym",
+          "manipulations": "圆整/精确价格、语境及物品种类",
+          "original_papers": [
+            {
+              "citation": "Tsvilodub, P., Gandhi, K., Zhao, H., Fränken, J.-P., Franke, M., & Goodman, N. D. (2025). Non-literal Understanding of Number Words by Language Models (Version 2). arXiv. https://doi.org/10.48550/ARXIV.2502.06204",
+              "url": "https://doi.org/10.48550/arxiv.2502.06204",
+              "relation": "source_study"
+            },
+            {
+              "citation": "Kao, J. T., Wu, J. Y., Bergen, L., & Goodman, N. D. (2014). Nonliteral understanding of number words. PNAS, 111(33), 12002–12007. doi:10.1073/pnas.1407479111",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4143012/",
+              "relation": "original"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "materials",
+              "url": "https://github.com/lance-ying/coggym/tree/main/EML/Tsvilodub2025Nonliteral",
+              "availability": "public",
+              "note": "已读config、instruction、trial和README；媒体资产在仓库中，本轮未逐一播放。保留CogGym重建与原论文版本差异。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/lance-ying/coggym/tree/main/evaluation",
+              "availability": "public",
+              "note": "已读官方scorer和evaluation README，固定trial_selection_map；未运行模型。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://github.com/lance-ying/coggym/blob/main/EML/Tsvilodub2025Nonliteral/exp1/human_data_ind.json",
+              "availability": "public",
+              "note": "本轮已下载并解析；个体记录与聚合均值分开。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://github.com/lance-ying/coggym/blob/main/EML/Tsvilodub2025Nonliteral/exp1/human_data_mean.json",
+              "availability": "public",
+              "note": "本轮已下载并解析；个体记录与聚合均值分开。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://github.com/lance-ying/coggym/blob/main/EML/Tsvilodub2025Nonliteral/exp3b/human_data_ind.json",
+              "availability": "public",
+              "note": "本轮已下载并解析；个体记录与聚合均值分开。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://github.com/lance-ying/coggym/blob/main/EML/Tsvilodub2025Nonliteral/exp3b/human_data_mean.json",
+              "availability": "public",
+              "note": "本轮已下载并解析；个体记录与聚合均值分开。"
+            }
+          ],
+          "input": "价格对话或物品价格陈述",
+          "output": "分别报告各价格或觉得昂贵的概率",
+          "history": "原Kao2014真人数据；CogGym平衡抽题序列不是原参与者会话",
+          "split_protocol": "按public_manifest和trial_selection_map固定评测题，保留各config实验flow与条件；公开题不作held-out，未见ML训练/测试拆分。",
+          "metrics": [
+            "原响应量：明确事件的价格/情感概率",
+            "CogGym公开analyze：同题重复响应先平均，按响应类型/量表归一，实验级Pearson R²对真人均值；官方固定选题；少于5项可评分对默认排除。",
+            "scorer按查询类型保留：选择的人类众数匹配/所选人类频率；单滑条绝对/归一误差；多滑条相关/MSE/MAE。使用前按该实验实际响应类型选择。"
+          ],
+          "baselines": [
+            {
+              "name": "真人响应参照",
+              "status": "official",
+              "source_url": "https://github.com/lance-ying/coggym/tree/main/EML/Tsvilodub2025Nonliteral",
+              "note": "个体及聚合文件已解析；是人类参照，不是模型上界。"
+            },
+            {
+              "name": "原认知/计算模型及原LLM比较组",
+              "status": "not_located",
+              "source_url": "https://doi.org/10.48550/arxiv.2502.06204",
+              "note": "已核公开任务和通用评分；原研究强模型与参数尚待逐篇核实，不凭标题指定SOTA。"
+            },
+            {
+              "name": "Kao2014 pragmatic number interpretation model",
+              "status": "author_reference",
+              "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4143012/",
+              "note": "原真人数据来源；原论文模型通过沟通目标、意义和情感推断非字面数字。当前任务材料为CogGym/Tsvilodub重建，非从模型重新生成真人数据。"
+            }
+          ],
+          "adaptation_note": "公开可见不等于原始实验完全复现或held-out；须保留原刺激、量表和条件。滑条的等级、坐标、事件概率和数值各有原含义，不能统一当动作概率或成功信心。CogGym README明确原Kao2014说明部分无法恢复、抽题采用平衡序列、Exp3b部分文本由维护者判断改动；不视为完全原样复刻。"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "complete_at_least_one_full_protocol",
+        "llama8b": "queued",
+        "minitaur8b": "queued",
+        "qwen35_4b": "complete_at_least_one_full_protocol"
+      }
+    },
+    {
+      "task_number": 30,
+      "task_id": "population_comparison_confidence",
+      "name_zh": "国家人口比较与信心",
+      "domain": "元认知与自我评估",
+      "runner": null,
+      "task_argument": null,
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "S1CogBench existing inventory",
+          "manipulations": "人口差异难度、正确/错误、独立1–6等级信心",
+          "original_papers": [
+            {
+              "citation": "Benwell et al., npj Mental Health Research 2022",
+              "url": "https://www.nature.com/articles/s44184-022-00009-4",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://osf.io/s3cth/",
+              "availability": "public",
+              "note": "公开下载有429；本机快照366/534文件，不计完整"
+            },
+            {
+              "kind": "materials",
+              "url": "https://osf.io/download/kdv97/",
+              "availability": "public",
+              "note": "原A套144刺激"
+            },
+            {
+              "kind": "analysis",
+              "url": "docs/METACOGNITION_RUN_20261015.md",
+              "availability": "local",
+              "note": "本机协议与实际结果入口，按2026-10-17快照"
+            }
+          ],
+          "input": "两个国家",
+          "output": "左/右，再独立报告1–6信心；正式阶段无反馈",
+          "history": "固定2019标签；等级信心不除以6当概率；当前已读记录无题目ID，不能据难度虚构逐题真人配对",
+          "split_protocol": "A/B各144正式题，8档难度；原534人数据、473人纳入；无官方ML划分",
+          "metrics": "难度—准确率/信心；d′、meta-d′、M-ratio按原统计；当前完整复算尚缺",
+          "baselines": [
+            {
+              "name": "HMeta-d / JAGS",
+              "status": "author_reference",
+              "source_url": "https://www.nature.com/articles/s44184-022-00009-4",
+              "note": "元认知统计模型，不是答题算法baseline"
+            }
+          ],
+          "adaptation_note": "固定2019标签；等级信心不除以6当概率；当前已读记录无题目ID，不能据难度虚构逐题真人配对"
+        }
+      ],
+      "model_status": {
+        "laya": "source_or_interface_gap",
+        "intern_decision_4b": "source_or_interface_gap",
+        "llama8b": "source_or_interface_gap",
+        "minitaur8b": "source_or_interface_gap",
+        "qwen35_4b": "source_or_interface_gap"
+      }
+    },
+    {
+      "task_number": 31,
+      "task_id": "performance_self_assessment",
+      "name_zh": "答题与自我评估（语法、逻辑两个题域）",
+      "domain": "元认知与自我评估",
+      "runner": "scripts/run_four_task_responses_20261018.py",
+      "task_argument": "answer_self_assessment",
+      "runner_note": "Existing research runner, not a claim of clean-machine validation for this task.",
+      "sources": [
+        {
+          "source_library": "Psych-101",
+          "manipulations": "二十道语法题；前后预估答对数、相对排名、难度",
+          "original_papers": [
+            {
+              "citation": "Jansen, R. A., Rafferty, A. N. & Griffiths, T. L. A rational model of the dunning–kruger effect supports insensitivity to evidence in low performers. Nature Human Behaviour 5 , 756–763 (2021).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib28",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101",
+              "availability": "public",
+              "note": "已读数据卡和附录原提示；逐参与者完整会话转录。此端点是训练资源，正式留出另见 Psych-101-test。"
+            },
+            {
+              "kind": "human_data",
+              "url": "https://huggingface.co/datasets/marcelbinz/Psych-101-test",
+              "availability": "gated",
+              "note": "官方参与者留出测试；HF API gated=auto，需登录并同意共享联系信息/访问条件；数据卡要求不在仓库外再分发，许可证CC-BY-ND-4.0。匿名读取原README返回401；可浏览网页不等于可直接下载。不能用训练集代替。"
+            },
+            {
+              "kind": "analysis",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "public",
+              "note": "官方评测、认知模型和实验元数据；本轮未下载全行为数据。"
+            }
+          ],
+          "input": "语法题、五选项与独立自评问题",
+          "output": "题目五选一；自评数值/等级",
+          "history": "官方自然语言逐试次会话，预测当前位置时只提供此前真实参与者历史；完整会话可达约32k tokens。若改自主执行需另接反馈环境。",
+          "split_protocol": "Centaur 主分析每个实验按参与者90%训练、10%测试；使用官方 Psych-101-test，保留实验/参与者 ID，不重新按行随机划分。数据原研究的训练/测试阶段与 ML 留出另列。",
+          "metrics": "官方共同主指标：留出真人响应平均 NLL；题目正确率与人类 NLL；预测成绩偏差、自评与实际关系。除 NLL 外为基于原操纵的待实施分析，不冒称全部已实现官方评分。",
+          "baselines": [
+            {
+              "name": "Lookup table model",
+              "status": "official",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx10.SSSx14",
+              "note": "Centaur 论文正式领域基线；按训练参与者联合拟合，测试未见参与者。这里核实论文公式/映射，不声称本机已复跑。"
+            }
+          ],
+          "adaptation_note": "自评排名/难度不等于事件概率，不能直接计算概率校准"
+        },
+        {
+          "source_library": "Psych-101",
+          "manipulations": "二十道推理题及前后预期成绩/百分位/难度自评",
+          "original_papers": [
+            {
+              "citation": "Jansen, R. A., Rafferty, A. N. & Griffiths, T. L. A rational model of the dunning–kruger effect supports insensitivity to evidence in low performers. Nature Human Behaviour 5 , 756–763 (2021).",
+              "url": "https://arxiv.org/html/2410.20268v3#bib.bib28",
+              "relation": "source_study"
+            }
+          ],
+          "resources": [
+            {
+              "kind": "human_data",
+              "url": "https://github.com/marcelbinz/Llama-3.1-Centaur-70B",
+              "availability": "needs_verification",
+              "note": "论文给出逐参与者转录；独立 OOD 数据路径与权限须逐项核对，不假定在训练 Psych-101 中。"
+            }
+          ],
+          "input": "原任务说明、当前问题/可选动作及之前真实历史；句子阅读仅输入短句。",
+          "output": "按当前阶段合法选项及概率；逻辑自评独立数值。",
+          "history": "保持原实验会话历史；句子阅读按原神经分析处理，不凭空加选择。",
+          "split_protocol": "论文指定 OOD；不可作为模型调参集。原模型以最近似训练任务拟合领域参数后转移，不能在 OOD 测试集拟合。",
+          "metrics": "官方 OOD 真人选择 NLL；逻辑题可另分析正确率和自评误差。",
+          "baselines": [
+            {
+              "name": "领域认知模型未定位",
+              "status": "not_located",
+              "source_url": "https://arxiv.org/html/2410.20268v3#Sx6.SSx12.SSSx3",
+              "note": "Centaur/Llama是模型对照；逻辑OOD原文明确未用可迁移的领域模型。"
+            }
+          ],
+          "adaptation_note": "自评数值不等于选项概率；原选择任务与自评分别记录。"
+        }
+      ],
+      "model_status": {
+        "laya": "complete_at_least_one_full_protocol",
+        "intern_decision_4b": "running",
+        "llama8b": "running",
+        "minitaur8b": "queued",
+        "qwen35_4b": "running"
+      }
+    }
+  ],
+  "models": [
+    "laya",
+    "intern_decision_4b",
+    "llama8b",
+    "minitaur8b",
+    "qwen35_4b"
+  ],
+  "snapshot_jst": "2026-10-19T20:34:19.827266+09:00",
+  "planned_task_model_cells": 155,
+  "cells_with_any_complete_protocol": 118,
+  "scope": "All 31 tasks remain. Blocked and pending evaluations are explicit. Jev and Claude rows are in results/aggregate, separate from this five-model catalogue."
+}

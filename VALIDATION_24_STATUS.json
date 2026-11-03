@@ -1,0 +1,287 @@
+{
+  "verified_utc": "2026-10-26T11:16:38.485747+00:00",
+  "status": "complete_cpu_reference_pipelines",
+  "tasks": 24,
+  "named_modes": 27,
+  "new_environment": {
+    "python": "3.11.5 (main, Sep 11 2023, 13:54:46) [GCC 11.2.0]",
+    "cpu_torch": "2.10.0+cpu",
+    "julia_runtime": "1.4.1 provided existing interpreter",
+    "python_system_site_packages": false,
+    "julia_packages": "independent new depot"
+  },
+  "scope": "Separate source copy with supplied original source inputs, complete CPU-reference legal-output and original-scoring pipelines. Neural-model weights/readouts and independent restricted-input acquisition retain separate verification status.",
+  "repair": "An omitted original planning/data/exp1/trials.json asset was supplied; both complete Mouselab modes were rerun. First failure retained. No loader, scoring or simulation-count change.",
+  "modes": [
+    {
+      "task": "bayesian_urn_inference",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 400,
+      "expected_full_input_count": 400,
+      "original_scored_count": 400,
+      "expected_scored_count": 400,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "multiple_cue_judgment",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 6136,
+      "expected_full_input_count": 6136,
+      "original_scored_count": 6136,
+      "expected_scored_count": 6136,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "multi_attribute_choice",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 576,
+      "expected_full_input_count": 576,
+      "original_scored_count": 576,
+      "expected_scored_count": 576,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "probability_coherence_judgment",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 2460,
+      "expected_full_input_count": 2460,
+      "original_scored_count": 2460,
+      "expected_scored_count": 2460,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "shj_category_learning",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 3664,
+      "expected_full_input_count": 3664,
+      "original_scored_count": 3664,
+      "expected_scored_count": 3664,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "medin_category_learning",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 6972,
+      "expected_full_input_count": 6972,
+      "original_scored_count": 6972,
+      "expected_scored_count": 6972,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "weather_prediction",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 400,
+      "expected_full_input_count": 400,
+      "original_scored_count": 400,
+      "expected_scored_count": 400,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "rlwm",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 52911,
+      "expected_full_input_count": 52911,
+      "original_scored_count": 52911,
+      "expected_scored_count": 52911,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "recent_probes",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 3774,
+      "expected_full_input_count": 3774,
+      "original_scored_count": 3774,
+      "expected_scored_count": 3774,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "wcst",
+      "mode": "human_predictive",
+      "status": "complete",
+      "full_input_count": 12754,
+      "expected_full_input_count": 12754,
+      "original_scored_count": 12754,
+      "expected_scored_count": 12754,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "wcst",
+      "mode": "autonomous_generative",
+      "status": "complete",
+      "full_input_count": 12754,
+      "expected_full_input_count": 12754,
+      "original_scored_count": 12754,
+      "expected_scored_count": 12754,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "nonstationary_bandit",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 1600,
+      "expected_full_input_count": 1600,
+      "original_scored_count": 1600,
+      "expected_scored_count": 1600,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "instrumental_learning",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 960,
+      "expected_full_input_count": 960,
+      "original_scored_count": 960,
+      "expected_scored_count": 960,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "horizon",
+      "mode": "human_predictive",
+      "status": "complete",
+      "full_input_count": 6720,
+      "expected_full_input_count": 6720,
+      "original_scored_count": 6720,
+      "expected_scored_count": 6720,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "horizon",
+      "mode": "autonomous_generative",
+      "status": "complete",
+      "full_input_count": 34720,
+      "expected_full_input_count": 34720,
+      "original_scored_count": 34720,
+      "expected_scored_count": 34720,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "stationary_multiarmed_bandit",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 16,
+      "expected_full_input_count": 16,
+      "original_scored_count": 312000,
+      "expected_scored_count": 312000,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "hybrid_information_sampling",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 163135,
+      "expected_full_input_count": 163135,
+      "original_scored_count": 163135,
+      "expected_scored_count": 163135,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "mouselab_tree",
+      "mode": "human_predictive",
+      "status": "complete",
+      "full_input_count": 20363,
+      "expected_full_input_count": 20363,
+      "original_scored_count": 20363,
+      "expected_scored_count": 20363,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "mouselab_tree",
+      "mode": "autonomous_generative",
+      "status": "complete",
+      "full_input_count": 23750,
+      "expected_full_input_count": 23750,
+      "original_scored_count": 23750,
+      "expected_scored_count": 23750,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "bart",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 450,
+      "expected_full_input_count": 450,
+      "original_scored_count": 450,
+      "expected_scored_count": 450,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "temporal_discounting",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 1,
+      "expected_full_input_count": 1,
+      "original_scored_count": 1,
+      "expected_scored_count": 1,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "two_step",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 4000,
+      "expected_full_input_count": 4000,
+      "original_scored_count": 4000,
+      "expected_scored_count": 4000,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "false_belief_story_qa",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 5994,
+      "expected_full_input_count": 5994,
+      "original_scored_count": 5994,
+      "expected_scored_count": 5994,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "politeness_pragmatics",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 128,
+      "expected_full_input_count": 128,
+      "original_scored_count": 128,
+      "expected_scored_count": 128,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "pragmatic_language_interpretation",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 170,
+      "expected_full_input_count": 170,
+      "original_scored_count": 170,
+      "expected_scored_count": 170,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "nonliteral_number_interpretation",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 330,
+      "expected_full_input_count": 330,
+      "original_scored_count": 330,
+      "expected_scored_count": 330,
+      "full_end_to_end": "passed"
+    },
+    {
+      "task": "performance_self_assessment",
+      "mode": "primary_protocol",
+      "status": "complete",
+      "full_input_count": 108248,
+      "expected_full_input_count": 108248,
+      "original_scored_count": 108248,
+      "expected_scored_count": 108248,
+      "full_end_to_end": "passed"
+    }
+  ]
+}

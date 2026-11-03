@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "Please cite S1CogBench when using its task interfaces, protocols, or results."
+type: software
+title: "S1CogBench: What System One Decision Models Can and Cannot Do on Cognitive Experiments"
+authors:
+  - family-names: Hou
+    given-names: Dengzhe
+  - family-names: Yamada
+    given-names: Kazunori D
+version: "2026.10.28"
+repository-code: "https://github.com/dengzhe-hou/S1CogBench"
+url: "https://dengzhe-hou.github.io/S1CogBench/"
+license: MIT
+preferred-citation:
+  type: article
+  title: "S1CogBench: What System One Decision Models Can and Cannot Do on Cognitive Experiments"
+  authors:
+    - family-names: Hou
+      given-names: Dengzhe
+    - family-names: Yamada
+      given-names: Kazunori D
+  year: 2026
+  journal: "arXiv preprint"
+  identifiers:
+    - type: other
+      value: "arXiv:2611.00911"
+      description: "arXiv identifier"
+  url: "https://arxiv.org/abs/2611.00911"

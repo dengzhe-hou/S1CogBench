@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reproduction of accepted reference values · S1CogBench</title>
+<link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@600&family=Noto+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="../style.css"></head><body>
+<nav class="navbar" aria-label="Main navigation"><a href="../index.html#leaderboard">Leaderboard</a><a href="../index.html#tasks">Tasks</a><a href="../index.html#evaluate">Evaluate</a><a href="../index.html#resources">Resources</a></nav>
+<main class="doc-page"><p class="doc-back"><a href="../index.html#resources">Back to S1CogBench</a></p>
+<h1>Reproduction of accepted reference values</h1>
+<p><code>python -m s1cogbench eval</code> dispatches every mode to the original runner and scorer. To check that it changes no protocol, prompt, history, sample, seed or scorer, reference adapters were run through it on the inputs of the 2026-10-26 CPU validation (rebuilt on the lab cluster from the project snapshot), on CPU through Slurm on c01, with the pins of <code>requirements-eval-cpu.txt</code>.</p>
+<h2>CPU reference: 27/27 modes identical</h2>
+<p><code>examples/cpu_protocol_validation_agent.py</code> is the deterministic policy of the 2026-10-26 validation (<code>examples/bayes_event_agent.py</code> for the Bayesian urn, as there). Each mode must have the same full input and original scored counts, the same Table 3 primary value (exact floating-point equality), the same original summary, and the same per-item output files row by row (responses, predictions, decisions, trajectories, trial and score tables). Excluded are timing fields, absolute paths, the <code>--model-label</code> text that the CogBench scorers store as <code>engine</code>, and two labels the validation driver wrote itself: the interface name of the nonliteral sliders (whose fixed 50 % report the driver supplied inline; the CLI asks the adapter) and the WCST full-vocabulary status sentence.</p>
+<p>The validation ran Python 3.11.5. Under Python 3.11 (3.11.15) the CLI reproduces it in 27 of 27 modes. Under Python 3.12, 21 modes are identical and 6 differ only in float values that come from the built-in <code>sum()</code> (per-row expected reports, per-episode reward sums and NLL aggregates), by at most 3e-14 relative. Python 3.12 made float <code>sum()</code> compensated; the inputs, choices, trajectories, counts and every other field are identical.</p>
+<p>BART: the accepted five-model rows use 20 runs (900 balloons); the validation ran the 10-run code default. The CLI runs the accepted 20 runs, and its first 10 are compared with the validation's 10.</p>
+<h2>Uniform: 18/18 reproducible values match Table 3</h2>
+<p>Table 3's Uniform column is the expected score of uniform choice among the legal options (control jobs of 2026-10-29). <code>examples/uniform_reference_agent.py</code> (uniform probabilities, first legal key as native choice, 0.5 reports) was run through the CLI on all 27 modes. For human-NLL targets the CLI's own score is the Uniform value ("scorer"). For accuracy and numeric-report targets the expectation is recomputed from the CLI's scored items ("items"): the probability mass on the correct key, or the mean absolute error of a uniform report against each item's posterior or human value. 15 of these 18 agree to 1e-12. The others match to the printed precision: Horizon and WCST differ by the scorers' epsilons (-log(p + 1e-8), -log(p + 1e-12)), the rest by accumulated float rounding over up to 108,248 rows. The other 9 Uniform values are analytic expectations over environments and action sequences; a run of one fixed policy is one sample of them, so no CLI run reproduces them.</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>CPU reference: validation</th>
+<th>CLI</th>
+<th>Python 3.11</th>
+<th>Python 3.12</th>
+<th>Uniform: Table 3</th>
+<th>reproduced</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bayesian urn</td>
+<td>0</td>
+<td>0</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.349467975288</td>
+<td>0.349467975288 (items; exact)</td>
+</tr>
+<tr>
+<td>Multiple-cue judgment</td>
+<td>3.11768307131</td>
+<td>3.11768307131</td>
+<td>identical</td>
+<td>identical</td>
+<td>2.19722457734</td>
+<td>2.19722457734 (scorer; exact)</td>
+</tr>
+<tr>
+<td>Multi-attribute choice</td>
+<td>0.848432094793</td>
+<td>0.848432094793</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.69314718056</td>
+<td>0.69314718056 (scorer; exact)</td>
+</tr>
+<tr>
+<td>Probability coherence</td>
+<td>31.9943089431</td>
+<td>31.9943089431</td>
+<td>identical</td>
+<td>float sums only, rel. 4e-16</td>
+<td>32.1338525316</td>
+<td>32.1338525316 (items; exact)</td>
+</tr>
+<tr>
+<td>SHJ categories</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.5</td>
+<td>0.5 (items; exact)</td>
+</tr>
+<tr>
+<td>Medin categories</td>
+<td>0.49746031746</td>
+<td>0.49746031746</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.5</td>
+<td>0.5 (items; exact)</td>
+</tr>
+<tr>
+<td>Weather prediction</td>
+<td>0.4975</td>
+<td>0.4975</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.5</td>
+<td>0.5 (items; exact)</td>
+</tr>
+<tr>
+<td>RLWM</td>
+<td>0.337831452817</td>
+<td>0.337831452817</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.333333333333</td>
+<td>0.333333333333 (items; exact)</td>
+</tr>
+<tr>
+<td>Recent probes</td>
+<td>0.500529941706</td>
+<td>0.500529941706</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.5</td>
+<td>0.5 (items; exact)</td>
+</tr>
+<tr>
+<td>WCST, prediction</td>
+<td>1.93737332575</td>
+<td>1.93737332575</td>
+<td>identical</td>
+<td>identical</td>
+<td>1.38629436112</td>
+<td>1.38629436112 (scorer; diff 4e-12)</td>
+</tr>
+<tr>
+<td>WCST, autonomous</td>
+<td>0.242106605256</td>
+<td>0.242106605256</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.25</td>
+<td>analytic, not a run output</td>
+</tr>
+<tr>
+<td>Restless bandit</td>
+<td>0.52</td>
+<td>0.52</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.5</td>
+<td>analytic, not a run output</td>
+</tr>
+<tr>
+<td>Instrumental learning</td>
+<td>0.754166666667</td>
+<td>0.754166666667</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.75</td>
+<td>analytic, not a run output</td>
+</tr>
+<tr>
+<td>Horizon, prediction</td>
+<td>0.844671936594</td>
+<td>0.844671936594</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.69314718056</td>
+<td>0.69314716056 (scorer; diff 2e-08)</td>
+</tr>
+<tr>
+<td>Horizon, autonomous</td>
+<td>0.53202764977</td>
+<td>0.53202764977</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.5</td>
+<td>analytic, not a run output</td>
+</tr>
+<tr>
+<td>Stationary bandits</td>
+<td>0.114804487179</td>
+<td>0.114804487179</td>
+<td>identical</td>
+<td>float sums only, rel. 3e-14</td>
+<td>0.125</td>
+<td>analytic, not a run output</td>
+</tr>
+<tr>
+<td>Hybrid sampling</td>
+<td>1.87695419954</td>
+<td>1.87695419954</td>
+<td>identical</td>
+<td>float sums only, rel. 2e-16</td>
+<td>1.38629436112</td>
+<td>1.38629436112 (scorer; exact)</td>
+</tr>
+<tr>
+<td>Mouselab, prediction</td>
+<td>2.21698328053</td>
+<td>2.21698328053</td>
+<td>identical</td>
+<td>identical</td>
+<td>1.63363484604</td>
+<td>1.63363484604 (scorer; exact)</td>
+</tr>
+<tr>
+<td>Mouselab, autonomous</td>
+<td>9.28526315789</td>
+<td>9.28526315789</td>
+<td>identical</td>
+<td>identical</td>
+<td>7.00775792911</td>
+<td>analytic, not a run output</td>
+</tr>
+<tr>
+<td>BART</td>
+<td>0.0822222222222 (10 runs)</td>
+<td>0.0822222222222 (first 10 of 20)</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.837727864668</td>
+<td>analytic, not a run output</td>
+</tr>
+<tr>
+<td>Temporal discounting</td>
+<td>0.7</td>
+<td>0.7</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.5</td>
+<td>analytic, not a run output</td>
+</tr>
+<tr>
+<td>Two-step</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.496289328684</td>
+<td>analytic, not a run output</td>
+</tr>
+<tr>
+<td>False-belief QA</td>
+<td>0.499499499499</td>
+<td>0.499499499499</td>
+<td>identical</td>
+<td>identical</td>
+<td>0.5</td>
+<td>0.5 (items; exact)</td>
+</tr>
+<tr>
+<td>Politeness</td>
+<td>1.36396314629</td>
+<td>1.36396314629</td>
+<td>identical</td>
+<td>float sums only, rel. 3e-15</td>
+<td>1.01391209922</td>
+<td>1.01391209922 (scorer; exact)</td>
+</tr>
+<tr>
+<td>Pragmatic interpretation</td>
+<td>1.7236120365</td>
+<td>1.7236120365</td>
+<td>identical</td>
+<td>float sums only, rel. 4e-15</td>
+<td>1.28226831751</td>
+<td>1.28226831751 (scorer; exact)</td>
+</tr>
+<tr>
+<td>Nonliteral number</td>
+<td>27.1976666667</td>
+<td>27.1976666667</td>
+<td>identical</td>
+<td>identical</td>
+<td>34.7690393182</td>
+<td>34.7690393182 (items; exact)</td>
+</tr>
+<tr>
+<td>Self-assessment</td>
+<td>2.81619849315</td>
+<td>2.81619849315</td>
+<td>identical</td>
+<td>float sums only, rel. 2e-16</td>
+<td>2.03927233032</td>
+<td>2.03927233032 (scorer; diff 2e-12)</td>
+</tr>
+</tbody>
+</table>
+<h2>Adapter templates</h2>
+<p>No API call was made. Every saved exchange of the accepted 2026-10-30 runs was replayed through the templates with a local transport:</p>
+<ul>
+<li><code>decision_api_choice.py</code>: 47,505 Jev choice responses in 10 tasks, all with identical request bodies and identical native choice, raw and normalized probabilities; 330 Jev nonliteral event answers, identical bodies and reports.</li>
+<li><code>generative_api_choice.py</code>: 20,132 Claude Haiku responses in 5 tasks (letter and digit keys), all with identical message bodies and identical parsed answer and invalid flag (12 invalid).</li>
+<li><code>hf_causal_lm_choice.py</code>: a five-call smoke run on CPU with Qwen3-0.6B (float32) through 15 modes covering the chat template, multi-token integer replies, numeric reports and Restless confidence. It has not been compared with the accepted open-model rows, which used model-specific adapters.</li>
+</ul>
+<p><code>python tests/test_adapter_templates.py</code> runs the parser and readout cases offline.</p>
+<h2>Table 3</h2>
+<p><code>scripts/add_table2_api_rows.py</code> added 110 API rows and nine references to the aggregate files from the closed acceptance records. The Uniform column (27 rows), the eight older references, the analytic Bayesian reference, the five open-model temporal cells, the RLWM argmax accuracy and the Horizon greedy replay followed, each read from its record. Each row validates against the result schema, and all earlier rows keep their JSON text and CSV bytes. Each n equals the accepted n of its comparison context. Only the two clipped Jev rows have no open-model row in the same context (<a href="API_EXTENSION.html">API_EXTENSION.md</a>).</p>
+<p><code>python scripts/build_table2.py</code> rebuilds the whole table from <code>results.json</code> and <code>reference_results.json</code>. The paper prints the Opus and Sonnet columns in a sentence of its appendix. All 297 cells, with targets, directions, marks, reference types and domains, match the table in the paper's latest PDF, and the bold and gray marks match its source. The 171 Uniform, open-model and reference values recorded when the table was generated are equal exactly, and the eight older references equal their higher-precision numbers in <a href="BASELINES.html">BASELINES.md</a>.</p>
+<h2>First real-model pass</h2>
+<p>Llama-3.1-8B-Instruct ran through <code>python -m s1cogbench eval --smoke --smoke-calls 20</code> in every mode, with the software versions of the accepted runs (torch 2.10.0+cu128, transformers 5.3.0, accelerate 1.13.0) on one <code>3g.40gb</code> MIG slice of an A100 80GB. The job took 6 minutes 34 seconds, about 0.11 GPU-hours, and made no paid call.</p>
+<p>The real adapter passes through the original runner of every mode. The one failure is an adapter mismatch: <code>examples/llama8b_event_agent.py</code> reads an urn question and stops on nonliteral number. <code>examples/llama8b_social_numeric_agent.py</code>, the numeric report of the accepted run, runs that mode.</p>
+<p>The first 20 decisions of 23 modes were compared with the saved accepted outputs. A mode was to match if legal keys, native choice, identity and every probability were within 1e-3. Prompts, legal keys, input tokens and source IDs are identical everywhere they are recorded. Only nonliteral number matches, exactly. The other 22 modes miss the tolerance: probabilities differ by up to 0.10, native choices change in 11 of the compared decisions, and two of 20 Bayesian reports differ (0.60 against 0.53). Identical counts decisions with no difference at all. In Restless bandit the 10 confidence reports are identical and the 10 choice probabilities are not.</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th style="text-align: right;">Decisions</th>
+<th style="text-align: right;">Identical</th>
+<th style="text-align: right;">Largest probability or report difference</th>
+<th style="text-align: right;">Native choice changes</th>
+<th>Identity checked by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Multi-attribute choice</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.046</td>
+<td style="text-align: right;">0</td>
+<td>source ID, input tokens</td>
+</tr>
+<tr>
+<td>SHJ categories</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.062</td>
+<td style="text-align: right;">0</td>
+<td>source ID, input tokens</td>
+</tr>
+<tr>
+<td>Medin categories</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.052</td>
+<td style="text-align: right;">0</td>
+<td>source ID, input tokens</td>
+</tr>
+<tr>
+<td>Weather prediction</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.013</td>
+<td style="text-align: right;">0</td>
+<td>source ID, input tokens</td>
+</tr>
+<tr>
+<td>Recent probes</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.043</td>
+<td style="text-align: right;">1</td>
+<td>source ID, input tokens</td>
+</tr>
+<tr>
+<td>False-belief QA</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.062</td>
+<td style="text-align: right;">1</td>
+<td>source ID, input tokens</td>
+</tr>
+<tr>
+<td>Politeness</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.060</td>
+<td style="text-align: right;">0</td>
+<td>source ID, input tokens</td>
+</tr>
+<tr>
+<td>Pragmatic interpretation</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.078</td>
+<td style="text-align: right;">0</td>
+<td>source ID, input tokens</td>
+</tr>
+<tr>
+<td>Multiple-cue judgment, compact history</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.049</td>
+<td style="text-align: right;">1</td>
+<td>source ID, input tokens</td>
+</tr>
+<tr>
+<td>RLWM</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.093</td>
+<td style="text-align: right;">2</td>
+<td>source ID, input tokens</td>
+</tr>
+<tr>
+<td>Mouselab, prediction</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.076</td>
+<td style="text-align: right;">1</td>
+<td>prompt, input tokens</td>
+</tr>
+<tr>
+<td>Hybrid sampling</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.101</td>
+<td style="text-align: right;">1</td>
+<td>input tokens</td>
+</tr>
+<tr>
+<td>Two-step</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">0</td>
+<td>prompt, input tokens</td>
+</tr>
+<tr>
+<td>BART</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.060</td>
+<td style="text-align: right;">0</td>
+<td>prompt, input tokens</td>
+</tr>
+<tr>
+<td>Temporal discounting</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.007</td>
+<td style="text-align: right;">0</td>
+<td>prompt, input tokens</td>
+</tr>
+<tr>
+<td>Instrumental learning</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.031</td>
+<td style="text-align: right;">0</td>
+<td>prompt, input tokens</td>
+</tr>
+<tr>
+<td>Stationary bandits</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.037</td>
+<td style="text-align: right;">0</td>
+<td>input tokens</td>
+</tr>
+<tr>
+<td>Mouselab, autonomous</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: right;">0</td>
+<td>prompt, input tokens</td>
+</tr>
+<tr>
+<td>Bayesian urn</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0.070</td>
+<td style="text-align: right;">n.a.</td>
+<td>prompt, source ID, input tokens</td>
+</tr>
+<tr>
+<td>Restless bandit</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.052</td>
+<td style="text-align: right;">0</td>
+<td>prompt, input tokens</td>
+</tr>
+<tr>
+<td>Probability coherence</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.091</td>
+<td style="text-align: right;">2</td>
+<td>source ID, input tokens</td>
+</tr>
+<tr>
+<td>Self-assessment</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.059</td>
+<td style="text-align: right;">2</td>
+<td>source ID, input tokens</td>
+</tr>
+<tr>
+<td>Nonliteral number</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">n.a.</td>
+<td>source ID, input tokens</td>
+</tr>
+</tbody>
+</table>
+<p>Every difference between log probabilities lies on the 1/32 grid of BF16 logits, so these are rounding steps of the logits, mostly 1/16 or 1/8, and not a change of prompt or scorer. The saved accepted run on a whole A100 80GB and the latency study on a whole A100-SXM4-40GB are identical on all 2,576 decisions they share, so this slice is the outlier. The whole-card rerun below shows that the CLI is not the cause. Expect Llama numbers from a MIG slice to differ from the accepted rows.</p>
+<p>Four modes cannot be compared. The accepted Llama rows of Horizon and WCST used the published Llama prompts and readouts, not an adapter, so <code>llama8b_choice_agent.py</code> through the CLI is a different condition. All four ran through their runners. Twenty decisions also say nothing about a whole-task score.</p>
+<h2>Whole-card rerun</h2>
+<p>The same pass ran again on a whole A100-SXM4-40GB with MIG disabled and driver 615.71.09, through the same CLI, adapters and prompts. The modes took about 5 minutes.</p>
+<p>All 23 compared modes, 449 decisions, are identical to the saved accepted outputs, with a largest difference of exactly 0 in every probability and report. This includes the 22 modes that missed the tolerance on the MIG slice and nonliteral number, which already matched. Native choices, legal keys, input tokens and the recorded prompts and source IDs match as well.</p>
+<p>Autonomous Mouselab ran in a second start of the same VM. In the first start its Julia server stopped, because the copy of the sources prepared for that run left out the fetched file <code>mdps/base/4O8nSiCFkbB</code>. That was a mistake in preparing the run, not a failure of the CLI. The other results are as in the first pass: the event adapter stops on nonliteral number, and the four Horizon and WCST modes ran but cannot be compared.</p>
+<p>The Python environment was the one of the latency study (torch 2.10.0+cu128, transformers 5.3.0, tokenizers 0.22.2, NumPy 1.26.4, safetensors 0.7.0), with the CLI's other dependencies added at the versions of the first pass.</p>
+<p>This rules out the CLI, the adapters and the prompts as the source of the differences on the MIG slice. It changes the slice and the driver together (595.58.03 on the slice, 615.71.09 here), so it does not say which of the two is responsible.</p>
+<p>Llama-3.1-8B on a whole A100 is therefore supported through the CLI. This means that its example adapters run in all 27 modes, and that the 23 comparable modes reproduce the accepted outputs exactly for the decisions compared. In Horizon and WCST it means only that the modes run, because their accepted rows used published prompts. Nonliteral number needs <code>examples/llama8b_social_numeric_agent.py</code>. Support does not extend to MIG slices or to the other neural models, and this short pass does not repeat any whole task.</p>
+<h2>Not covered</h2>
+<p>Apart from the short passes above, these checks run reference policies through the original scorers. They do not repeat the five-model neural inference, do not acquire the gated inputs independently (the validation inputs were reused), and do not compare the Hugging Face template with accepted rows.</p>
+</main></body></html>

@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-10-27T18:06:24.511077+00:00",
+  "scope": {
+    "catalogue_tasks": 31,
+    "evaluated_tasks": 24,
+    "deferred_tasks": 7,
+    "domains": 10,
+    "open_models": 5,
+    "full_sample_task_model_cells": 120,
+    "cpu_reference_validation_tasks": 24,
+    "cpu_reference_validation_modes": 27,
+    "api_models": 4
+  },
+  "accepted_input_snapshots": [
+    "final_numeric_long_24_closeout_20261028.csv",
+    "final_metric_status_24_closeout_20261028.csv",
+    "FINAL_FIXED_SCOPE_COMPUTE_CLOSED_20261028.json",
+    "final_baseline_paper_artifacts_20261028/full_condition_scores.csv",
+    "task_catalog.json",
+    "selected_tasks_24.json",
+    "VALIDATION_24_STATUS.json",
+    "table2_values_20261030.json (main results table, paper commit 5a0f491)",
+    "runs/probes_20261028/analysis/paper_body_revision_20261029/TABLE2_COMPLETE_UNIFORM_INTEGRATION_20261029.json",
+    "runs/probes_20261028/analysis/paper_revision_b_20261029/EXISTING_REFERENCE_ROW_ALIGNMENT_20261029.json",
+    "runs/probes_20261028/analysis/paper_revision_b_20261029/EXISTING_BANDIT_REFERENCE_TARGET_ALIGNMENT_20261029.json"
+  ],
+  "counts": {
+    "private_numeric_rows": 9178,
+    "public_rows_from_private_numeric_table": 1830,
+    "gaussian_ts_condition_metric_rows_added": 16,
+    "public_result_rows": 1961,
+    "excluded_runtime_strata_rows": 7342,
+    "pending_protocol_rows_not_displayed_as_complete": 6,
+    "bandit_condition_download_rows": 88,
+    "metric_status_rows": 1080,
+    "public_value_status_counts": {
+      "finite": 1883,
+      "defined_positive_infinity": 16,
+      "undefined": 62
+    },
+    "public_models": {
+      "laya": 365,
+      "intern_decision_4b": 394,
+      "llama8b": 356,
+      "minitaur8b": 381,
+      "qwen35_4b": 339,
+      "gaussian_ts": 16,
+      "jev_1_14": 29,
+      "claude_opus_5_5": 27,
+      "claude_sonnet_5_5": 27,
+      "claude_haiku_5_5": 27
+    },
+    "table2_marker_rows": {
+      "n.a.": 23,
+      "canc.": 2,
+      "part.": 4,
+      "n.e.": 26,
+      "n.f.": 6
+    },
+    "table2_cells": 297
+  },
+  "export_rules": [
+    "Include every accepted task/experiment/condition aggregate in the numeric table regardless of outcome, sign, Infinity or undefined value.",
+    "Exclude fine-grained per-execution-file/input-session runtime strata from the public presentation bundle. Original private results are retained unchanged.",
+    "Pending protocol-resolution values are not labelled completed results; all pending availability fields remain in metric_status.json.",
+    "Add the accepted eight Gaussian Thompson conditions with reward and pseudo-regret. Preserve the separate disclosed classical-policy protocol.",
+    "Do not pool reward distributions, arm counts, horizons, native/sample interfaces, human prediction, event probability or autonomous return.",
+    "Retain original decimal text in value_raw and CSV; undefined is null, positive infinity is the string Infinity.",
+    "Remove original absolute runtime paths, host identifiers, GPU UUIDs, private logs and credential-bearing fields. Source-row identifiers and JSON pointers preserve mapping to the accepted private inventory.",
+    "No participant/trial responses, original transcripts, per-participant identifiers, gated data or model weights are included."
+  ],
+  "data_and_code_conditions": {
+    "code_license": "Original S1CogBench project software is MIT licensed. Third-party code, models and source data retain their original terms.",
+    "upstream_data": "Original provider terms apply independently. No blanket redistribution permission is asserted.",
+    "psych101_test": "Provider access/conditions required; not redistributed.",
+    "cpu_example": "400 newly generated urn queries using a pinned public CogBench source; analytical Bayes, no GPU or model weights.",
+    "remaining_acquisition": "python scripts/fetch_public_sources.py all fetches every public source at its pinned revision into the layout the loaders read. Psych-101-test stays gated at its provider, and Julia 1.4.1 is needed for Mouselab autonomous.",
+    "code_license_spdx": "MIT"
+  },
+  "files": [
+    "tasks.json",
+    "results.json",
+    "results.csv",
+    "bandit_condition_scores.csv",
+    "metric_status.json",
+    "result_schema.json",
+    "quickstart.md",
+    "grouping_guide.md",
+    "api_time_cost_per_target.csv",
+    "table2.csv",
+    "table2.json",
+    "minitaur_nonliteral_reparsed.csv",
+    "rlwm_curves.csv"
+  ],
+  "limitations": [
+    "120/120 means one full-sample accepted named protocol per selected task/model, not all modes or all metrics.",
+    "35 needs_protocol_resolution metric fields and one all-invalid undefined field remain explicit.",
+    "The 24-task/27-mode CPU execution check is not a rerun of five neural models or independent acquisition of gated data.",
+    "Runtime measurements have different hosts/interfaces and cannot be pooled into an unconditional speed leaderboard.",
+    "API rows keep the provider readout: native typed choice (Jev), generated FINAL line (Claude, human-NLL targets n.a.) or stated probabilities (Claude Haiku on four modes). They are not internal probabilities of open weights.",
+    "Nine Uniform values (autonomous modes) are analytic expectations that no single run reproduces."
+  ]
+}

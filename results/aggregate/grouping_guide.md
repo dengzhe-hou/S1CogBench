@@ -1,0 +1,13 @@
+# Browse results by their measurement context
+
+Start with task, then mode, metric, protocol and scope. Keep target, unit and aggregation visible. Only after this context is fixed should model rows appear together. A model selector may narrow the rows, but should not silently select a different protocol when a model is missing.
+
+Recommended comparison key is `task + protocol + mode + metric + metric_variant + scope + target + unit + aggregation`. Runtime additionally needs matching `runtime_context` and recorded timing notes. No rows should be pooled across modes or conditions to force an overall ranking. Distinct names in historical protocol records should remain distinct until an explicit scientific reconciliation is approved.
+
+A result table should expose the metric value, original value text, denominator `n`, aggregation, protocol and notes. `Infinity` is a real infinite NLL; display it without clipping. Undefined is a separate marker, never zero. The all-invalid Minitaur nonliteral-number MAE remains undefined; retain its invalid rate and denominator.
+
+Use `metric_status.json` for unavailable and not-applicable fields. `available_some_protocols` means the field has results for named protocols, not that all modes are complete. The 35 `needs_protocol_resolution` fields are not completed additional human-mode experiments. The 31-task catalogue retains seven deferred tasks alongside the 24 evaluated tasks. API rows (`model_access` api) keep their readout in `runtime_context.readout`; compare them with open-model rows only in the same context, and keep stated-probability cells apart from internal probabilities. The n of an API row is the aggregation denominator of its context, and `runtime_context.model_calls` counts its requests. A row of Table 3 can draw on different protocols, because each model keeps the readout it was accepted under; `table2.json` names the row behind each cell.
+
+`results.csv` contains the same public aggregate rows as `results.json`. `bandit_condition_scores.csv` retains all 88 original condition summaries, including all five models and eight Gaussian Thompson conditions. Reward-family, arm-count and horizon conditions remain separate; no cross-condition reward total is computed.
+
+Fine-grained timing strata tied to individual execution files/input sessions were omitted from this public presentation bundle, not removed from the private accepted evidence. Task/experiment/condition aggregate timings remain, including unfavorable values. All original transcripts, individual participant/trial records, GPU UUIDs and private runtime paths remain outside the public assets. The export decision never depends on whether a value is favorable.

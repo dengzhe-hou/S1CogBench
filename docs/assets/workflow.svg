@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="470" viewBox="0 0 1080 470" role="img" aria-label="From a pinned task source to a result row: fetch, check, smoke and evaluate, then three separate scoring targets, then result rows.">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; }
+      .title { font-size: 18px; font-weight: 700; fill: #172a42; }
+      .code { font-family: Consolas, Menlo, "Courier New", monospace; font-size: 13.5px; fill: #172a42; }
+      .detail { font-size: 14px; fill: #4b5563; }
+      .label { font-size: 14px; font-weight: 700; fill: #475569; }
+      .link { fill: none; stroke: #475569; stroke-width: 1.6; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1080" height="470" fill="#ffffff"/>
+
+  <g>
+    <rect x="30" y="24" width="236" height="104" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+    <rect x="30" y="24" width="6" height="104" rx="3" fill="#475569"/>
+    <text class="title" x="50" y="52">Fetch</text>
+    <text class="code" x="50" y="76">fetch_public_sources.py</text>
+    <text class="detail" x="50" y="100">Sources at pinned revisions.</text>
+    <text class="detail" x="50" y="119">Psych-101-test is gated.</text>
+
+    <rect x="290" y="24" width="236" height="104" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+    <rect x="290" y="24" width="6" height="104" rx="3" fill="#475569"/>
+    <text class="title" x="310" y="52">Check</text>
+    <text class="code" x="310" y="76">s1cogbench doctor</text>
+    <text class="detail" x="310" y="100">Which of the 27 modes can</text>
+    <text class="detail" x="310" y="119">run here, and why not.</text>
+
+    <rect x="550" y="24" width="236" height="104" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+    <rect x="550" y="24" width="6" height="104" rx="3" fill="#475569"/>
+    <text class="title" x="570" y="52">Smoke</text>
+    <text class="code" x="570" y="76">eval --smoke</text>
+    <text class="detail" x="570" y="100">A few adapter calls per mode,</text>
+    <text class="detail" x="570" y="119">compared with stored values.</text>
+
+    <rect x="810" y="24" width="240" height="104" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+    <rect x="810" y="24" width="6" height="104" rx="3" fill="#475569"/>
+    <text class="title" x="830" y="52">Evaluate</text>
+    <text class="code" x="830" y="76">eval --adapter my_agent.py</text>
+    <text class="detail" x="830" y="100">One process per task, through</text>
+    <text class="detail" x="830" y="119">the original runner and scorer.</text>
+
+    <line class="link" x1="266" y1="76" x2="288" y2="76"/>
+    <line class="link" x1="526" y1="76" x2="548" y2="76"/>
+    <line class="link" x1="786" y1="76" x2="808" y2="76"/>
+  </g>
+
+  <path class="link" d="M930 128 V146 H390 V162"/>
+
+  <rect x="24" y="164" width="736" height="290" rx="10" fill="none" stroke="#94a3b8" stroke-dasharray="5 5"/>
+  <text class="label" x="44" y="190">Three separate targets. Each task's original conditions and scoring are kept.</text>
+
+  <g>
+    <rect x="44" y="204" width="400" height="72" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+    <rect x="44" y="204" width="6" height="72" rx="3" fill="#2563eb"/>
+    <text class="title" x="64" y="232">Human-response prediction</text>
+    <text class="detail" x="64" y="256">The participant's own preceding history.</text>
+    <rect x="490" y="216" width="250" height="48" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text class="detail" x="508" y="245">NLL or report error</text>
+    <line class="link" x1="444" y1="240" x2="488" y2="240"/>
+
+    <rect x="44" y="288" width="400" height="72" rx="8" fill="#fffbeb" stroke="#fcd34d"/>
+    <rect x="44" y="288" width="6" height="72" rx="3" fill="#d69a12"/>
+    <text class="title" x="64" y="316">Autonomous execution</text>
+    <text class="detail" x="64" y="340">The model's own actions and feedback.</text>
+    <rect x="490" y="300" width="250" height="48" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text class="detail" x="508" y="329">Reward, accuracy, cost</text>
+    <line class="link" x1="444" y1="324" x2="488" y2="324"/>
+
+    <rect x="44" y="372" width="400" height="72" rx="8" fill="#fdf2f8" stroke="#f9a8d4"/>
+    <rect x="44" y="372" width="6" height="72" rx="3" fill="#db2777"/>
+    <text class="title" x="64" y="400">Event probability</text>
+    <text class="detail" x="64" y="424">A named event and its observed label.</text>
+    <rect x="490" y="384" width="250" height="48" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text class="detail" x="508" y="413">Brier where defined</text>
+    <line class="link" x1="444" y1="408" x2="488" y2="408"/>
+  </g>
+
+  <line class="link" x1="760" y1="309" x2="808" y2="309"/>
+  <g>
+    <rect x="810" y="204" width="240" height="210" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+    <rect x="810" y="204" width="6" height="210" rx="3" fill="#27834b"/>
+    <text class="title" x="830" y="232">Result rows</text>
+    <text class="code" x="830" y="258">results.csv</text>
+    <text class="code" x="830" y="278">results.json</text>
+    <text class="detail" x="830" y="310">One row per mode, with its</text>
+    <text class="detail" x="830" y="330">protocol, unit, denominator</text>
+    <text class="detail" x="830" y="350">and aggregation.</text>
+    <text class="detail" x="830" y="384">No pooled score.</text>
+  </g>
+</svg>

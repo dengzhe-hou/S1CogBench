@@ -1,0 +1,11 @@
+.venv*/
+__pycache__/
+*.pyc
+.env
+runs/
+models/
+data/
+external/
+.runtime/
+literature/
+.tools/

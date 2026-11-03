@@ -1,0 +1,2654 @@
+{
+ "description": "Table 3 with the row behind every cell. Written by scripts/build_table2.py from results.json and reference_results.json.",
+ "columns": [
+  "Uniform",
+  "Laya",
+  "Intern",
+  "Llama",
+  "Minitaur",
+  "Qwen",
+  "Jev",
+  "Opus",
+  "Sonnet",
+  "Haiku",
+  "Reference"
+ ],
+ "rows": [
+  {
+   "domain": "Evidence",
+   "table2_row": "Bayesian urn",
+   "mode_key": "bayesian_urn_inference",
+   "primary_target": "Posterior MAE",
+   "direction": "lower",
+   "reference_mark": "",
+   "reference_type": "optimal",
+   "cells": {
+    "Uniform": {
+     "printed": "0.349",
+     "file": "reference_results.json",
+     "row_id": "uniform-bayesian_urn_inference",
+     "value_raw": "0.34946797528825263",
+     "n": 400
+    },
+    "Laya": {
+     "printed": "0.291",
+     "file": "results.json",
+     "row_id": "v00009",
+     "value_raw": "0.29132085719423834",
+     "n": 400,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Intern": {
+     "printed": "0.235",
+     "file": "results.json",
+     "row_id": "v00020",
+     "value_raw": "0.23451563502271347",
+     "n": 400,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "0.240",
+     "file": "results.json",
+     "row_id": "v00031",
+     "value_raw": "0.24024652814285496",
+     "n": 400,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "0.294",
+     "file": "results.json",
+     "row_id": "v00042",
+     "value_raw": "0.2938360538345546",
+     "n": 400,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "0.246",
+     "file": "results.json",
+     "row_id": "v00053",
+     "value_raw": "0.24619969019819096",
+     "n": 400,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "0.068",
+     "file": "results.json",
+     "row_id": "a00001",
+     "value_raw": "0.0682182908004872",
+     "n": 400
+    },
+    "Opus": {
+     "printed": "0.001",
+     "file": "results.json",
+     "row_id": "a00002",
+     "value_raw": "0.000970842717169546",
+     "n": 400
+    },
+    "Sonnet": {
+     "printed": "0.001",
+     "file": "results.json",
+     "row_id": "a00003",
+     "value_raw": "0.000970842717169546",
+     "n": 400
+    },
+    "Haiku": {
+     "printed": "0.001",
+     "file": "results.json",
+     "row_id": "a00004",
+     "value_raw": "0.000970842717169546",
+     "n": 400
+    },
+    "Reference": {
+     "printed": "0.000",
+     "file": "reference_results.json",
+     "row_id": "bayesian_urn_analytic-posterior_mae",
+     "value_raw": "0.0",
+     "n": 400
+    }
+   }
+  },
+  {
+   "domain": "Evidence",
+   "table2_row": "Multiple-cue judgment",
+   "mode_key": "multiple_cue_judgment",
+   "primary_target": "Human NLL",
+   "direction": "lower",
+   "reference_mark": "",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "2.197",
+     "file": "reference_results.json",
+     "row_id": "uniform-multiple_cue_judgment",
+     "value_raw": "2.1972245773362196",
+     "n": 6136
+    },
+    "Laya": {
+     "printed": "2.342",
+     "file": "results.json",
+     "row_id": "v00076",
+     "value_raw": "2.342446202205846",
+     "n": 6136,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "1.570",
+     "file": "results.json",
+     "row_id": "v00151",
+     "value_raw": "1.5695519909272746",
+     "n": 6136,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "2.687",
+     "file": "results.json",
+     "row_id": "v00241",
+     "value_raw": "2.686880864933173",
+     "n": 6136,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Minitaur": {
+     "printed": "1.984",
+     "file": "results.json",
+     "row_id": "v00294",
+     "value_raw": "1.9835823332846132",
+     "n": 6136,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "3.012",
+     "file": "results.json",
+     "row_id": "v00349",
+     "value_raw": "3.0120727126354185",
+     "n": 6136,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Jev": {
+     "printed": "+∞",
+     "file": "results.json",
+     "row_id": "a00005",
+     "value_raw": "Infinity",
+     "n": 6136
+    },
+    "Opus": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00006",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00007",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00008",
+     "value_raw": "",
+     "n": null
+    },
+    "Reference": {
+     "printed": "2.029",
+     "file": "reference_results.json",
+     "row_id": "mcpl-overall-test-nll",
+     "value_raw": "2.0290877869005786",
+     "n": 6136
+    }
+   }
+  },
+  {
+   "domain": "Evidence",
+   "table2_row": "Multi-attribute choice",
+   "mode_key": "multi_attribute_choice",
+   "primary_target": "Human NLL",
+   "direction": "lower",
+   "reference_mark": "†",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "0.693",
+     "file": "reference_results.json",
+     "row_id": "uniform-multi_attribute_choice",
+     "value_raw": "0.6931471805599453",
+     "n": 576
+    },
+    "Laya": {
+     "printed": "0.730",
+     "file": "results.json",
+     "row_id": "v00386",
+     "value_raw": "0.7297495561754554",
+     "n": 576,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "0.546",
+     "file": "results.json",
+     "row_id": "v00394",
+     "value_raw": "0.5456727505555088",
+     "n": 576,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "0.786",
+     "file": "results.json",
+     "row_id": "v00402",
+     "value_raw": "0.7856294671769466",
+     "n": 576,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Minitaur": {
+     "printed": "0.722",
+     "file": "results.json",
+     "row_id": "v00410",
+     "value_raw": "0.7220688128806454",
+     "n": 576,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Qwen": {
+     "printed": "0.613",
+     "file": "results.json",
+     "row_id": "v00418",
+     "value_raw": "0.6126204280717138",
+     "n": 576,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "0.329",
+     "file": "results.json",
+     "row_id": "a00009",
+     "value_raw": "0.3291398970428249",
+     "n": 576
+    },
+    "Opus": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00010",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00011",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "0.206s",
+     "file": "results.json",
+     "row_id": "a00012",
+     "value_raw": "0.2055455720779773",
+     "n": 576
+    },
+    "Reference": {
+     "printed": "0.192",
+     "file": "reference_results.json",
+     "row_id": "multi_attribute_wadd-typed_choice_mean_nll",
+     "value_raw": "0.19221569848548428",
+     "n": 576
+    }
+   }
+  },
+  {
+   "domain": "Evidence",
+   "table2_row": "Probability coherence",
+   "mode_key": "probability_coherence_judgment",
+   "primary_target": "Human MAE (pp)",
+   "direction": "lower",
+   "reference_mark": "¶",
+   "reference_type": "human",
+   "cells": {
+    "Uniform": {
+     "printed": "32.13",
+     "file": "reference_results.json",
+     "row_id": "uniform-probability_coherence_judgment",
+     "value_raw": "32.13385253159464",
+     "n": 2460
+    },
+    "Laya": {
+     "printed": "32.98",
+     "file": "results.json",
+     "row_id": "v00432",
+     "value_raw": "32.97560975609756",
+     "n": 2460,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "18.95",
+     "file": "results.json",
+     "row_id": "final20261028_130",
+     "value_raw": "18.945528455284553",
+     "n": 2460,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "28.57",
+     "file": "results.json",
+     "row_id": "final20261028_140",
+     "value_raw": "28.567073170731707",
+     "n": 2460,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "19.04",
+     "file": "results.json",
+     "row_id": "final20261028_150",
+     "value_raw": "19.04471544715447",
+     "n": 2460,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "21.87",
+     "file": "results.json",
+     "row_id": "final20261028_160",
+     "value_raw": "21.86869918699187",
+     "n": 2460,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "17.66",
+     "file": "results.json",
+     "row_id": "a00013",
+     "value_raw": "17.65569105691057",
+     "n": 2460
+    },
+    "Opus": {
+     "printed": "canc.",
+     "file": "results.json",
+     "row_id": "a00014",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "canc.",
+     "file": "results.json",
+     "row_id": "a00015",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "part.",
+     "file": "results.json",
+     "row_id": "a00016",
+     "value_raw": "",
+     "n": null
+    },
+    "Reference": {
+     "printed": "16.54",
+     "file": "reference_results.json",
+     "row_id": "probability_coherence_reference_20261030-mean_numeric_absolute_error",
+     "value_raw": "16.541056910569107",
+     "n": 2460
+    }
+   }
+  },
+  {
+   "domain": "Category",
+   "table2_row": "SHJ categories",
+   "mode_key": "shj_category_learning",
+   "primary_target": "Accuracy (%)",
+   "direction": "higher",
+   "reference_mark": "†",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "50.0",
+     "file": "reference_results.json",
+     "row_id": "uniform-shj_category_learning",
+     "value_raw": "0.5",
+     "n": 3664
+    },
+    "Laya": {
+     "printed": "50.0",
+     "file": "results.json",
+     "row_id": "v00437",
+     "value_raw": "0.49972707423580787",
+     "n": 3664,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "65.0",
+     "file": "results.json",
+     "row_id": "v00445",
+     "value_raw": "0.6498362445414847",
+     "n": 3664,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "52.9",
+     "file": "results.json",
+     "row_id": "v00453",
+     "value_raw": "0.5286572052401747",
+     "n": 3664,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "54.5",
+     "file": "results.json",
+     "row_id": "v00461",
+     "value_raw": "0.5453056768558951",
+     "n": 3664,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "71.3",
+     "file": "results.json",
+     "row_id": "v00469",
+     "value_raw": "0.712882096069869",
+     "n": 3664,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "87.4",
+     "file": "results.json",
+     "row_id": "a00017",
+     "value_raw": "0.8741812227074236",
+     "n": 3664
+    },
+    "Opus": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00018",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00019",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "91.2",
+     "file": "results.json",
+     "row_id": "a00020",
+     "value_raw": "0.9123908296943232",
+     "n": 3664
+    },
+    "Reference": {
+     "printed": "93.8",
+     "file": "reference_results.json",
+     "row_id": "shj_gcm-category_accuracy_under_human_history",
+     "value_raw": "0.9383187772925764",
+     "n": 3664
+    }
+   }
+  },
+  {
+   "domain": "Category",
+   "table2_row": "Medin categories",
+   "mode_key": "medin_category_learning",
+   "primary_target": "Accuracy (%)",
+   "direction": "higher",
+   "reference_mark": "†",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "50.0",
+     "file": "reference_results.json",
+     "row_id": "uniform-medin_category_learning",
+     "value_raw": "0.5",
+     "n": 6300
+    },
+    "Laya": {
+     "printed": "49.6",
+     "file": "results.json",
+     "row_id": "v00477",
+     "value_raw": "0.49603174603174605",
+     "n": 6300,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "72.3",
+     "file": "results.json",
+     "row_id": "v00508",
+     "value_raw": "0.7225396825396826",
+     "n": 6300,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "53.5",
+     "file": "results.json",
+     "row_id": "v00539",
+     "value_raw": "0.5349206349206349",
+     "n": 6300,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "55.9",
+     "file": "results.json",
+     "row_id": "v00570",
+     "value_raw": "0.5585714285714286",
+     "n": 6300,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "53.8",
+     "file": "results.json",
+     "row_id": "v00601",
+     "value_raw": "0.5377777777777778",
+     "n": 6300,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "86.8",
+     "file": "results.json",
+     "row_id": "a00021",
+     "value_raw": "0.8680952380952381",
+     "n": 6300
+    },
+    "Opus": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00022",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00023",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "97.4",
+     "file": "results.json",
+     "row_id": "a00024",
+     "value_raw": "0.9741269841269842",
+     "n": 6300
+    },
+    "Reference": {
+     "printed": "96.6",
+     "file": "reference_results.json",
+     "row_id": "medin_gcm-objective_label_accuracy_under_human_history",
+     "value_raw": "0.9661904761904762",
+     "n": 6300
+    }
+   }
+  },
+  {
+   "domain": "Category",
+   "table2_row": "Weather prediction",
+   "mode_key": "weather_prediction",
+   "primary_target": "Accuracy (%)",
+   "direction": "higher",
+   "reference_mark": "†",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "50.0",
+     "file": "reference_results.json",
+     "row_id": "uniform-weather_prediction",
+     "value_raw": "0.5",
+     "n": 400
+    },
+    "Laya": {
+     "printed": "54.5",
+     "file": "results.json",
+     "row_id": "v00632",
+     "value_raw": "0.545",
+     "n": 400,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Intern": {
+     "printed": "73.0",
+     "file": "results.json",
+     "row_id": "v00644",
+     "value_raw": "0.73",
+     "n": 400,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "47.5",
+     "file": "results.json",
+     "row_id": "v00656",
+     "value_raw": "0.475",
+     "n": 400,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Minitaur": {
+     "printed": "53.8",
+     "file": "results.json",
+     "row_id": "v00668",
+     "value_raw": "0.5375",
+     "n": 400,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "50.5",
+     "file": "results.json",
+     "row_id": "v00680",
+     "value_raw": "0.505",
+     "n": 400,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "80.8",
+     "file": "results.json",
+     "row_id": "a00025",
+     "value_raw": "0.8075",
+     "n": 400
+    },
+    "Opus": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00026",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00027",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "80.2",
+     "file": "results.json",
+     "row_id": "a00028",
+     "value_raw": "0.8025",
+     "n": 400
+    },
+    "Reference": {
+     "printed": "78.2",
+     "file": "reference_results.json",
+     "row_id": "weather_gcm-objective_label_accuracy_under_human_history",
+     "value_raw": "0.7825",
+     "n": 400
+    }
+   }
+  },
+  {
+   "domain": "History",
+   "table2_row": "RLWM",
+   "mode_key": "rlwm",
+   "primary_target": "Accuracy (%)",
+   "direction": "higher",
+   "reference_mark": "§",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "33.3",
+     "file": "reference_results.json",
+     "row_id": "uniform-rlwm",
+     "value_raw": "0.3333333333333333",
+     "n": 52911
+    },
+    "Laya": {
+     "printed": "34.9",
+     "file": "results.json",
+     "row_id": "v00693",
+     "value_raw": "0.34850976167526604",
+     "n": 52911,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Intern": {
+     "printed": "77.8",
+     "file": "results.json",
+     "row_id": "v00703",
+     "value_raw": "0.7779478747330423",
+     "n": 52911,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "41.7",
+     "file": "results.json",
+     "row_id": "new_rlwm_llama8b_full_2",
+     "value_raw": "0.417455727542477",
+     "n": 52911,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "49.0",
+     "file": "results.json",
+     "row_id": "final20261028_72",
+     "value_raw": "0.4902194250722912",
+     "n": 52911,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "59.3",
+     "file": "results.json",
+     "row_id": "v00713",
+     "value_raw": "0.5931847819924023",
+     "n": 52911,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "89.5",
+     "file": "results.json",
+     "row_id": "a00029",
+     "value_raw": "0.8946154863827938",
+     "n": 52911
+    },
+    "Opus": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00030",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00031",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "89.4",
+     "file": "results.json",
+     "row_id": "a00032",
+     "value_raw": "0.8939728978851279",
+     "n": 52911
+    },
+    "Reference": {
+     "printed": "89.3",
+     "file": "reference_results.json",
+     "row_id": "rlwm-M9-argmax-accuracy",
+     "value_raw": "0.893368108710854",
+     "n": 52911
+    }
+   }
+  },
+  {
+   "domain": "History",
+   "table2_row": "Recent probes",
+   "mode_key": "recent_probes",
+   "primary_target": "Accuracy (%)",
+   "direction": "higher",
+   "reference_mark": "†",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "50.0",
+     "file": "reference_results.json",
+     "row_id": "uniform-recent_probes",
+     "value_raw": "0.5",
+     "n": 3774
+    },
+    "Laya": {
+     "printed": "49.7",
+     "file": "results.json",
+     "row_id": "v00722",
+     "value_raw": "0.4970853206147324",
+     "n": 3774,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "82.1",
+     "file": "results.json",
+     "row_id": "v00734",
+     "value_raw": "0.8208797032326444",
+     "n": 3774,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "55.6",
+     "file": "results.json",
+     "row_id": "v00746",
+     "value_raw": "0.555908850026497",
+     "n": 3774,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "49.5",
+     "file": "results.json",
+     "row_id": "v00758",
+     "value_raw": "0.49470058293587704",
+     "n": 3774,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Qwen": {
+     "printed": "53.5",
+     "file": "results.json",
+     "row_id": "v00770",
+     "value_raw": "0.5349761526232114",
+     "n": 3774,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "99.0",
+     "file": "results.json",
+     "row_id": "a00033",
+     "value_raw": "0.9904610492845787",
+     "n": 3774
+    },
+    "Opus": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00034",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00035",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "100.0",
+     "file": "results.json",
+     "row_id": "a00036",
+     "value_raw": "1.0",
+     "n": 3774
+    },
+    "Reference": {
+     "printed": "100.0",
+     "file": "reference_results.json",
+     "row_id": "recent_probes_rational-objective_label_accuracy_under_human_history",
+     "value_raw": "1.0",
+     "n": 3774
+    }
+   }
+  },
+  {
+   "domain": "Adaptation",
+   "table2_row": "WCST, prediction",
+   "mode_key": "wcst:human_predictive",
+   "primary_target": "Human NLL",
+   "direction": "lower",
+   "reference_mark": "",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "1.386",
+     "file": "reference_results.json",
+     "row_id": "uniform-wcst-human_predictive",
+     "value_raw": "1.3862943611198906",
+     "n": 75
+    },
+    "Laya": {
+     "printed": "1.462",
+     "file": "results.json",
+     "row_id": "v00788",
+     "value_raw": "1.4615976053331359",
+     "n": 75,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "1.378",
+     "file": "results.json",
+     "row_id": "final20261028_19",
+     "value_raw": "1.3780772077330319",
+     "n": 75,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "1.431",
+     "file": "results.json",
+     "row_id": "v00810",
+     "value_raw": "1.4307050334551046",
+     "n": 75,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Minitaur": {
+     "printed": "1.344",
+     "file": "results.json",
+     "row_id": "v00834",
+     "value_raw": "1.3435348184735838",
+     "n": 75,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "1.968",
+     "file": "results.json",
+     "row_id": "final20261028_61",
+     "value_raw": "1.9677260157375163",
+     "n": 75,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Jev": {
+     "printed": "1.543",
+     "file": "results.json",
+     "row_id": "a00037",
+     "value_raw": "1.5433271104448631",
+     "n": 75
+    },
+    "Opus": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00038",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00039",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00040",
+     "value_raw": "",
+     "n": null
+    },
+    "Reference": {
+     "printed": "0.840",
+     "file": "reference_results.json",
+     "row_id": "wcst-sl-2-human_nll",
+     "value_raw": "0.8402",
+     "n": 75
+    }
+   }
+  },
+  {
+   "domain": "Adaptation",
+   "table2_row": "WCST, autonomous",
+   "mode_key": "wcst:autonomous_generative",
+   "primary_target": "Accuracy (%)",
+   "direction": "higher",
+   "reference_mark": "",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "25.0",
+     "file": "reference_results.json",
+     "row_id": "uniform-wcst-autonomous_generative",
+     "value_raw": "0.25",
+     "n": 75
+    },
+    "Laya": {
+     "printed": "25.5",
+     "file": "results.json",
+     "row_id": "v00782",
+     "value_raw": "0.25468547878350717",
+     "n": 75,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Intern": {
+     "printed": "27.9",
+     "file": "results.json",
+     "row_id": "final20261028_15",
+     "value_raw": "0.27895815104761945",
+     "n": 75,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "31.4",
+     "file": "results.json",
+     "row_id": "v00804",
+     "value_raw": "0.3139030190672591",
+     "n": 75,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "28.2",
+     "file": "results.json",
+     "row_id": "v00828",
+     "value_raw": "0.28155142111511694",
+     "n": 75,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "25.2",
+     "file": "results.json",
+     "row_id": "final20261028_57",
+     "value_raw": "0.25195673566592697",
+     "n": 75,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "28.5",
+     "file": "results.json",
+     "row_id": "a00041",
+     "value_raw": "0.28498473191859414",
+     "n": 75
+    },
+    "Opus": {
+     "printed": "n.f.",
+     "file": "results.json",
+     "row_id": "a00042",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.f.",
+     "file": "results.json",
+     "row_id": "a00043",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "n.f.",
+     "file": "results.json",
+     "row_id": "a00044",
+     "value_raw": "",
+     "n": null
+    },
+    "Reference": {
+     "printed": "48.9",
+     "file": "reference_results.json",
+     "row_id": "wcst-sl-3-objective_accuracy",
+     "value_raw": "0.4892",
+     "n": 75
+    }
+   }
+  },
+  {
+   "domain": "Adaptation",
+   "table2_row": "Restless bandit",
+   "mode_key": "nonstationary_bandit",
+   "primary_target": "Better arm (%)",
+   "direction": "higher",
+   "reference_mark": "∗",
+   "reference_type": "algorithm",
+   "cells": {
+    "Uniform": {
+     "printed": "50.0",
+     "file": "reference_results.json",
+     "row_id": "uniform-nonstationary_bandit",
+     "value_raw": "0.5",
+     "n": 800
+    },
+    "Laya": {
+     "printed": "55.4",
+     "file": "results.json",
+     "row_id": "v00852",
+     "value_raw": "0.5537500000000001",
+     "n": 800,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Intern": {
+     "printed": "65.6",
+     "file": "results.json",
+     "row_id": "v00863",
+     "value_raw": "0.6562499999999999",
+     "n": 800,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "57.1",
+     "file": "results.json",
+     "row_id": "v00874",
+     "value_raw": "0.57125",
+     "n": 800,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "49.0",
+     "file": "results.json",
+     "row_id": "v00885",
+     "value_raw": "0.48999999999999994",
+     "n": 800,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Qwen": {
+     "printed": "50.5",
+     "file": "results.json",
+     "row_id": "v00896",
+     "value_raw": "0.505",
+     "n": 800,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "63.9",
+     "file": "results.json",
+     "row_id": "a00045",
+     "value_raw": "0.63875",
+     "n": 800
+    },
+    "Opus": {
+     "printed": "part.",
+     "file": "results.json",
+     "row_id": "a00046",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "91.1",
+     "file": "results.json",
+     "row_id": "a00047",
+     "value_raw": "0.91125",
+     "n": 800
+    },
+    "Haiku": {
+     "printed": "part.",
+     "file": "results.json",
+     "row_id": "a00048",
+     "value_raw": "",
+     "n": null
+    },
+    "Reference": {
+     "printed": "68.8",
+     "file": "reference_results.json",
+     "row_id": "restless_qlearning-accuracy_post_step_original",
+     "value_raw": "0.6875",
+     "n": 800
+    }
+   }
+  },
+  {
+   "domain": "Adaptation",
+   "table2_row": "Instrumental learning",
+   "mode_key": "instrumental_learning",
+   "primary_target": "Better arm (%)",
+   "direction": "higher",
+   "reference_mark": "¶",
+   "reference_type": "algorithm",
+   "cells": {
+    "Uniform": {
+     "printed": "75.0",
+     "file": "reference_results.json",
+     "row_id": "uniform-instrumental_learning",
+     "value_raw": "0.75",
+     "n": 960
+    },
+    "Laya": {
+     "printed": "73.9",
+     "file": "results.json",
+     "row_id": "new_saved_20_accuracy",
+     "value_raw": "0.7385416666666667",
+     "n": 960,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "81.4",
+     "file": "results.json",
+     "row_id": "new_saved_21_accuracy",
+     "value_raw": "0.8135416666666667",
+     "n": 960,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "79.2",
+     "file": "results.json",
+     "row_id": "new_saved_22_accuracy",
+     "value_raw": "0.7916666666666666",
+     "n": 960,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "86.7",
+     "file": "results.json",
+     "row_id": "new_saved_23_accuracy",
+     "value_raw": "0.8666666666666667",
+     "n": 960,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "80.0",
+     "file": "results.json",
+     "row_id": "new_saved_24_accuracy",
+     "value_raw": "0.8",
+     "n": 960,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "86.7",
+     "file": "results.json",
+     "row_id": "a00049",
+     "value_raw": "0.8666666666666667",
+     "n": 960
+    },
+    "Opus": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00050",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00051",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "part.",
+     "file": "results.json",
+     "row_id": "a00052",
+     "value_raw": "",
+     "n": null
+    },
+    "Reference": {
+     "printed": "94.9",
+     "file": "reference_results.json",
+     "row_id": "instrumental_learning_reference_20261030-original_latent_mean_optimal_action_rate",
+     "value_raw": "0.9489583333333333",
+     "n": 960
+    }
+   }
+  },
+  {
+   "domain": "Exploration",
+   "table2_row": "Horizon, prediction",
+   "mode_key": "horizon:human_predictive",
+   "primary_target": "Human NLL",
+   "direction": "lower",
+   "reference_mark": "",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "0.693",
+     "file": "reference_results.json",
+     "row_id": "uniform-horizon-human_predictive",
+     "value_raw": "0.6931471805599453",
+     "n": 6720
+    },
+    "Laya": {
+     "printed": "0.702",
+     "file": "results.json",
+     "row_id": "v00933",
+     "value_raw": "0.7022374780763286",
+     "n": 6720,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "0.518",
+     "file": "results.json",
+     "row_id": "v00939",
+     "value_raw": "0.5178796649816175",
+     "n": 6720,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "0.503",
+     "file": "results.json",
+     "row_id": "v00944",
+     "value_raw": "0.5031625522657853",
+     "n": 6720,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "0.409",
+     "file": "results.json",
+     "row_id": "v00948",
+     "value_raw": "0.4093538186756058",
+     "n": 6720,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "0.661",
+     "file": "results.json",
+     "row_id": "v00952",
+     "value_raw": "0.6613339370488202",
+     "n": 6720,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "0.414",
+     "file": "results.json",
+     "row_id": "a00053",
+     "value_raw": "0.41409505415082937",
+     "n": 6720
+    },
+    "Opus": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00054",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00055",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "0.390s",
+     "file": "results.json",
+     "row_id": "a00056",
+     "value_raw": "0.38981806508734024",
+     "n": 6720
+    },
+    "Reference": {
+     "printed": "0.400",
+     "file": "reference_results.json",
+     "row_id": "rw3-heldout-legal-nll",
+     "value_raw": "0.400188875690336",
+     "n": 6720
+    }
+   }
+  },
+  {
+   "domain": "Exploration",
+   "table2_row": "Horizon, autonomous",
+   "mode_key": "horizon:autonomous_generative",
+   "primary_target": "Optimal (%)",
+   "direction": "higher",
+   "reference_mark": "",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "50.0",
+     "file": "reference_results.json",
+     "row_id": "uniform-horizon-autonomous_generative",
+     "value_raw": "0.5",
+     "n": 34720
+    },
+    "Laya": {
+     "printed": "54.8",
+     "file": "results.json",
+     "row_id": "new_saved_25_accuracy",
+     "value_raw": "0.5479838709677419",
+     "n": 34720,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Intern": {
+     "printed": "78.7",
+     "file": "results.json",
+     "row_id": "final20261028_7630",
+     "value_raw": "0.786520737327189",
+     "n": 34720,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "66.4",
+     "file": "results.json",
+     "row_id": "new_saved_26_accuracy",
+     "value_raw": "0.6644009216589861",
+     "n": 34720,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "71.7",
+     "file": "results.json",
+     "row_id": "new_saved_27_accuracy",
+     "value_raw": "0.7165322580645161",
+     "n": 34720,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "63.3",
+     "file": "results.json",
+     "row_id": "final20261028_7633",
+     "value_raw": "0.6325460829493088",
+     "n": 34720,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "82.9",
+     "file": "results.json",
+     "row_id": "a00057",
+     "value_raw": "0.8290610599078341",
+     "n": 34720
+    },
+    "Opus": {
+     "printed": "n.f.",
+     "file": "results.json",
+     "row_id": "a00058",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.f.",
+     "file": "results.json",
+     "row_id": "a00059",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "n.f.",
+     "file": "results.json",
+     "row_id": "a00060",
+     "value_raw": "",
+     "n": null
+    },
+    "Reference": {
+     "printed": "74.6",
+     "file": "reference_results.json",
+     "row_id": "rw3-autonomous-optimal_action_rate",
+     "value_raw": "0.7459389400921659",
+     "n": 34720
+    }
+   }
+  },
+  {
+   "domain": "Exploration",
+   "table2_row": "Stationary bandits",
+   "mode_key": "stationary_multiarmed_bandit",
+   "primary_target": "Optimal arm (%)",
+   "direction": "higher",
+   "reference_mark": "†",
+   "reference_type": "algorithm",
+   "cells": {
+    "Uniform": {
+     "printed": "12.5",
+     "file": "reference_results.json",
+     "row_id": "uniform-stationary_multiarmed_bandit",
+     "value_raw": "0.125",
+     "n": 312000
+    },
+    "Laya": {
+     "printed": "17.6",
+     "file": "results.json",
+     "row_id": "new_saved_28_accuracy",
+     "value_raw": "0.17592628205128205",
+     "n": 312000,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Intern": {
+     "printed": "37.4",
+     "file": "results.json",
+     "row_id": "cpuclose20261028_70",
+     "value_raw": "0.3736025641025641",
+     "n": 312000,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "13.5",
+     "file": "results.json",
+     "row_id": "new_saved_29_accuracy",
+     "value_raw": "0.1354198717948718",
+     "n": 312000,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "9.8",
+     "file": "results.json",
+     "row_id": "new_saved_30_accuracy",
+     "value_raw": "0.09756730769230769",
+     "n": 312000,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Qwen": {
+     "printed": "28.9",
+     "file": "results.json",
+     "row_id": "cpuclose20261028_106",
+     "value_raw": "0.2890641025641026",
+     "n": 312000,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "47.0",
+     "file": "results.json",
+     "row_id": "a00061",
+     "value_raw": "0.47033974358974356",
+     "n": 312000
+    },
+    "Opus": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00062",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00063",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00064",
+     "value_raw": "",
+     "n": null
+    },
+    "Reference": {
+     "printed": "68.1",
+     "file": "reference_results.json",
+     "row_id": "stationary_thompson_family-accuracy",
+     "value_raw": "0.6809038461538461",
+     "n": 312000
+    }
+   }
+  },
+  {
+   "domain": "Information",
+   "table2_row": "Hybrid sampling",
+   "mode_key": "hybrid_information_sampling",
+   "primary_target": "Human NLL",
+   "direction": "lower",
+   "reference_mark": "‡",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "1.386",
+     "file": "reference_results.json",
+     "row_id": "uniform-hybrid_information_sampling",
+     "value_raw": "1.3862943611198906",
+     "n": 163135
+    },
+    "Laya": {
+     "printed": "1.390",
+     "file": "results.json",
+     "row_id": "v01103",
+     "value_raw": "1.3904522286236622",
+     "n": 163135,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "1.116",
+     "file": "results.json",
+     "row_id": "v01107",
+     "value_raw": "1.116183035166427",
+     "n": 163135,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "1.515",
+     "file": "results.json",
+     "row_id": "v01111",
+     "value_raw": "1.5145696256504524",
+     "n": 163135,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Minitaur": {
+     "printed": "1.039",
+     "file": "results.json",
+     "row_id": "v01115",
+     "value_raw": "1.0390852905973533",
+     "n": 163135,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "2.648",
+     "file": "results.json",
+     "row_id": "v01119",
+     "value_raw": "2.6484975085989992",
+     "n": 163135,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Jev": {
+     "printed": "+∞",
+     "file": "results.json",
+     "row_id": "a00065",
+     "value_raw": "Infinity",
+     "n": 163135
+    },
+    "Opus": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00066",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00067",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00068",
+     "value_raw": "",
+     "n": null
+    },
+    "Reference": {
+     "printed": "0.264",
+     "file": "reference_results.json",
+     "row_id": "hybrid-ann-human_nll",
+     "value_raw": "0.2639591167960235",
+     "n": 20
+    }
+   }
+  },
+  {
+   "domain": "Information",
+   "table2_row": "Mouselab, prediction",
+   "mode_key": "mouselab_tree:human_predictive",
+   "primary_target": "Human NLL",
+   "direction": "lower",
+   "reference_mark": "‡",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "1.634",
+     "file": "reference_results.json",
+     "row_id": "uniform-mouselab_tree-human_predictive",
+     "value_raw": "1.6336348460418304",
+     "n": 20363
+    },
+    "Laya": {
+     "printed": "1.717",
+     "file": "results.json",
+     "row_id": "v01122",
+     "value_raw": "1.716724620391506",
+     "n": 20363,
+     "best_open": true,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "2.109",
+     "file": "results.json",
+     "row_id": "v01130",
+     "value_raw": "2.1092053428276376",
+     "n": 20363,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Llama": {
+     "printed": "2.743",
+     "file": "results.json",
+     "row_id": "v01133",
+     "value_raw": "2.7433772285300697",
+     "n": 20363,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Minitaur": {
+     "printed": "2.125",
+     "file": "results.json",
+     "row_id": "v01140",
+     "value_raw": "2.1248951951577566",
+     "n": 20363,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Qwen": {
+     "printed": "2.464",
+     "file": "results.json",
+     "row_id": "v01147",
+     "value_raw": "2.4637485369829424",
+     "n": 20363,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Jev": {
+     "printed": "1.458",
+     "file": "results.json",
+     "row_id": "a00069",
+     "value_raw": "1.4575866455484785",
+     "n": 20363
+    },
+    "Opus": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00070",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00071",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00072",
+     "value_raw": "",
+     "n": null
+    },
+    "Reference": {
+     "printed": "1.367",
+     "file": "reference_results.json",
+     "row_id": "mouselab-metagreedy-2",
+     "value_raw": "1.3670",
+     "n": 20363
+    }
+   }
+  },
+  {
+   "domain": "Information",
+   "table2_row": "Mouselab, autonomous",
+   "mode_key": "mouselab_tree:autonomous_generative",
+   "primary_target": "Expected return",
+   "direction": "higher",
+   "reference_mark": "∗",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "7.01",
+     "file": "reference_results.json",
+     "row_id": "uniform-mouselab_tree-autonomous_generative",
+     "value_raw": "7.007757929108834",
+     "n": 23750
+    },
+    "Laya": {
+     "printed": "0.00",
+     "file": "results.json",
+     "row_id": "v01129",
+     "value_raw": "0.0",
+     "n": 23750,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "0.00",
+     "file": "results.json",
+     "row_id": "final20261028_7622",
+     "value_raw": "0.0",
+     "n": 23750,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Llama": {
+     "printed": "3.77",
+     "file": "results.json",
+     "row_id": "v01139",
+     "value_raw": "3.7658947368421054",
+     "n": 23750,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Minitaur": {
+     "printed": "0.00",
+     "file": "results.json",
+     "row_id": "v01146",
+     "value_raw": "0.0",
+     "n": 23750,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Qwen": {
+     "printed": "17.40",
+     "file": "results.json",
+     "row_id": "final20261028_7626",
+     "value_raw": "17.40063157894737",
+     "n": 23750,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "8.21",
+     "file": "results.json",
+     "row_id": "a00073",
+     "value_raw": "8.213684210526315",
+     "n": 23750
+    },
+    "Opus": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00074",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00075",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00076",
+     "value_raw": "",
+     "n": null
+    },
+    "Reference": {
+     "printed": "11.77",
+     "file": "reference_results.json",
+     "row_id": "mouselab_metagreedy_autonomous-mean_terminal_expected_reward",
+     "value_raw": "11.77221052631579",
+     "n": 23750
+    }
+   }
+  },
+  {
+   "domain": "Preference",
+   "table2_row": "BART",
+   "mode_key": "bart",
+   "primary_target": "Mean reward",
+   "direction": "higher",
+   "reference_mark": "¶",
+   "reference_type": "algorithm",
+   "cells": {
+    "Uniform": {
+     "printed": "0.84",
+     "file": "reference_results.json",
+     "row_id": "uniform-bart",
+     "value_raw": "0.8377278646682195",
+     "n": 900
+    },
+    "Laya": {
+     "printed": "0.00",
+     "file": "results.json",
+     "row_id": "v01175",
+     "value_raw": "0.0044444444444444444",
+     "n": 900,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "0.74",
+     "file": "results.json",
+     "row_id": "v01179",
+     "value_raw": "0.7422222222222222",
+     "n": 900,
+     "best_open": true,
+     "not_better_than_uniform": true
+    },
+    "Llama": {
+     "printed": "0.28",
+     "file": "results.json",
+     "row_id": "v01183",
+     "value_raw": "0.2811111111111111",
+     "n": 900,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Minitaur": {
+     "printed": "0.00",
+     "file": "results.json",
+     "row_id": "v01187",
+     "value_raw": "0.0",
+     "n": 900,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Qwen": {
+     "printed": "0.00",
+     "file": "results.json",
+     "row_id": "v01191",
+     "value_raw": "0.0",
+     "n": 900,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Jev": {
+     "printed": "1.76",
+     "file": "results.json",
+     "row_id": "a00077",
+     "value_raw": "1.761111111111111",
+     "n": 900
+    },
+    "Opus": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00078",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00079",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "6.27",
+     "file": "results.json",
+     "row_id": "a00080",
+     "value_raw": "6.27",
+     "n": 900
+    },
+    "Reference": {
+     "printed": "10.49",
+     "file": "reference_results.json",
+     "row_id": "bart_reference_20261030-mean_reward",
+     "value_raw": "10.493333333333334",
+     "n": 900
+    }
+   }
+  },
+  {
+   "domain": "Preference",
+   "table2_row": "Temporal discounting",
+   "mode_key": "temporal_discounting",
+   "primary_target": "Delayed reward (%)",
+   "direction": "",
+   "reference_mark": "¶",
+   "reference_type": "human",
+   "cells": {
+    "Uniform": {
+     "printed": "50.0",
+     "file": "reference_results.json",
+     "row_id": "uniform-temporal_discounting",
+     "value_raw": "0.5",
+     "n": null
+    },
+    "Laya": {
+     "printed": "0.0",
+     "file": "results.json",
+     "row_id": "t00001",
+     "value_raw": "0.0",
+     "n": 6
+    },
+    "Intern": {
+     "printed": "16.7",
+     "file": "results.json",
+     "row_id": "t00002",
+     "value_raw": "0.16666666666666666",
+     "n": 6
+    },
+    "Llama": {
+     "printed": "0.0",
+     "file": "results.json",
+     "row_id": "t00003",
+     "value_raw": "0.0",
+     "n": 6
+    },
+    "Minitaur": {
+     "printed": "80.0",
+     "file": "results.json",
+     "row_id": "t00004",
+     "value_raw": "0.8",
+     "n": 10
+    },
+    "Qwen": {
+     "printed": "90.0",
+     "file": "results.json",
+     "row_id": "t00005",
+     "value_raw": "0.9",
+     "n": 10
+    },
+    "Jev": {
+     "printed": "50.0",
+     "file": "results.json",
+     "row_id": "a00081",
+     "value_raw": "0.5",
+     "n": 8
+    },
+    "Opus": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00082",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00083",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "77.8",
+     "file": "results.json",
+     "row_id": "a00084",
+     "value_raw": "0.7777777777777778",
+     "n": 9
+    },
+    "Reference": {
+     "printed": "41.5",
+     "file": "reference_results.json",
+     "row_id": "temporal_discounting_reference_20261030-delayed_reward_choice_rate",
+     "value_raw": "0.41509744894531775",
+     "n": 13232
+    }
+   }
+  },
+  {
+   "domain": "Planning",
+   "table2_row": "Two-step",
+   "mode_key": "two_step",
+   "primary_target": "Mean reward",
+   "direction": "higher",
+   "reference_mark": "¶",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "0.50",
+     "file": "reference_results.json",
+     "row_id": "uniform-two_step",
+     "value_raw": "0.49628932868351744",
+     "n": 2000
+    },
+    "Laya": {
+     "printed": "0.50",
+     "file": "results.json",
+     "row_id": "v01249",
+     "value_raw": "0.4965",
+     "n": 2000,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Intern": {
+     "printed": "0.52",
+     "file": "results.json",
+     "row_id": "v01253",
+     "value_raw": "0.523",
+     "n": 2000,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "0.50",
+     "file": "results.json",
+     "row_id": "v01257",
+     "value_raw": "0.5035",
+     "n": 2000,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "0.51",
+     "file": "results.json",
+     "row_id": "v01261",
+     "value_raw": "0.509",
+     "n": 2000,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "0.52",
+     "file": "results.json",
+     "row_id": "v01265",
+     "value_raw": "0.519",
+     "n": 2000,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "0.55",
+     "file": "results.json",
+     "row_id": "a00085",
+     "value_raw": "0.547",
+     "n": 2000
+    },
+    "Opus": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00086",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00087",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "0.55",
+     "file": "results.json",
+     "row_id": "a00088",
+     "value_raw": "0.546",
+     "n": 2000
+    },
+    "Reference": {
+     "printed": "0.52",
+     "file": "reference_results.json",
+     "row_id": "two_step_reference_20261030-mean_reward",
+     "value_raw": "0.51955",
+     "n": 2000
+    }
+   }
+  },
+  {
+   "domain": "Social",
+   "table2_row": "False-belief QA",
+   "mode_key": "false_belief_story_qa",
+   "primary_target": "Accuracy (%)",
+   "direction": "higher",
+   "reference_mark": "",
+   "reference_type": "optimal",
+   "cells": {
+    "Uniform": {
+     "printed": "50.0",
+     "file": "reference_results.json",
+     "row_id": "uniform-false_belief_story_qa",
+     "value_raw": "0.5",
+     "n": 5994
+    },
+    "Laya": {
+     "printed": "39.5",
+     "file": "results.json",
+     "row_id": "v01301",
+     "value_raw": "0.39522856189522854",
+     "n": 5994,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "82.5",
+     "file": "results.json",
+     "row_id": "v01311",
+     "value_raw": "0.824657991324658",
+     "n": 5994,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "81.8",
+     "file": "results.json",
+     "row_id": "new_psych_social_tomi_llama8b_full_41",
+     "value_raw": "0.8183183183183184",
+     "n": 5994,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "65.0",
+     "file": "results.json",
+     "row_id": "final20261028_82",
+     "value_raw": "0.6501501501501501",
+     "n": 5994,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "82.8",
+     "file": "results.json",
+     "row_id": "v01321",
+     "value_raw": "0.8284951618284951",
+     "n": 5994,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "71.5",
+     "file": "results.json",
+     "row_id": "a00089",
+     "value_raw": "0.7148815482148816",
+     "n": 5994
+    },
+    "Opus": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00090",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.e.",
+     "file": "results.json",
+     "row_id": "a00091",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "82.6",
+     "file": "results.json",
+     "row_id": "a00092",
+     "value_raw": "0.8259926593259926",
+     "n": 5994
+    },
+    "Reference": {
+     "printed": "100.0",
+     "file": "reference_results.json",
+     "row_id": "false_belief_answer_key-original_answer_exact_match_mean",
+     "value_raw": "1.0",
+     "n": 5994
+    }
+   }
+  },
+  {
+   "domain": "Social",
+   "table2_row": "Politeness",
+   "mode_key": "politeness_pragmatics",
+   "primary_target": "Aggregate NLL",
+   "direction": "lower",
+   "reference_mark": "¶",
+   "reference_type": "human",
+   "cells": {
+    "Uniform": {
+     "printed": "1.014",
+     "file": "reference_results.json",
+     "row_id": "uniform-politeness_pragmatics",
+     "value_raw": "1.0139120992233244",
+     "n": 128
+    },
+    "Laya": {
+     "printed": "1.192",
+     "file": "results.json",
+     "row_id": "v01330",
+     "value_raw": "1.1920789604071451",
+     "n": 128,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "0.799",
+     "file": "results.json",
+     "row_id": "v01340",
+     "value_raw": "0.7988451649484437",
+     "n": 128,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "1.584",
+     "file": "results.json",
+     "row_id": "new_psych_social_politeness_llama8b_full_11",
+     "value_raw": "1.5838268399344961",
+     "n": 128,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Minitaur": {
+     "printed": "1.008",
+     "file": "results.json",
+     "row_id": "final20261028_89",
+     "value_raw": "1.0083505201908776",
+     "n": 128,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "1.000",
+     "file": "results.json",
+     "row_id": "v01350",
+     "value_raw": "0.9998605394748019",
+     "n": 128,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "+∞",
+     "file": "results.json",
+     "row_id": "a00093",
+     "value_raw": "Infinity",
+     "n": 128
+    },
+    "Opus": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00094",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00095",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "+∞s",
+     "file": "results.json",
+     "row_id": "a00096",
+     "value_raw": "Infinity",
+     "n": 128
+    },
+    "Reference": {
+     "printed": "0.587",
+     "file": "reference_results.json",
+     "row_id": "politeness_reference_20261030-human_response_weighted_mean_nll",
+     "value_raw": "0.5872864995872029",
+     "n": 128
+    }
+   }
+  },
+  {
+   "domain": "Social",
+   "table2_row": "Pragmatic interpretation",
+   "mode_key": "pragmatic_language_interpretation",
+   "primary_target": "Aggregate NLL",
+   "direction": "lower",
+   "reference_mark": "¶",
+   "reference_type": "human",
+   "cells": {
+    "Uniform": {
+     "printed": "1.282",
+     "file": "reference_results.json",
+     "row_id": "uniform-pragmatic_language_interpretation",
+     "value_raw": "1.2822683175124885",
+     "n": 170
+    },
+    "Laya": {
+     "printed": "1.592",
+     "file": "results.json",
+     "row_id": "v01360",
+     "value_raw": "1.5915153074312387",
+     "n": 170,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "0.814",
+     "file": "results.json",
+     "row_id": "v01367",
+     "value_raw": "0.8137968669470528",
+     "n": 170,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "1.851",
+     "file": "results.json",
+     "row_id": "new_psych_social_pragmatic_llama8b_full_21",
+     "value_raw": "1.8514305638020085",
+     "n": 170,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Minitaur": {
+     "printed": "1.049",
+     "file": "results.json",
+     "row_id": "final20261028_99",
+     "value_raw": "1.0486177484416257",
+     "n": 170,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "1.240",
+     "file": "results.json",
+     "row_id": "v01374",
+     "value_raw": "1.2395484997252715",
+     "n": 170,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "+∞",
+     "file": "results.json",
+     "row_id": "a00097",
+     "value_raw": "Infinity",
+     "n": 170
+    },
+    "Opus": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00098",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00099",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "+∞s",
+     "file": "results.json",
+     "row_id": "a00100",
+     "value_raw": "Infinity",
+     "n": 170
+    },
+    "Reference": {
+     "printed": "0.416",
+     "file": "reference_results.json",
+     "row_id": "pragmatic_interpretation_reference_20261030-human_response_weighted_mean_nll",
+     "value_raw": "0.41570917438542526",
+     "n": 170
+    }
+   }
+  },
+  {
+   "domain": "Social",
+   "table2_row": "Nonliteral number",
+   "mode_key": "nonliteral_number_interpretation",
+   "primary_target": "MAE to human mean",
+   "direction": "lower",
+   "reference_mark": "¶",
+   "reference_type": "human",
+   "cells": {
+    "Uniform": {
+     "printed": "34.77",
+     "file": "reference_results.json",
+     "row_id": "uniform-nonliteral_number_interpretation",
+     "value_raw": "34.76903931818182",
+     "n": 330
+    },
+    "Laya": {
+     "printed": "30.86",
+     "file": "results.json",
+     "row_id": "v01392",
+     "value_raw": "30.86139393939394",
+     "n": 330,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Intern": {
+     "printed": "16.87",
+     "file": "results.json",
+     "row_id": "v01404",
+     "value_raw": "16.869470936315473",
+     "n": 330,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "25.10",
+     "file": "results.json",
+     "row_id": "new_psych_social_nonliteral_llama8b_full_39",
+     "value_raw": "25.095060606060606",
+     "n": 330,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Minitaur": {
+     "printed": "28.53",
+     "file": "results.json",
+     "row_id": "cpuclose20261028_35",
+     "value_raw": "28.52972727272727",
+     "n": 330,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "29.75",
+     "file": "results.json",
+     "row_id": "v01416",
+     "value_raw": "29.750636363636364",
+     "n": 330,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Jev": {
+     "printed": "20.37",
+     "file": "results.json",
+     "row_id": "a00101",
+     "value_raw": "20.372090909090907",
+     "n": 330
+    },
+    "Opus": {
+     "printed": "15.34",
+     "file": "results.json",
+     "row_id": "a00102",
+     "value_raw": "15.335545454545455",
+     "n": 330
+    },
+    "Sonnet": {
+     "printed": "20.81",
+     "file": "results.json",
+     "row_id": "a00103",
+     "value_raw": "20.807181818181817",
+     "n": 330
+    },
+    "Haiku": {
+     "printed": "22.52",
+     "file": "results.json",
+     "row_id": "a00104",
+     "value_raw": "22.521060606060605",
+     "n": 330
+    },
+    "Reference": {
+     "printed": "4.98",
+     "file": "reference_results.json",
+     "row_id": "nonliteral_number_reference_20261030-absolute_error_to_human_mean_mean",
+     "value_raw": "4.976033702069305",
+     "n": 330
+    }
+   }
+  },
+  {
+   "domain": "Metacognition",
+   "table2_row": "Self-assessment",
+   "mode_key": "performance_self_assessment",
+   "primary_target": "Human NLL",
+   "direction": "lower",
+   "reference_mark": "¶",
+   "reference_type": "human fit",
+   "cells": {
+    "Uniform": {
+     "printed": "2.039",
+     "file": "reference_results.json",
+     "row_id": "uniform-performance_self_assessment",
+     "value_raw": "2.039272330321602",
+     "n": 108248
+    },
+    "Laya": {
+     "printed": "+∞",
+     "file": "results.json",
+     "row_id": "v01423",
+     "value_raw": "Infinity",
+     "n": 108248,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Intern": {
+     "printed": "2.029",
+     "file": "results.json",
+     "row_id": "final20261028_170",
+     "value_raw": "2.028509628820405",
+     "n": 108248,
+     "best_open": false,
+     "not_better_than_uniform": false
+    },
+    "Llama": {
+     "printed": "2.523",
+     "file": "results.json",
+     "row_id": "final20261028_196",
+     "value_raw": "2.523089865473279",
+     "n": 108248,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Minitaur": {
+     "printed": "1.885",
+     "file": "results.json",
+     "row_id": "new_mdx_minitaur_self_6",
+     "value_raw": "1.8851206979439843",
+     "n": 108248,
+     "best_open": true,
+     "not_better_than_uniform": false
+    },
+    "Qwen": {
+     "printed": "2.262",
+     "file": "results.json",
+     "row_id": "final20261028_248",
+     "value_raw": "2.261557447575329",
+     "n": 108248,
+     "best_open": false,
+     "not_better_than_uniform": true
+    },
+    "Jev": {
+     "printed": "+∞",
+     "file": "results.json",
+     "row_id": "a00105",
+     "value_raw": "Infinity",
+     "n": 108248
+    },
+    "Opus": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00106",
+     "value_raw": "",
+     "n": null
+    },
+    "Sonnet": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00107",
+     "value_raw": "",
+     "n": null
+    },
+    "Haiku": {
+     "printed": "n.a.",
+     "file": "results.json",
+     "row_id": "a00108",
+     "value_raw": "",
+     "n": null
+    },
+    "Reference": {
+     "printed": "1.619",
+     "file": "reference_results.json",
+     "row_id": "self_assessment_lookup_reference_20261030-i_within_logic_10fold_crossfit",
+     "value_raw": "1.6193064420134906",
+     "n": 108248
+    }
+   }
+  }
+ ]
+}

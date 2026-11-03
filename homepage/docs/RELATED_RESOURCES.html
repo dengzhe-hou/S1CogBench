@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Related evaluation resources · S1CogBench</title>
+<link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@600&family=Noto+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="../style.css"></head><body>
+<nav class="navbar" aria-label="Main navigation"><a href="../index.html#leaderboard">Leaderboard</a><a href="../index.html#tasks">Tasks</a><a href="../index.html#evaluate">Evaluate</a><a href="../index.html#resources">Resources</a></nav>
+<main class="doc-page"><p class="doc-back"><a href="../index.html#resources">Back to S1CogBench</a></p>
+<h1>Related evaluation resources</h1>
+<p>This is a factual protocol comparison from the cited papers and their official resources. No performance ranking is implied.</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Evaluation source and split</th>
+<th>Mode and visible history</th>
+<th>Scoring targets and references</th>
+<th>Reusable material</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CogBench (Coda-Forno et al., 2024)</td>
+<td>Seven experiments; 40 language models; generated tasks and a fixed questionnaire.</td>
+<td>Experiment prompts; feedback-dependent choices in sequential tasks.</td>
+<td>Task performance and ten behavioral indices; human and random references.</td>
+<td>Experiment runners, task scorers, and model adapters.</td>
+</tr>
+<tr>
+<td>CogGym, Sept. 2026 v1 (Ying et al., 2026)</td>
+<td>258 experiments; 50 models; matched source trials and human responses.</td>
+<td>Single-turn, non-interactive trials; JSON answers or verbalized response distributions.</td>
+<td>Mean-response and distribution alignment; human split-half and random references.</td>
+<td>EML specifications, model administration, and human-replication interfaces.</td>
+</tr>
+<tr>
+<td>Psych-101 / Centaur (Binz et al., 2025)</td>
+<td>160 experiments; 90%/10% participant split; additional held-out tasks.</td>
+<td>Human-history prediction; model-generated trajectories in Horizon and Two-step.</td>
+<td>Response NLL and simulation statistics; domain-specific cognitive models.</td>
+<td>Transcripts, model adapters, and analysis code; gated test-set access.</td>
+</tr>
+<tr>
+<td>BanditBench / EVOLvE (Nie et al., 2025)</td>
+<td>Context-free and contextual bandits; generated interaction trajectories.</td>
+<td>Interactive choices; raw or summary histories; algorithm-guided conditions.</td>
+<td>Reward and regret; UCB, Thompson sampling, and LinUCB references.</td>
+<td>Bandit environments, agent interfaces, and evaluation runners.</td>
+</tr>
+<tr>
+<td>System1-Arena (Chen et al., 2026)</td>
+<td>Public-source and generated decision tasks and closed-loop environments.</td>
+<td>Typed probability requests; decision models and general language models.</td>
+<td>Probability quality, task outcomes, latency, cost, and reasoning budgets.</td>
+<td>Shared decision interfaces and evaluation resources.</td>
+</tr>
+<tr>
+<td>TypedBench (Sharma et al., 2026)</td>
+<td>Generated evaluation suites with controlled wording, options, and length.</td>
+<td>Static decision requests under matched presentation changes.</td>
+<td>Calibration, framing sensitivity, asymmetric costs, and latency.</td>
+<td>Evaluation suites.</td>
+</tr>
+<tr>
+<td>DecisionPivot (Zhuang et al., 2026)</td>
+<td>Generated task families with controlled diagnostic conditions.</td>
+<td>Decision models and general language-model comparisons.</td>
+<td>Probability ranking, calibration, and selective coverage.</td>
+<td>Diagnostic task families and evaluation resources.</td>
+</tr>
+<tr>
+<td>CogArena (Hou et al., 2026)</td>
+<td>13 procedurally generated paradigms.</td>
+<td>Language and vision-language models.</td>
+<td>Measurement consistency and predictive validity.</td>
+<td></td>
+</tr>
+<tr>
+<td>CogArena (Fernandez et al., 2026)</td>
+<td>Ten browser-based behavioral experiments.</td>
+<td>Multimodal agents interacting through an execution scaffold.</td>
+<td>Task completion, performance, and behavioral signatures.</td>
+<td>Interactive experiment implementations and agent evaluation code.</td>
+</tr>
+<tr>
+<td>S1CogBench</td>
+<td>24 selected tasks; five open models and Jev; source participant and fold rules where applicable; fitted replay labeled separately.</td>
+<td>Human prediction, autonomous execution, and event reports distinguished; original and compact histories retained.</td>
+<td>Target-specific NLL, return, event Brier, and source condition effects; reference provenance disclosed.</td>
+<td>Source mappings, adapters, scorers; CPU reference pipelines verified for 24 tasks in 27 modes.</td>
+</tr>
+</tbody>
+</table>
+<p>Reported experiments and the selected task inventory are different counting units. Numerical comparisons require matching the source split, information history, execution mode, response decoding, scoring target, and reference fit. The S1CogBench CPU checks use separately provided original inputs. They do not establish fresh neural-model deployment, independent public retrieval of restricted inputs, or redistribution permission. Model, metric, and cognitive-baseline completion remain separately recorded. The S1CogBench row describes the five-model suite; the <a href="API_EXTENSION.html">API extension</a> is separate.</p>
+<h2>References</h2>
+<ul>
+<li>Marcel Binz, Elif Akata, Matthias Bethge, and others. 2025. A foundation model to predict and capture human cognition. Nature, 644(8078):1002-1009.</li>
+<li>Tianyu Chen, Xinyang Liu, Ruyi An, Zhendong Wang, and Mingyuan Zhou. 2026. System1-Arena: Which Decisions Can Be Left to System 1? arXiv:2610.21244.</li>
+<li>Julian Coda-Forno, Marcel Binz, Jane X Wang, and Eric Schulz. 2024. CogBench: a large language model walks into a psychology lab. In Proceedings of the 41st International Conference on Machine Learning, PMLR 235:9076-9108.</li>
+<li>Kianté Fernandez, Caitlin Chen, Jialu Zhou, Bartek Sadowski, Anthony C. Miceli, and Ian Krajbich. 2026. CogArena: Benchmarking Multimodal Agents on Interactive Behavioral Experiments. In Advances in Neural Information Processing Systems, Evaluations and Datasets Track.</li>
+<li>Allen Nie, Yi Su, Bo Chang, Jonathan Lee, Ed H. Chi, Quoc V Le, and Minmin Chen. 2025. EVOLvE: Evaluating and optimizing LLMs for in-context exploration. In Proceedings of the 42nd International Conference on Machine Learning, PMLR 267:46346-46376.</li>
+<li>Rahul Sharma, Andrew B. Duncan, Gaétan Marceau Caron, and Sebastian J. Vollmer. 2026. TypedBench: A Benchmark for Calibration, Framing Sensitivity, and Cost in System One Decision Models. arXiv:2610.11392.</li>
+<li>Lance Ying, Jinzhou Wu, Yingshan Susan Wang, and others. 2026. CogGym: Towards Large-Scale Comparative Evaluation of Human and Machine Cognition. arXiv:2609.21259.</li>
+<li>Xialie Zhuang, Mingcong Lei, Zunhai Su, and others. 2026. DecisionPivot: A Diagnostic Benchmark for Decision Models in LLM Systems. arXiv:2610.28522.</li>
+</ul>
+</main></body></html>

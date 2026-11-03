@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S1CogBench: What System One Decision Models Can and Cannot Do on Cognitive Experiments</title>
+<meta name="description" content="S1CogBench asks what System One decision models can and cannot do on established cognitive experiments. 24 tasks in 27 modes, with results kept per target and no pooled score.">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@600&family=Noto+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<meta property="og:title" content="S1CogBench"><meta property="og:description" content="What System One Decision Models Can and Cannot Do on Cognitive Experiments">
+<meta property="og:url" content="https://dengzhe-hou.github.io/S1CogBench/">
+</head><body>
+<a class="skip" href="#leaderboard">Skip to the leaderboard</a>
+<nav class="navbar" aria-label="Main navigation"><a href="#leaderboard">Leaderboard</a><a href="#benchmark">Benchmark</a><a href="#tasks">Tasks</a><a href="#evaluate">Evaluate</a><a href="#resources">Resources</a></nav>
+<main>
+<header class="hero">
+<h1 class="wordmark"><img src="assets/mark.svg" alt=""><span>S1CogBench</span></h1>
+<h2 class="subtitle">What System One Decision Models Can and Cannot Do on Cognitive Experiments</h2>
+<p class="authors">Dengzhe Hou <span>&nbsp;&nbsp;</span> Kazunori D Yamada</p>
+<p class="venue">arXiv preprint, 2026</p>
+<div class="hero-actions"><a class="pill" href="https://arxiv.org/abs/2611.00911" target="_blank" rel="noopener">arXiv</a><a class="pill" href="downloads/s1cogbench-paper.pdf" target="_blank" rel="noopener">PDF</a><a class="pill" href="https://github.com/dengzhe-hou/S1CogBench" target="_blank" rel="noopener">Code</a><a class="pill" href="#leaderboard">Leaderboard</a><a class="pill" href="#evaluate">Evaluate your model</a></div>
+<p class="hero-note">Original tasks and scoring. Explicit comparison context. No pooled cognitive score.</p>
+</header>
+
+<section class="section" id="overview" aria-labelledby="overview-title">
+<h2 class="section-title" id="overview-title">Overview</h2>
+<div class="prose">
+<p>Language models are no longer used only to generate text. Software also asks them for decisions, in routing, guardrails, and automated gates. System One decision models, also called typed decision models, such as Jev, Laya, and Intern-Decision, return one fast decision over the legal options, leaving no text to inspect, and a fast, well-formed decision does not show that the model used the evidence. S1CogBench asks what these models can and cannot do on established cognitive experiments, keeping each task's conditions and scoring apart from disclosed adaptations, and scoring human-response prediction, autonomous execution, and event probabilities separately. It covers five open models and Jev on 24 tasks (27 modes). </p>
+<ul class="findings">
+<li><strong>Decision models vary widely in reliability.</strong> Laya does not beat uniform choice on 17 of 26 targets, against 3 for Intern-Decision, which also beats the Qwen3.5 backbone it is fine-tuned from on 23.</li>
+<li><strong>Acting well does not imply predicting humans.</strong> In Mouselab, Qwen has the highest autonomous reward but predicts humans worse than uniform choice, and Laya has the best NLL of the open models with zero reward.</li>
+<li><strong>Aggregate scores hide condition effects.</strong> Horizon, the Wisconsin Card Sorting Test, and reinforcement learning and working memory show how decisions change across conditions that an overall score does not.</li>
+<li><strong>Speed comes mainly from the interface.</strong> Under the same readout, Intern-Decision is no faster than its same-size backbone, while generation takes 80 to 316 times as long as one forward pass in the two general models timed.</li>
+</ul>
+<p>To our knowledge, it is the first benchmark of System One decision models on established cognitive experiments, and it gives a shared test of whether their decisions respond to evidence, feedback, memory load, and future opportunities before software relies on them.</p>
+</div>
+</section>
+
+<section class="section wide" id="leaderboard" aria-labelledby="leaderboard-title">
+<h2 class="section-title" id="leaderboard-title">Leaderboard</h2>
+<p class="section-lead">Each row is one target, in its own unit. There is no pooled cognitive score and no overall ranking, so compare within a row.</p>
+<div id="load-error" class="notice danger" hidden></div>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Table 3, primary targets"><table id="results"><caption class="visually-hidden">Table 3. Primary targets for 27 full-suite modes, with complete targets from the selected-task API extension.</caption>
+<thead><tr><th rowspan="2" scope="col">Domain</th><th rowspan="2" scope="col" class="task-col">Task mode and primary target</th><th rowspan="2" scope="col">Uniform</th><th colspan="5" scope="colgroup">Full-suite open models</th><th colspan="4" scope="colgroup">Selected-task APIs</th><th colspan="2" scope="colgroup">Reference</th></tr>
+<tr><th scope="col">Laya</th><th scope="col">Intern</th><th scope="col">Llama</th><th scope="col">Minitaur</th><th scope="col">Qwen</th><th scope="col">Jev</th><th scope="col">Opus</th><th scope="col">Sonnet</th><th scope="col">Haiku</th><th scope="col">Value</th><th scope="col">Type</th></tr></thead>
+<tbody id="leaderboard-body"><tr><td colspan="15" class="loading">Loading Table 3…</td></tr></tbody></table></div>
+<div class="legend">
+<p>Bold and gray apply only to the five full-suite open models; gray marks scores not better than Uniform. Opus, Sonnet, and Haiku are Claude 5.5. API cells marked <em>n.e.</em> are outside the measured full-task scope, <em>n.a.</em> lack a full probability score, <em>n.f.</em> have only non-full prefixes, <em>part.</em> retain incomplete records, and <em>canc.</em> were canceled before generation. <em>inv.</em> marks all-invalid reports, which leave the MAE undefined. NLL keeps only the epsilons of primary source scorers, so a zero human-choice probability can give +∞. Temporal discounting reports preference. Domain gives the organizational domain, not a validated ability.</p>
+<p>The reference type marks fits to participants' responses (human fit), other participants' responses without a fitted model (human), the analytic solution or answer key (optimal), and policies without human fitting (algorithm). † recovered fit or policy, § same-participant fit, ‡ within-participant holdout, ∗ new reference, ¶ reference added for the remaining rows. ToMi has no human responses, so its reference is the answer key. <sup>s</sup> Haiku stated option probabilities, a different readout from the open models. Haiku politeness retains one invalid response of 128 and is +∞ on its valid responses.</p>
+<p class="legend-links"><a href="data/table2.csv" download>Table 3 as CSV</a> · <a href="data/table2.json" download>The row behind each cell</a> · <a href="docs/RESULTS.html">Results guide</a> · <a href="docs/BASELINES.html">References and Uniform</a></p>
+</div>
+</section>
+
+<section class="section wide" id="explorer" aria-labelledby="explorer-title">
+<h2 class="section-title" id="explorer-title">Every aggregate row</h2>
+<p class="section-lead">Choose a task from the leaderboard, or below, and a measurement target. Protocols, units, and aggregation stay attached to every result.</p>
+<div id="import-status" class="notice" hidden></div>
+<div class="box workbench">
+<div class="filter-row"><label>Task<select id="result-task" aria-label="Result task"></select></label><label>Mode<select id="result-mode" aria-label="Evaluation mode"></select></label><label>Metric<select id="result-metric" aria-label="Result metric"></select></label></div>
+<div class="context-filter"><label>Comparison context<select id="result-context" aria-label="Comparison context"></select></label><span id="result-count" class="mono"></span></div>
+<div id="results-content" aria-live="polite"><div class="loading">Loading the accepted results…</div></div>
+<div class="workbench-footer"><span>Original units, no pooled cognitive score</span><a href="data/results.csv" download>All aggregate results</a></div>
+</div>
+<div class="result-tools"><button id="import-open" class="pill small">Add your results</button><button id="export-view" class="pill small">Download this view</button><button class="text-button" id="download-template">Download a matching result template</button><a href="data/result_schema.json" download>Result schema</a><a href="data/metric_status.json" download>Metric applicability</a><button class="text-button" id="clear-import" hidden>Clear local rows</button></div>
+<p class="smallprint">Latency records include shared-device execution context and do not establish an isolated model-speed ranking. A task can have coverage across distinct protocol records. Imported files stay in your browser and are marked as user-supplied.</p>
+</section>
+
+<div class="band" id="benchmark"><h2>Benchmark</h2></div>
+<section class="section" aria-label="Benchmark framework">
+<figure class="box figure"><img src="assets/fig1.svg" alt="Six representative task interfaces above a diagram of model evaluation: task-specific adapters feed the model panel, which is scored separately on predicting human choices, executing its own actions, and reporting explicit probabilities." loading="lazy">
+<figcaption><strong>S1CogBench connects cognitive tasks to model evaluation.</strong> <strong>(a)</strong> Six representative tasks from the 24-task, 27-mode suite. <strong>(b)</strong> Adapters supply visible states, histories, and legal responses to the models, and each output has its own score.</figcaption></figure>
+<p class="scope-note">The five open models have at least one accepted full-sample protocol on all 120 task and model pairs. The catalogue retains 31 paradigms in ten organizational domains, and seven are deferred. Coverage does not mean every possible mode or metric.</p>
+</section>
+
+<div class="band" id="tasks"><h2>Tasks</h2></div>
+<section class="section wide" aria-label="Task catalogue">
+<p class="section-lead">31 source paradigms, their data requirements, and their evaluation entry points. <a href="data/tasks.json" download>Download the catalogue</a></p>
+<div class="catalog-controls"><label class="search-field"><input type="search" id="task-search" placeholder="Search tasks, domains, or source collections" aria-label="Search tasks"></label><select id="domain-filter" aria-label="Filter by domain"></select><select id="scope-filter" aria-label="Filter by scope"><option value="">Evaluated and deferred</option><option value="evaluated_first_paper">Evaluated, 24 tasks</option><option value="deferred_catalogue">Deferred, 7 paradigms</option></select></div>
+<div id="catalog-count" class="catalog-count mono"></div><div id="task-grid" class="task-grid"></div>
+</section>
+
+<div class="band" id="evaluate"><h2>Evaluate</h2></div>
+<section class="section" aria-label="Evaluate a model">
+<p class="section-lead">One entry point runs each of the 27 modes through its original runner and scorer. The smoke run takes about two minutes on one CPU, with no model weights.</p>
+<pre class="code-block" id="quickstart-code"><code>python3.12 -m venv .venv &amp;&amp; source .venv/bin/activate
+python -m pip install -r requirements-eval-cpu.txt
+python scripts/fetch_public_sources.py all
+python -m s1cogbench doctor
+python -m s1cogbench eval --smoke --output runs/smoke
+python -m s1cogbench eval --adapter my_agent.py --device cuda:0 --model-label my-model \
+    --tasks all --output runs/my-model</code></pre>
+<p class="copy-row"><button class="text-button" data-copy="quickstart-code">Copy the commands</button></p>
+<ul class="cautions">
+<li>Psych-101-test is gated. Eight modes stop at <code>doctor</code> until you accept its conditions on Hugging Face and run <code>fetch_public_sources.py psych101</code>.</li>
+<li><code>--output</code> must be a new directory inside the repository.</li>
+<li>Reproducing the CPU validation bit for bit needs Python 3.11. Under Python 3.12, 6 of the 27 modes differ in the last digits of floats.</li>
+</ul>
+<div class="box builder"><h3>Build a command for your adapter</h3>
+<div class="filter-row"><label>Modes<select id="command-task"></select></label><label>Adapter file<input id="command-adapter" value="my_agent.py" placeholder="Path to your adapter"></label><label>Device<select id="command-device"><option value="cuda:0">cuda:0</option><option value="cpu">cpu</option></select></label></div>
+<pre class="code-block" id="command-code"><code></code></pre><p id="command-help" class="smallprint"></p><p class="copy-row"><button class="text-button" data-copy="command-code">Copy this command</button></p></div>
+<p class="smallprint">The CPU reference policy through this entry point reproduces the CPU validation in all 27 modes. Among neural models, Llama-3.1-8B on a whole A100 is supported. In a pass of 20 calls per mode, all 23 comparable modes match the accepted runs exactly. On a MIG slice of an A100, prompts and identities match but probabilities differ by BF16 rounding steps, so the support does not extend to slices. The other neural models have not run through this entry point. <a href="docs/REPRODUCTION.html">Read the reproduction record</a></p>
+<p class="evaluation-links"><a href="docs/QUICKSTART.html">Complete quickstart</a> · <a href="docs/MODELS.html">Adapter interfaces</a> · <a href="docs/SUBMIT_RESULTS.html">Prepare a comparison file</a></p>
+</section>
+
+<div class="band" id="resources"><h2>Resources</h2></div>
+<section class="section wide" aria-label="Documentation">
+<div class="doc-grid">
+<a href="docs/PROTOCOLS.html"><h3>Evaluation protocols</h3><p>Visible histories, legal responses, execution rules, and source-specific scoring.</p></a>
+<a href="docs/DATA.html"><h3>Sources and data access</h3><p>Original providers, participant splits, versions, and redistribution conditions.</p></a>
+<a href="docs/RESULTS.html"><h3>Results guide</h3><p>Table 3 marks, retained evidence, and how the aggregate files fit together.</p></a>
+<a href="docs/BASELINES.html"><h3>References and Uniform</h3><p>Fit, information, and provenance of every reference, and each Uniform definition.</p></a>
+<a href="docs/REPRODUCTION.html"><h3>Reproduction record</h3><p>What the CPU reference checks and the first real-model pass establish, and what they do not.</p></a>
+<a href="docs/CPU_REUSE_VALIDATION_24.html"><h3>CPU validation</h3><p>Input and scored counts of the 24-task, 27-mode reference check.</p></a>
+<a href="docs/API_EXTENSION.html"><h3>Selected-task API extension</h3><p>Jev and Claude settings, parsers, zero-probability targets, and run records.</p></a>
+<a href="docs/API_TIME_COST.html"><h3>API time and cost</h3><p>Client time and usage-priced cost per target, and the cells not completed.</p></a>
+<a href="docs/SUPPLEMENTARY_CONTROLS.html"><h3>Supplementary controls</h3><p>Accepted latency, generated-reasoning, legal-readout, and Claude prefix records.</p></a>
+<a href="docs/LATENCY.html"><h3>Controlled latency</h3><p>Per-mode timings of nine configurations on one A100 at batch size one.</p></a>
+<a href="docs/RELATED_RESOURCES.html"><h3>Related evaluation resources</h3><p>A factual protocol comparison with directly related benchmarks.</p></a>
+<a href="data/grouping_guide.md"><h3>Comparing results</h3><p>Use the same task, target, mode, protocol, unit, and aggregation.</p></a>
+</div>
+<div class="box baseline-panel"><h3>Task-specific references</h3><p>Reference fits and algorithms carry their own exposure and provenance. Human-action NLL and autonomous reward are separate comparison targets.</p><div id="baseline-list" class="baseline-list"></div></div>
+</section>
+
+<section class="section" aria-labelledby="cite-title">
+<h2 class="section-title" id="cite-title">Citation</h2>
+<pre class="bibtex" id="citation-code"><code>@misc{hou2026s1cogbench,
+  title         = {{S1CogBench}: What System One Decision Models Can and Cannot Do on Cognitive Experiments},
+  author        = {Hou, Dengzhe and Yamada, Kazunori D},
+  year          = {2026},
+  eprint        = {2611.00911},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2611.00911}
+}</code></pre>
+<p class="copy-row"><button class="text-button" data-copy="citation-code">Copy BibTeX</button></p>
+</section>
+</main>
+<footer class="footer"><p><strong>S1CogBench</strong>, a benchmark of System One decision models on cognitive experiments.</p><p><a href="https://arxiv.org/abs/2611.00911">arXiv</a> · <a href="downloads/s1cogbench-paper.pdf">PDF</a> · <a href="https://github.com/dengzhe-hou/S1CogBench">Code</a> · <a href="data/data_manifest.json">Data manifest</a></p><p>Original project software uses the <a href="LICENSE.txt">MIT License</a>; third-party terms remain in force.</p></footer>
+<dialog id="import-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><h2>Add a comparison file</h2><p>Import aggregate JSON using the downloadable result schema. Files stay in this browser. Keep the protocol and target fields unchanged when making a matched comparison.</p><input type="file" id="import-file" accept=".json,application/json"><p id="import-error" role="alert"></p><button class="pill small" id="import-template">Download matching template</button></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="app.js"></script></body></html>

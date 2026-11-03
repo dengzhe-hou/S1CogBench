@@ -1,0 +1,6 @@
+# CPU environment for `python -m s1cogbench` on all 27 modes with CPU adapters,
+# the same pins as the 24-task CPU validation of 2026-10-26.
+# Neural adapters add their own model stack (see docs/MODELS.md).
+--extra-index-url https://download.pytorch.org/whl/cpu
+-r requirements-validation-cpu.txt
+-r requirements-validation-helpers.txt

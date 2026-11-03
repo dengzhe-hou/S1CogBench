@@ -1,0 +1,276 @@
+{
+  "cogbench": {
+    "kind": "github",
+    "access": "public",
+    "repository": "juliancodaforno/CogBench",
+    "revision": "8e70d3399193bfad9ef5e63dc9aa6feeccabdf72",
+    "destination": "external/CogBench",
+    "license": "none stated upstream",
+    "modes": [
+      "bayesian_urn_inference",
+      "nonstationary_bandit",
+      "instrumental_learning",
+      "horizon",
+      "bart",
+      "temporal_discounting",
+      "two_step"
+    ]
+  },
+  "evolve": {
+    "kind": "github",
+    "access": "public",
+    "repository": "allenanie/EVOLvE",
+    "revision": "d9143f762e9724b857ae076d480acdb3067effff",
+    "destination": "external/EVOLvE",
+    "license": "MIT",
+    "modes": [
+      "stationary_multiarmed_bandit"
+    ]
+  },
+  "centaur_evaluation": {
+    "kind": "github",
+    "access": "public",
+    "repository": "snamazova/centaur_evaluation",
+    "revision": "d788dace10db5ab2005339a6b488b884af9443c0",
+    "destination": "external/paper_matched_centaur_evaluation",
+    "license": "none stated upstream",
+    "modes": [
+      "horizon",
+      "wcst"
+    ]
+  },
+  "coggym": {
+    "kind": "files",
+    "access": "public",
+    "files": {
+      "external/coggym_social_evaluation/experiment.py": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/evaluation/experiment.py",
+      "external/coggym_social_evaluation/prompt_builder.py": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/evaluation/prompt_builder.py",
+      "external/coggym_social_evaluation/scorer.py": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/evaluation/scorer.py",
+      "external/coggym_social_evaluation/analyze.py": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/evaluation/analyze.py",
+      "literature/task_catalog_20261017/raw/coggym_repo__evaluation__trial_selection_map.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/evaluation/trial_selection_map.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Hu2023Fine__exp1__config.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Hu2023Fine/exp1/config.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Hu2023Fine__exp1__human_data_ind.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Hu2023Fine/exp1/human_data_ind.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Hu2023Fine__exp1__human_data_mean.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Hu2023Fine/exp1/human_data_mean.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Hu2023Fine__exp1__instruction.jsonl": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Hu2023Fine/exp1/instruction.jsonl",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Hu2023Fine__exp1__trial.jsonl": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Hu2023Fine/exp1/trial.jsonl",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Tsvilodub2025Nonliteral__exp1__config.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Tsvilodub2025Nonliteral/exp1/config.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Tsvilodub2025Nonliteral__exp1__human_data_ind.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Tsvilodub2025Nonliteral/exp1/human_data_ind.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Tsvilodub2025Nonliteral__exp1__human_data_mean.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Tsvilodub2025Nonliteral/exp1/human_data_mean.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Tsvilodub2025Nonliteral__exp1__instruction.jsonl": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Tsvilodub2025Nonliteral/exp1/instruction.jsonl",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Tsvilodub2025Nonliteral__exp1__trial.jsonl": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Tsvilodub2025Nonliteral/exp1/trial.jsonl",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Tsvilodub2025Nonliteral__exp3b__config.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Tsvilodub2025Nonliteral/exp3b/config.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Tsvilodub2025Nonliteral__exp3b__human_data_ind.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Tsvilodub2025Nonliteral/exp3b/human_data_ind.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Tsvilodub2025Nonliteral__exp3b__human_data_mean.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Tsvilodub2025Nonliteral/exp3b/human_data_mean.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Tsvilodub2025Nonliteral__exp3b__instruction.jsonl": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Tsvilodub2025Nonliteral/exp3b/instruction.jsonl",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Tsvilodub2025Nonliteral__exp3b__trial.jsonl": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Tsvilodub2025Nonliteral/exp3b/trial.jsonl",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Yoon2020Polite__exp1__config.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Yoon2020Polite/exp1/config.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Yoon2020Polite__exp1__human_data_ind.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Yoon2020Polite/exp1/human_data_ind.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Yoon2020Polite__exp1__human_data_mean.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Yoon2020Polite/exp1/human_data_mean.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Yoon2020Polite__exp1__instruction.jsonl": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Yoon2020Polite/exp1/instruction.jsonl",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Yoon2020Polite__exp1__trial.jsonl": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Yoon2020Polite/exp1/trial.jsonl",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Yoon2020Polite__exp2__config.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Yoon2020Polite/exp2/config.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Yoon2020Polite__exp2__human_data_ind.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Yoon2020Polite/exp2/human_data_ind.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Yoon2020Polite__exp2__human_data_mean.json": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Yoon2020Polite/exp2/human_data_mean.json",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Yoon2020Polite__exp2__instruction.jsonl": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Yoon2020Polite/exp2/instruction.jsonl",
+      "literature/task_catalog_20261017/raw/coggym_repo__EML__Yoon2020Polite__exp2__trial.jsonl": "https://raw.githubusercontent.com/lance-ying/coggym/a1cd9df1118fec80eba7463de237d1497d77e041/EML/Yoon2020Polite/exp2/trial.jsonl"
+    },
+    "empty": [
+      "external/coggym_social_evaluation/__init__.py"
+    ],
+    "revision": "a1cd9df1118fec80eba7463de237d1497d77e041",
+    "license": "code MIT; public-subset data CC BY 4.0, original-study terms apply (DATA_LICENSE.md)",
+    "modes": [
+      "false_belief_story_qa",
+      "politeness_pragmatics",
+      "pragmatic_language_interpretation",
+      "nonliteral_number_interpretation"
+    ]
+  },
+  "tomi": {
+    "kind": "archive",
+    "access": "public",
+    "archive_name": "tomi_balanced_story_types.zip",
+    "url": "https://raw.githubusercontent.com/facebookresearch/ToMi/dea2bca9b366c41cdab0bd717353cc02453e193e/tomi_balanced_story_types.zip",
+    "files": {
+      "data/tomi_original_2019/tomi_balanced_story_types/fb_all_test.txt": "tomi_balanced_story_types/fb_all_test.txt",
+      "data/tomi_original_2019/tomi_balanced_story_types/fb_all_test.trace": "tomi_balanced_story_types/fb_all_test.trace"
+    },
+    "license": "CC BY-NC 4.0",
+    "modes": [
+      "false_belief_story_qa"
+    ]
+  },
+  "rlwm": {
+    "kind": "files",
+    "access": "public",
+    "files": {
+      "data/rlwm/CollinsFrank_2012_EJoN.csv": "https://osf.io/download/a58vd/"
+    },
+    "revision": "OSF wgzb6 file a58vd version 1",
+    "license": "none set on the OSF project",
+    "modes": [
+      "rlwm"
+    ]
+  },
+  "hybrid": {
+    "kind": "files",
+    "access": "public",
+    "files": {
+      "external/HybridModellingProject/Data/fit/data/1/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/1/X.csv",
+      "external/HybridModellingProject/Data/fit/data/1/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/1/y.csv",
+      "external/HybridModellingProject/Data/fit/data/2/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/2/X.csv",
+      "external/HybridModellingProject/Data/fit/data/2/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/2/y.csv",
+      "external/HybridModellingProject/Data/fit/data/3/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/3/X.csv",
+      "external/HybridModellingProject/Data/fit/data/3/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/3/y.csv",
+      "external/HybridModellingProject/Data/fit/data/4/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/4/X.csv",
+      "external/HybridModellingProject/Data/fit/data/4/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/4/y.csv",
+      "external/HybridModellingProject/Data/fit/data/5/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/5/X.csv",
+      "external/HybridModellingProject/Data/fit/data/5/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/5/y.csv",
+      "external/HybridModellingProject/Data/fit/data/6/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/6/X.csv",
+      "external/HybridModellingProject/Data/fit/data/6/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/6/y.csv",
+      "external/HybridModellingProject/Data/fit/data/7/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/7/X.csv",
+      "external/HybridModellingProject/Data/fit/data/7/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/7/y.csv",
+      "external/HybridModellingProject/Data/fit/data/8/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/8/X.csv",
+      "external/HybridModellingProject/Data/fit/data/8/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/8/y.csv",
+      "external/HybridModellingProject/Data/fit/data/9/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/9/X.csv",
+      "external/HybridModellingProject/Data/fit/data/9/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/9/y.csv",
+      "external/HybridModellingProject/Data/fit/data/10/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/10/X.csv",
+      "external/HybridModellingProject/Data/fit/data/10/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/10/y.csv",
+      "external/HybridModellingProject/Data/fit/data/11/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/11/X.csv",
+      "external/HybridModellingProject/Data/fit/data/11/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/11/y.csv",
+      "external/HybridModellingProject/Data/fit/data/12/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/12/X.csv",
+      "external/HybridModellingProject/Data/fit/data/12/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/12/y.csv",
+      "external/HybridModellingProject/Data/fit/data/13/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/13/X.csv",
+      "external/HybridModellingProject/Data/fit/data/13/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/13/y.csv",
+      "external/HybridModellingProject/Data/fit/data/14/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/14/X.csv",
+      "external/HybridModellingProject/Data/fit/data/14/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/14/y.csv",
+      "external/HybridModellingProject/Data/fit/data/15/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/15/X.csv",
+      "external/HybridModellingProject/Data/fit/data/15/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/15/y.csv",
+      "external/HybridModellingProject/Data/fit/data/16/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/16/X.csv",
+      "external/HybridModellingProject/Data/fit/data/16/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/16/y.csv",
+      "external/HybridModellingProject/Data/fit/data/17/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/17/X.csv",
+      "external/HybridModellingProject/Data/fit/data/17/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/17/y.csv",
+      "external/HybridModellingProject/Data/fit/data/18/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/18/X.csv",
+      "external/HybridModellingProject/Data/fit/data/18/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/18/y.csv",
+      "external/HybridModellingProject/Data/fit/data/19/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/19/X.csv",
+      "external/HybridModellingProject/Data/fit/data/19/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/19/y.csv",
+      "external/HybridModellingProject/Data/fit/data/20/X.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/20/X.csv",
+      "external/HybridModellingProject/Data/fit/data/20/y.csv": "https://raw.githubusercontent.com/simonedambrogio/HybridModellingProject/3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12/Data/fit/data/20/y.csv"
+    },
+    "derive": "hybrid_folds",
+    "revision": "3d343beb6dc7f1b7c6c7521ebec61f7dcef35b12 (tag v1.0.0)",
+    "license": "MIT",
+    "modes": [
+      "hybrid_information_sampling"
+    ]
+  },
+  "four_task": {
+    "kind": "files",
+    "access": "public",
+    "files": {
+      "literature/four_task_resolution_20261018/Grammar_SA_MTurk_-_attchecks.qsf": "https://osf.io/download/e3wkr/",
+      "literature/four_task_resolution_20261018/LSAT_SA_MTurk_-_attchecks.qsf": "https://osf.io/download/cz9yh/",
+      "literature/four_task_resolution_20261018/generalization__jansen2021logic__exp1.csv": "https://media.githubusercontent.com/media/marcelbinz/Llama-3.1-Centaur-70B/f8038fb57e052614a1d0aae3e58bf5cca93da883/generalization/jansen2021logic/exp1.csv",
+      "literature/four_task_resolution_20261018/generalization__jansen2021logic__prompts.jsonl": "https://media.githubusercontent.com/media/marcelbinz/Llama-3.1-Centaur-70B/f8038fb57e052614a1d0aae3e58bf5cca93da883/generalization/jansen2021logic/prompts.jsonl",
+      "literature/four_task_resolution_20261018/openloop__jansen2021dunningkruger__exp1.csv": "https://media.githubusercontent.com/media/marcelbinz/Llama-3.1-Centaur-70B/f8038fb57e052614a1d0aae3e58bf5cca93da883/openloop/jansen2021dunningkruger/exp1.csv"
+    },
+    "revision": "OSF er9ms version 1; marcelbinz/Llama-3.1-Centaur-70B f8038fb57e052614a1d0aae3e58bf5cca93da883",
+    "license": "OSF none set; Centaur repository Apache-2.0",
+    "modes": [
+      "performance_self_assessment"
+    ]
+  },
+  "callaway": {
+    "kind": "archive",
+    "access": "public",
+    "archive_name": "model-code.zip",
+    "url": "https://osf.io/download/rqxja/",
+    "files": {
+      "external/callaway2022_archive/planning/model/optimal.jl": "planning/model/optimal.jl",
+      "external/callaway2022_archive/planning/model/Q_table.jl": "planning/model/Q_table.jl",
+      "external/callaway2022_archive/planning/model/likelihood.jl": "planning/model/likelihood.jl",
+      "external/callaway2022_archive/planning/model/dnp.jl": "planning/model/dnp.jl",
+      "external/callaway2022_archive/planning/model/space.jl": "planning/model/space.jl",
+      "external/callaway2022_archive/planning/model/model_comparison.jl": "planning/model/model_comparison.jl",
+      "external/callaway2022_archive/planning/model/solve.jl": "planning/model/solve.jl",
+      "external/callaway2022_archive/planning/model/abstract_model.jl": "planning/model/abstract_model.jl",
+      "external/callaway2022_archive/planning/model/define_trials.jl": "planning/model/define_trials.jl",
+      "external/callaway2022_archive/planning/model/heuristic.jl": "planning/model/heuristic.jl",
+      "external/callaway2022_archive/planning/model/data.jl": "planning/model/data.jl",
+      "external/callaway2022_archive/planning/model/base.jl": "planning/model/base.jl",
+      "external/callaway2022_archive/planning/model/best_first_rate.jl": "planning/model/best_first_rate.jl",
+      "external/callaway2022_archive/planning/model/utils.jl": "planning/model/utils.jl",
+      "external/callaway2022_archive/planning/model/reward_structures.jl": "planning/model/reward_structures.jl",
+      "external/callaway2022_archive/planning/model/metagreedy.jl": "planning/model/metagreedy.jl",
+      "external/callaway2022_archive/planning/model/mdp.jl": "planning/model/mdp.jl",
+      "external/callaway2022_archive/planning/model/exp3_pareto.jl": "planning/model/exp3_pareto.jl",
+      "external/callaway2022_archive/planning/model/deps.txt": "planning/model/deps.txt",
+      "external/callaway2022_archive/planning/model/make_demo.jl": "planning/model/make_demo.jl",
+      "external/callaway2022_archive/planning/model/simulate.jl": "planning/model/simulate.jl",
+      "external/callaway2022_archive/planning/model/Q_table_highmem.jl": "planning/model/Q_table_highmem.jl",
+      "external/callaway2022_archive/planning/model/conf.jl": "planning/model/conf.jl",
+      "external/callaway2022_archive/planning/model/explore_reward_structure.jl": "planning/model/explore_reward_structure.jl",
+      "external/callaway2022_archive/planning/model/explore_reward_structure_base.jl": "planning/model/explore_reward_structure_base.jl",
+      "external/callaway2022_archive/planning/model/write_roadtrip_mdps.jl": "planning/model/write_roadtrip_mdps.jl",
+      "external/callaway2022_archive/planning/model/steps.sh": "planning/model/steps.sh",
+      "external/callaway2022_archive/planning/model/random.jl": "planning/model/random.jl",
+      "external/callaway2022_archive/planning/model/pareto.jl": "planning/model/pareto.jl",
+      "external/callaway2022_archive/planning/model/scratch_base.jl": "planning/model/scratch_base.jl",
+      "external/callaway2022_archive/planning/model/features.jl": "planning/model/features.jl",
+      "external/callaway2022_archive/planning/model/install_deps.jl": "planning/model/install_deps.jl",
+      "external/callaway2022_archive/planning/model/simulation.jl": "planning/model/simulation.jl",
+      "external/callaway2022_archive/planning/model/models.jl": "planning/model/models.jl",
+      "external/callaway2022_archive/planning/model/recovery.jl": "planning/model/recovery.jl",
+      "external/callaway2022_archive/planning/model/analysis.jl": "planning/model/analysis.jl",
+      "external/callaway2022_archive/planning/model/conf/exp1.jl": "planning/model/conf/exp1.jl",
+      "external/callaway2022_archive/planning/model/mdps/base/4O8nSiCFkbB": "planning/model/mdps/base/4O8nSiCFkbB",
+      "external/callaway2022_archive/planning/data/exp1/trials.json": "planning/data/exp1/trials.json",
+      "data/mouselab_callaway2022_official/trials.json": "planning/data/exp1/trials.json"
+    },
+    "copy": {
+      "data/mouselab_callaway2022_official/folds.json": "derived/mouselab_callaway2022_official/folds.json"
+    },
+    "revision": "OSF 6venh file rqxja version 1 (1,071,056,478 bytes)",
+    "license": "none set on the OSF project",
+    "note": "Downloads the 1.07 GB archive once and keeps only these members.",
+    "modes": [
+      "mouselab_tree"
+    ]
+  },
+  "julia": {
+    "kind": "julia",
+    "access": "public",
+    "url": "https://julialang-s3.julialang.org/bin/linux/x64/1.4/julia-1.4.1-linux-x86_64.tar.gz",
+    "environment": "envs/mouselab-julia141",
+    "revision": "Julia 1.4.1 (381693d3); General registry packages pinned by Manifest.toml",
+    "license": "MIT",
+    "modes": [
+      "mouselab_tree:autonomous_generative"
+    ]
+  },
+  "psych101": {
+    "kind": "huggingface",
+    "access": "gated",
+    "repo_id": "marcelbinz/Psych-101-test",
+    "filename": "prompts_testing_t1.jsonl",
+    "revision": "88acfc178f3a41e2f323b1e0c0a5cd73bb02414d",
+    "destination": "data/psych101/prompts_testing_t1.jsonl",
+    "license": "CC BY-ND 4.0; the provider asks not to redistribute it outside its repository",
+    "steps": [
+      "Sign in at https://huggingface.co and accept the conditions of https://huggingface.co/datasets/marcelbinz/Psych-101-test (approval is automatic).",
+      "Create a read token and run `hf auth login`, or export HF_TOKEN in this shell only.",
+      "Run `python scripts/fetch_public_sources.py psych101` (revision 88acfc17, 91,981,882 bytes, saved as data/psych101/prompts_testing_t1.jsonl).",
+      "Do not commit or redistribute the file or the per-item outputs of these tasks."
+    ],
+    "modes": [
+      "multiple_cue_judgment",
+      "multi_attribute_choice",
+      "probability_coherence_judgment",
+      "shj_category_learning",
+      "medin_category_learning",
+      "weather_prediction",
+      "recent_probes",
+      "performance_self_assessment"
+    ]
+  }
+}
