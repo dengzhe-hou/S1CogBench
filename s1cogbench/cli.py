@@ -68,7 +68,13 @@ def link_data_root(data_root, modes):
     return made
 
 
+def extra_path():
+    """Directories in S1COGBENCH_EXTRA_PATH, for adapter code outside the active environment."""
+    return [p for p in os.environ.get('S1COGBENCH_EXTRA_PATH', '').split(os.pathsep) if p]
+
+
 def adapter_module(path):
+    sys.path[:0] = [p for p in extra_path() if p not in sys.path]
     spec = importlib.util.spec_from_file_location('s1cogbench_adapter_check', path)
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)
@@ -159,7 +165,7 @@ def cmd_eval(args):
     env.update(OMP_NUM_THREADS=threads, MKL_NUM_THREADS=threads, OPENBLAS_NUM_THREADS=threads,
                NUMEXPR_NUM_THREADS=threads, JULIA_NUM_THREADS=threads, TF_NUM_INTRAOP_THREADS=threads,
                TF_NUM_INTEROP_THREADS=threads, PYTHONDONTWRITEBYTECODE='1',
-               LITELLM_LOCAL_MODEL_COST_MAP='True', PYTHONPATH=str(ROOT))
+               LITELLM_LOCAL_MODEL_COST_MAP='True', PYTHONPATH=os.pathsep.join([str(ROOT), *extra_path()]))
     env.setdefault('MPLCONFIGDIR', str(out / '.runtime/matplotlib'))
     config = {'s1cogbench_version': VERSION, 'started_utc': now(), 'adapter': str(adapter),
               'model_label': args.model_label, 'device': args.device, 'action_rule': args.action_rule,

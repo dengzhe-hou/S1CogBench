@@ -27,7 +27,7 @@ An adapter is a Python file that defines `create_agent(device)`. The returned ob
 | `posterior_probability(state, question)` | Bayesian urn, nonliteral number | a probability in [0, 1]; `None` marks an invalid nonliteral report |
 | `confidence_probability(state, chosen, original_specifications)` | Restless bandit | a probability in [0, 1] |
 
-`python -m s1cogbench list` prints the methods each mode calls. A module-level `PROBABILITY_READOUT = False` declares that the adapter has no action probabilities (for example a model read from generated text); the CLI then leaves human-NLL targets undefined instead of scoring a placeholder.
+`output_keys` can hold a single key. In Mouselab prediction, 63 of the 20,363 requests offer only STOP. The only valid answer there is `[1.0]`, so an adapter can return it without calling a model that rejects one-option questions. `python -m s1cogbench list` prints the methods each mode calls. A module-level `PROBABILITY_READOUT = False` declares that the adapter has no action probabilities (for example a model read from generated text); the CLI then leaves human-NLL targets undefined instead of scoring a placeholder.
 
 Only the visible state, the typed question and the ordered legal keys reach the adapter. Targets, human responses, hidden environment values and future feedback stay with the scorer. Autonomous modes act on `last_native_choice` when the adapter sets it and otherwise on the argmax of the probabilities, with ties taking the first key; `--action-rule sample` samples from the probabilities instead. Native choice and sampling are different execution conditions and are recorded in each result row.
 
@@ -64,7 +64,7 @@ Add `--smoke-calls N` for more calls per mode. The decision and generative templ
 | Minitaur8B | `models/minitaur8b` or `S1COGBENCH_MINITAUR_MODEL_DIR` with the evaluated provider revision | `examples/minitaur8b_choice_agent.py` |
 | Qwen3.5-4B | `models/qwen3.5-4b` | `examples/qwen35_4b_choice_agent.py` |
 
-The Intern and Qwen examples record their model IDs and evaluated revisions. Several tasks used task-specific variants of these adapters (event, integer-sequence and Restless files in `examples/`); the task runner recorded in each accepted row names the one used. Preserve each adapter's precision, temperature, prompt and decision rule when reproducing its results. `requirements.txt` installs the CPU task environment only; the neural adapters need their own PyTorch, Transformers, SDK and checkpoint dependencies.
+The Intern and Qwen examples record their model IDs and evaluated revisions. Several tasks used task-specific variants of these adapters (event, integer-sequence and Restless files in `examples/`); the task runner recorded in each accepted row names the one used. Preserve each adapter's precision, temperature, prompt and decision rule when reproducing its results. `requirements.txt` installs the CPU task environment only; the neural adapters need their own PyTorch, Transformers, SDK and checkpoint dependencies. The CLI starts each task's worker with its own `PYTHONPATH`, so code outside the active environment is not visible to an adapter. List its directories in `S1COGBENCH_EXTRA_PATH`, separated as in `PYTHONPATH`; the CLI's own adapter check and every worker then import from them.
 
 Through the CLI, Llama-3.1-8B on a whole A100 is the one neural setup supported so far. The other adapters in this table have not run through it, and a MIG slice gives different Llama numbers. See [REPRODUCTION.md](REPRODUCTION.md).
 
