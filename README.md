@@ -6,6 +6,7 @@
 
 <p align="center">
   <a href="https://arxiv.org/abs/2611.00911"><img src="https://img.shields.io/badge/arXiv-2611.00911-B31B1B" alt="arXiv paper 2611.00911"></a>
+  <a href="https://huggingface.co/datasets/dengzhe-hou/S1CogBench"><img src="https://img.shields.io/badge/Hugging%20Face-Results-FFB000" alt="Aggregate results on Hugging Face"></a>
   <a href="docs/QUICKSTART.md"><img src="https://img.shields.io/badge/Docs-Quickstart-2878D0" alt="Quickstart documentation"></a>
   <a href="results/aggregate/table2.csv"><img src="https://img.shields.io/badge/Results-Table%203-2A8C82" alt="Table 3 as a CSV file"></a>
   <a href="task_catalog.json"><img src="https://img.shields.io/badge/Tasks-Catalogue-2A8C82" alt="Task catalogue"></a>
@@ -24,7 +25,7 @@
 
 Language models are no longer used only to generate text. Software also asks them for decisions, in routing, guardrails, and automated gates. System One decision models, also called typed decision models, such as Jev, Laya, and Intern-Decision, return one fast decision over the legal options, leaving no text to inspect, and a fast, well-formed decision does not show that the model used the evidence. **S1CogBench** asks what these models can and cannot do on established cognitive experiments, keeping each task's conditions and scoring apart from disclosed adaptations, and scoring human-response prediction, autonomous execution, and event probabilities separately. It covers five open models and Jev on 24 tasks (27 modes). To our knowledge, it is the first benchmark of System One decision models on established cognitive experiments, and it gives a shared test of whether their decisions respond to evidence, feedback, memory load, and future opportunities before software relies on them.
 
-Read the paper on [arXiv](https://arxiv.org/abs/2611.00911).
+Read the paper on [arXiv](https://arxiv.org/abs/2611.00911). The aggregate results are also on [Hugging Face](https://huggingface.co/datasets/dengzhe-hou/S1CogBench).
 
 ## Quick Start
 
