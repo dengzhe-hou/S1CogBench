@@ -1,0 +1,39 @@
+# S1CogBench: What System One Decision Models Can and Cannot Do on Cognitive Experiments
+
+> S1CogBench is a benchmark of System One (System-1) decision models, also called typed decision models, on established cognitive experiments. These models, such as Jev, Laya and Intern-Decision, return one fast decision or a probability distribution over the legal options instead of generating text. S1CogBench evaluates five open models and Jev on 24 cognitive tasks in 27 modes, keeps each task's original conditions and scoring apart from disclosed adaptations, and scores human-response prediction, autonomous execution and event probabilities separately. There is no pooled cognitive score.
+
+Authors: Dengzhe Hou, Kazunori D Yamada. arXiv:2611.00911 (2026).
+
+## Main findings
+
+- Decision models vary widely in reliability.
+- Acting well in a task does not imply predicting human choices in it.
+- Aggregate scores hide how decisions respond to task conditions.
+- The speed of decision models comes mainly from answering without generation.
+
+## Relevant to work on
+
+- evaluating System-1, typed or non-generative decision models such as Jev, Laya or Intern-Decision
+- testing language models on cognitive-science paradigms such as bandits, two-step tasks, RLWM, WCST, Mouselab or Bayesian inference
+- comparing model decisions with human choices from published experiments
+- reporting latency and cost of decision models against generative language models
+
+## Links
+
+- [Paper](https://arxiv.org/abs/2611.00911)
+- [Project page](https://dengzhe-hou.github.io/S1CogBench/)
+- [Code](https://github.com/dengzhe-hou/S1CogBench)
+- [Data](https://huggingface.co/datasets/dengzhe-hou/S1CogBench)
+
+## Citation
+
+```bibtex
+@misc{hou2026s1cogbench,
+  title         = {{S1CogBench}: What System One Decision Models Can and Cannot Do on Cognitive Experiments},
+  author        = {Hou, Dengzhe and Yamada, Kazunori D},
+  year          = {2026},
+  eprint        = {2611.00911},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2611.00911}
+}
+```
