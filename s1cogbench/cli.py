@@ -1,6 +1,7 @@
-"""python -m s1cogbench {list,doctor,eval}
+"""python -m s1cogbench {list,plan,doctor,eval}
 
   list    the 27 evaluated modes, their adapter methods and inputs
+  plan    selected modes, adapter contract and action rules without importing the adapter
   doctor  which modes the local data and runtimes can run, and why not
   eval    run modes through their original runners and scorers
           (--smoke: a few calls per mode, checked against stored values)
@@ -18,6 +19,7 @@ import time
 
 from s1cogbench import ROOT, VERSION, results, smoke
 from s1cogbench.modes import MODES, select
+from s1cogbench.planning import describe, effective_action_rule, inspect_adapter, validate_action_rules
 
 UNIFORM = ROOT / 'examples/uniform_reference_agent.py'
 LINKED = ('data', 'external', 'literature', '.tools')
@@ -81,6 +83,25 @@ def adapter_module(path):
     if not callable(getattr(m, 'create_agent', None)):
         raise SystemExit(f'{path} must define create_agent(device).')
     return m
+
+
+def cmd_plan(args):
+    modes = select(args.tasks)
+    report = {'selected_modes': len(modes), 'model_API_calls': 0,
+              'adapter': inspect_adapter(args.adapter) if args.adapter else None,
+              'modes': describe(modes, args.action_rule),
+              'status': 'plan_only',
+              'comparison': 'New adapter runs are user-supplied results. Check checkpoint, prompt, '
+                            'readout, history, action rule and score context before comparing with paper rows.'}
+    if args.json:
+        print(json.dumps(report, indent=2))
+    else:
+        for m in report['modes']:
+            print(f"{m['key']:45s} rule={m['effective_action_rule']:13s} "
+                  f"needs={'+'.join(m['adapter_interface'])} scored_units={m['expected_scored_units']}")
+        print('Plan only. No adapter import, model/API call, dataset read, download or evaluation output.')
+        print('Use --json for original input paths and full comparison contexts.')
+    validate_action_rules(modes, args.action_rule)
 
 
 # ---------------------------------------------------------------- list / doctor
@@ -147,10 +168,15 @@ def cmd_doctor(args):
 # ---------------------------------------------------------------- eval
 def cmd_eval(args):
     modes = select(args.tasks)
+    validate_action_rules(modes, args.action_rule)
     adapter = Path(args.adapter or UNIFORM).resolve()
     if not args.smoke and args.adapter is None:
         raise SystemExit('--adapter is required (or use --smoke).')
     probabilities = getattr(adapter_module(adapter), 'PROBABILITY_READOUT', True)
+    if not probabilities and any(effective_action_rule(m, args.action_rule) == 'sample' for m in modes):
+        raise SystemExit('Categorical sampling requires actual legal-option probabilities. '
+                         'This adapter declares PROBABILITY_READOUT=False; its text-parser placeholders '
+                         'cannot be sampled as model probabilities.')
     out = args.output.resolve()
     if not out.is_relative_to(ROOT):
         raise SystemExit(f'--output must be inside the repository ({ROOT}), for example runs/my-model: '
@@ -264,6 +290,12 @@ def main(argv=None):
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest='command', required=True)
     sub.add_parser('list', help='List the 27 modes.').set_defaults(func=cmd_list)
+    q = sub.add_parser('plan', help='Inspect modes and adapter syntax without model or data access.')
+    q.add_argument('--tasks', nargs='+', default=['all'])
+    q.add_argument('--adapter', type=Path)
+    q.add_argument('--action-rule', choices=['native', 'sample'], default='native')
+    q.add_argument('--json', action='store_true', help='Print input paths, targets and comparison contexts.')
+    q.set_defaults(func=cmd_plan)
     for name, func, text in (('doctor', cmd_doctor, 'Check which modes the local data can run.'),
                              ('eval', cmd_eval, 'Run modes through the original runners.')):
         q = sub.add_parser(name, help=text)

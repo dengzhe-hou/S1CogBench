@@ -1,5 +1,7 @@
 # Quickstart
 
+Before downloading data or loading a model, run `python -m s1cogbench plan --tasks all --json`. For one integration path, follow [ADD_MODEL.md](ADD_MODEL.md). This inspection does not run a model or verify neural reproduction.
+
 Use Python 3.12 and run every command from the repository root.
 
 ## 1. Install the CPU task environment

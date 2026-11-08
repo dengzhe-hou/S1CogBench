@@ -1,6 +1,8 @@
 # Evaluation protocols
 
-The fixed first-paper suite has 24 tasks and five frozen open models. All 120 task–model pairs have an accepted full-sample named protocol. The catalogue retains 31 paradigms in ten domains, including seven deferred tasks. Completing a compact presentation or human-response mode does not complete all original presentations or autonomous modes.
+This document retains the released arXiv snapshot. Use [COMPARISON_GUIDE.md](COMPARISON_GUIDE.md) for current CLI action-rule behavior and [RELEASE_SCOPE.md](RELEASE_SCOPE.md) for the separate current-paper evidence. `plan --json` exposes the same original mode metadata used by `eval`.
+
+The released arXiv snapshot has 24 tasks and five frozen open models. All 120 task–model pairs have an accepted full-sample named protocol. The catalogue retains 31 paradigms in ten domains, including seven deferred tasks. Completing a compact presentation or human-response mode does not complete all original presentations or autonomous modes.
 
 ## Preserve the evaluation unit
 

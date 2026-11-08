@@ -262,28 +262,48 @@ def wcst(mode, out, ctx):
     ctx.check(sum(map(len, data.values())), 12754, 'WCST test trials')
     a, parts = ctx.agent(), []
     original_mode = 'predictive' if mode.mode == 'human_predictive' else 'generative'
+    sampling = original_mode == 'generative' and ctx.action_rule == 'sample'
+    if sampling:
+        import random
+        import numpy as np
     if ctx.smoke:
         data = dict(list(data.items())[:1])
         data = {sid: rows[:ctx.limit] for sid, rows in data.items()}
     with (out / 'decisions.jsonl').open('w') as stream:
         for sid, source in data.items():
+            if sampling:
+                # Original legal-readout control uses the original participant ID, not shard order.
+                seed = 10000 + sid
+                random.seed(seed)
+                np.random.seed(seed)
+                if 'torch' in sys.modules:
+                    sys.modules['torch'].manual_seed(seed)
             dialogue, rows = m.Dialogue('centaur', original_mode), []
             for i, row in enumerate(source):
                 state = dialogue.prompt(row)
                 p = a.choice_probabilities(state, m.QUESTION, list(m.LETTERS))
                 native = getattr(a, 'last_native_choice', None)
-                if native not in m.LETTERS:
-                    raise ValueError('WCST runs the original native-choice rule: the adapter must set '
-                                     f'last_native_choice to one of {m.LETTERS}, got {native!r}.')
-                key = m.LETTERS.index(native) + 1
+                if sampling:
+                    probabilities = np.asarray(p, dtype=float)
+                    if (probabilities.shape != (4,) or not np.isfinite(probabilities).all()
+                            or (probabilities < 0).any() or abs(probabilities.sum() - 1) > 1e-8):
+                        raise ValueError('Invalid legal-action probability distribution.')
+                    executed = str(np.random.choice(list(m.LETTERS), p=probabilities))
+                else:
+                    if native not in m.LETTERS:
+                        raise ValueError('WCST native choice requires last_native_choice to be one of '
+                                         f'{m.LETTERS}, got {native!r}.')
+                    executed = native
+                key = m.LETTERS.index(executed) + 1
                 assert len(p) == 4 and abs(sum(p) - 1) < 1e-6
                 record = {'subject_id': sid, 'trial': i, 'key': key,
                           'human_key': int(row['user_key']), 'ground_key': int(row['ground_key']),
-                          'legal_probabilities': [float(x) for x in p], 'native_choice': native}
+                          'legal_probabilities': [float(x) for x in p], 'native_choice': native,
+                          'executed_choice': executed, 'action_rule': 'sample' if sampling else 'native'}
                 stream.write(json.dumps(record, allow_nan=False) + '\n')
                 rows.append(record)
                 actual = int(row['user_key']) if original_mode == 'predictive' else key
-                dialogue.update(row, actual, native if original_mode == 'generative' else None)
+                dialogue.update(row, actual, executed if original_mode == 'generative' else None)
             part = {'subject_id': sid, 'mode': original_mode, 'trials': len(rows),
                     **m.task_metrics(source, [x['key'] for x in rows])}
             if original_mode == 'predictive':
@@ -291,6 +311,8 @@ def wcst(mode, out, ctx):
             parts.append(part)
     count = sum(x['trials'] for x in parts)
     summary = {'status': 'complete', 'mode': original_mode, 'responses': count,
+               'executed_action_rule': 'sample' if sampling else 'native',
+               'sampling_seed': '10000 + original subject_id' if sampling else None,
                'participants': len(parts), 'per_participant': parts,
                'original_full_vocabulary_nll': None,
                'original_full_vocabulary_nll_status': 'Not produced by the typed choice interface.'}

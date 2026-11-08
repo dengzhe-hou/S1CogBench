@@ -1,5 +1,7 @@
 # Prepare a comparison file
 
+Follow [ADD_MODEL.md](ADD_MODEL.md) to create a run and [COMPARISON_GUIDE.md](COMPARISON_GUIDE.md) to match the evaluated protocol. Native and sampled actions must remain distinct when viewing or submitting results.
+
 The homepage can display a local comparison next to a matching accepted protocol. It does not upload files, run inference, publish results or add an official ranking.
 
 1. Select the task, evaluation mode, metric and exact comparison context in the result explorer.

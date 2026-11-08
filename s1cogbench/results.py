@@ -1,8 +1,8 @@
 """Primary-target values from original summaries, written as result-schema rows.
 
-Rows follow results/aggregate/result_schema.json, with the comparison context
-(protocol, mode, metric, variant, scope, unit, aggregation, target) of the
-accepted Table 3 rows, so a new model can be compared row by row.
+Rows follow results/aggregate/result_schema.json. Only matching protocol,
+mode, metric, variant, scope, unit, aggregation and target define a comparison.
+Sampled execution remains distinct from native execution.
 """
 import csv
 import json
@@ -11,6 +11,7 @@ from pathlib import Path
 import statistics
 
 from s1cogbench.modes import PROBABILITY_METRICS
+from s1cogbench.planning import effective_action_rule, comparison_context
 
 COLUMNS = ['row_id', 'task', 'model', 'protocol', 'mode', 'metric', 'metric_variant', 'scope',
            'target', 'unit', 'aggregation', 'n', 'n_raw', 'steps', 'value_raw', 'value_status',
@@ -105,9 +106,8 @@ def encode(v):
 def row(mode, result, model, probabilities=True):
     """One result-schema row for the mode's primary target."""
     rule = result.get('action_rule', 'native')
-    c = {k: v.format(rule=rule) for k, v in mode.primary.items()}
-    if mode.family == 'mouselab_generative':
-        c['scope'] = f'{rule}_autonomous_full'
+    c = comparison_context(mode, rule)
+    effective_rule = effective_action_rule(mode, rule)
     p = result.get('primary') or {}
     notes = []
     status = 'user_supplied_full_protocol' if result['status'] == 'complete' else 'user_supplied_incomplete'
@@ -130,6 +130,7 @@ def row(mode, result, model, probabilities=True):
             'source': {'asset': f'{mode.task}/{mode.mode}/{result.get("summary_file", "mode_result.json")}',
                        'source_field': p.get('source_field')},
             'runtime_context': {'device': result.get('device'), 'action_rule': rule,
+                                'effective_action_rule': effective_rule,
                                 'adapter': Path(result.get('adapter', '')).name}}
 
 

@@ -23,9 +23,20 @@
   <em>S1CogBench connects cognitive tasks to model evaluation.</em>
 </p>
 
-Language models are no longer used only to generate text. Software also asks them for decisions, in routing, guardrails, and automated gates. System One (System-1) decision models, also called typed decision models, such as Jev, Laya, and Intern-Decision, return one fast decision over the legal options, leaving no text to inspect, and a fast, well-formed decision does not show that the model used the evidence. **S1CogBench** asks what these models can and cannot do on established cognitive experiments, keeping each task's conditions and scoring apart from disclosed adaptations, and scoring human-response prediction, autonomous execution, and event probabilities separately. It covers five open models and Jev on 24 tasks (27 modes). To our knowledge, it is the first benchmark of System One decision models on established cognitive experiments, and it gives a shared test of whether their decisions respond to evidence, feedback, memory load, and future opportunities before software relies on them.
+Language models are no longer used only to generate text. Software also asks them for decisions, in routing, guardrails, and automated gates. System One (System-1) decision models, also called typed decision models, such as Jev, Laya, and Intern-Decision, return one fast decision over the legal options, leaving no text to inspect, and a fast, well-formed decision does not show that the model used the evidence. **S1CogBench** asks what these models can and cannot do on established cognitive experiments, keeping each task's conditions and scoring apart from disclosed adaptations, and scoring human-response prediction, autonomous execution, and event probabilities separately. The released arXiv snapshot covers five open models and Jev on 24 tasks (27 modes). To our knowledge, it is the first benchmark of System One decision models on established cognitive experiments, and it gives a shared test of whether their decisions respond to evidence, feedback, memory load, and future opportunities before software relies on them.
 
 Read the paper on [arXiv](https://arxiv.org/abs/2611.00911). The aggregate results are also on [Hugging Face](https://huggingface.co/datasets/dengzhe-hou/S1CogBench).
+
+## Add a model or inspect a protocol
+
+Start with [the new-model guide](docs/ADD_MODEL.md). The plan command lists the original inputs, denominators and adapter requirements without importing a model or reading datasets.
+
+```bash
+python -m s1cogbench plan --tasks all --json
+python -m s1cogbench plan --adapter my_agent.py --tasks all --json
+```
+
+Use [the comparison guide](docs/COMPARISON_GUIDE.md) to distinguish action rules and score targets. [Release scope](docs/RELEASE_SCOPE.md) separates the released aggregate from later manuscript evidence and tooling changes. Existing numeric results are preserved.
 
 ## Quick Start
 
@@ -86,7 +97,7 @@ python -m s1cogbench eval --adapter my_agent.py --device cuda:0 --model-label my
 | Accepted results and Table 3 | [All rows](results/aggregate/results.csv) · [Table 3](results/aggregate/table2.csv) |
 | Weights of the evaluated models, not bundled | [Find the adapters](docs/MODELS.md#adapters-of-the-accepted-rows) |
 
-The manuscript evaluates five open models and Jev on 24 tasks (27 modes), and Claude on selected modes.
+The released arXiv snapshot evaluates five open models and Jev on 24 tasks (27 modes), and Claude on selected modes.
 
 | Model | Access | Modes | Adapter or template |
 | --- | --- | --- | --- |
@@ -156,7 +167,7 @@ Each reference keeps its own target, fit and provenance. A human-action NLL is n
 <summary><strong>Repository structure</strong></summary>
 
 ```text
-s1cogbench/   The command line: list, doctor, eval, smoke
+s1cogbench/   The command line: list, plan, doctor, eval, smoke
 scripts/      Source fetching, the original task runners, Table 3 and homepage builders
 src/          Task loaders, environments and scorers
 examples/     Model adapters and templates
@@ -166,14 +177,14 @@ experiments/  Portable code of the supplementary controls
 derived/      Inputs derived from published code
 envs/         The pinned Julia environment for Mouselab
 homepage/     The project page source
-tests/        Offline tests of the adapter templates
+tests/        Offline tests of adapter templates and evaluation entry behavior
 ```
 
 </details>
 
 ## Citation
 
-If you use S1CogBench in your research, please cite:
+If you use S1CogBench in your research, please cite.
 
 ```bibtex
 @misc{hou2026s1cogbench,
