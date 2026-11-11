@@ -30,17 +30,44 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 const mainSource = fs.readFileSync(path.join(root, 'homepage/app.js'), 'utf8');
 const mainTable = JSON.parse(fs.readFileSync(path.join(root, 'results/latest/table2.json'), 'utf8'));
-const body = {innerHTML: '', querySelectorAll: () => []};
-const documentFixture = {querySelector: selector => {
-  assert.equal(selector, '#leaderboard-body');
-  return body;
-}};
-vm.runInNewContext(mainSource.slice(0, mainSource.indexOf('async function initialize()')) +
-  '\nrenderLeaderboard(mainTable);', {document: documentFixture, mainTable, Intl});
-const renderedRows = body.innerHTML.match(/<tr>[\s\S]*?<\/tr>/g);
+const elements = new Map();
+const element = selector => {
+  if (!elements.has(selector)) elements.set(selector, {
+    innerHTML: '', textContent: '', value: '', checked: false,
+    dataset: {}, options: [{}, {}], querySelectorAll: () => [], addEventListener: () => {}
+  });
+  return elements.get(selector);
+};
+element('#leaderboard-model').value = 'all';
+const context = {document: {querySelector: element}, mainTable, Intl};
+vm.createContext(context);
+vm.runInContext(mainSource.slice(0, mainSource.indexOf('async function initialize()')), context);
+const render = () => {
+  vm.runInContext('renderLeaderboard(mainTable);', context);
+  return element('#leaderboard-body').innerHTML.match(/<tr>[\s\S]*?<\/tr>/g);
+};
+let renderedRows = render();
 assert.equal(renderedRows.length, 27);
+for (const row of renderedRows) assert.equal(row.match(/<td(?:\s|>)/g).length, 12);
+for (const model of ['Laya', 'Intern', 'Llama', 'Minitaur', 'Qwen', 'Nox', 'CLM']) {
+  assert.match(element('#results thead').innerHTML, new RegExp('>' + model + '<'));
+}
+assert.doesNotMatch(element('#results thead').innerHTML, />Haiku</);
+element('#leaderboard-api').checked = true;
+renderedRows = render();
 for (const row of renderedRows) assert.equal(row.match(/<td(?:\s|>)/g).length, 16);
+assert.match(element('#results thead').innerHTML, />Haiku</);
+element('#leaderboard-api').checked = false;
+element('#leaderboard-model').value = 'Nox';
+renderedRows = render();
+for (const row of renderedRows) assert.equal(row.match(/<td(?:\s|>)/g).length, 6);
+element('#leaderboard-model').value = 'all';
+element('#leaderboard-search').value = 'mouselab';
+assert.equal(render().length, 2);
+element('#leaderboard-search').value = '';
+element('#leaderboard-domain').value = 'Evidence';
+assert.equal(render().length, 4);
 const page = fs.readFileSync(path.join(root, 'homepage/index.html'), 'utf8');
 assert.match(page, /colspan="7" scope="colgroup">Full-suite open models/);
 assert.match(page, /<th scope="col">Nox<\/th><th scope="col">CLM<\/th>/);
-console.log('The actual main-table renderer includes seven open-model columns across all 27 modes.');
+console.log('Main-table rendering passed for all 27 modes, seven models, API columns, model selection, domain and task search.');
