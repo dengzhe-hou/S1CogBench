@@ -78,6 +78,20 @@ python -m s1cogbench eval --adapter my_agent.py --device cuda:0 --model-label my
 
 [Read the full quickstart](docs/QUICKSTART.md) · [Write an adapter](docs/MODELS.md)
 
+## Submit your model's scores
+
+Evaluate your model, compare its `results.json` locally on the [project page](https://dengzhe-hou.github.io/S1CogBench/#explorer), and package a completed run for the [community leaderboard](https://dengzhe-hou.github.io/S1CogBench/#community).
+
+```bash
+# Fill examples/submission_metadata.json and save it as runs/my-model/metadata.json.
+python -m s1cogbench package --run runs/my-model \
+    --metadata runs/my-model/metadata.json --id my-model-20261111 \
+    --output submissions/my-model-20261111.json
+python -m s1cogbench check-submissions
+```
+
+Open a GitHub pull request with the submission JSON. After maintainer review and merge, the leaderboard updates automatically. Each task and action rule is compared separately using the original metric. The paper table stays fixed, and no overall cognitive score is added. Read [the submission guide](docs/SUBMIT_RESULTS.md) for evidence and data-sharing requirements.
+
 ## From a task source to a result row
 
 [![Workflow from fetching the sources to result rows](docs/assets/workflow.svg)](docs/assets/workflow.svg)

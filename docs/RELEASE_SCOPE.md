@@ -9,3 +9,5 @@ Use [ADD_MODEL.md](ADD_MODEL.md) to integrate a model and [COMPARISON_GUIDE.md](
 The new `plan` command performs no model or API call. Its adapter inspection checks Python syntax and the factory signature without importing the file. It is not a neural-reproduction test. Existing measured validation and its limitations remain in [REPRODUCTION.md](REPRODUCTION.md).
 
 This source update includes no new inference, restricted participant transcripts, model weights or new manuscript result tables. No separate GitHub release or tag is created by this update.
+
+Community submissions now live separately under `submissions/`. The homepage builds their per-target leaderboard after review and merge, without rewriting `results/aggregate/` or the released paper table. The `package` and `check-submissions` commands use saved outputs only. Format checks and maintainer review are distinct from independent model reproduction.

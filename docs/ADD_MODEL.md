@@ -19,4 +19,6 @@ python -m s1cogbench eval --adapter my_agent.py --device cuda:0 \
   --model-label my-model --tasks all --output runs/my-model
 ```
 
-`eval` performs real inference and may incur provider charges. Use the original full protocol for reported comparisons. A diagnostic smoke run checks integration and is not a complete benchmark result. Submit the raw records and [comparison metadata](SUBMIT_RESULTS.md), retaining checkpoint, readout, action rule, histories and source scoring.
+`eval` performs real inference and may incur provider charges. Use the original full protocol for reported comparisons. A diagnostic smoke run checks integration and is not a complete benchmark result. Retain checkpoint, readout, action rule, histories and source scoring.
+
+After a complete run, compare `results.json` locally on the project page. Use `python -m s1cogbench package` to prepare the aggregate submission and open a GitHub pull request following [SUBMIT_RESULTS.md](SUBMIT_RESULTS.md). Raw participant records stay local under their original access terms.

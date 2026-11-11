@@ -5,13 +5,17 @@ Copies the aggregate files to homepage/data and writes homepage/docs from docs/ 
 HTML; needs the markdown package).
 """
 import argparse
+import json
 from pathlib import Path
 import re
 import shutil
+import sys
 
 import markdown
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from s1cogbench.community import build_board
 SITE = ROOT / 'homepage'
 GITHUB = 'https://github.com/dengzhe-hou/S1CogBench/blob/main/'
 PAGE = '''<!doctype html>
@@ -67,6 +71,8 @@ def main():
     shutil.copytree(ROOT / 'results/aggregate', SITE / 'data', dirs_exist_ok=True)
     shutil.copy2(ROOT / 'public_sources.json', SITE / 'data/public_sources.json')
     shutil.copy2(ROOT / 'LICENSE', SITE / 'LICENSE.txt')
+    (SITE / 'data/community.json').write_text(
+        json.dumps(build_board(ROOT), ensure_ascii=False, indent=2, allow_nan=False) + '\n')
     write_docs()
     print('Static homepage prepared at', SITE)
 

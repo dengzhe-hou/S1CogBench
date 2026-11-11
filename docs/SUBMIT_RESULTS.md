@@ -1,18 +1,45 @@
-# Prepare a comparison file
+# Submit results to the community leaderboard
 
-Follow [ADD_MODEL.md](ADD_MODEL.md) to create a run and [COMPARISON_GUIDE.md](COMPARISON_GUIDE.md) to match the evaluated protocol. Native and sampled actions must remain distinct when viewing or submitting results.
+You can evaluate your own model and submit scores through a GitHub pull request. Maintainers review the run settings and supporting evidence, then merge the submission. GitHub Pages rebuilds the [community leaderboard](https://dengzhe-hou.github.io/S1CogBench/#community) automatically. You run the model on your own compute or provider account.
 
-The homepage can display a local comparison next to a matching accepted protocol. It does not upload files, run inference, publish results or add an official ranking.
+The released paper table stays fixed. Community entries are labeled separately and retain their checkpoint, prompt and readout. Each task, target and action rule has its own comparison. There is no cross-task total score. Ranks reflect measured values before display rounding, keep ties, and do not imply statistically significant differences. Preference and undefined results have no rank. Positive infinite NLL remains positive infinite.
 
-1. Select the task, evaluation mode, metric and exact comparison context in the result explorer.
-2. Download a matching result template. Keep its task, protocol, mode, metric, metric variant, scope, target, unit and aggregation only if your run actually matches them.
-3. Fill the measured value, original value text, value status and full sample count. Preserve infinite and undefined values. Identify the model and disclose the actual checkpoint, prompt, readout, inference mode, precision, seed and runtime context in the accompanying notes and run record.
-4. Use “Add your results” to load the JSON. It stays in browser memory and is marked user-supplied. “Download view” exports the selected rows without changing the accepted snapshot.
+## Run the original protocol
 
-For a maintainable contribution, retain raw predictions, command, source revision, original input IDs, scorer output and per-condition sample counts. Explain material protocol deviations. Human-response NLL, autonomous reward, event-probability reports and controlled latency have different targets. Shared-device timing does not become an isolated speed comparison.
+Follow [ADD_MODEL.md](ADD_MODEL.md), then run one or more complete task modes. Use `--tasks all` for the whole suite or select a task or mode with `--tasks`. A submission can cover a single complete mode. Smoke tests and incomplete mode runs cannot enter the leaderboard.
 
-`python -m s1cogbench eval` writes `results.csv` and `results.json` in this format: one row per mode for its Table 3 primary target, with the comparison context of the accepted rows, the original value text, value status and sample count, and `status` `user_supplied_full_protocol` (or `user_supplied_incomplete` when a mode stopped). Add the run record (`run_config.json`) and the raw outputs under `<task>/<mode>/`.
+```bash
+python -m s1cogbench plan --adapter my_agent.py --tasks all --json
+python -m s1cogbench doctor --adapter my_agent.py
+python -m s1cogbench eval --adapter my_agent.py --device cuda:0 \
+    --model-label my-model --tasks all --output runs/my-model
+```
 
-Use `results/aggregate/result_schema.json` for the aggregate format. The homepage's import checks structural fields; it cannot verify that a submitted result was measured honestly, that all original inputs were used, or that checkpoint settings matched. Full acceptance uses the raw task-specific outputs and original scorer.
+The output directory must be new and inside the repository. A completed run writes `results.json`, `summary.json`, `run_config.json` and per-mode records. Retain all of them. The run may make paid API calls if your adapter uses a provider. Packaging and checking below make no model or API calls.
 
-No public submission service or automatic acceptance endpoint is active.
+## Package the saved scores
+
+Copy [the metadata template](../examples/submission_metadata.json) to `runs/my-model/metadata.json`. Replace every field with the actual checkpoint revision, code revision, adapter, prompt, readout, precision, seeds, hardware and command. Set `model_name` to the exact label passed to `eval`. The `evidence_url` should link to reproducible instructions and evidence that you are permitted to share. Keep the adapter and prompt available at a fixed code revision. Describe how original sources were obtained.
+
+```bash
+python -m s1cogbench package --run runs/my-model \
+    --metadata runs/my-model/metadata.json --id my-model-20261111 \
+    --output submissions/my-model-20261111.json
+python -m s1cogbench check-submissions
+```
+
+The package command reads the completed run, checks the aggregate against the saved mode result, and copies the aggregates and coverage counts. It preserves the original scoring denominator, which may count participants rather than actions. It does not copy raw trials, load an adapter, run inference, upload files or create a pull request.
+
+## Open a pull request
+
+Fork [the repository](https://github.com/dengzhe-hou/S1CogBench), add the generated JSON under `submissions/`, and open a pull request against `main`. Use the community-result pull request template and include your run evidence link. A maintainer checks the protocol, full counts, readout and evidence before merging. Material deviations should be discussed in the pull request instead of relabeling them as an existing protocol.
+
+The automated check validates structure, counts and comparison contexts. It cannot establish that reported model outputs are genuine. Merging means the report was reviewed, not that the maintainers independently reran the model. Later corrections use another pull request, keeping Git history available. Pending pull requests are not public leaderboard entries.
+
+Only add the aggregate submission JSON. Restricted participant inputs and per-item participant outputs must not be placed in a public pull request or public artifact link. For gated sources, provide instructions for an authorized reader to obtain the original data and reproduce the score. Record access restrictions in the evidence documentation. Keep weights, credentials and provider keys out of the submission.
+
+## Compare locally before submitting
+
+Use the result explorer's “Add your results” button to open `results.json` or the packaged submission JSON. It stays in browser memory and is marked user-supplied. Select a matching task, mode, metric and comparison context. The local import does not upload or submit anything.
+
+See [COMPARISON_GUIDE.md](COMPARISON_GUIDE.md) for the existing targets and action rules, [the result schema](../results/aggregate/result_schema.json) for aggregate fields, and [RELEASE_SCOPE.md](RELEASE_SCOPE.md) for the paper snapshot boundary.

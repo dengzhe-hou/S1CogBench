@@ -55,7 +55,18 @@ The full suite is about 910,000 adapter calls: 312,000 in the stationary bandits
 
 ## 5. Share a comparison
 
-Keep the raw outputs and the result rows. Record the checkpoint revision, adapter, prompt, readout, action rule, precision, seed and device. Runtime records retain hardware and sharing context, and latency is not a human reaction-time measure. See [SUBMIT_RESULTS.md](SUBMIT_RESULTS.md). A local run is a user-supplied result until the maintainers validate it.
+Open `runs/my-llama/results.json` with “Add your results” on the project page to compare locally. Match the task, mode, metric and comparison context. Local imports stay in your browser.
+
+To join the community leaderboard, fill [the metadata template](../examples/submission_metadata.json) with the actual run settings and a shareable evidence link, using `my-llama` as `model_name` for the command above.
+
+```bash
+python -m s1cogbench package --run runs/my-llama \
+    --metadata runs/my-llama/metadata.json --id my-llama-20261111 \
+    --output submissions/my-llama-20261111.json
+python -m s1cogbench check-submissions
+```
+
+Open a GitHub pull request with that submission file. Maintainer review and merge update the community leaderboard automatically. Keep raw outputs locally and follow the source data's sharing terms. See [SUBMIT_RESULTS.md](SUBMIT_RESULTS.md) for the full process.
 
 ## The CPU Bayes example
 

@@ -110,6 +110,29 @@ def cmd_list(args):
         print(f'{m.key:45s} {m.label:26s} {"+".join(m.interface):45s} n={m.scored_expected}')
 
 
+def cmd_package(args):
+    from s1cogbench.community import prepare
+    try:
+        item = prepare(args.run, args.metadata, args.id)
+    except (ValueError, KeyError, OSError) as exc:
+        raise SystemExit(str(exc)) from exc
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    with args.output.open('x', encoding='utf-8') as stream:
+        stream.write(json.dumps(item, ensure_ascii=False, indent=2, allow_nan=False) + '\n')
+    print(f'{len(item["rows"])} complete mode rows packaged at {args.output}.')
+    print('No files uploaded. Open a GitHub pull request to submit the JSON for review.')
+
+
+def cmd_check_submissions(args):
+    from s1cogbench.community import load_submissions
+    try:
+        items = load_submissions(args.directory)
+    except (ValueError, KeyError, OSError) as exc:
+        raise SystemExit(str(exc)) from exc
+    print(f'{len(items)} submissions passed format, count and comparison-context checks.')
+    print('These checks do not independently verify model outputs or certify reported scores.')
+
+
 def julia_problem(data_root):
     julia = locate('.tools/julia-1.4.1/bin/julia', data_root)
     if julia is None:
@@ -290,6 +313,15 @@ def main(argv=None):
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest='command', required=True)
     sub.add_parser('list', help='List the 27 modes.').set_defaults(func=cmd_list)
+    q = sub.add_parser('package', help='Prepare a completed run for community submission without uploading.')
+    q.add_argument('--run', type=Path, required=True)
+    q.add_argument('--metadata', type=Path, required=True)
+    q.add_argument('--id', required=True, help='Unique lowercase submission ID.')
+    q.add_argument('--output', type=Path, required=True, help='New submission JSON file.')
+    q.set_defaults(func=cmd_package)
+    q = sub.add_parser('check-submissions', help='Check community submission JSON files without inference.')
+    q.add_argument('--directory', type=Path, default=ROOT / 'submissions')
+    q.set_defaults(func=cmd_check_submissions)
     q = sub.add_parser('plan', help='Inspect modes and adapter syntax without model or data access.')
     q.add_argument('--tasks', nargs='+', default=['all'])
     q.add_argument('--adapter', type=Path)

@@ -20,7 +20,7 @@
 <meta property="og:url" content="https://dengzhe-hou.github.io/S1CogBench/">
 </head><body>
 <a class="skip" href="#leaderboard">Skip to the leaderboard</a>
-<nav class="navbar" aria-label="Main navigation"><a href="#leaderboard">Leaderboard</a><a href="#benchmark">Benchmark</a><a href="#tasks">Tasks</a><a href="#evaluate">Evaluate</a><a href="#resources">Resources</a></nav>
+<nav class="navbar" aria-label="Main navigation"><a href="#leaderboard">Paper results</a><a href="#community">Community</a><a href="#benchmark">Benchmark</a><a href="#tasks">Tasks</a><a href="#evaluate">Evaluate</a><a href="#resources">Resources</a></nav>
 <main>
 <header class="hero">
 <h1 class="wordmark"><img src="assets/mark.svg" alt=""><span>S1CogBench</span></h1>
@@ -57,6 +57,18 @@
 <p>The reference type marks fits to participants' responses (human fit), other participants' responses without a fitted model (human), the analytic solution or answer key (optimal), and policies without human fitting (algorithm). † recovered fit or policy, § same-participant fit, ‡ within-participant holdout, ∗ new reference, ¶ reference added for the remaining rows. ToMi has no human responses, so its reference is the answer key. <sup>s</sup> Haiku stated option probabilities, a different readout from the open models. Haiku politeness retains one invalid response of 128 and is +∞ on its valid responses.</p>
 <p class="legend-links"><a href="data/table2.csv" download>Table 3 as CSV</a> · <a href="data/table2.json" download>The row behind each cell</a> · <a href="docs/RESULTS.html">Results guide</a> · <a href="docs/BASELINES.html">References and Uniform</a></p>
 </div>
+</section>
+
+<section class="section wide" id="community" aria-labelledby="community-title">
+<h2 class="section-title" id="community-title">Community leaderboard</h2>
+<p class="section-lead">Submit your model through a GitHub pull request. Reviewed contributions appear here after merge, alongside matching paper results. Each task and action rule has its own comparison.</p>
+<p><a class="pill" href="docs/SUBMIT_RESULTS.html">Submit your results</a> <a class="pill" href="https://github.com/dengzhe-hou/S1CogBench/tree/main/submissions">Browse submissions</a></p>
+<p id="community-status" class="smallprint" role="status">Loading community results…</p>
+<div class="box workbench">
+<label>Task and protocol<select id="community-context" aria-label="Community leaderboard task and protocol"></select></label>
+<div id="community-results" aria-live="polite"></div>
+</div>
+<p class="smallprint">Ranks use the original target and direction, with ties retained. Preference and undefined values have no rank. Maintainer review is not an independent model rerun. Supporting settings and evidence remain linked.</p>
 </section>
 
 <section class="section wide" id="explorer" aria-labelledby="explorer-title">
@@ -145,4 +157,4 @@ python -m s1cogbench eval --adapter my_agent.py --device cuda:0 --model-label my
 <footer class="footer"><p><strong>S1CogBench</strong>, a benchmark of System One decision models on cognitive experiments.</p><p><a href="https://arxiv.org/abs/2611.00911">arXiv</a> · <a href="https://arxiv.org/pdf/2611.00911">PDF</a> · <a href="https://github.com/dengzhe-hou/S1CogBench">Code</a> · <a href="https://huggingface.co/datasets/dengzhe-hou/S1CogBench">Hugging Face</a> · <a href="data/data_manifest.json">Data manifest</a></p><p>Original project software uses the <a href="LICENSE.txt">MIT License</a>; third-party terms remain in force.</p></footer>
 <dialog id="import-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><h2>Add a comparison file</h2><p>Import aggregate JSON using the downloadable result schema. Files stay in this browser. Keep the protocol and target fields unchanged when making a matched comparison.</p><input type="file" id="import-file" accept=".json,application/json"><p id="import-error" role="alert"></p><button class="pill small" id="import-template">Download matching template</button></dialog>
 <div id="toast" role="status" aria-live="polite"></div>
-<script type="module" src="app.js"></script></body></html>
+<script type="module" src="app.js"></script><script type="module" src="community.js"></script></body></html>

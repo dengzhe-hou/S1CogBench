@@ -187,6 +187,10 @@ dialog h2 { font: 600 22px/30px var(--font-body); margin-bottom: 8px; }
 .doc-page pre { background: var(--code-bg); border: 1px solid var(--table-border); border-radius: 5px; padding: 12px 14px; overflow-x: auto; }
 .doc-page :not(pre) > code { background: var(--code-bg); padding: 1px 4px; border-radius: 3px; }
 .doc-back { font-size: 14px; }
+#community-context { width: 100%; margin: 8px 0 16px; }
+#community-results .result-table { min-width: 640px; }
+#community-results details { max-width: 650px; overflow-wrap: anywhere; }
+#community-results details p { font-size: 13px; margin: 8px 0; }
 
 @media (max-width: 768px) {
   .hero { padding: 24px 16px; }

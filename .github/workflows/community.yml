@@ -1,0 +1,40 @@
+name: Check community results
+
+on:
+  pull_request:
+    paths:
+      - 'submissions/**'
+      - 's1cogbench/**'
+      - 'tests/test_community.py'
+      - 'tests/test_community_web.cjs'
+      - 'homepage/community.js'
+      - '.github/workflows/community.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'submissions/**'
+      - 's1cogbench/**'
+      - 'tests/test_community.py'
+      - 'tests/test_community_web.cjs'
+      - 'homepage/community.js'
+      - '.github/workflows/community.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -B -m unittest discover -s tests -p test_community.py -v
+      - run: python -B -m s1cogbench check-submissions
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tests/test_community_web.cjs
