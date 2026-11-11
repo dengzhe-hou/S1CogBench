@@ -20,7 +20,7 @@
 <meta property="og:url" content="https://dengzhe-hou.github.io/S1CogBench/">
 </head><body>
 <a class="skip" href="#leaderboard">Skip to the leaderboard</a>
-<nav class="navbar" aria-label="Main navigation"><a href="#leaderboard">Paper results</a><a href="#community">Community</a><a href="#benchmark">Benchmark</a><a href="#tasks">Tasks</a><a href="#evaluate">Evaluate</a><a href="#resources">Resources</a></nav>
+<nav class="navbar" aria-label="Main navigation"><a href="#leaderboard">Latest results</a><a href="#community">Community</a><a href="#benchmark">Benchmark</a><a href="#tasks">Tasks</a><a href="#evaluate">Evaluate</a><a href="#resources">Resources</a></nav>
 <main>
 <header class="hero">
 <h1 class="wordmark"><img src="assets/mark.svg" alt=""><span>S1CogBench</span></h1>
@@ -33,35 +33,28 @@
 <section class="section" id="overview" aria-labelledby="overview-title">
 <h2 class="section-title" id="overview-title">Overview</h2>
 <div class="prose">
-<p>Language models are no longer used only to generate text. Software also asks them for decisions, in routing, guardrails, and automated gates. System One (System-1) decision models, also called typed decision models, such as Jev, Laya, and Intern-Decision, return one fast decision over the legal options, leaving no text to inspect, and a fast, well-formed decision does not show that the model used the evidence. S1CogBench asks what these models can and cannot do on established cognitive experiments, keeping each task's conditions and scoring apart from disclosed adaptations, and scoring human-response prediction, autonomous execution, and event probabilities separately. It covers five open models and Jev on 24 tasks (27 modes). </p>
-<ul class="findings">
-<li><strong>Decision models vary widely in reliability.</strong> Laya does not beat uniform choice on 17 of 26 targets, against 3 for Intern-Decision, which also beats the Qwen3.5 backbone it is fine-tuned from on 23.</li>
-<li><strong>Acting well does not imply predicting humans.</strong> In Mouselab, Qwen has the highest autonomous reward but predicts humans worse than uniform choice, and Laya has the best NLL of the open models with zero reward.</li>
-<li><strong>Aggregate scores hide condition effects.</strong> Horizon, the Wisconsin Card Sorting Test, and reinforcement learning and working memory show how decisions change across conditions that an overall score does not.</li>
-<li><strong>Speed comes mainly from the interface.</strong> Under the same readout, Intern-Decision is no faster than its same-size backbone, while generation takes 80 to 316 times as long as one forward pass in the two general models timed.</li>
-</ul>
-<p>To our knowledge, it is the first benchmark of System One decision models on established cognitive experiments, and it gives a shared test of whether their decisions respond to evidence, feedback, memory load, and future opportunities before software relies on them.</p>
+<p>Decision-making in humans and AI involves multiple cognitive abilities. System One decision models produce fast, structured choices. Their cognitive strengths and limitations, however, remain poorly understood. We introduce S1CogBench, a benchmark of 24 established cognitive tasks and 27 evaluation modes, evaluating seven open models and the API model Jev. It combines human-response prediction, autonomous execution, and controlled task manipulations to reveal strengths and failures that aggregate scores miss. We find distinct behavioral profiles across the evaluated models. In these models, strong performance on some learning tasks coexists with failures to gather information or adapt to feedback, while high accuracy does not guarantee human-like responses to changing task demands. Shared readout controls show that model rankings depend partly on how choices are extracted. Separate latency comparisons with generative language models show that long responses are much slower than direct decisions, whereas matched one-token generation adds little overhead. To our knowledge, S1CogBench is the first benchmark of System One decision models on established cognitive experiments. It provides a common empirical basis for identifying their capabilities and limitations before integrating them into automated decision systems.</p>
 </div>
 </section>
 
 <section class="section wide" id="leaderboard" aria-labelledby="leaderboard-title">
-<h2 class="section-title" id="leaderboard-title">Leaderboard</h2>
-<p class="section-lead">Each row is one target, in its own unit. There is no pooled cognitive score and no overall ranking, so compare within a row.</p>
+<h2 class="section-title" id="leaderboard-title">Latest seven-model results</h2>
+<p class="section-lead">The current release adds Nox and CLM and matches the accepted seven-model results. Each row is one target, in its own unit. There is no pooled cognitive score and no overall ranking, so compare within a row.</p>
 <div id="load-error" class="notice danger" hidden></div>
 <div class="table-scroll" tabindex="0" role="region" aria-label="Table 3, primary targets"><table id="results"><caption class="visually-hidden">Table 3. Primary targets for 27 full-suite modes, with complete targets from the selected-task API extension.</caption>
-<thead><tr><th rowspan="2" scope="col">Domain</th><th rowspan="2" scope="col" class="task-col">Task mode and primary target</th><th rowspan="2" scope="col">Uniform</th><th colspan="5" scope="colgroup">Full-suite open models</th><th colspan="4" scope="colgroup">Selected-task APIs</th><th colspan="2" scope="colgroup">Reference</th></tr>
-<tr><th scope="col">Laya</th><th scope="col">Intern</th><th scope="col">Llama</th><th scope="col">Minitaur</th><th scope="col">Qwen</th><th scope="col">Jev</th><th scope="col">Opus</th><th scope="col">Sonnet</th><th scope="col">Haiku</th><th scope="col">Value</th><th scope="col">Type</th></tr></thead>
-<tbody id="leaderboard-body"><tr><td colspan="15" class="loading">Loading Table 3…</td></tr></tbody></table></div>
+<thead><tr><th rowspan="2" scope="col">Domain</th><th rowspan="2" scope="col" class="task-col">Task mode and primary target</th><th rowspan="2" scope="col">Uniform</th><th colspan="7" scope="colgroup">Full-suite open models</th><th colspan="4" scope="colgroup">Selected-task APIs</th><th colspan="2" scope="colgroup">Reference</th></tr>
+<tr><th scope="col">Laya</th><th scope="col">Intern</th><th scope="col">Llama</th><th scope="col">Minitaur</th><th scope="col">Qwen</th><th scope="col">Nox</th><th scope="col">CLM</th><th scope="col">Jev</th><th scope="col">Opus</th><th scope="col">Sonnet</th><th scope="col">Haiku</th><th scope="col">Value</th><th scope="col">Type</th></tr></thead>
+<tbody id="leaderboard-body"><tr><td colspan="16" class="loading">Loading Table 3…</td></tr></tbody></table></div>
 <div class="legend">
-<p>Bold and gray apply only to the five full-suite open models; gray marks scores not better than Uniform. Opus, Sonnet, and Haiku are Claude 5.5. API cells marked <em>n.e.</em> are outside the measured full-task scope, <em>n.a.</em> lack a full probability score, <em>n.f.</em> have only non-full prefixes, <em>part.</em> retain incomplete records, and <em>canc.</em> were canceled before generation. <em>inv.</em> marks all-invalid reports, which leave the MAE undefined. NLL keeps only the epsilons of primary source scorers, so a zero human-choice probability can give +∞. Temporal discounting reports preference. Domain gives the organizational domain, not a validated ability.</p>
+<p>Bold and underlining mark the best and second-best scores among seven open models, including ties before rounding. Gray marks scores not better than Uniform. Opus, Sonnet, and Haiku are Claude 5.5. API cells marked <em>n.e.</em> are outside the measured full-task scope, <em>n.a.</em> lack a full probability score, <em>n.f.</em> have only non-full prefixes, <em>part.</em> retain incomplete records, and <em>canc.</em> were canceled before generation. <em>inv.</em> marks all-invalid reports, which leave the MAE undefined. NLL keeps only the epsilons of primary source scorers, so a zero human-choice probability can give +∞. Temporal discounting reports preference. Domain gives the organizational domain, not a validated ability.</p>
 <p>The reference type marks fits to participants' responses (human fit), other participants' responses without a fitted model (human), the analytic solution or answer key (optimal), and policies without human fitting (algorithm). † recovered fit or policy, § same-participant fit, ‡ within-participant holdout, ∗ new reference, ¶ reference added for the remaining rows. ToMi has no human responses, so its reference is the answer key. <sup>s</sup> Haiku stated option probabilities, a different readout from the open models. Haiku politeness retains one invalid response of 128 and is +∞ on its valid responses.</p>
-<p class="legend-links"><a href="data/table2.csv" download>Table 3 as CSV</a> · <a href="data/table2.json" download>The row behind each cell</a> · <a href="docs/RESULTS.html">Results guide</a> · <a href="docs/BASELINES.html">References and Uniform</a></p>
+<p class="legend-links"><a href="data/table2.csv" download>Latest scores as CSV</a> · <a href="data/table2_arxiv_20261031.csv" download>Original arXiv snapshot</a> · <a href="docs/LATEST_RESULTS.html">Release and readout details</a> · <a href="data/table2.json" download>The row behind each cell</a> · <a href="docs/RESULTS.html">Results guide</a> · <a href="docs/BASELINES.html">References and Uniform</a></p>
 </div>
 </section>
 
 <section class="section wide" id="community" aria-labelledby="community-title">
 <h2 class="section-title" id="community-title">Community leaderboard</h2>
-<p class="section-lead">Submit your model through a GitHub pull request. Reviewed contributions appear here after merge, alongside matching paper results. Each task and action rule has its own comparison.</p>
+<p class="section-lead">Submit your model through a GitHub pull request. Reviewed contributions appear here after merge, alongside matching maintainer results. Each task and action rule has its own comparison.</p>
 <p><a class="pill" href="docs/SUBMIT_RESULTS.html">Submit your results</a> <a class="pill" href="https://github.com/dengzhe-hou/S1CogBench/tree/main/submissions">Browse submissions</a></p>
 <p id="community-status" class="smallprint" role="status">Loading community results…</p>
 <div class="box workbench">
@@ -89,7 +82,7 @@
 <section class="section" aria-label="Benchmark framework">
 <figure class="box figure"><img src="assets/fig1.svg" alt="Six representative task interfaces above a diagram of model evaluation: task-specific adapters feed the model panel, which is scored separately on predicting human choices, executing its own actions, and reporting explicit probabilities." loading="lazy">
 <figcaption><strong>S1CogBench connects cognitive tasks to model evaluation.</strong> <strong>(a)</strong> Six representative tasks from the 24-task, 27-mode suite. <strong>(b)</strong> Adapters supply visible states, histories, and legal responses to the models, and each output has its own score.</figcaption></figure>
-<p class="scope-note">The five open models have at least one accepted full-sample protocol on all 120 task and model pairs. The catalogue retains 31 paradigms in ten organizational domains, and seven are deferred. Coverage does not mean every possible mode or metric.</p>
+<p class="scope-note">The seven open models have an accepted full-sample protocol on all 168 task and model pairs. The catalogue retains 31 paradigms in ten organizational domains, and seven are deferred. Coverage does not mean every possible mode or metric.</p>
 </section>
 
 <div class="band" id="tasks"><h2>Tasks</h2></div>

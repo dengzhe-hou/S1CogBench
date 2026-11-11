@@ -24,7 +24,7 @@ function communityHTML(board) {
           '<p><strong>' + esc(key.replaceAll("_", " ")) + '</strong> ' + esc(value) + '</p>').join("") +
         '</details>' : "";
       return '<tr><td>' + (row.rank ?? "Unranked") + '</td><td>' + esc(row.model_label) +
-        '<small class="result-meta">' + (row.origin === "community" ? "Reviewed community report" : "Paper snapshot") +
+        '<small class="result-meta">' + (row.origin === "community" ? "Reviewed community report" : row.origin === "maintainer" ? "Maintainer results" : "Paper snapshot") +
         '</small>' + details + '</td><td title="' + esc(row.value_raw) + '">' + esc(communityValue(row)) +
         '</td><td>' + esc(row.n ?? row.n_raw) + '</td><td><a href="' + esc(row.evidence_url) +
         '" target="_blank" rel="noopener">' + (metadata ? "Run evidence" : "Paper") + '</a></td></tr>';
@@ -47,7 +47,7 @@ async function initializeCommunity() {
     };
     select.addEventListener("change", render);
     status.textContent = data.submission_count ? data.submission_count + " merged community submissions. " + data.review_policy :
-      "Open for submissions. No external contribution has been merged yet. The paper snapshot is shown below.";
+      "Open for submissions. No external contribution has been merged yet. Seven-model maintainer results are shown below.";
     render();
   } catch (error) {
     status.textContent = error.message + " You can still read the paper results and submit through GitHub.";

@@ -8,7 +8,7 @@
   <a href="https://arxiv.org/abs/2611.00911"><img src="https://img.shields.io/badge/arXiv-2611.00911-B31B1B" alt="arXiv paper 2611.00911"></a>
   <a href="https://huggingface.co/datasets/dengzhe-hou/S1CogBench"><img src="https://img.shields.io/badge/Hugging%20Face-Results-FFB000" alt="Aggregate results on Hugging Face"></a>
   <a href="docs/QUICKSTART.md"><img src="https://img.shields.io/badge/Docs-Quickstart-2878D0" alt="Quickstart documentation"></a>
-  <a href="results/aggregate/table2.csv"><img src="https://img.shields.io/badge/Results-Table%203-2A8C82" alt="Table 3 as a CSV file"></a>
+  <a href="results/latest/table2.csv"><img src="https://img.shields.io/badge/Results-Table%203-2A8C82" alt="Table 3 as a CSV file"></a>
   <a href="task_catalog.json"><img src="https://img.shields.io/badge/Tasks-Catalogue-2A8C82" alt="Task catalogue"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2878D0" alt="MIT license for the original project software"></a>
 </p>
@@ -23,9 +23,9 @@
   <em>S1CogBench connects cognitive tasks to model evaluation.</em>
 </p>
 
-Language models are no longer used only to generate text. Software also asks them for decisions, in routing, guardrails, and automated gates. System One (System-1) decision models, also called typed decision models, such as Jev, Laya, and Intern-Decision, return one fast decision over the legal options, leaving no text to inspect, and a fast, well-formed decision does not show that the model used the evidence. **S1CogBench** asks what these models can and cannot do on established cognitive experiments, keeping each task's conditions and scoring apart from disclosed adaptations, and scoring human-response prediction, autonomous execution, and event probabilities separately. The released arXiv snapshot covers five open models and Jev on 24 tasks (27 modes). To our knowledge, it is the first benchmark of System One decision models on established cognitive experiments, and it gives a shared test of whether their decisions respond to evidence, feedback, memory load, and future opportunities before software relies on them.
+Decision-making in humans and AI involves multiple cognitive abilities. System One decision models produce fast, structured choices. Their cognitive strengths and limitations, however, remain poorly understood. We introduce S1CogBench, a benchmark of 24 established cognitive tasks and 27 evaluation modes, evaluating seven open models and the API model Jev. It combines human-response prediction, autonomous execution, and controlled task manipulations to reveal strengths and failures that aggregate scores miss. We find distinct behavioral profiles across the evaluated models. In these models, strong performance on some learning tasks coexists with failures to gather information or adapt to feedback, while high accuracy does not guarantee human-like responses to changing task demands. Shared readout controls show that model rankings depend partly on how choices are extracted. Separate latency comparisons with generative language models show that long responses are much slower than direct decisions, whereas matched one-token generation adds little overhead. To our knowledge, S1CogBench is the first benchmark of System One decision models on established cognitive experiments. It provides a common empirical basis for identifying their capabilities and limitations before integrating them into automated decision systems.
 
-Read the paper on [arXiv](https://arxiv.org/abs/2611.00911). The aggregate results are also on [Hugging Face](https://huggingface.co/datasets/dengzhe-hou/S1CogBench).
+Read the paper on [arXiv](https://arxiv.org/abs/2611.00911). The original arXiv aggregate is also on [Hugging Face](https://huggingface.co/datasets/dengzhe-hou/S1CogBench).
 
 ## Add a model or inspect a protocol
 
@@ -90,7 +90,7 @@ python -m s1cogbench package --run runs/my-model \
 python -m s1cogbench check-submissions
 ```
 
-Open a GitHub pull request with the submission JSON. After maintainer review and merge, the leaderboard updates automatically. Each task and action rule is compared separately using the original metric. The paper table stays fixed, and no overall cognitive score is added. Read [the submission guide](docs/SUBMIT_RESULTS.md) for evidence and data-sharing requirements.
+Open a GitHub pull request with the submission JSON. After maintainer review and merge, the leaderboard updates automatically. Each task and action rule is compared separately using the original metric. Maintainer result snapshots are versioned, and no overall cognitive score is added. Read [the submission guide](docs/SUBMIT_RESULTS.md) for evidence and data-sharing requirements.
 
 ## From a task source to a result row
 
@@ -108,10 +108,10 @@ Open a GitHub pull request with the submission JSON. After maintainer review and
 | 18 modes on public sources at pinned revisions | [Read the data guide](docs/DATA.md#fetch) |
 | Mouselab autonomous, which also needs Julia 1.4.1 | [Set up Julia](docs/DATA.md#julia-for-mouselab-autonomous) |
 | 8 modes on the gated Psych-101-test | [Request access](docs/DATA.md#gated-psych-101-test) |
-| Accepted results and Table 3 | [All rows](results/aggregate/results.csv) · [Table 3](results/aggregate/table2.csv) |
+| Accepted results and Table 3 | [All rows](results/latest/results.csv) · [Table 3](results/latest/table2.csv) |
 | Weights of the evaluated models, not bundled | [Find the adapters](docs/MODELS.md#adapters-of-the-accepted-rows) |
 
-The released arXiv snapshot evaluates five open models and Jev on 24 tasks (27 modes), and Claude on selected modes.
+The current release evaluates seven open models and Jev on 24 tasks (27 modes), with Claude on selected modes. See [the release guide](docs/LATEST_RESULTS.md) for the current scores and the retained five-model arXiv snapshot.
 
 | Model | Access | Modes | Adapter or template |
 | --- | --- | --- | --- |
@@ -120,6 +120,8 @@ The released arXiv snapshot evaluates five open models and Jev on 24 tasks (27 m
 | Llama-3.1-8B-Instruct | Open weights | All 27 | [By mode](docs/MODELS.md#adapters-of-the-accepted-rows) |
 | Minitaur8B | Open weights | All 27 | [`minitaur8b_choice_agent.py`](examples/minitaur8b_choice_agent.py) |
 | Qwen3.5-4B | Open weights | All 27 | [`qwen35_4b_choice_agent.py`](examples/qwen35_4b_choice_agent.py) |
+| Decision-2.0-Nox-4B | Open weights | All 27 | [Native readout and checkpoint](docs/LATEST_RESULTS.md) |
+| CLM-v0.1-8B | Open weights | All 27 | [Pooling readout and checkpoint](docs/LATEST_RESULTS.md) |
 | Jev 1.14 | API | All 27 | [`decision_api_choice.py`](examples/templates/decision_api_choice.py) |
 | Claude Opus 5.5 | API | 2 | [`generative_api_choice.py`](examples/templates/generative_api_choice.py) |
 | Claude Sonnet 5.5 | API | 3 | [`generative_api_choice.py`](examples/templates/generative_api_choice.py) |
@@ -127,7 +129,7 @@ The released arXiv snapshot evaluates five open models and Jev on 24 tasks (27 m
 | Your Hugging Face model | Your weights | Any | [`hf_causal_lm_choice.py`](examples/templates/hf_causal_lm_choice.py) |
 
 > [!NOTE]
-> All 27 modes run through the CLI with the CPU reference adapters. Among neural models, Llama-3.1-8B on a whole A100 is supported. In a pass of 20 calls per mode, all 23 comparable modes match the accepted runs exactly. On a MIG slice of an A100, prompts and identities match but probabilities differ by BF16 rounding steps, so the support does not extend to slices, and expect Llama numbers from a slice to differ from the accepted rows. The accepted results came from the original runners with model-specific adapters or published prompts, and the other neural models have not run through the CLI. See [REPRODUCTION.md](docs/REPRODUCTION.md).
+> All 27 modes run through the CLI with the CPU reference adapters. Among neural models, Llama-3.1-8B on a whole A100 is supported. In a pass of 20 calls per mode, all 23 comparable modes match the accepted runs exactly. On a MIG slice of an A100, prompts and identities match but probabilities differ by BF16 rounding steps, so the support does not extend to slices, and expect Llama numbers from a slice to differ from the accepted rows. The accepted results came from the original runners with model-specific adapters or published prompts, and the current seven-model score release does not extend this generic-CLI reproduction certification to every model. See [REPRODUCTION.md](docs/REPRODUCTION.md).
 
 ## Baselines
 
@@ -169,7 +171,7 @@ Each reference keeps its own target, fit and provenance. A human-action NLL is n
 | Write an adapter for my model | [Models and adapters](docs/MODELS.md) |
 | Get the data and check its terms | [Data](docs/DATA.md) · [License status](docs/LICENSE_STATUS.md) |
 | Read the protocols and scoring targets | [Protocols](docs/PROTOCOLS.md) |
-| Look up a number in Table 3 | [Results guide](docs/RESULTS.md) · [The row behind each cell](results/aggregate/table2.json) |
+| Look up a number in Table 3 | [Results guide](docs/RESULTS.md) · [The row behind each cell](results/latest/table2.json) |
 | Compare results without mixing contexts | [Grouping guide](results/aggregate/grouping_guide.md) · [Metric applicability](results/aggregate/metric_status.json) |
 | Understand a reference or the Uniform column | [Baselines](docs/BASELINES.md) |
 | See what has been reproduced and what has not | [Reproduction](docs/REPRODUCTION.md) · [CPU validation](docs/CPU_REUSE_VALIDATION_24.md) |

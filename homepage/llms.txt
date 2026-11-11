@@ -1,6 +1,6 @@
 # S1CogBench: What System One Decision Models Can and Cannot Do on Cognitive Experiments
 
-> S1CogBench is a benchmark of System One (System-1) decision models, also called typed decision models, on established cognitive experiments. These models, such as Jev, Laya and Intern-Decision, return one fast decision or a probability distribution over the legal options instead of generating text. S1CogBench evaluates five open models and Jev on 24 cognitive tasks in 27 modes, keeps each task's original conditions and scoring apart from disclosed adaptations, and scores human-response prediction, autonomous execution and event probabilities separately. There is no pooled cognitive score.
+> S1CogBench is a benchmark of System One (System-1) decision models, also called typed decision models, on established cognitive experiments. These models, such as Jev, Laya and Intern-Decision, return one fast decision or a probability distribution over the legal options instead of generating text. S1CogBench evaluates seven open models and Jev on 24 cognitive tasks in 27 modes, keeps each task's original conditions and scoring apart from disclosed adaptations, and scores human-response prediction, autonomous execution and event probabilities separately. There is no pooled cognitive score.
 
 Authors: Dengzhe Hou, Kazunori D Yamada. arXiv:2611.00911 (2026).
 
@@ -9,7 +9,7 @@ Authors: Dengzhe Hou, Kazunori D Yamada. arXiv:2611.00911 (2026).
 - Decision models vary widely in reliability.
 - Acting well in a task does not imply predicting human choices in it.
 - Aggregate scores hide how decisions respond to task conditions.
-- The speed of decision models comes mainly from answering without generation.
+- Long free-text response protocols are much slower than direct decisions, while matched one-token generation adds little overhead.
 
 ## Relevant to work on
 
@@ -18,12 +18,16 @@ Authors: Dengzhe Hou, Kazunori D Yamada. arXiv:2611.00911 (2026).
 - comparing model decisions with human choices from published experiments
 - reporting latency and cost of decision models against generative language models
 
+The active seven-model result release is dated 2026-11-10. The original five-model arXiv aggregate remains available separately.
+
 ## Links
 
 - [Paper](https://arxiv.org/abs/2611.00911)
 - [Project page](https://dengzhe-hou.github.io/S1CogBench/)
 - [Code](https://github.com/dengzhe-hou/S1CogBench)
-- [Data](https://huggingface.co/datasets/dengzhe-hou/S1CogBench)
+- [Current scores](https://dengzhe-hou.github.io/S1CogBench/#leaderboard)
+- [Result release guide](https://github.com/dengzhe-hou/S1CogBench/blob/main/docs/LATEST_RESULTS.md)
+- [Dataset mirror](https://huggingface.co/datasets/dengzhe-hou/S1CogBench)
 
 ## Citation
 

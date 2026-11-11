@@ -8,6 +8,8 @@ on:
       - 'tests/test_community.py'
       - 'tests/test_community_web.cjs'
       - 'homepage/community.js'
+      - 'results/latest/**'
+      - 'scripts/build_latest_results.py'
       - '.github/workflows/community.yml'
   push:
     branches: [main]
@@ -17,6 +19,8 @@ on:
       - 'tests/test_community.py'
       - 'tests/test_community_web.cjs'
       - 'homepage/community.js'
+      - 'results/latest/**'
+      - 'scripts/build_latest_results.py'
       - '.github/workflows/community.yml'
   workflow_dispatch:
 
@@ -32,6 +36,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - run: python -B scripts/build_latest_results.py
       - run: python -B -m unittest discover -s tests -p test_community.py -v
       - run: python -B -m s1cogbench check-submissions
       - uses: actions/setup-node@v4

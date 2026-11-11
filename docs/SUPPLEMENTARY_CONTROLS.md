@@ -1,5 +1,7 @@
 # Supplementary controls
 
+The current seven-model Horizon and WCST readout release is documented in [LATEST_RESULTS.md](LATEST_RESULTS.md). The original five-model P3 collection and other retained controls below keep their historical scope and counts.
+
 This page holds the accepted records of the controlled latency study (P1), the generated reasoning conditions (P2), the common legal readouts (P3) and the non-full Claude API prefixes. These controls are separate from the Table 3 targets, and no prefix replaces a full task evaluation. Portable preparation and execution code is in [experiments/decision_controls](../experiments/decision_controls/README.md).
 
 ## Controlled latency (P1)

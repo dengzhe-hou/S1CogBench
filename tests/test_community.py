@@ -43,6 +43,33 @@ def save_run(path, item, record):
 
 
 class CommunityTests(unittest.TestCase):
+    def test_current_release_has_all_189_primary_scores(self):
+        latest = ROOT / 'results/latest'
+        data = community.read_json(latest / 'results.json')
+        sources = community.read_json(latest / 'primary_sources.json')
+        table = community.read_json(latest / 'table2.json')
+        self.assertEqual(len(data['primary_row_ids']), 189)
+        self.assertEqual(set(sources['models']), {'Laya', 'Intern', 'Llama', 'Minitaur', 'Qwen', 'Nox', 'CLM'})
+        self.assertEqual(len(table['rows']), 27)
+        rows = {r['row_id']: r for r in data['rows']}
+        for point in sources['primary_points']:
+            target = next(t for t in table['rows'] if t['mode_key'] == point['mode_key'])
+            cell = target['cells'][point['model_label']]
+            self.assertEqual(cell['printed'], point['expected_printed'])
+            self.assertEqual(rows[cell['row_id']]['value'], point['value'])
+            self.assertEqual(rows[cell['row_id']]['n'], point['n'])
+
+    def test_complete_seven_model_readouts_are_in_the_live_board(self):
+        data = community.read_json(ROOT / 'results/latest/results.json')
+        controls = [r for r in data['rows'] if 'leaderboard_direction' in r]
+        self.assertEqual(len(controls), 70)
+        self.assertEqual({r['model'] for r in controls}, {'laya', 'intern_decision_4b', 'llama8b', 'minitaur8b', 'qwen35_4b', 'nox4b', 'clm8b'})
+        for row in controls:
+            self.assertEqual(row['n'], 34720 if row['task'] == 'horizon' else 75)
+        board = community.build_board()
+        indexed = {r['row_id'] for b in board['boards'] for r in b['entries']}
+        self.assertTrue(all(row['row_id'] in indexed for row in controls))
+
     def test_package_and_check_cli_do_not_import_model_or_copy_trials(self):
         item, record = fixture()
         with tempfile.TemporaryDirectory() as tmp:

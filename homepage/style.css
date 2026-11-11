@@ -191,6 +191,7 @@ dialog h2 { font: 600 22px/30px var(--font-body); margin-bottom: 8px; }
 #community-results .result-table { min-width: 640px; }
 #community-results details { max-width: 650px; overflow-wrap: anywhere; }
 #community-results details p { font-size: 13px; margin: 8px 0; }
+#results td.second { text-decoration: underline; text-underline-offset: 3px; }
 
 @media (max-width: 768px) {
   .hero { padding: 24px 16px; }

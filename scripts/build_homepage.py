@@ -69,6 +69,15 @@ def write_docs():
 def main():
     argparse.ArgumentParser(description=__doc__).parse_args()
     shutil.copytree(ROOT / 'results/aggregate', SITE / 'data', dirs_exist_ok=True)
+    for name in ['results.json', 'results.csv', 'table2.json', 'table2.csv', 'primary_sources.json', 'readout_sources.json']:
+        shutil.copy2(ROOT / 'results/latest' / name, SITE / 'data' / name)
+    shutil.copy2(ROOT / 'results/aggregate/table2.json', SITE / 'data/table2_arxiv_20261031.json')
+    shutil.copy2(ROOT / 'results/aggregate/table2.csv', SITE / 'data/table2_arxiv_20261031.csv')
+    catalog = json.loads((SITE / 'data/tasks.json').read_text())
+    latest = json.loads((SITE / 'data/results.json').read_text())
+    for task in catalog['tasks']:
+        task['public_result_rows'] = sum(row['task'] == task['task_id'] for row in latest['rows'])
+    (SITE / 'data/tasks.json').write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n')
     shutil.copy2(ROOT / 'public_sources.json', SITE / 'data/public_sources.json')
     shutil.copy2(ROOT / 'LICENSE', SITE / 'LICENSE.txt')
     (SITE / 'data/community.json').write_text(

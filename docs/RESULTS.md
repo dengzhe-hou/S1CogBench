@@ -1,8 +1,8 @@
 # Accepted results
 
-The fixed first-paper scope is 24 tasks and five open models, with at least one accepted full-sample protocol for all 120 pairs. The 31-task catalogue retains seven deferred tasks. The same files hold the Table 3 API rows: Jev 1.14 in 27 of 27 modes and Claude 5.5 on selected modes (`model_access` is `api`, and `runtime_context.readout` names the readout). A Table 3 cell printed as n.a., part., n.e., n.f., canc. or inv. is a row with no value whose `table2_marker` and `status` say why. See [API_EXTENSION.md](API_EXTENSION.md) and [API_TIME_COST.md](API_TIME_COST.md).
+The current release covers 24 tasks and seven open models, with all 168 task and model pairs complete. It supplies 189 primary scores and 70 Horizon and WCST readout metrics. See [LATEST_RESULTS.md](LATEST_RESULTS.md) for the source and version details. The original five-model arXiv snapshot remains available separately. The 31-task catalogue retains seven deferred tasks. Existing API rows retain Jev 1.14 in 27 modes and Claude 5.5 on selected modes. A table cell printed as n.a., part., n.e., n.f., canc. or inv. retains its marker and reason. See [API_EXTENSION.md](API_EXTENSION.md) and [API_TIME_COST.md](API_TIME_COST.md).
 
-Download the aggregate JSON/CSV from results/aggregate/. Keep task, protocol, mode, metric variant, scope, target, unit and aggregation together. Report denominator n. Infinity remains an infinite NLL; undefined values are not zero. Fine-grained execution-log strata are retained privately, not in the public aggregate bundle. Original and compact presentations, human prediction and autonomous execution, and binary-event versus class-summed Brier remain distinct.
+Download current JSON/CSV from results/latest/ and the historical arXiv files from results/aggregate/. Keep task, protocol, mode, metric variant, scope, target, unit and aggregation together. Report denominator n. Infinity remains an infinite NLL, and undefined values are not zero. Fine-grained execution logs remain under their source access terms. Original and compact presentations, human prediction and autonomous execution, and binary-event versus class-summed Brier remain distinct.
 
 The compact paper appendix keeps the central comparisons; the complete aggregate table and task catalogue retain all accepted condition results, including negative results. See DATA.md, PROTOCOLS.md and CPU_REUSE_VALIDATION_24.md for access and verification boundaries.
 
@@ -13,6 +13,8 @@ Horizon condition contrasts use six held-out participants, and their intervals a
 The repository provides the full condition tables, both grammar encodings (below), task-specific metric applicability, complete aggregate results, and extended protocol notes. Negative values, infinite NLL, and the undefined all-invalid MAE are retained.
 
 ## Grammar response likelihoods
+
+This diagnostic table retains the original five-model snapshot. It is separate from the current seven-model primary-score table.
 
 | Model | Binned NLL | Zero targets | Integer/choice NLL | Zero targets |
 | --- | ---: | ---: | ---: | ---: |

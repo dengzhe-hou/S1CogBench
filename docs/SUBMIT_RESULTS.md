@@ -2,7 +2,7 @@
 
 You can evaluate your own model and submit scores through a GitHub pull request. Maintainers review the run settings and supporting evidence, then merge the submission. GitHub Pages rebuilds the [community leaderboard](https://dengzhe-hou.github.io/S1CogBench/#community) automatically. You run the model on your own compute or provider account.
 
-The released paper table stays fixed. Community entries are labeled separately and retain their checkpoint, prompt and readout. Each task, target and action rule has its own comparison. There is no cross-task total score. Ranks reflect measured values before display rounding, keep ties, and do not imply statistically significant differences. Preference and undefined results have no rank. Positive infinite NLL remains positive infinite.
+Maintainer result snapshots are versioned, and the original arXiv table stays available. Community entries are labeled separately and retain their checkpoint, prompt and readout. Each task, target and action rule has its own comparison. There is no cross-task total score. Ranks reflect measured values before display rounding, keep ties, and do not imply statistically significant differences. Preference and undefined results have no rank. Positive infinite NLL remains positive infinite.
 
 ## Run the original protocol
 
@@ -42,4 +42,4 @@ Only add the aggregate submission JSON. Restricted participant inputs and per-it
 
 Use the result explorer's “Add your results” button to open `results.json` or the packaged submission JSON. It stays in browser memory and is marked user-supplied. Select a matching task, mode, metric and comparison context. The local import does not upload or submit anything.
 
-See [COMPARISON_GUIDE.md](COMPARISON_GUIDE.md) for the existing targets and action rules, [the result schema](../results/aggregate/result_schema.json) for aggregate fields, and [RELEASE_SCOPE.md](RELEASE_SCOPE.md) for the paper snapshot boundary.
+See [COMPARISON_GUIDE.md](COMPARISON_GUIDE.md) for the existing targets and action rules, [the result schema](../results/aggregate/result_schema.json) for aggregate fields, and [RELEASE_SCOPE.md](RELEASE_SCOPE.md) for the result release boundary.

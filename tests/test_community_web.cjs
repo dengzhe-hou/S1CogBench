@@ -23,3 +23,24 @@ assert.equal(communityValue({value: null, value_status: 'undefined'}), 'Undefine
 board.entries[1].rank = null;
 assert.match(communityHTML(board), /Unranked/);
 console.log('Community board rendering passed, with separate provenance and retained undefined/infinite values.');
+
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const root = path.resolve(__dirname, '..');
+const mainSource = fs.readFileSync(path.join(root, 'homepage/app.js'), 'utf8');
+const mainTable = JSON.parse(fs.readFileSync(path.join(root, 'results/latest/table2.json'), 'utf8'));
+const body = {innerHTML: '', querySelectorAll: () => []};
+const documentFixture = {querySelector: selector => {
+  assert.equal(selector, '#leaderboard-body');
+  return body;
+}};
+vm.runInNewContext(mainSource.slice(0, mainSource.indexOf('async function initialize()')) +
+  '\nrenderLeaderboard(mainTable);', {document: documentFixture, mainTable, Intl});
+const renderedRows = body.innerHTML.match(/<tr>[\s\S]*?<\/tr>/g);
+assert.equal(renderedRows.length, 27);
+for (const row of renderedRows) assert.equal(row.match(/<td(?:\s|>)/g).length, 16);
+const page = fs.readFileSync(path.join(root, 'homepage/index.html'), 'utf8');
+assert.match(page, /colspan="7" scope="colgroup">Full-suite open models/);
+assert.match(page, /<th scope="col">Nox<\/th><th scope="col">CLM<\/th>/);
+console.log('The actual main-table renderer includes seven open-model columns across all 27 modes.');

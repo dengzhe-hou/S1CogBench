@@ -1,0 +1,28 @@
+Domain,Task mode,Primary target,Better direction,Uniform,Laya,Intern,Llama,Minitaur,Qwen,Nox,CLM,Jev,Opus,Sonnet,Haiku,Reference
+Evidence,Bayesian urn,Posterior MAE,lower,0.349,0.291,0.235,0.240,0.294,0.246,0.175,0.286,0.068,0.001,0.001,0.001,0.000
+Evidence,Multiple-cue judgment,Human NLL,lower,2.197,2.342,1.570,2.687,1.984,3.012,1.491,2.675,+∞,n.a.,n.a.,n.a.,2.029
+Evidence,Multi-attribute choice,Human NLL,lower,0.693,0.730,0.546,0.786,0.722,0.613,0.366,1.039,0.329,n.a.,n.a.,0.206s,0.192
+Evidence,Probability coherence,Human MAE (pp),lower,32.13,32.98,18.95,28.57,19.04,21.87,18.03,42.13,17.66,canc.,canc.,part.,16.54
+Category,SHJ categories,Accuracy (%),higher,50.0,50.0,65.0,52.9,54.5,71.3,94.5,50.4,87.4,n.e.,n.e.,91.2,93.8
+Category,Medin categories,Accuracy (%),higher,50.0,49.6,72.3,53.5,55.9,53.8,92.8,50.4,86.8,n.e.,n.e.,97.4,96.6
+Category,Weather prediction,Accuracy (%),higher,50.0,54.5,73.0,47.5,53.8,50.5,81.2,52.5,80.8,n.e.,n.e.,80.2,78.2
+History,RLWM,Accuracy (%),higher,33.3,34.9,77.8,41.7,49.0,59.3,86.3,36.7,89.5,n.e.,n.e.,89.4,89.3
+History,Recent probes,Accuracy (%),higher,50.0,49.7,82.1,55.6,49.5,53.5,99.3,55.9,99.0,n.e.,n.e.,100.0,100.0
+Adaptation,"WCST, prediction",Human NLL,lower,1.386,1.462,1.378,1.431,1.344,1.968,1.552,2.368,1.543,n.a.,n.a.,n.a.,0.840
+Adaptation,"WCST, autonomous",Accuracy (%),higher,25.0,25.5,27.9,31.4,28.2,25.2,32.1,25.7,28.5,n.f.,n.f.,n.f.,48.9
+Adaptation,Restless bandit,Better arm (%),higher,50.0,55.4,65.6,57.1,49.0,50.5,69.0,52.6,63.9,part.,91.1,part.,68.8
+Adaptation,Instrumental learning,Better arm (%),higher,75.0,73.9,81.4,79.2,86.7,80.0,89.8,69.5,86.7,n.e.,n.e.,part.,94.9
+Exploration,"Horizon, prediction",Human NLL,lower,0.693,0.702,0.518,0.503,0.409,0.661,0.408,1.161,0.414,n.a.,n.a.,0.390s,0.400
+Exploration,"Horizon, autonomous",Optimal (%),higher,50.0,54.8,78.7,66.4,71.7,63.3,86.0,50.0,82.9,n.f.,n.f.,n.f.,74.6
+Exploration,Stationary bandits,Optimal arm (%),higher,12.5,17.6,37.4,13.5,9.8,28.9,35.4,15.4,47.0,n.e.,n.e.,n.e.,68.1
+Information,Hybrid sampling,Human NLL,lower,1.386,1.390,1.116,1.515,1.039,2.648,2.044,3.012,+∞,n.a.,n.a.,n.a.,0.264
+Information,"Mouselab, prediction",Human NLL,lower,1.634,1.717,2.109,2.743,2.125,2.464,1.619,7.817,1.458,n.a.,n.a.,n.a.,1.367
+Information,"Mouselab, autonomous",Expected return,higher,7.01,0.00,0.00,3.77,0.00,17.40,3.77,0.00,8.21,n.e.,n.e.,n.e.,11.77
+Preference,BART,Mean reward,higher,0.84,0.00,0.74,0.28,0.00,0.00,4.72,1.03,1.76,n.e.,n.e.,6.27,10.49
+Preference,Temporal discounting,Delayed reward (%),,50.0,0.0,16.7,0.0,80.0,90.0,16.7,0.0,50.0,n.e.,n.e.,77.8,41.5
+Planning,Two-step,Mean reward,higher,0.50,0.50,0.52,0.50,0.51,0.52,0.53,0.49,0.55,n.e.,n.e.,0.55,0.52
+Social,False-belief QA,Accuracy (%),higher,50.0,39.5,82.5,81.8,65.0,82.8,81.9,67.4,71.5,n.e.,n.e.,82.6,100.0
+Social,Politeness,Aggregate NLL,lower,1.014,1.192,0.799,1.584,1.008,1.000,0.749,1.195,+∞,n.a.,n.a.,+∞s,0.587
+Social,Pragmatic interpretation,Aggregate NLL,lower,1.282,1.592,0.814,1.851,1.049,1.240,0.895,1.081,+∞,n.a.,n.a.,+∞s,0.416
+Social,Nonliteral number,MAE to human mean,lower,34.77,30.86,16.87,25.10,28.53,29.75,17.73,18.97,20.37,15.34,20.81,22.52,4.98
+Metacognition,Self-assessment,Human NLL,lower,2.039,+∞,2.029,2.523,1.885,2.262,1.893,3.094,+∞,n.a.,n.a.,n.a.,1.619

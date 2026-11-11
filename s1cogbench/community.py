@@ -151,8 +151,9 @@ def rank_entries(entries, direction):
 def build_board(root=ROOT):
     root = Path(root)
     submissions = load_submissions(root / 'submissions')
-    aggregate = read_json(root / 'results/aggregate/results.json')
-    table = read_json(root / 'results/aggregate/table2.json')
+    snapshot = root / 'results/latest'
+    aggregate = read_json(snapshot / 'results.json')
+    table = read_json(snapshot / 'table2.json')
     originals = {r['row_id']: r for r in aggregate['rows']}
     boards = {}
     directions = {}
@@ -170,7 +171,18 @@ def build_board(root=ROOT):
             if any(e['row_id'] == row['row_id'] for e in board['entries']):
                 continue
             board['entries'].append({**row, 'model_label': aggregate['model_labels'].get(row['model'], row['model']),
-                                     'origin': 'paper', 'evidence_url': 'https://arxiv.org/abs/2611.00911'})
+                                     'origin': 'maintainer',
+                                     'evidence_url': 'https://github.com/dengzhe-hou/S1CogBench/blob/main/docs/LATEST_RESULTS.md'})
+    for row in aggregate['rows']:
+        if 'leaderboard_direction' not in row:
+            continue
+        mode = BY_KEY[row['mode_key']]
+        board = boards.setdefault(context_key(row), {'mode_key': mode.key, 'label': row['leaderboard_label'],
+                                 'context': {k: row[k] for k in CONTEXT},
+                                 'direction': row['leaderboard_direction'], 'entries': []})
+        board['entries'].append({**row, 'model_label': aggregate['model_labels'][row['model']],
+                                 'origin': 'maintainer',
+                                 'evidence_url': 'https://github.com/dengzhe-hou/S1CogBench/blob/main/docs/LATEST_RESULTS.md'})
     for item in submissions:
         for row, coverage in zip(item['rows'], item['coverage']):
             key = context_key(row)
@@ -184,6 +196,6 @@ def build_board(root=ROOT):
                                      'evidence_url': item['metadata']['evidence_url']})
     for board in boards.values():
         board['entries'] = rank_entries(board['entries'], board['direction'])
-    return {'benchmark': BENCHMARK, 'submission_count': len(submissions),
+    return {'benchmark': BENCHMARK, 'release_id': aggregate['release_id'], 'submission_count': len(submissions),
             'review_policy': 'Community entries appear after maintainer review and merge. Format checks do not certify scores.',
             'boards': list(boards.values())}

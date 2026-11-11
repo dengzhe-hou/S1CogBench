@@ -12,4 +12,4 @@ Restless bandit retains its source-native runner. Requesting sampling for it sto
 
 New sampled results receive a distinct protocol key when the original fixed key did not encode the rule. Previously written files and published aggregate values are unchanged. An old `sample` label alone cannot establish which actions were executed. Inspect the raw decisions before using such a record.
 
-The public aggregate is the released arXiv snapshot. This tooling update does not add later manuscript tables or certify new neural inference. Follow [REPRODUCTION.md](REPRODUCTION.md) for existing measured reproduction limits and [RELEASE_SCOPE.md](RELEASE_SCOPE.md) for version boundaries.
+The active seven-model results are in results/latest, and the original arXiv snapshot remains in results/aggregate. Releasing retained accepted scores does not certify new neural inference. Follow [REPRODUCTION.md](REPRODUCTION.md) for existing measured reproduction limits and [RELEASE_SCOPE.md](RELEASE_SCOPE.md) for version boundaries.
