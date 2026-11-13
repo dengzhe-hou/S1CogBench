@@ -21,7 +21,7 @@ import traceback
 from types import SimpleNamespace
 
 from s1cogbench import ROOT, smoke
-from s1cogbench.modes import BY_KEY
+from s1cogbench.extensions import ALL_BY_KEY as BY_KEY
 from s1cogbench.results import primary_value
 
 sys.path.insert(0, str(ROOT))
@@ -485,10 +485,38 @@ def temporal_items(records):
             'delayed_reward_choice_rate': delayed / reward if reward else None}
 
 
+def extension(mode, out, ctx):
+    """An extension task: its own run() or the built-in scorer over load_trials()."""
+    from s1cogbench.extensions import MODULES, score_trials
+    m = MODULES[mode.task]
+    agent = ctx.agent()
+    if callable(getattr(m, 'run', None)):
+        done = m.run(agent, out, limit=ctx.limit if ctx.smoke else None, device=ctx.device,
+                     action_rule=ctx.action_rule)
+        summary = {'status': 'complete', **done['summary'], 'primary_value': done['value'],
+                   'primary_value_is_infinite': done['value'] == math.inf, 'primary_n': done['n']}
+        if summary['primary_value_is_infinite']:
+            summary['primary_value'] = None
+        inputs, scored = done['inputs'], done['scored']
+    else:
+        trials = list(m.load_trials(ROOT))
+        unique([t['id'] for t in trials], mode.inputs_expected, ctx)
+        if ctx.smoke:
+            trials = trials[:ctx.limit]
+        with (out / 'responses.jsonl').open('w') as stream:
+            summary = score_trials(mode.primary['metric'], agent, trials, stream)
+        inputs = scored = summary['responses']
+    ctx.check(inputs, mode.inputs_expected, 'Extension input count')
+    ctx.check(scored, mode.scored_expected, 'Extension scored count')
+    save(out / 'original_summary.json', summary)
+    return {'inputs': inputs, 'scored': scored, 'summary_file': 'original_summary.json', 'summary': summary}
+
+
 FAMILIES = {'typed': typed, 'four': four, 'posterior': posterior, 'prediction': prediction,
             'wcst': wcst, 'hybrid': hybrid, 'restless': restless, 'twostep': twostep,
             'horizon_generative': horizon_generative, 'mouselab_generative': mouselab_generative,
-            'bandit': bandit, 'expansion': expansion}
+            'bandit': bandit, 'expansion': expansion,
+            'extension': extension, 'extension_autonomous': extension}
 
 
 def run_mode(mode, out, ctx):
