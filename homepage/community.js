@@ -13,7 +13,9 @@ function communityHTML(board) {
   const esc = escapeCommunity;
   const context = board.context;
   const arrow = board.direction === "lower" ? " ↓" : board.direction === "higher" ? " ↑" : "";
-  return '<p class="smallprint">' + esc(context.metric + arrow) + ' · ' + esc(context.unit) + ' · ' +
+  const track = board.track === "extension" ?
+    '<p class="smallprint">Extension task, contributed outside the 24-task paper suite.</p>' : "";
+  return track + '<p class="smallprint">' + esc(context.metric + arrow) + ' · ' + esc(context.unit) + ' · ' +
     esc(context.aggregation) + '</p><p class="smallprint">' + esc(context.target) + '</p>' +
     '<div class="table-scroll"><table class="result-table"><thead><tr><th>Rank</th><th>Model and readout</th>' +
     '<th>Value' + arrow + '</th><th>n</th><th>Evidence</th></tr></thead><tbody>' +
@@ -38,8 +40,13 @@ async function initializeCommunity() {
     if (!response.ok) throw Error("Community results could not be loaded.");
     const data = await response.json();
     const select = document.querySelector("#community-context");
-    select.innerHTML = data.boards.map((board, i) => '<option value="' + i + '">' +
-      escapeCommunity(board.label + " · " + board.context.protocol) + '</option>').join("");
+    const option = (board, i) => '<option value="' + i + '">' +
+      escapeCommunity(board.label + " · " + board.context.protocol) + '</option>';
+    const group = (label, track) => {
+      const items = data.boards.map((board, i) => (board.track || "core") === track ? option(board, i) : "").join("");
+      return items ? '<optgroup label="' + label + '">' + items + '</optgroup>' : "";
+    };
+    select.innerHTML = group("Paper suite, 24 tasks", "core") + group("Extension tasks", "extension");
     const render = () => {
       const board = data.boards[Number(select.value)];
       document.querySelector("#community-results").innerHTML = board ? communityHTML(board) :

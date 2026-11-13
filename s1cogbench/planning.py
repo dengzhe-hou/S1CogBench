@@ -7,7 +7,8 @@ def effective_action_rule(mode, requested):
     if mode.family == 'restless':
         return 'source_native' if requested == 'native' else 'unsupported'
     if (mode.family == 'wcst' and mode.mode == 'autonomous_generative') or mode.family in {
-            'twostep', 'horizon_generative', 'mouselab_generative', 'bandit', 'expansion'}:
+            'twostep', 'horizon_generative', 'mouselab_generative', 'bandit', 'expansion',
+            'extension_autonomous'}:
         return requested
     return 'not_applied'
 
@@ -53,7 +54,7 @@ def describe(modes, requested):
         if m.family == 'bandit' and rule == 'native':
             methods.append('last_native_choice')
         context = comparison_context(m, requested)
-        rows.append({'key': m.key, 'label': m.label, 'adapter_interface': methods,
+        rows.append({'key': m.key, 'label': m.label, 'track': m.track, 'adapter_interface': methods,
                      'source_family': m.family, 'expected_input_units': m.inputs_expected,
                      'expected_scored_units': m.scored_expected,
                      'input_paths': list(m.inputs), 'requested_action_rule': requested,

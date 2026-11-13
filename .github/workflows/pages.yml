@@ -12,6 +12,8 @@ on:
       - 'results/latest/**'
       - 'submissions/**'
       - 's1cogbench/community.py'
+      - 's1cogbench/extensions.py'
+      - 'extensions/**'
       - 's1cogbench/modes.py'
       - 's1cogbench/planning.py'
       - 'public_sources.json'

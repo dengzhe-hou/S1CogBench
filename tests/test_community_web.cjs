@@ -22,6 +22,8 @@ assert.match(html, /\+∞/);
 assert.equal(communityValue({value: null, value_status: 'undefined'}), 'Undefined');
 board.entries[1].rank = null;
 assert.match(communityHTML(board), /Unranked/);
+assert.doesNotMatch(communityHTML(board), /Extension task/);
+assert.match(communityHTML({...board, track: 'extension'}), /Extension task, contributed outside the 24-task paper suite/);
 console.log('Community board rendering passed, with separate provenance and retained undefined/infinite values.');
 
 const fs = require('node:fs');

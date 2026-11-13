@@ -6,7 +6,7 @@ import re
 from urllib.parse import urlsplit
 
 from s1cogbench import ROOT
-from s1cogbench.modes import BY_KEY
+from s1cogbench.extensions import ALL_BY_KEY as BY_KEY
 from s1cogbench.planning import comparison_context, validate_action_rules
 
 BENCHMARK = 'arxiv-2611.00911'
@@ -165,7 +165,7 @@ def build_board(root=ROOT):
             if row is None:
                 continue
             key = context_key(row)
-            board = boards.setdefault(key, {'mode_key': mode.key, 'label': mode.label,
+            board = boards.setdefault(key, {'mode_key': mode.key, 'label': mode.label, 'track': mode.track,
                                           'context': {k: row[k] for k in CONTEXT},
                                           'direction': target['direction'], 'entries': []})
             if any(e['row_id'] == row['row_id'] for e in board['entries']):
@@ -178,7 +178,7 @@ def build_board(root=ROOT):
             continue
         mode = BY_KEY[row['mode_key']]
         board = boards.setdefault(context_key(row), {'mode_key': mode.key, 'label': row['leaderboard_label'],
-                                 'context': {k: row[k] for k in CONTEXT},
+                                 'track': mode.track, 'context': {k: row[k] for k in CONTEXT},
                                  'direction': row['leaderboard_direction'], 'entries': []})
         board['entries'].append({**row, 'model_label': aggregate['model_labels'][row['model']],
                                  'origin': 'maintainer',
@@ -187,15 +187,19 @@ def build_board(root=ROOT):
         for row, coverage in zip(item['rows'], item['coverage']):
             key = context_key(row)
             mode = BY_KEY[coverage['mode_key']]
-            board = boards.setdefault(key, {'mode_key': mode.key, 'label': mode.label,
+            board = boards.setdefault(key, {'mode_key': mode.key, 'label': mode.label, 'track': mode.track,
                                           'context': {k: row[k] for k in CONTEXT},
-                                          'direction': directions[mode.key], 'entries': []})
+                                          'direction': directions.get(mode.key, mode.direction),
+                                          'entries': []})
             board['entries'].append({**row, 'model_label': item['metadata']['model_name'],
                                      'origin': 'community', 'submission_id': item['submission_id'],
                                      'metadata': item['metadata'],
                                      'evidence_url': item['metadata']['evidence_url']})
     for board in boards.values():
         board['entries'] = rank_entries(board['entries'], board['direction'])
+    ordered = sorted(boards.values(), key=lambda b: b['track'] != 'core')  # paper suite first, stable
     return {'benchmark': BENCHMARK, 'release_id': aggregate['release_id'], 'submission_count': len(submissions),
             'review_policy': 'Community entries appear after maintainer review and merge. Format checks do not certify scores.',
-            'boards': list(boards.values())}
+            'extension_policy': 'Extension tasks are contributed paradigms outside the 24-task paper suite. '
+                                'Their boards are separate and never enter paper tables.',
+            'boards': ordered}

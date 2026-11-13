@@ -1,6 +1,6 @@
-"""python -m s1cogbench {list,plan,doctor,eval}
+"""python -m s1cogbench {list,plan,doctor,eval,package,check-submissions}
 
-  list    the 27 evaluated modes, their adapter methods and inputs
+  list    the 27 evaluated modes and the extension tasks, their adapter methods and inputs
   plan    selected modes, adapter contract and action rules without importing the adapter
   doctor  which modes the local data and runtimes can run, and why not
   eval    run modes through their original runners and scorers
@@ -18,7 +18,8 @@ import sys
 import time
 
 from s1cogbench import ROOT, VERSION, results, smoke
-from s1cogbench.modes import MODES, select
+from s1cogbench.extensions import EXTENSION_MODES, select
+from s1cogbench.modes import MODES
 from s1cogbench.planning import describe, effective_action_rule, inspect_adapter, validate_action_rules
 
 UNIFORM = ROOT / 'examples/uniform_reference_agent.py'
@@ -107,6 +108,10 @@ def cmd_plan(args):
 # ---------------------------------------------------------------- list / doctor
 def cmd_list(args):
     for m in MODES:
+        print(f'{m.key:45s} {m.label:26s} {"+".join(m.interface):45s} n={m.scored_expected}')
+    print(f'Extension tasks ({len(EXTENSION_MODES)}), outside the 24-task paper suite; '
+          'select them with --tasks extensions or their IDs.')
+    for m in EXTENSION_MODES:
         print(f'{m.key:45s} {m.label:26s} {"+".join(m.interface):45s} n={m.scored_expected}')
 
 
@@ -297,7 +302,7 @@ def smoke_check(out, modes, states, adapter, write_expected, calls):
     expected = json.loads(smoke.EXPECTED.read_text())['modes']
     problems, compared = [], 0
     for m, s in zip(modes, states):
-        if s['status'] == 'not_run':
+        if s['status'] == 'not_run' or m.track == 'extension':  # stored values cover the paper modes only
             continue
         compared += 1
         problems += smoke.compare(m.key, values[m.key], expected)
@@ -305,6 +310,9 @@ def smoke_check(out, modes, states, adapter, write_expected, calls):
                                                     indent=2) + '\n')
     verdict = (f'SMOKE PASSED: {compared} modes match the stored values.' if not problems else
                f'SMOKE FAILED: {len(problems)} differences in {compared} modes; see smoke_check.json.')
+    extension = sum(m.track == 'extension' and s['status'] != 'not_run' for m, s in zip(modes, states))
+    if extension:
+        verdict += f' {extension} extension modes ran; they have no stored values to compare.'
     return {'passed': not problems, 'compared': compared, 'problems': problems, 'verdict': verdict}
 
 
@@ -312,7 +320,7 @@ def main(argv=None):
     p = argparse.ArgumentParser(prog='python -m s1cogbench', description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest='command', required=True)
-    sub.add_parser('list', help='List the 27 modes.').set_defaults(func=cmd_list)
+    sub.add_parser('list', help='List the 27 modes and the extension tasks.').set_defaults(func=cmd_list)
     q = sub.add_parser('package', help='Prepare a completed run for community submission without uploading.')
     q.add_argument('--run', type=Path, required=True)
     q.add_argument('--metadata', type=Path, required=True)
@@ -332,7 +340,7 @@ def main(argv=None):
                              ('eval', cmd_eval, 'Run modes through the original runners.')):
         q = sub.add_parser(name, help=text)
         q.add_argument('--tasks', nargs='+', default=['all'],
-                       help='all, task IDs or task:mode keys (see `list`).')
+                       help='all (the 27 paper modes), extensions, task IDs or task:mode keys (see `list`).')
         q.add_argument('--data-root', type=Path, default=ROOT,
                        help='Directory with data/, external/, literature/, .tools/ (default: repository).')
         q.add_argument('--adapter', type=Path, help='Python file defining create_agent(device).')

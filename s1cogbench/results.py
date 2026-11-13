@@ -35,6 +35,9 @@ def nll(v, infinite):
 def primary_value(mode, s, out=None):
     """Table 3 primary target of one mode from its original summary `s`."""
     task = mode.task
+    if mode.track == 'extension':
+        return value(nll(s['primary_value'], s['primary_value_is_infinite']), s['primary_n'],
+                     '/primary_value', invalid=s.get('invalid_responses', 0))
     if task == 'bayesian_urn_inference':
         if 'full_code_default400' not in s:  # smoke subset
             return value(s['posterior_mae'], s['scored_rows'], '/posterior_mae')

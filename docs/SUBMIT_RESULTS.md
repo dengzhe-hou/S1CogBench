@@ -17,6 +17,8 @@ python -m s1cogbench eval --adapter my_agent.py --device cuda:0 \
 
 The output directory must be new and inside the repository. A completed run writes `results.json`, `summary.json`, `run_config.json` and per-mode records. Retain all of them. The run may make paid API calls if your adapter uses a provider. Packaging and checking below make no model or API calls.
 
+Extension tasks are submitted the same way. Select them with `--tasks extensions` or their IDs. Their rows keep the task's own protocol and appear in the Extension tasks group of the leaderboard, never among the paper tasks. See [ADD_TASK.md](ADD_TASK.md) to contribute a task.
+
 ## Package the saved scores
 
 Copy [the metadata template](../examples/submission_metadata.json) to `runs/my-model/metadata.json`. Replace every field with the actual checkpoint revision, code revision, adapter, prompt, readout, precision, seeds, hardware and command. Set `model_name` to the exact label passed to `eval`. The `evidence_url` should link to reproducible instructions and evidence that you are permitted to share. Keep the adapter and prompt available at a fixed code revision. Describe how original sources were obtained.

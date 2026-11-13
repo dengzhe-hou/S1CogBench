@@ -92,6 +92,17 @@ python -m s1cogbench check-submissions
 
 Open a GitHub pull request with the submission JSON. After maintainer review and merge, the leaderboard updates automatically. Each task and action rule is compared separately using the original metric. Maintainer result snapshots are versioned, and no overall cognitive score is added. Read [the submission guide](docs/SUBMIT_RESULTS.md) for evidence and data-sharing requirements.
 
+## Contribute a task
+
+The 24 paper tasks stay fixed, and new paradigms join a separate extension track. An extension task is one file, `extensions/<task_id>/task.py`, with the task's source, terms, comparison context and trials. The command line finds it automatically, and its leaderboard appears in its own group. `--tasks all` still runs only the 27 paper modes.
+
+```bash
+cp -r extensions/_template extensions/my_task      # then fill in TASK and load_trials()
+python -m s1cogbench eval --smoke --tasks my_task --output runs/my-task-smoke
+```
+
+Read [the task guide](docs/ADD_TASK.md) for the review criteria, and [CONTRIBUTING.md](CONTRIBUTING.md) for all ways to contribute.
+
 ## From a task source to a result row
 
 [![Workflow from fetching the sources to result rows](docs/assets/workflow.svg)](docs/assets/workflow.svg)
@@ -178,6 +189,7 @@ Each reference keeps its own target, fit and provenance. A human-action NLL is n
 | Read the Jev and Claude settings, time and cost | [API extension](docs/API_EXTENSION.md) · [Time and cost](docs/API_TIME_COST.md) |
 | Read the latency, generation and readout controls | [Supplementary controls](docs/SUPPLEMENTARY_CONTROLS.md) · [Latency](docs/LATENCY.md) |
 | Share my results | [Submit results](docs/SUBMIT_RESULTS.md) |
+| Add a new cognitive task | [Task guide](docs/ADD_TASK.md) · [Extension tasks](extensions/README.md) |
 
 <details>
 <summary><strong>Repository structure</strong></summary>
@@ -187,6 +199,7 @@ s1cogbench/   The command line: list, plan, doctor, eval, smoke
 scripts/      Source fetching, the original task runners, Table 3 and homepage builders
 src/          Task loaders, environments and scorers
 examples/     Model adapters and templates
+extensions/   Contributed tasks outside the 24-task paper suite, and a template
 results/      Accepted aggregate results, references and Table 3
 docs/         Guides and retained records
 experiments/  Portable code of the supplementary controls

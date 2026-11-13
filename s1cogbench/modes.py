@@ -63,6 +63,8 @@ class Mode:
     scored_expected: int  # original scored count checked by the CPU validation
     primary: dict         # comparison context of the Table 3 primary target
     note: str = ''
+    track: str = 'core'   # 'core' for the 27 paper modes, 'extension' for extensions/<task>/task.py
+    direction: str = ''   # better direction of an extension target; core directions are in table2.json
 
     @property
     def key(self):

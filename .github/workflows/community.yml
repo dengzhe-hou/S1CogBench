@@ -6,6 +6,9 @@ on:
       - 'submissions/**'
       - 's1cogbench/**'
       - 'tests/test_community.py'
+      - 'tests/test_extensions.py'
+      - 'tests/fixtures/**'
+      - 'extensions/**'
       - 'tests/test_community_web.cjs'
       - 'homepage/community.js'
       - 'homepage/app.js'
@@ -19,6 +22,9 @@ on:
       - 'submissions/**'
       - 's1cogbench/**'
       - 'tests/test_community.py'
+      - 'tests/test_extensions.py'
+      - 'tests/fixtures/**'
+      - 'extensions/**'
       - 'tests/test_community_web.cjs'
       - 'homepage/community.js'
       - 'homepage/app.js'
@@ -42,6 +48,7 @@ jobs:
           python-version: '3.11'
       - run: python -B scripts/build_latest_results.py
       - run: python -B -m unittest discover -s tests -p test_community.py -v
+      - run: python -B -m unittest discover -s tests -p test_extensions.py -v
       - run: python -B -m s1cogbench check-submissions
       - uses: actions/setup-node@v4
         with:
