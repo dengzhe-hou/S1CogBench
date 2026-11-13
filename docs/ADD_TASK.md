@@ -8,14 +8,15 @@ Extension tasks never change the paper suite. `--tasks all` still selects only t
 
 Maintainers review each task against these points. Address each one in the pull request.
 
-1. **A published source.** The paradigm and its human data, answer key or environment come from a peer-reviewed study or an established benchmark, cited in `TASK['source']`.
-2. **Terms that allow the use.** The data license permits evaluation. Commit inputs only if the license permits redistribution. Otherwise `TASK['obtain']` explains how to retrieve them at a pinned revision. Gated or restricted participant records never enter a pull request.
-3. **A new paradigm.** A new seed, prompt, condition or transcription of an existing paper or extension task is not a new task.
-4. **The original protocol.** Keep official splits, participant IDs and complete histories. State every change from the original in `TASK['adaptations']`, such as text display, supplied histories or a constrained response set.
-5. **Full counts.** `n_inputs` and `n_scored` are the full source counts. Full runs stop when the counts differ.
-6. **Visible information only.** `state`, `question` and `output_keys` hold only what a participant could see at that point. Targets, later feedback and hidden environment values stay with the scorer.
-7. **A uniform control and a reference.** The pull request reports the score of `examples/uniform_reference_agent.py` on the full task, or the analytic uniform expectation for accuracy and reward targets. `TASK['reference']` gives at least one reference score with its provenance, such as a model fitted to training participants, an analytic solution or an answer key.
-8. **One paradigm per pull request,** with the checks below passing.
+1. **A cognitive or behavioral paradigm.** The paradigm comes from research on human cognition or behavior, and the source study ran it with human participants. A knowledge or skill test with an answer key but no participant study behind it does not qualify.
+2. **A published source.** The paradigm and its human data, answer key or environment come from a peer-reviewed study or an established benchmark, cited in `TASK['source']`.
+3. **Terms that allow the use.** The data license permits evaluation. Commit inputs only if the license permits redistribution. Otherwise `TASK['obtain']` explains how to retrieve them at a pinned revision. Gated or restricted participant records never enter a pull request.
+4. **A new paradigm or a new study.** A new seed, prompt or condition of an existing paper or extension task is not a new task, and neither is the same data encoded another way. Data of an existing paradigm from a different study, with its own participants, is welcome as a separate task under its own ID, for example the paradigm name followed by the first author and year. Its leaderboard stays apart from that of the existing task.
+5. **The original protocol.** Keep official splits, participant IDs and complete histories. State every change from the original in `TASK['adaptations']`, such as text display, supplied histories or a constrained response set.
+6. **Full counts.** `n_inputs` and `n_scored` are the full source counts. Full runs stop when the counts differ.
+7. **Visible information only.** `state`, `question` and `output_keys` hold only what a participant could see at that point. Targets, later feedback and hidden environment values stay with the scorer.
+8. **A uniform control and a reference.** The pull request reports the score of `examples/uniform_reference_agent.py` on the full task, or the analytic uniform expectation for accuracy and reward targets. `TASK['reference']` gives at least one reference score with its provenance, such as a model fitted to training participants, an analytic solution or an answer key. Before merging, a maintainer reruns the full uniform control and compares it with the reported value. The reference is checked against its cited provenance and is not refitted.
+9. **One task per pull request,** with the checks below passing.
 
 ## Write the task file
 
@@ -49,6 +50,6 @@ The smoke run has no stored values for extension tasks, so it checks that the ta
 
 ## Open the pull request
 
-Fork the repository, add `extensions/<task_id>/`, and open a pull request with the [extension-task template](../.github/PULL_REQUEST_TEMPLATE/extension_task.md). Maintainers check the source, terms, protocol, counts and reference before merging. A merged task appears in `list` and can receive model results through [SUBMIT_RESULTS.md](SUBMIT_RESULTS.md), and its leaderboard joins the Extension tasks group on the project page.
+Fork the repository, add `extensions/<task_id>/`, and open a pull request with the [extension-task template](../.github/PULL_REQUEST_TEMPLATE/extension_task.md). Before merging, maintainers check the source, terms, protocol, counts and reference, and rerun the full uniform control. A merged task appears in `list` and can receive model results through [SUBMIT_RESULTS.md](SUBMIT_RESULTS.md), and its leaderboard joins the Extension tasks group on the project page.
 
 Model results for a new task go in a separate pull request, after the task is merged, so the task can be reviewed apart from any score.
