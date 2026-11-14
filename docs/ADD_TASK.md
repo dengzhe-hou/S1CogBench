@@ -4,6 +4,8 @@ S1CogBench keeps its 24 paper tasks fixed. New paradigms join a separate extensi
 
 Extension tasks never change the paper suite. `--tasks all` still selects only the 27 paper modes, and the paper tables and maintainer results do not include extension tasks. Their leaderboards appear in a separate group on the project page.
 
+If you would rather not write the task file, describe the paradigm in a [paradigm proposal](https://github.com/dengzhe-hou/S1CogBench/issues/new?template=propose_paradigm.yml). Anyone can later turn a proposal into a task under the criteria below.
+
 ## What a task needs before review
 
 Maintainers review each task against these points. Address each one in the pull request.

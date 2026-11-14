@@ -1,0 +1,68 @@
+name: Propose a paradigm
+description: Suggest a cognitive or behavioral paradigm for the extension track. No code needed.
+title: "[Paradigm] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Extension tasks are reviewed against [the task criteria](https://dengzhe-hou.github.io/S1CogBench/docs/ADD_TASK.html). A proposal lets anyone, you included, turn the paradigm into a task directory later. It does not add the task or any score by itself.
+  - type: input
+    id: paradigm
+    attributes:
+      label: Paradigm
+      description: Its name and what it manipulates, in one sentence. For a different study of a paradigm already in S1CogBench, also name that task.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source study
+      description: The peer-reviewed study or established benchmark, with a DOI or link.
+    validations:
+      required: true
+  - type: textarea
+    id: participants
+    attributes:
+      label: Human participants
+      description: Who did the task in the source study, how many, and the official split if there is one.
+    validations:
+      required: true
+  - type: textarea
+    id: data
+    attributes:
+      label: Data and license
+      description: Where the human data, answer key or environment can be obtained, its license, and whether it may be redistributed or is gated.
+    validations:
+      required: true
+  - type: dropdown
+    id: relation
+    attributes:
+      label: Relation to existing tasks
+      options:
+        - A paradigm not yet in S1CogBench
+        - A different study of a paradigm already in S1CogBench
+    validations:
+      required: true
+  - type: textarea
+    id: scoring
+    attributes:
+      label: Target and score
+      description: What a model would predict or do on each trial, how it would be scored, and any published reference score. Leave empty if unsure.
+  - type: dropdown
+    id: contributor
+    attributes:
+      label: Would you write the task file?
+      options:
+        - "Yes"
+        - With some help
+        - "No"
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Data and credentials
+      options:
+        - label: This issue attaches no restricted participant data, model weights, credentials or provider keys.
+          required: true

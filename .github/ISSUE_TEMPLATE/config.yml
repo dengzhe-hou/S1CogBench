@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Submit model results
+    url: https://dengzhe-hou.github.io/S1CogBench/docs/SUBMIT_RESULTS.html
+    about: Results enter the leaderboard through a pull request that adds one packaged JSON under submissions/, not through issues.
+  - name: Add a task with code
+    url: https://dengzhe-hou.github.io/S1CogBench/docs/ADD_TASK.html
+    about: Add a task directory under extensions/ through a pull request.

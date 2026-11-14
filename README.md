@@ -101,7 +101,7 @@ cp -r extensions/_template extensions/my_task      # then fill in TASK and load_
 python -m s1cogbench eval --smoke --tasks my_task --output runs/my-task-smoke
 ```
 
-Read [the task guide](docs/ADD_TASK.md) for the review criteria, and [CONTRIBUTING.md](CONTRIBUTING.md) for all ways to contribute.
+Read [the task guide](docs/ADD_TASK.md) for the review criteria, and [CONTRIBUTING.md](CONTRIBUTING.md) for all ways to contribute. To suggest a paradigm without writing code, open a [paradigm proposal](https://github.com/dengzhe-hou/S1CogBench/issues/new?template=propose_paradigm.yml). To report an error in the documentation, code, data, results or leaderboard, open an [error report](https://github.com/dengzhe-hou/S1CogBench/issues/new?template=correction.yml).
 
 ## From a task source to a result row
 
@@ -190,6 +190,7 @@ Each reference keeps its own target, fit and provenance. A human-action NLL is n
 | Read the latency, generation and readout controls | [Supplementary controls](docs/SUPPLEMENTARY_CONTROLS.md) · [Latency](docs/LATENCY.md) |
 | Share my results | [Submit results](docs/SUBMIT_RESULTS.md) |
 | Add a new cognitive task | [Task guide](docs/ADD_TASK.md) · [Extension tasks](extensions/README.md) |
+| Suggest a paradigm or report an error | [Paradigm proposal](https://github.com/dengzhe-hou/S1CogBench/issues/new?template=propose_paradigm.yml) · [Error report](https://github.com/dengzhe-hou/S1CogBench/issues/new?template=correction.yml) |
 
 <details>
 <summary><strong>Repository structure</strong></summary>
