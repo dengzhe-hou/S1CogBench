@@ -192,25 +192,19 @@ Each reference keeps its own target, fit and provenance. A human-action NLL is n
 | Add a new cognitive task | [Task guide](docs/ADD_TASK.md) · [Extension tasks](extensions/README.md) |
 | Suggest a paradigm or report an error | [Paradigm proposal](https://github.com/dengzhe-hou/S1CogBench/issues/new?template=propose_paradigm.yml) · [Error report](https://github.com/dengzhe-hou/S1CogBench/issues/new?template=correction.yml) |
 
-<details>
-<summary><strong>Repository structure</strong></summary>
+## Repository layout
 
-```text
-s1cogbench/   The command line: list, plan, doctor, eval, smoke
-scripts/      Source fetching, the original task runners, Table 3 and homepage builders
-src/          Task loaders, environments and scorers
-examples/     Model adapters and templates
-extensions/   Contributed tasks outside the 24-task paper suite, and a template
-results/      Accepted aggregate results, references and Table 3
-docs/         Guides and retained records
-experiments/  Portable code of the supplementary controls
-derived/      Inputs derived from published code
-envs/         The pinned Julia environment for Mouselab
-homepage/     The project page source
-tests/        Offline tests of adapter templates and evaluation entry behavior
-```
+Each main folder has a README that explains its files.
 
-</details>
+**Use the benchmark.** [`s1cogbench/`](s1cogbench/) is the command line that lists, plans, checks, runs and packages evaluations. [`examples/templates/`](examples/templates/) has adapter templates for your own model, and [`docs/`](docs/) has the guides.
+
+**Share results and tasks.** [`submissions/`](submissions/) holds community result files, and [`extensions/`](extensions/) holds contributed tasks outside the paper suite.
+
+**Read the results.** [`results/latest/`](results/latest/) is the current seven-model release, and [`results/aggregate/`](results/aggregate/) is the original five-model release with references and provenance.
+
+**Reproduce the paper.** [`src/`](src/) holds the task loaders, environments and scorers, [`scripts/`](scripts/) the source fetching, original runners and table builders, and [`examples/`](examples/) the adapters of the evaluated models. [`experiments/`](experiments/) holds the supplementary decision-time and readout controls. [`envs/`](envs/) and [`derived/`](derived/) hold the pinned Julia environment and the derived participant folds for Mouselab. These paths stay fixed, because the accepted result records cite them.
+
+**Project files.** [`homepage/`](homepage/) is the project page source and [`tests/`](tests/) the offline tests. [`task_catalog.json`](task_catalog.json) catalogues the tasks and their sources, [`selected_tasks_24.json`](selected_tasks_24.json) lists the 24 paper tasks with their domains, and [`public_sources.json`](public_sources.json) pins the download sources that `scripts/fetch_public_sources.py` reads.
 
 ## Citation
 
