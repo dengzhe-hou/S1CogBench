@@ -1,0 +1,56 @@
+name: Report an error
+description: A mistake in the documentation, code, task data, scoring, paper results or leaderboard.
+title: "[Error] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for checking. Give enough detail for a maintainer to find the error and confirm the correct value. If you already have a fix, a pull request is welcome too.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where is the error?
+      options:
+        - Documentation or project page
+        - Code or command line
+        - Task data, trials or scoring
+        - Paper results or result files
+        - Community leaderboard or a submission
+        - Something else
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: File and line, page link, table and row, or the task, mode and model on the leaderboard.
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What it says or does now
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What it should say or do
+      description: The correct value or behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: How you found it, such as a command and its output, the source paper with page or table, or a record in this repository.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Data and credentials
+      options:
+        - label: This issue contains no restricted participant data, model weights, credentials or provider keys.
+          required: true
