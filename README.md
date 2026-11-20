@@ -42,8 +42,8 @@ Use [the comparison guide](docs/COMPARISON_GUIDE.md) to distinguish action rules
 
 **Run every mode through its original runner and scorer in about two minutes.** The smoke run makes a few calls per mode with a uniform reference adapter, on one CPU, with no model weights.
 
-> [!CAUTION]
-> Reproducing the 2026-10-26 CPU validation bit for bit needs Python 3.11. Under Python 3.12, 6 of the 27 modes differ in the last digits of floats, because Python 3.12 made the built-in float `sum()` compensated.
+> [!NOTE]
+> Use Python 3.12, as in the commands below. Only a bit-for-bit match with the 2026-10-26 CPU validation needs Python 3.11. Under Python 3.12, 6 of the 27 modes differ from it in the last digits of floats, at most 3e-14 relative, because Python 3.12 made the built-in float `sum()` compensated ([reproduction record](docs/REPRODUCTION.md)).
 
 ```bash
 git clone https://github.com/dengzhe-hou/S1CogBench.git
@@ -66,23 +66,29 @@ python -m s1cogbench eval --smoke --output runs/smoke
 
 The last line says `SMOKE PASSED`, or lists the differences in `runs/smoke/smoke_check.json`.
 
-**Then evaluate your own model.** An adapter is a Python file with `create_agent(device)`, and a template is the shortest way to write one.
+**Then evaluate your own model.** A Hugging Face causal language model needs no code. `--adapter hf:` with its Hub id or local directory runs it through the [Hugging Face template](examples/templates/hf_causal_lm_choice.py), which reads the probabilities of the legal option labels as the accepted Llama and Qwen rows do, and labels the results with the model name. Any other model needs an adapter, a Python file with `create_agent(device)`, and a template is the shortest way to write one.
 
 > [!CAUTION]
 > `--output` must be a new directory inside the repository, for example `runs/my-model`. The original runners refuse to write anywhere else.
 
 ```bash
+python -m s1cogbench eval --adapter hf:Qwen/Qwen2.5-1.5B-Instruct --device cuda:0 \
+    --tasks all --output runs/qwen2.5-1.5b
 python -m s1cogbench eval --adapter my_agent.py --device cuda:0 --model-label my-model \
     --tasks all --output runs/my-model
 ```
 
+Add `@<commit>` after the model id to pin a revision, and set `S1_HF_DTYPE=float16` on GPUs without bfloat16.
+
 [Read the full quickstart](docs/QUICKSTART.md) · [Write an adapter](docs/MODELS.md)
 
-**Or get a reliability count in about an hour.** The eight lite targets rank the evaluated models as the full 26 do, and `score` gives a 95% bootstrap interval against uniform choice for each.
+**Or get a reliability count in about an hour.** The eight lite targets rank the evaluated models as the full 26 do, and `score` gives a 95% bootstrap interval against uniform choice for each. [The Colab notebook](examples/colab_lite.ipynb) runs these two commands for a Hugging Face model.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dengzhe-hou/S1CogBench/blob/main/examples/colab_lite.ipynb)
 
 ```bash
-python -m s1cogbench eval --adapter my_agent.py --device cuda:0 --tasks lite --output runs/my-model-lite
-python -m s1cogbench score runs/my-model-lite
+python -m s1cogbench eval --adapter hf:Qwen/Qwen2.5-1.5B-Instruct --device cuda:0 --tasks lite --output runs/qwen2.5-1.5b-lite
+python -m s1cogbench score runs/qwen2.5-1.5b-lite
 ```
 
 ## Reliability against uniform choice
@@ -205,7 +211,7 @@ Each reference keeps its own target, fit and provenance. A human-action NLL is n
 | Get the data and check its terms | [Data](docs/DATA.md) · [License status](docs/LICENSE_STATUS.md) |
 | Read the protocols and scoring targets | [Protocols](docs/PROTOCOLS.md) |
 | Look up a number in Table 3 | [Results guide](docs/RESULTS.md) · [The row behind each cell](results/latest/table2.json) |
-| Get a reliability count, or score my model on the lite targets | [Reliability](docs/RELIABILITY.md) |
+| Get a reliability count, or score my model on the lite targets | [Reliability](docs/RELIABILITY.md) · [Colab notebook](examples/colab_lite.ipynb) |
 | Compare results without mixing contexts | [Grouping guide](results/aggregate/grouping_guide.md) · [Metric applicability](results/aggregate/metric_status.json) |
 | Understand a reference or the Uniform column | [Baselines](docs/BASELINES.md) |
 | See what has been reproduced and what has not | [Reproduction](docs/REPRODUCTION.md) · [CPU validation](docs/CPU_REUSE_VALIDATION_24.md) |
@@ -219,7 +225,7 @@ Each reference keeps its own target, fit and provenance. A human-action NLL is n
 
 Each main folder has a README that explains its files.
 
-**Use the benchmark.** [`s1cogbench/`](s1cogbench/) is the command line that lists, plans, checks, runs and packages evaluations. [`examples/templates/`](examples/templates/) has adapter templates for your own model, and [`docs/`](docs/) has the guides.
+**Use the benchmark.** [`s1cogbench/`](s1cogbench/) is the command line that lists, plans, checks, runs and packages evaluations. [`examples/templates/`](examples/templates/) has adapter templates for your own model, [`examples/colab_lite.ipynb`](examples/colab_lite.ipynb) runs the lite targets in Colab, and [`docs/`](docs/) has the guides.
 
 **Share results and tasks.** [`submissions/`](submissions/) holds community result files, and [`extensions/`](extensions/) holds contributed tasks outside the paper suite.
 

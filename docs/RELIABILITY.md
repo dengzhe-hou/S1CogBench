@@ -24,4 +24,6 @@ python -m s1cogbench eval --tasks lite --adapter path/to/adapter.py --device cud
 python -m s1cogbench score runs/my_model
 ```
 
+[The Colab notebook](../examples/colab_lite.ipynb) runs both steps for a Hugging Face model ([open in Colab](https://colab.research.google.com/github/dengzhe-hou/S1CogBench/blob/main/examples/colab_lite.ipynb)).
+
 `score` recomputes each lite target from the saved records, and the result must equal the value the run wrote in `mode_result.json`. It then writes `reliability.json` into the run directory, with the interval and class of each target. The seed of each target is fixed, `[20261103, Table 3 row index]`. On the Nox and CLM runs, `score` gives the same class as the published interval table for all 16 lite cells.

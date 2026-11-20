@@ -1,6 +1,13 @@
 """Template: a Hugging Face causal language model as an S1CogBench adapter.
 
-Copy this file, then run, for example:
+Run it as it is with `--adapter hf:<model>[@<revision>]`, which sets
+S1_HF_MODEL and S1_HF_REVISION for every worker and labels the results with
+the model name:
+
+    python -m s1cogbench eval --adapter hf:meta-llama/Llama-3.1-8B-Instruct \\
+        --device cuda:0 --tasks all --output runs/llama
+
+To change the readout, copy this file and pass the copy instead:
 
     S1_HF_MODEL=meta-llama/Llama-3.1-8B-Instruct \\
     python -m s1cogbench eval --adapter my_hf_agent.py --device cuda:0 \\
@@ -18,7 +25,9 @@ src/hf_choice_models.py and src/integer_label_choice.py):
   "Return only one legal integer.". Labels are the task keys when they are
   single capital letters or integers, otherwise A, B, C, ... in legal order.
   Chat models get their chat template (with thinking disabled where the
-  template supports it); base models get the raw text and "Answer: ".
+  template supports it); base models get the raw text and a last line
+  "Answer:", and each label follows after one space, so the space joins the
+  label's token rather than the prompt's.
 - When every label is one token after the prompt, choice_probabilities is the
   softmax at temperature 1 over the legal label logits of the next token.
   Otherwise each legal reply (label plus end of turn) is scored by the sum of
@@ -30,7 +39,9 @@ src/hf_choice_models.py and src/integer_label_choice.py):
   at most 6 tokens after "Return only the probability as a number from 0 to
   1." and accepts only a reply that is such a number; anything else is None
   (invalid). confidence_probability (Restless bandit) asks the same for
-  "Machine <chosen> currently has the higher average reward.".
+  "Machine <chosen> currently has the higher average reward." and raises an
+  error on a reply that is not such a number, because the Restless runner
+  has no rule for invalid reports.
 
 This is an explicit typed-choice readout, not the model's free generation and
 not the original full-vocabulary NLL of any source paper.
@@ -56,6 +67,7 @@ class HFCausalLMChoice:
         self.model = AutoModelForCausalLM.from_pretrained(
             model, revision=revision, torch_dtype=getattr(torch, dtype)).to(self.device).eval()
         self.chat = self.tokenizer.chat_template is not None
+        self.reply_space = '' if self.chat else ' '
         self.context = getattr(self.model.config, 'max_position_embeddings', None)
         self.turn_end = self._turn_end()
         self.metadata = {
@@ -71,7 +83,7 @@ class HFCausalLMChoice:
     # ------------------------------------------------------------ prompts
     def _render(self, content):
         if not self.chat:
-            return content + '\nAnswer: '
+            return content + '\nAnswer:'
         return self.tokenizer.apply_chat_template(
             [{'role': 'user', 'content': content}], tokenize=False, add_generation_prompt=True,
             enable_thinking=False)
@@ -116,7 +128,7 @@ class HFCausalLMChoice:
         prefix = self._ids(prompt)
         replies = []
         for label in labels:
-            joined = self._ids(prompt + label)
+            joined = self._ids(prompt + self.reply_space + label)
             if joined[:len(prefix)] != prefix:
                 raise ValueError('A legal label changes the tokenization of the prompt.')
             replies.append(joined[len(prefix):])
@@ -124,7 +136,7 @@ class HFCausalLMChoice:
         if not single:
             replies = []
             for label in labels:
-                joined = self._ids(prompt + label + self.turn_end)
+                joined = self._ids(prompt + self.reply_space + label + self.turn_end)
                 if joined[:len(prefix)] != prefix:
                     raise ValueError('A legal reply changes the tokenization of the prompt.')
                 replies.append(joined[len(prefix):])
@@ -183,7 +195,11 @@ class HFCausalLMChoice:
         return self._probability(state + '\n' + question['instructions'])
 
     def confidence_probability(self, state, chosen, original_specifications):
-        return self._probability(state + f'\nMachine {chosen} currently has the higher average reward.')
+        q = self._probability(state + f'\nMachine {chosen} currently has the higher average reward.')
+        if q is None:
+            raise ValueError('The Restless bandit needs a confidence from 0 to 1, but the model replied '
+                             f'{self.last_raw_answer!r}. Its runner has no rule for invalid reports.')
+        return q
 
 
 def create_agent(device):

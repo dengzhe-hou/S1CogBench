@@ -75,8 +75,8 @@
 </div>
 <p class="smallprint">Ranks use the original target and direction, with ties retained. Preference and undefined values have no rank. Maintainer review is not an independent model rerun. Supporting settings and evidence remain linked.</p>
 </section><section aria-label="Evaluate a model" class="section" id="evaluate"><h2 class="section-title">🚀 Evaluate your model</h2><div class="evaluate-steps">
-<div class="evaluate-step"><b>Add one adapter.</b><p>Use the interface and templates for the outputs your model supports.</p><a href="https://github.com/dengzhe-hou/S1CogBench/blob/main/docs/ADD_MODEL.md">Model integration guide ↗</a></div>
-<div class="evaluate-step"><b>Run the original tasks.</b><p>Acquire the source data, check the installation, then run the complete protocols.</p><a href="https://github.com/dengzhe-hou/S1CogBench/blob/main/docs/QUICKSTART.md">Start the evaluation ↗</a></div>
+<div class="evaluate-step"><b>Add one adapter.</b><p>Use the interface and templates for the outputs your model supports. A Hugging Face model needs none, with <code>--adapter hf:&lt;model&gt;</code>.</p><a href="https://github.com/dengzhe-hou/S1CogBench/blob/main/docs/ADD_MODEL.md">Model integration guide ↗</a></div>
+<div class="evaluate-step"><b>Run the original tasks.</b><p>Acquire the source data, check the installation, then run the complete protocols. The eight lite targets also run in <a href="https://colab.research.google.com/github/dengzhe-hou/S1CogBench/blob/main/examples/colab_lite.ipynb">Colab</a>.</p><a href="https://github.com/dengzhe-hou/S1CogBench/blob/main/docs/QUICKSTART.md">Start the evaluation ↗</a></div>
 <div class="evaluate-step"><b>Submit comparable results.</b><p>Package aggregate scores and run settings. Reviewed submissions appear after merge.</p><a href="https://github.com/dengzhe-hou/S1CogBench/blob/main/docs/SUBMIT_RESULTS.md">Submission instructions ↗</a></div>
 </div><div class="detail-section"><details id="evaluate-details"><summary>Run commands and data-access instructions</summary><div class="details-inner">
 <p class="section-lead">One entry point runs each of the 27 modes through its original runner and scorer. The smoke run takes about two minutes on one CPU, with no model weights.</p>
@@ -86,15 +86,18 @@ python scripts/fetch_public_sources.py all
 python -m s1cogbench doctor
 python -m s1cogbench eval --smoke --output runs/smoke
 python -m s1cogbench eval --adapter my_agent.py --device cuda:0 --model-label my-model \
-    --tasks all --output runs/my-model</code></pre>
+    --tasks all --output runs/my-model
+python -m s1cogbench eval --adapter hf:Qwen/Qwen2.5-1.5B-Instruct --device cuda:0 \
+    --tasks lite --output runs/qwen2.5-1.5b-lite
+python -m s1cogbench score runs/qwen2.5-1.5b-lite</code></pre>
 <p class="copy-row"><button class="text-button" data-copy="quickstart-code">Copy the commands</button></p>
 <ul class="cautions">
 <li>Psych-101-test is gated. Eight modes stop at <code>doctor</code> until you accept its conditions on Hugging Face and run <code>fetch_public_sources.py psych101</code>.</li>
 <li><code>--output</code> must be a new directory inside the repository.</li>
-<li>Reproducing the CPU validation bit for bit needs Python 3.11. Under Python 3.12, 6 of the 27 modes differ in the last digits of floats.</li>
+<li>Use Python 3.12. Only a bit-for-bit match with the CPU validation needs Python 3.11, because under Python 3.12 six of the 27 modes differ in the last digits of floats.</li>
 </ul>
 <div class="box builder"><h3>Build a command for your adapter</h3>
-<div class="filter-row"><label>Modes<select id="command-task"></select></label><label>Adapter file<input id="command-adapter" placeholder="Path to your adapter" value="my_agent.py"/></label><label>Device<select id="command-device"><option value="cuda:0">cuda:0</option><option value="cpu">cpu</option></select></label></div>
+<div class="filter-row"><label>Modes<select id="command-task"></select></label><label>Adapter<input id="command-adapter" placeholder="Adapter file or hf:&lt;model&gt;" value="my_agent.py"/></label><label>Device<select id="command-device"><option value="cuda:0">cuda:0</option><option value="cpu">cpu</option></select></label></div>
 <pre class="code-block" id="command-code"><code></code></pre><p class="smallprint" id="command-help"></p><p class="copy-row"><button class="text-button" data-copy="command-code">Copy this command</button></p></div>
 <p class="smallprint">The CPU reference policy through this entry point reproduces the CPU validation in all 27 modes. Among neural models, Llama-3.1-8B on a whole A100 is supported. In a pass of 20 calls per mode, all 23 comparable modes match the accepted runs exactly. On a MIG slice of an A100, prompts and identities match but probabilities differ by BF16 rounding steps, so the support does not extend to slices. The other neural models have not run through this entry point. <a href="https://dengzhe-hou.github.io/S1CogBench/docs/REPRODUCTION.html">Read the reproduction record</a></p>
 <p class="evaluation-links"><a href="https://dengzhe-hou.github.io/S1CogBench/docs/QUICKSTART.html">Complete quickstart</a> · <a href="https://dengzhe-hou.github.io/S1CogBench/docs/MODELS.html">Adapter interfaces</a> · <a href="https://dengzhe-hou.github.io/S1CogBench/docs/SUBMIT_RESULTS.html">Prepare a comparison file</a></p>

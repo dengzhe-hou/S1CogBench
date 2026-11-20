@@ -2,7 +2,7 @@
 
 Before downloading data or loading a model, run `python -m s1cogbench plan --tasks all --json`. For one integration path, follow [ADD_MODEL.md](ADD_MODEL.md). This inspection does not run a model or verify neural reproduction.
 
-Use Python 3.12 and run every command from the repository root.
+Use Python 3.12 and run every command from the repository root. To try the eight lite targets without a local installation, open [the Colab notebook](https://colab.research.google.com/github/dengzhe-hou/S1CogBench/blob/main/examples/colab_lite.ipynb).
 
 ## 1. Install the CPU task environment
 
@@ -37,13 +37,14 @@ Every runnable mode runs its original runner and scorer with `examples/uniform_r
 
 ## 4. Evaluate a model
 
-Copy a template from `examples/templates/` (see [MODELS.md](MODELS.md)), then:
+A Hugging Face causal language model needs no adapter file. `--adapter hf:` with a Hub id or a local directory runs it through `examples/templates/hf_causal_lm_choice.py`, and `@<commit>` after the id pins a revision.
 
 ```bash
-S1_HF_MODEL=meta-llama/Llama-3.1-8B-Instruct \
-python -m s1cogbench eval --adapter my_hf_agent.py --device cuda:0 \
+python -m s1cogbench eval --adapter hf:meta-llama/Llama-3.1-8B-Instruct --device cuda:0 \
     --model-label my-llama --tasks all --output runs/my-llama
 ```
+
+Without `--model-label` the results carry the model name, here `Llama-3.1-8B-Instruct`. The pinned Transformers 4.57.1 is that of the CPU validation, so a newer architecture such as Qwen3.5 needs a newer Transformers. `doctor --adapter hf:<model>` loads the model config and says so before a run. `S1_HF_DTYPE` sets the dtype (default `bfloat16`, use `float16` on GPUs without bfloat16). For any other model, or to change the readout, copy a template from `examples/templates/` (see [MODELS.md](MODELS.md)) and pass the file, for example `--adapter my_agent.py`.
 
 `--tasks` takes `all`, task IDs (all modes of the task) or `task:mode` keys from `python -m s1cogbench list`. Each task runs in its own process through the runner and scorer that produced the accepted results. Outputs:
 

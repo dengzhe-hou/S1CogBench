@@ -22,6 +22,8 @@ Same-family models are not assumed to have matched training data or training com
 
 ## Evaluate your own model
 
+A Hugging Face causal language model needs no adapter file. `--adapter hf:<Hub id or directory>`, optionally followed by `@<revision>`, runs it through `examples/templates/hf_causal_lm_choice.py` and labels the results with the model name. Copy the template only to change its readout.
+
 An adapter is a Python file that defines `create_agent(device)`. The returned object implements the methods the modes call:
 
 | Method | Called by | Returns |

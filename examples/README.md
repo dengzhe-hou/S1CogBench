@@ -1,10 +1,11 @@
 # examples
 
-Adapters connect a model to the benchmark. To add your own model, copy a file from `templates/` and follow [the model guide](../docs/ADD_MODEL.md).
+Adapters connect a model to the benchmark. A Hugging Face causal language model can skip this step with `--adapter hf:<model>`. For any other model, copy a file from `templates/` and follow [the model guide](../docs/ADD_MODEL.md).
 
 | Files | What they are |
 | --- | --- |
-| `templates/` | Starting points for a Hugging Face causal LM, a decision API and a generative API |
+| `templates/` | Starting points for a Hugging Face causal LM, a decision API and a generative API. `--adapter hf:<model>` runs the Hugging Face one as it is |
+| `colab_lite.ipynb` | Runs a Hugging Face model on the eight lite targets in Colab ([open in Colab](https://colab.research.google.com/github/dengzhe-hou/S1CogBench/blob/main/examples/colab_lite.ipynb)) |
 | `uniform_reference_agent.py`, `uniform_choice_agent.py`, `restless_random_agent.py` | Uniform and random controls |
 | `<model>_<interface>_agent.py` | The adapters of the evaluated models, such as `laya_choice_agent.py` or `llama8b_event_agent.py`. The interface part names the task family the adapter serves. Some names carry the date of the run that used them. |
 | `bayes_event_agent.py`, `cpu_protocol_validation_agent.py` | Reference and validation agents |
