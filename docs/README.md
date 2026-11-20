@@ -20,6 +20,7 @@
 - [Baselines](BASELINES.md) covers the references and the Uniform column.
 - [API extension](API_EXTENSION.md) and [API time and cost](API_TIME_COST.md) give the Jev and Claude settings.
 - [Supplementary controls](SUPPLEMENTARY_CONTROLS.md) and [latency](LATENCY.md) cover the readout, generation and timing controls.
+- [Reliability](RELIABILITY.md) counts the targets on which each model beats uniform choice, and covers the lite targets.
 
 ## Reproduction records
 
@@ -27,3 +28,4 @@
 - [CPU validation](CPU_REUSE_VALIDATION_24.md) records the reference validation.
 - [Release scope](RELEASE_SCOPE.md) states what the release includes.
 - [Tooling changelog](TOOLING_CHANGELOG.md) lists command-line changes.
+- [Paper details](PAPER_DETAILS.md) keeps the full text that the paper's appendix summarizes.

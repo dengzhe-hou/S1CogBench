@@ -82,6 +82,13 @@ button { font: inherit; }
 #results td.ref-type { font-size:16px; white-space: nowrap; }
 #results sup { font-size:15px; line-height: 0; }
 #results .task-col { min-width: 200px; }
+#reliability { margin: 0 auto 24px; border-collapse: collapse; font: 400 15px/22px var(--font-table); text-align: center; }
+#reliability th, #reliability td { border: 1px solid var(--table-border); padding: 6px 14px; }
+#reliability thead { background: var(--table-head); }
+#reliability th { color: var(--heading); font-weight: 700; }
+#reliability td.model { text-align: left; }
+#reliability tbody tr:nth-child(even) { background: var(--zebra); }
+.reliability-note { text-align: center; margin-bottom: 28px; }
 .loading { padding: 24px; color: var(--org); text-align: center; }
 .legend { max-width: 1118px; margin: 20px auto 0; font-size:16px; line-height: 21px; }
 .legend p { margin: 0 0 10px; text-align: justify; }

@@ -68,9 +68,16 @@ Add `--smoke-calls N` for more calls per mode. The decision and generative templ
 | Minitaur8B | `models/minitaur8b` or `S1COGBENCH_MINITAUR_MODEL_DIR` with the evaluated provider revision | `examples/minitaur8b_choice_agent.py` |
 | Qwen3.5-4B | `models/qwen3.5-4b` | `examples/qwen35_4b_choice_agent.py` |
 
+Two further decision models have adapters. Both ran all 27 modes through the CLI, Nox on an A100 MIG slice (3g.40gb) and CLM on a whole A100. Their scores are in the current seven-model release ([LATEST_RESULTS.md](LATEST_RESULTS.md)), and `results/aggregate` keeps the five-model arXiv snapshot.
+
+| Model | Local setup | Example adapter |
+| --- | --- | --- |
+| Decision-2.0-Nox-4B | `S1COGBENCH_NOX_MODEL_DIR`, revision ae269ecf; runs the checkpoint's bundled code. Evaluated with transformers 5.3.0 (the model card asks for 5.17 or newer) | `examples/nox4b_choice_agent.py` |
+| CLM-v0.1-8B | `S1COGBENCH_CLM_HEAD`, the `clm` package, and the official Qwen3-8B vLLM pooling server at `S1COGBENCH_CLM_EMB_URL`. As in the official setup, the server keeps the first 2,048 tokens of each text, so a long state loses its end. `S1COGBENCH_CLM_TRUNCATION_SIDE=left` keeps the last 2,048 tokens instead, for the separately labeled control in [SUPPLEMENTARY_CONTROLS.md](SUPPLEMENTARY_CONTROLS.md) | `examples/clm8b_choice_agent.py` |
+
 The Intern and Qwen examples record their model IDs and evaluated revisions. Several tasks used task-specific variants of these adapters (event, integer-sequence and Restless files in `examples/`); the task runner recorded in each accepted row names the one used. Preserve each adapter's precision, temperature, prompt and decision rule when reproducing its results. `requirements.txt` installs the CPU task environment only; the neural adapters need their own PyTorch, Transformers, SDK and checkpoint dependencies. The CLI starts each task's worker with its own `PYTHONPATH`, so code outside the active environment is not visible to an adapter. List its directories in `S1COGBENCH_EXTRA_PATH`, separated as in `PYTHONPATH`; the CLI's own adapter check and every worker then import from them.
 
-Through the CLI, Llama-3.1-8B on a whole A100 is the one neural setup supported so far. The other adapters in this table have not run through it, and a MIG slice gives different Llama numbers. See [REPRODUCTION.md](REPRODUCTION.md).
+Of the five models above, Llama-3.1-8B on a whole A100 is the one setup checked through the CLI against the accepted rows so far. The other four adapters have not run through it, and a MIG slice gives different Llama numbers. See [REPRODUCTION.md](REPRODUCTION.md).
 
 Llama used these adapters by mode:
 

@@ -1,0 +1,17 @@
+Group,Reference,Data used,Construction
+Selected references,Exact Bayes,"Generated urn trials, no human fitting",Analytic posterior
+Selected references,Horizon RW fit,"25 training participants, 6 held out","Three-parameter fit, autonomous sampling with source seeds"
+Selected references,WCST SL refit,"300 training participants, 75 held out",Refit with separate prediction and autonomous histories
+Selected references,Mouselab MetaGreedy,"95 participants, 5 folds","Human-action fit using official code, 100 Sobol starts"
+Selected references,Hybrid independent ANN,"20 participants, 160 validation folds","Independent training, 3,000 updates per fold"
+Selected references,Multiple-cue update model,"232 training participants, 28 held out","Source-formula reimplementation, updates only from visible feedback"
+Selected references,Gaussian Thompson,"8 conditions, 30 seeds each, no human fitting","NIG prior and posterior, original environment and scoring"
+Selected references,RLWM parameters,Archived participant fits,Replay of fitted parameters
+Computed from source data (¶),Probability coherence,128 Psych-101 training participants,Median response to the same query
+Computed from source data (¶),Self-assessment,"Source lookup table ([Binz et al., 2025](https://doi.org/10.1038/s41586-025-09215-4)) and logic-item responses","Add-α smoothing, tenfold cross-fitting across participants for logic items"
+Computed from source data (¶),"Politeness, pragmatic interpretation",Other participants' responses to the same item,Response prediction with add-one smoothing
+Computed from source data (¶),Nonliteral number,Two random halves of each item's respondents,MAE between the two mean reports
+Computed from source data (¶),Temporal discounting,"13,232 Psych-101 participants",Mean later-reward choice rate on the same questions
+Computed from source data (¶),Instrumental learning,100 independent training environments for parameter selection,"CogBench Rescorla-Wagner, separate rates for positive and negative prediction errors, fixed before test ([Coda-Forno et al., 2024](https://proceedings.mlr.press/v235/coda-forno24a.html), [Lefebvre et al., 2017](https://doi.org/10.1038/s41562-017-0067))"
+Computed from source data (¶),BART,Training environments for threshold selection,One fixed pump threshold per balloon letter
+Computed from source data (¶),Two-step,40 CogBench participants,"Seven-parameter hybrid fit to each participant ([Daw et al., 2011](https://doi.org/10.1016/j.neuron.2011.02.027))"

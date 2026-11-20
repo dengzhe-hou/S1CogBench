@@ -1,0 +1,5 @@
+Model,Targets,Decisions,Median latency (s),P95 latency (s),USD per 1000,Output tokens
+Jev,27,"864,813",0.35,0.41,0.0448,94
+Haiku,15,"92,803",2.60,7.65,0.336,442
+Sonnet,3,"2,330",3.08,4.99,5.39,253
+Opus,2,730,3.59,5.34,8.96,289
