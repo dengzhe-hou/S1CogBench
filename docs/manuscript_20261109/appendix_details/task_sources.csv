@@ -1,0 +1,28 @@
+Task mode,Task source,Reference type,Mark,Haiku
+Multiple-cue judgment,"[Collsiöö et al., 2023](https://doi.org/10.1016/j.cognition.2023.105584)",human fit,--,n.a.
+Multi-attribute choice,"[Hilbig et al., 2014](https://doi.org/10.3758/s13423-014-0643-0)",human fit,†,--
+"WCST, prediction","[Grant et al., 1948](https://doi.org/10.1037/h0059831), [Namazova et al., 2025](https://arxiv.org/abs/2508.07887v1)",human fit,--,n.a.
+"Horizon, prediction","[Wilson et al., 2014](https://doi.org/10.1037/a0038199), [Namazova et al., 2025](https://arxiv.org/abs/2508.07887v1)",human fit,--,--
+Hybrid sampling,"[D'Ambrogio et al., 2026](https://doi.org/10.1038/s41593-026-02342-9)",human fit,‡,n.a.
+"Mouselab, prediction","[Callaway et al., 2022](https://doi.org/10.1038/s41562-022-01332-8)",human fit,‡,n.a.
+Politeness,"[Yoon et al., 2016](https://escholarship.org/uc/item/6dm139m8)",human,¶,--
+Pragmatic interpretation,"[Hu et al., 2023](https://doi.org/10.18653/v1/2023.acl-long.230)",human,¶,--
+Self-assessment,"[Jansen et al., 2021](https://doi.org/10.1038/s41562-021-01057-0)",human fit,¶,n.a.
+SHJ categories,"[Badham et al., 2017](https://irep.ntu.ac.uk/30691/1/8441_Badham.pdf)",human fit,†,--
+Medin categories,"[Levering et al., 2020](https://doi.org/10.3758/s13421-019-00972-y)",human fit,†,--
+Weather prediction,"[Speekenbrink et al., 2008](https://discovery.ucl.ac.uk/id/eprint/14463/)",human fit,†,--
+RLWM,"[Collins et al., 2012](https://doi.org/10.1111/j.1460-9568.2011.07980.x)",human fit,§,--
+Recent probes,"[Enkavi et al., 2019](https://doi.org/10.1073/pnas.1818430116)",human fit,†,--
+False-belief QA,"[Le et al., 2019](https://doi.org/10.18653/v1/D19-1598)",optimal,--,--
+"WCST, autonomous","[Grant et al., 1948](https://doi.org/10.1037/h0059831), [Namazova et al., 2025](https://arxiv.org/abs/2508.07887v1)",human fit,--,n.f.
+Restless bandit,"[Coda-Forno et al., 2024](https://proceedings.mlr.press/v235/coda-forno24a.html)",algorithm,*,part.
+Instrumental learning,"[Lefebvre et al., 2017](https://doi.org/10.1038/s41562-017-0067)",algorithm,¶,part.
+"Horizon, autonomous","[Wilson et al., 2014](https://doi.org/10.1037/a0038199), [Namazova et al., 2025](https://arxiv.org/abs/2508.07887v1)",human fit,--,n.f.
+Stationary bandits,"[Nie et al., 2025](https://proceedings.mlr.press/v267/nie25b.html)",algorithm,†,n.e.
+"Mouselab, autonomous","[Callaway et al., 2022](https://doi.org/10.1038/s41562-022-01332-8)",human fit,*,n.e.
+BART,"[Frey et al., 2017](https://pmc.ncbi.nlm.nih.gov/articles/PMC5627985/)",algorithm,¶,--
+Two-step,"[Daw et al., 2011](https://doi.org/10.1016/j.neuron.2011.02.027)",human fit,¶,--
+Bayesian urn,"[Coda-Forno et al., 2024](https://proceedings.mlr.press/v235/coda-forno24a.html)",optimal,--,--
+Probability coherence,"[Zhu et al., 2020](https://doi.org/10.1037/rev0000190)",human,¶,part.
+Nonliteral number,"[Kao et al., 2014](https://doi.org/10.1073/pnas.1407479111), [Tsvilodub et al., 2025](https://escholarship.org/uc/item/08c3s3jt)",human,¶,--
+Temporal discounting,"[Coda-Forno et al., 2024](https://proceedings.mlr.press/v235/coda-forno24a.html)",human,¶,--

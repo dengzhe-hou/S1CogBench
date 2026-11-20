@@ -1,0 +1,11 @@
+Model,Readout,Horizon legal argmax reward,Horizon sampling reward,WCST legal argmax accuracy pct,WCST sampling accuracy pct,Horizon free-text reward,WCST free-text accuracy pct
+Opus,Adaptive free text,,,,,56.87,63.51
+Sonnet,Adaptive free text,,,,,56.95,66.22
+Haiku,Adaptive free text,,,,,56.86,66.22
+Laya,Legal argmax and categorical sampling,50.23,50.05,20.27,22.97,,
+Intern,Legal argmax and categorical sampling,56.22,51.35,33.78,29.73,,
+Llama,Legal argmax and categorical sampling,54.33,51.57,37.84,39.19,,
+Minitaur,Legal argmax and categorical sampling,56.48,52.92,43.24,27.03,,
+Qwen,Legal argmax and categorical sampling,52.68,51.33,18.92,22.97,,
+Nox,Legal argmax and categorical sampling,56.62,54.94,28.38,22.97,,
+CLM,Legal argmax and categorical sampling,49.58,49.88,25.68,32.43,,

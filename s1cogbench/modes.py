@@ -219,10 +219,18 @@ TASKS = list(dict.fromkeys(m.task for m in MODES))
 assert len(MODES) == 27 and len(TASKS) == 24 and len(BY_KEY) == 27
 
 
+# Eight cheap targets whose reliably-better count ranks the eight evaluated models as the full 26 targets do
+# (Spearman 0.98, in-sample); about 50 minutes for Nox on an A100 MIG slice. See docs/RELIABILITY.md.
+LITE = ('politeness_pragmatics', 'pragmatic_language_interpretation', 'multi_attribute_choice', 'instrumental_learning',
+        'false_belief_story_qa', 'two_step', 'nonstationary_bandit', 'horizon:human_predictive')
+
+
 def select(names):
-    """Resolve 'all', task IDs (every mode of the task) and task:mode keys."""
+    """Resolve 'all', 'lite', task IDs (every mode of the task) and task:mode keys."""
     if names in (['all'], 'all'):
         return list(MODES)
+    if names in (['lite'], 'lite'):
+        return [m for m in MODES if m.key in LITE]
     chosen = []
     for name in names:
         hits = [m for m in MODES if name in (m.key, m.task)]

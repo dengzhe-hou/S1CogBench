@@ -78,6 +78,28 @@ python -m s1cogbench eval --adapter my_agent.py --device cuda:0 --model-label my
 
 [Read the full quickstart](docs/QUICKSTART.md) · [Write an adapter](docs/MODELS.md)
 
+**Or get a reliability count in about an hour.** The eight lite targets rank the evaluated models as the full 26 do, and `score` gives a 95% bootstrap interval against uniform choice for each.
+
+```bash
+python -m s1cogbench eval --adapter my_agent.py --device cuda:0 --tasks lite --output runs/my-model-lite
+python -m s1cogbench score runs/my-model-lite
+```
+
+## Reliability against uniform choice
+
+The count of the 26 directional targets on which a model beats uniform choice with a 95% bootstrap interval. It is not a cognitive score, so read Table 3 within a row for anything more. See [Reliability](docs/RELIABILITY.md) for the method, every interval and the lite targets.
+
+| Model | Reliably better (of 26) | Lite (of 8) |
+| --- | ---: | ---: |
+| Laya | 7 | 1 |
+| Intern-Decision-4B | 21 | 7 |
+| Llama3.1-8B | 12 | 3 |
+| Minitaur8B | 17 | 4 |
+| Qwen3.5-4B | 11 | 1 |
+| Decision-2.0-Nox-4B | 23 | 8 |
+| CLM-v0.1-8B | 11 | 2 |
+| Jev 1.14 (API) | 20 | 6 |
+
 ## Submit your model's scores
 
 Evaluate your model, compare its `results.json` locally on the [project page](https://dengzhe-hou.github.io/S1CogBench/#explorer), and package a completed run for the [community leaderboard](https://dengzhe-hou.github.io/S1CogBench/#community).
@@ -183,6 +205,7 @@ Each reference keeps its own target, fit and provenance. A human-action NLL is n
 | Get the data and check its terms | [Data](docs/DATA.md) · [License status](docs/LICENSE_STATUS.md) |
 | Read the protocols and scoring targets | [Protocols](docs/PROTOCOLS.md) |
 | Look up a number in Table 3 | [Results guide](docs/RESULTS.md) · [The row behind each cell](results/latest/table2.json) |
+| Get a reliability count, or score my model on the lite targets | [Reliability](docs/RELIABILITY.md) |
 | Compare results without mixing contexts | [Grouping guide](results/aggregate/grouping_guide.md) · [Metric applicability](results/aggregate/metric_status.json) |
 | Understand a reference or the Uniform column | [Baselines](docs/BASELINES.md) |
 | See what has been reproduced and what has not | [Reproduction](docs/REPRODUCTION.md) · [CPU validation](docs/CPU_REUSE_VALIDATION_24.md) |
@@ -225,3 +248,8 @@ If you use S1CogBench in your research, please cite.
 ## License
 
 Original S1CogBench project software is licensed under [MIT](LICENSE). Third-party code, models and data keep their original terms, and gated participant data and model weights are not bundled. See [license status](docs/LICENSE_STATUS.md).
+
+
+## Appendix details
+
+The [appendix details](docs/manuscript_20261109/APPENDIX_DETAILS.md) preserve the complete reference catalogue, common-source comparison, model and API protocol details, timing records, and additional related work moved out of the PDF of arXiv v2, with CSV copies. They are separate from the released aggregate results.

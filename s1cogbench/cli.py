@@ -5,6 +5,7 @@
   doctor  which modes the local data and runtimes can run, and why not
   eval    run modes through their original runners and scorers
           (--smoke: a few calls per mode, checked against stored values)
+  score   reliability against uniform choice on the lite targets of an eval output
 """
 import argparse
 from datetime import datetime, timezone
@@ -316,6 +317,18 @@ def smoke_check(out, modes, states, adapter, write_expected, calls):
     return {'passed': not problems, 'compared': compared, 'problems': problems, 'verdict': verdict}
 
 
+def cmd_score(args):
+    from s1cogbench import score  # numpy is needed only here, not by package or check-submissions
+    rows, n = score.score(args.run)
+    out = Path(args.run) / 'reliability.json'
+    out.write_text(json.dumps({'run': str(args.run), 'reliably_better_than_uniform': n, 'targets': len(score.TARGETS),
+                               'resamples': score.B, 'seed': score.SEED, 'rows': rows}, indent=1) + '\n')
+    for r in rows:
+        interval = '' if r.get('lo') is None else f" [{r['lo']:.4g}, {r['hi']:.4g}]"
+        print(f"{r['target']:26s} {r['class']:14s}{interval}")
+    print(f'Reliably better than uniform choice on {n} of {len(score.TARGETS)} lite targets. Written to {out}.')
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(prog='python -m s1cogbench', description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -340,7 +353,7 @@ def main(argv=None):
                              ('eval', cmd_eval, 'Run modes through the original runners.')):
         q = sub.add_parser(name, help=text)
         q.add_argument('--tasks', nargs='+', default=['all'],
-                       help='all (the 27 paper modes), extensions, task IDs or task:mode keys (see `list`).')
+                       help='all (the 27 paper modes), lite, extensions, task IDs or task:mode keys (see `list`).')
         q.add_argument('--data-root', type=Path, default=ROOT,
                        help='Directory with data/, external/, literature/, .tools/ (default: repository).')
         q.add_argument('--adapter', type=Path, help='Python file defining create_agent(device).')
@@ -357,5 +370,8 @@ def main(argv=None):
             q.add_argument('--smoke-calls', type=int, default=smoke.LIMIT,
                            help='Adapter calls per mode in a smoke run.')
             q.add_argument('--write-smoke-expected', action='store_true', help=argparse.SUPPRESS)
+    q = sub.add_parser('score', help='Reliability against uniform choice on the lite targets of an eval output.')
+    q.add_argument('run', type=Path, help='An eval --output directory that contains the lite modes.')
+    q.set_defaults(func=cmd_score)
     args = p.parse_args(argv)
     args.func(args)

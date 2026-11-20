@@ -2,13 +2,35 @@
 
 The current seven-model Horizon and WCST readout release is documented in [LATEST_RESULTS.md](LATEST_RESULTS.md). The original five-model P3 collection and other retained controls below keep their historical scope and counts.
 
-This page holds the accepted records of the controlled latency study (P1), the generated reasoning conditions (P2), the common legal readouts (P3) and the non-full Claude API prefixes. These controls are separate from the Table 3 targets, and no prefix replaces a full task evaluation. Portable preparation and execution code is in [experiments/decision_controls](../experiments/decision_controls/README.md).
+This page holds the accepted records of the controlled latency study (P1), the generated reasoning conditions (P2), the common legal readouts (P3), the non-full Claude API prefixes, and the CLM left-truncation control. These controls are separate from the Table 3 targets, and no prefix replaces a full task evaluation. Portable preparation and execution code is in [experiments/decision_controls](../experiments/decision_controls/README.md).
 
 ## Controlled latency (P1)
 
 Controlled latency testing uses one A100 40GB device, batch size one, and 20 warm-up calls per mode before separate forward-pass and end-to-end measurements. The nine implementation configurations remain separate. Combined source acceptance covers all 54 configuration-mode cells and 37,056 timed calls. The original six successes and three authorized supplements remain source-linked, with prior failure records retained in the audit record.
 
 P1 retains the original per-request percentile and source-identity ratio definitions. Main configurations use up to 1,000 requests per mode (576 where only 576 source requests exist). Laya TileLang, Intern Torch, and Qwen Torch retain 200 requests per mode. Twenty warm-up calls per mode are excluded from timed counts. Prior failure history remains recorded separately from the accepted supplement view. The accepted timings are in [LATENCY.md](LATENCY.md).
+
+Nox and CLM were timed on 2026-11-04 with the same requests, warm-up and timer on the same A100 type, where a Llama re-run matched the 10-28 Llama times (median ratios 1.00 to 1.01). With the fla kernels that Intern and Qwen used, Nox takes 0.80 to 1.43 times Llama's median end-to-end time (first 200 requests per mode), and 2.64 to 4.92 times without them, as in its main evaluation (all requests). CLM takes 0.12 to 0.70 times, including a local request to its vLLM embedding server, which keeps the first 2,048 tokens of each text and caches shared prefixes.
+
+## CLM left-truncation control
+
+CLM's official embedding server keeps the first 2,048 tokens of each text, so in 11 modes a long state loses its end, including the question, on some calls (for example about 66% of WCST calls). The control repeats those 11 modes with `S1COGBENCH_CLM_TRUNCATION_SIDE=left`, which keeps the last 2,048 tokens. It is labeled separately and does not replace the official-setup results. `scripts/check_clm_truncation_side.py` confirms the server honours the setting before the run (cosine 0.999962 with left truncation, 0.903983 under the default).
+
+| Target | Better | Uniform | Official | Left |
+| --- | --- | ---: | ---: | ---: |
+| Weather prediction (%) | higher | 50.00 | 52.50 | 52.50 |
+| Multi-attribute choice (NLL) | lower | 0.6931 | 1.0391 | 1.1978 |
+| Restless bandit (%) | higher | 50.00 | 52.62 | 52.12 |
+| Probability coherence (MAE) | lower | 32.13 | 42.13 | 37.76 |
+| Recent probes (%) | higher | 50.00 | 55.91 | 56.04 |
+| SHJ categories (%) | higher | 50.00 | 50.41 | 50.60 |
+| Multiple-cue judgment (NLL) | lower | 2.1972 | 2.6753 | 2.5248 |
+| Medin categories (%) | higher | 50.00 | 50.43 | 50.27 |
+| WCST, prediction (NLL) | lower | 1.3863 | 2.3678 | 2.6163 |
+| WCST, autonomous (%) | higher | 25.00 | 25.71 | 25.25 |
+| Self-assessment (NLL) | lower | 2.0393 | 3.0939 | 2.7424 |
+
+No target changes side relative to Uniform. Left truncation helps five targets, hurts five and leaves weather unchanged, so the question being cut is not the main reason CLM is weak.
 
 ## Common legal readouts (P3)
 
