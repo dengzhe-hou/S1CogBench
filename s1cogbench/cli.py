@@ -8,6 +8,7 @@
   score   reliability against uniform choice on the lite targets of an eval output
 """
 import argparse
+from collections import namedtuple
 from datetime import datetime, timezone
 import importlib.metadata
 import importlib.util
@@ -24,9 +25,41 @@ from s1cogbench.modes import MODES
 from s1cogbench.planning import describe, effective_action_rule, inspect_adapter, validate_action_rules
 
 UNIFORM = ROOT / 'examples/uniform_reference_agent.py'
+HF_TEMPLATE = ROOT / 'examples/templates/hf_causal_lm_choice.py'
+Adapter = namedtuple('Adapter', 'path spec env label')
 LINKED = ('data', 'external', 'literature', '.tools')
 PYTHON_PACKAGES = ['numpy', 'pandas', 'scipy', 'statsmodels', 'torch', 'gym', 'gymnasium', 'matplotlib',
                    'pydantic', 'litellm', 'transformers']
+
+
+def adapter_spec(value):
+    """--adapter value: a Python file, or hf:<model>[@<revision>] for a Hugging Face causal LM.
+
+    hf: runs examples/templates/hf_causal_lm_choice.py with S1_HF_MODEL (and S1_HF_REVISION) set,
+    so a Hub id or a local model directory needs no adapter file of its own.
+    """
+    if value.startswith('hf:'):
+        model, _, revision = value[3:].partition('@')
+        if not model:
+            raise argparse.ArgumentTypeError('hf: needs a Hugging Face Hub id or a local model directory, '
+                                             'for example hf:Qwen/Qwen2.5-1.5B-Instruct')
+        env = {'S1_HF_MODEL': model, **({'S1_HF_REVISION': revision} if revision else {})}
+        return Adapter(HF_TEMPLATE, value, env, Path(model.rstrip('/')).name)
+    return Adapter(Path(value), value, {}, None)
+
+
+def hf_model_problem(spec):
+    """Why the model of an hf: spec cannot be loaded here, or None.
+
+    Reads only the model config, once, so that a wrong id, a gated repository without access, an offline
+    machine or an architecture this Transformers version lacks stops the run before any worker starts.
+    """
+    from transformers import AutoConfig
+    try:
+        AutoConfig.from_pretrained(spec.env['S1_HF_MODEL'], revision=spec.env.get('S1_HF_REVISION'))
+    except (OSError, ValueError) as exc:
+        return ' '.join(str(exc).split())[:400]
+    return None
 
 
 def now():
@@ -90,7 +123,7 @@ def adapter_module(path):
 def cmd_plan(args):
     modes = select(args.tasks)
     report = {'selected_modes': len(modes), 'model_API_calls': 0,
-              'adapter': inspect_adapter(args.adapter) if args.adapter else None,
+              'adapter': {**inspect_adapter(args.adapter.path), 'spec': args.adapter.spec} if args.adapter else None,
               'modes': describe(modes, args.action_rule),
               'status': 'plan_only',
               'comparison': 'New adapter runs are user-supplied results. Check checkpoint, prompt, '
@@ -180,10 +213,14 @@ def diagnose(modes, data_root):
 
 def cmd_doctor(args):
     modes = select(args.tasks)
+    problem = None
     if args.adapter:
-        a = adapter_module(args.adapter)
-        print(f'adapter {args.adapter}: create_agent found; probability readout '
+        a = adapter_module(args.adapter.path)
+        print(f'adapter {args.adapter.spec}: create_agent found; probability readout '
               f'{getattr(a, "PROBABILITY_READOUT", True)}')
+        if args.adapter.env:
+            problem = hf_model_problem(args.adapter)
+            print(f"model {args.adapter.env['S1_HF_MODEL']}: {problem or 'config loads'}")
     d = diagnose(modes, args.data_root.resolve())
     print(f"python {d['python']}; " + ', '.join(f'{k} {v or "MISSING"}' for k, v in d['packages'].items()))
     for r in d['modes']:
@@ -191,16 +228,23 @@ def cmd_doctor(args):
     ok = sum(r['runnable'] for r in d['modes'])
     print(f'{ok}/{len(d["modes"])} modes runnable with data root {args.data_root.resolve()}')
     print('See docs/DATA.md for how to obtain each missing input.')
-    raise SystemExit(0 if ok == len(d['modes']) else 1)
+    raise SystemExit(0 if ok == len(d['modes']) and problem is None else 1)
 
 
 # ---------------------------------------------------------------- eval
 def cmd_eval(args):
     modes = select(args.tasks)
     validate_action_rules(modes, args.action_rule)
-    adapter = Path(args.adapter or UNIFORM).resolve()
-    if not args.smoke and args.adapter is None:
+    spec = args.adapter
+    adapter = (spec.path if spec else UNIFORM).resolve()
+    if not args.smoke and spec is None:
         raise SystemExit('--adapter is required (or use --smoke).')
+    if spec is not None and spec.env:
+        problem = hf_model_problem(spec)
+        if problem:
+            raise SystemExit(f'{spec.spec}: {problem}')
+    if args.model_label is None:
+        args.model_label = (spec.label if spec else None) or 'user_model'
     probabilities = getattr(adapter_module(adapter), 'PROBABILITY_READOUT', True)
     if not probabilities and any(effective_action_rule(m, args.action_rule) == 'sample' for m in modes):
         raise SystemExit('Categorical sampling requires actual legal-option probabilities. '
@@ -222,7 +266,9 @@ def cmd_eval(args):
                TF_NUM_INTEROP_THREADS=threads, PYTHONDONTWRITEBYTECODE='1',
                LITELLM_LOCAL_MODEL_COST_MAP='True', PYTHONPATH=os.pathsep.join([str(ROOT), *extra_path()]))
     env.setdefault('MPLCONFIGDIR', str(out / '.runtime/matplotlib'))
+    env.update(spec.env if spec else {})
     config = {'s1cogbench_version': VERSION, 'started_utc': now(), 'adapter': str(adapter),
+              'adapter_spec': spec.spec if spec else None,
               'model_label': args.model_label, 'device': args.device, 'action_rule': args.action_rule,
               'threads': args.threads, 'smoke': args.smoke, 'data_root': str(data_root),
               'linked_into_repository': linked, 'modes': [m.key for m in modes],
@@ -345,7 +391,8 @@ def main(argv=None):
     q.set_defaults(func=cmd_check_submissions)
     q = sub.add_parser('plan', help='Inspect modes and adapter syntax without model or data access.')
     q.add_argument('--tasks', nargs='+', default=['all'])
-    q.add_argument('--adapter', type=Path)
+    q.add_argument('--adapter', type=adapter_spec,
+                   help='Python file defining create_agent(device), or hf:<model> for a Hugging Face causal LM.')
     q.add_argument('--action-rule', choices=['native', 'sample'], default='native')
     q.add_argument('--json', action='store_true', help='Print input paths, targets and comparison contexts.')
     q.set_defaults(func=cmd_plan)
@@ -356,12 +403,15 @@ def main(argv=None):
                        help='all (the 27 paper modes), lite, extensions, task IDs or task:mode keys (see `list`).')
         q.add_argument('--data-root', type=Path, default=ROOT,
                        help='Directory with data/, external/, literature/, .tools/ (default: repository).')
-        q.add_argument('--adapter', type=Path, help='Python file defining create_agent(device).')
+        q.add_argument('--adapter', type=adapter_spec,
+                       help='Python file defining create_agent(device), or hf:<model>[@<revision>] to run a '
+                            'Hugging Face causal LM through examples/templates/hf_causal_lm_choice.py.')
         q.set_defaults(func=func)
         if name == 'eval':
             q.add_argument('--output', type=Path, required=True, help='New output directory.')
             q.add_argument('--device', default='cpu')
-            q.add_argument('--model-label', default='user_model')
+            q.add_argument('--model-label', default=None,
+                           help='Label of the results (default: the model name for hf:, else user_model).')
             q.add_argument('--action-rule', choices=['native', 'sample'], default='native',
                            help='Autonomous modes: native choice (argmax when none) or sampling.')
             q.add_argument('--threads', type=int, default=1)

@@ -110,10 +110,80 @@ class EvaluationEntryTests(unittest.TestCase):
 
     def test_text_parser_placeholders_cannot_be_sampled(self):
         args = SimpleNamespace(tasks=['wcst:autonomous_generative'], action_rule='sample',
-                               adapter=Path('text_adapter.py'), smoke=False)
+                               adapter=cli.adapter_spec('text_adapter.py'), smoke=False, model_label=None)
         with patch.object(cli, 'adapter_module', return_value=SimpleNamespace(PROBABILITY_READOUT=False)):
             with self.assertRaisesRegex(SystemExit, 'actual legal-option probabilities'):
                 cli.cmd_eval(args)
+
+    def test_hf_adapter_spec_uses_the_template(self):
+        spec = cli.adapter_spec('hf:Qwen/Qwen3.5-4B@abc123')
+        self.assertEqual(spec.path, cli.HF_TEMPLATE)
+        self.assertEqual(spec.env, {'S1_HF_MODEL': 'Qwen/Qwen3.5-4B', 'S1_HF_REVISION': 'abc123'})
+        self.assertEqual(spec.label, 'Qwen3.5-4B')
+        self.assertEqual(cli.adapter_spec('hf:/models/my-llama/').env, {'S1_HF_MODEL': '/models/my-llama/'})
+        self.assertEqual(cli.adapter_spec('hf:/models/my-llama/').label, 'my-llama')
+        plain = cli.adapter_spec('my_agent.py')
+        self.assertEqual((plain.path, plain.env, plain.label), (Path('my_agent.py'), {}, None))
+        with self.assertRaises(cli.argparse.ArgumentTypeError):
+            cli.adapter_spec('hf:')
+
+    def test_plan_accepts_hf_adapter_without_importing_it(self):
+        out = subprocess.run([sys.executable, '-B', '-m', 's1cogbench', 'plan', '--adapter', 'hf:org/model',
+                              '--tasks', 'lite', '--json'], cwd=ROOT, capture_output=True, text=True, check=True)
+        report = json.loads(out.stdout)
+        self.assertEqual(report['adapter']['spec'], 'hf:org/model')
+        self.assertEqual(Path(report['adapter']['file']), cli.HF_TEMPLATE)
+        self.assertFalse(report['adapter']['imported'])
+        self.assertEqual(report['selected_modes'], 8)
+
+    def test_eval_passes_the_hf_model_to_workers(self):
+        name = 'runs/.test-hf-adapter'
+        out = ROOT / name
+        self.addCleanup(lambda: __import__('shutil').rmtree(out, ignore_errors=True))
+        calls = []
+
+        def run(command, cwd, env, stdout, stderr):
+            calls.append((command, env))
+            return SimpleNamespace(returncode=0)
+        runnable = lambda modes, root: {'python': '3', 'packages': {}, 'modes': [
+            {'key': m.key, 'label': m.label, 'runnable': True, 'reasons': []} for m in modes]}
+        with patch.object(cli, 'adapter_module', return_value=SimpleNamespace(PROBABILITY_READOUT=True)), \
+                patch.object(cli, 'hf_model_problem', return_value=None), \
+                patch.object(cli, 'diagnose', side_effect=runnable), \
+                patch.object(cli.subprocess, 'run', side_effect=run), patch.object(cli, 'finish'), \
+                contextlib.redirect_stdout(io.StringIO()):
+            cli.main(['eval', '--adapter', 'hf:org/tiny-model', '--tasks', 'false_belief_story_qa', '--output', name])
+        config = json.loads((out / 'run_config.json').read_text())
+        self.assertEqual(config['adapter_spec'], 'hf:org/tiny-model')
+        self.assertEqual(Path(config['adapter']), cli.HF_TEMPLATE.resolve())
+        self.assertEqual(config['model_label'], 'tiny-model')
+        self.assertTrue(calls)
+        for command, env in calls:
+            self.assertEqual(env['S1_HF_MODEL'], 'org/tiny-model')
+            self.assertEqual(command[command.index('--adapter') + 1], str(cli.HF_TEMPLATE.resolve()))
+            self.assertEqual(command[command.index('--model-label') + 1], 'tiny-model')
+
+    def test_hf_model_problem_stops_eval_before_any_output(self):
+        name = 'runs/.test-hf-unloadable'
+        with patch.object(cli, 'hf_model_problem', return_value='gated repo'), \
+                patch.object(cli.subprocess, 'run') as run:
+            with self.assertRaises(SystemExit) as stop:
+                cli.main(['eval', '--adapter', 'hf:org/gated-model', '--tasks', 'false_belief_story_qa',
+                          '--output', name])
+        self.assertEqual(str(stop.exception), 'hf:org/gated-model: gated repo')
+        self.assertFalse((ROOT / name).exists())
+        run.assert_not_called()
+
+    def test_hf_model_problem_reads_the_config_only(self):
+        try:
+            import transformers  # noqa: F401
+        except ImportError:
+            self.skipTest('transformers is not installed')
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, 'config.json').write_text(json.dumps({'model_type': 'gpt2'}))
+            self.assertIsNone(cli.hf_model_problem(cli.adapter_spec('hf:' + tmp)))
+            Path(tmp, 'config.json').write_text(json.dumps({'model_type': 'no_such_architecture'}))
+            self.assertIn('no_such_architecture', cli.hf_model_problem(cli.adapter_spec('hf:' + tmp)))
 
     def test_sampled_rows_cannot_share_native_comparison_context(self):
         mode = BY_KEY['wcst:autonomous_generative']

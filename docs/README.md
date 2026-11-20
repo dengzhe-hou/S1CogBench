@@ -4,6 +4,7 @@
 
 - [Quickstart](QUICKSTART.md) runs a first evaluation.
 - [Add a model](ADD_MODEL.md) and [models and adapters](MODELS.md) explain how to connect your own model.
+- [The Colab notebook](../examples/colab_lite.ipynb) runs a Hugging Face model on the eight lite targets.
 - [Protocols](PROTOCOLS.md) defines each mode, its scoring target and its comparison context.
 - [Data](DATA.md) and [license status](LICENSE_STATUS.md) list where each input comes from and its terms.
 

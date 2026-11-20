@@ -2,6 +2,8 @@
 
 The entry point is `python -m s1cogbench eval`. A model adapter defines `create_agent(device)` and returns an object with the methods listed in [MODELS.md](MODELS.md). Keep model loading inside the factory so importing the module does not start inference.
 
+A Hugging Face causal language model needs no adapter. `--adapter hf:<Hub id or directory>`, optionally followed by `@<revision>`, uses `examples/templates/hf_causal_lm_choice.py` with that model in `plan`, `doctor` and `eval`.
+
 Inspect the full suite before installing a model or obtaining participant data.
 
 ```bash

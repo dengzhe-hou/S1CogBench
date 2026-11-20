@@ -1,10 +1,11 @@
-"""Offline checks of the two API adapter templates; no network, no key.
+"""Offline checks of the adapter templates; no network, no key, no model.
 
     python tests/test_adapter_templates.py
 
 The letter cases are the self-test of the retained FINAL-line parser
 (generation_agent.py of the accepted Claude runs). The rest check the
-generalization to other legal keys and the Jev-style readout.
+generalization to other legal keys, the Jev-style readout and the Hugging Face
+template's handling of confidence replies.
 """
 import importlib.util
 import math
@@ -91,6 +92,21 @@ def test_decision_readout():
     assert agent.choice_probabilities('state', q, keys) == [.7, .3] and agent.last_native_choice == 'C'
     assert sent == [{'model': D.MODEL, 'state': 'state', 'questions': {'answer': q}}]
     assert math.isclose(sum(agent.choice_probabilities('state', q, keys)), 1)
+
+
+def test_hf_confidence_needs_a_number():
+    H = load('hf_causal_lm_choice')
+    agent = object.__new__(H.HFCausalLMChoice)  # no model: only the reply handling is checked
+    agent.last_raw_answer = 'Machine J is better'
+    agent._probability = lambda content: None
+    try:
+        agent.confidence_probability('state', 'J', {})
+    except ValueError as exc:
+        assert 'Machine J is better' in str(exc)
+    else:
+        raise AssertionError('an invalid confidence reply must raise')
+    agent._probability = lambda content: .75
+    assert agent.confidence_probability('state', 'J', {}) == .75
 
 
 if __name__ == '__main__':
